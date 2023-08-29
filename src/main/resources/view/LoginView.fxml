@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import de.jensd.fx.glyphs.weathericons.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPaneLogin" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.LoginViewController">
+   <children>
+      <Pane prefHeight="550.0" prefWidth="400.0" style="-fx-background-color: #32a0ff;">
+         <children>
+            <ImageView fitHeight="312.0" fitWidth="252.0" layoutX="74.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imgs/Logonew.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="400.0" prefHeight="550.0" prefWidth="400.0">
+         <children>
+            <FontAwesomeIcon iconName="GEAR" layoutX="353.0" layoutY="46.0" size="3em" text="" />
+            <Button fx:id="buttonDBSettings" layoutX="350.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleButtonDBSettings" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: transparent;" />
+            <TextField fx:id="textFieldUsuario" layoutX="88.0" layoutY="258.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="textFieldSenha" layoutX="88.0" layoutY="317.0" prefHeight="25.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="buttonEntrar" layoutX="158.0" layoutY="386.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #32a0ff;" text="ENTRAR" textFill="WHITE" />
+            <FontAwesomeIcon fill="#32a0ff" iconName="USER" layoutX="50.0" layoutY="281.0" size="2em" />
+            <FontAwesomeIcon fill="#32a0ff" iconName="KEY" layoutX="47.0" layoutY="340.0" size="2em" text="" />
+            <FontAwesomeIcon fill="#32a0ff" iconName="USERS" layoutX="168.0" layoutY="163.0" size="5em" />
+            <FontAwesomeIcon iconName="WIFI" layoutX="119.0" layoutY="511.0" size="2em" />
+            <Text fill="#32a0ff" layoutX="171.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="156.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TESTANDO CONEXÃO..." />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
