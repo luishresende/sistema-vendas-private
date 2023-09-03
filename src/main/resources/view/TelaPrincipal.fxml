@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comercio.TelaPrincipalController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="720.0" prefWidth="311.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox fx:id="subMenu" layoutX="8.0" layoutY="231.0" prefHeight="720.0" prefWidth="45.0" style="-fx-background-color: #0067a6;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="265.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button fx:id="Menu" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="46.0" style="-fx-background-color: Transparente;" styleClass="menu" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" styleClass="menu">
+                                 <image>
+                                    <Image url="@images/burger.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="menuPrincipal" prefHeight="600.0" prefWidth="317.0" spacing="10.0" style="-fx-background-color: #0067a6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Pane prefHeight="49.0" prefWidth="317.0" style="-fx-background-color: #0067a6;" styleClass="menu">
+                           <children>
+                              <Button fx:id="MenuClose" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="50.0" prefWidth="317.0" style="-fx-background-color: Transparente; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" styleClass="menu" text="MENU" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                       <effect>
+                                          <ColorAdjust brightness="1.0" />
+                                       </effect>
+                                       <image>
+                                          <Image url="@images/burger.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
+                        </Pane>
+                        <Pane prefHeight="196.0" prefWidth="311.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="55.0" layoutY="104.0" prefHeight="66.0" prefWidth="201.0" style="-fx-border-style: Solid; -fx-border-radius: 65;" text="Iuri Almeida Pereira&#10;Ciências da Computação&#10;&#9;&#9;" textAlignment="CENTER" textFill="WHITE">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                              <ImageView fx:id="img_user" fitHeight="72.0" fitWidth="75.0" layoutX="102.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" styleClass="usuario">
+                                 <image>
+                                    <Image url="@images/iuri.jpeg" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="318.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Almoxarifado" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="150.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Produto" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="367.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Ponto de Venda" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="servico" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="228.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Serviço" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="servico1" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="465.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Clientes" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="servico11" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="514.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Funcionarios" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="servico111" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="563.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Filial" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="servico1111" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="612.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="317.0" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" styleClass="itensmenu" text="Configurações" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Separator fx:id="abrirSubMenu" layoutX="-2.0" layoutY="234.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="17.0" visible="false" AnchorPane.bottomAnchor="300.0" AnchorPane.topAnchor="300.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="311.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane layoutX="321.0" layoutY="10.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

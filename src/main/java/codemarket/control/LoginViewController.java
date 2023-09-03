@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -27,6 +28,7 @@ public class LoginViewController implements Initializable {
     private TextField textFieldSenha;
     
     private Stage dialogStage;
+    private boolean logged = false;
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,6 +55,19 @@ public class LoginViewController implements Initializable {
 
         // Mostra o Dialog e espera até que o usuário o feche
         dialogStage.showAndWait();
+    }
+    
+    @FXML
+    public void handleButtonEntrar() throws IOException {
+        
+        Stage mainStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/mainView.fxml"));
+        Scene scene = new Scene(root);
+        
+        //mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.setScene(scene);
+        mainStage.setTitle("CodeMarket");
+        mainStage.show();
         
     }
 }

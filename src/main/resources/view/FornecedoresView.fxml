@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutY="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" percentWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="5.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="75.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane alignment="CENTER" GridPane.rowIndex="1">
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="2.5" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="60.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="15.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="15.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="15.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="2.5" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="100.0" valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <Label contentDisplay="RIGHT" prefHeight="32.0" prefWidth="493.0" text="Pesquisar Fornecedor" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <graphic>
+                        <TextField prefHeight="27.0" prefWidth="359.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                     </graphic>
+                  </Label>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="76.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon iconName="PLUS_SQUARE_ALT" size="3.5em" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                  </Button>
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: Transparent;" styleClass="menubuttonProduto" text="Editar" GridPane.columnIndex="3">
+                     <graphic>
+                        <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="3.5em" textAlignment="CENTER" wrappingWidth="46.0" />
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Deletar" GridPane.columnIndex="4">
+                     <graphic>
+                        <FontAwesomeIcon glyphStyleClass="" iconName="TRASH" size="3.5em" text="" textAlignment="CENTER" wrappingWidth="50.71428680419922" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </GridPane>
+            <TableView fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="226.0" text="Nome Fantasia" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="145.0" text="CNPJ" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="199.0" text="Email" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Telefone" />
+               </columns>
+            </TableView>
+            <GridPane GridPane.rowIndex="3">
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="20.0" />
+                  <ColumnConstraints halignment="CENTER" percentWidth="30.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="15.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="15.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="20.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <CheckBox mnemonicParsing="false" text="Cores de Controle de Pagamentos de Fornecedores" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </CheckBox>
+                  <Label prefHeight="25.0" prefWidth="69.0" text="Pago" GridPane.columnIndex="2">
+                     <graphic>
+                        <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #41E2EF; -fx-border-style: solid;" />
+                     </graphic>
+                  </Label>
+                  <Label prefHeight="21.0" prefWidth="139.0" text="Boleto Atrasado" GridPane.columnIndex="3">
+                     <graphic>
+                        <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #FF7A42; -fx-border-style: solid;" />
+                     </graphic>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane style="-fx-background-color: #32a0ff;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Fornecedores" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="50.0" right="50.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

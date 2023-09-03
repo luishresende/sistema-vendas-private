@@ -1,0 +1,29 @@
+.usuario:hover {
+    -fx-border-color: white;
+    -fx-border-width: 3px 3px 3px 3px;
+    -fx-border-radius: 50px;
+}
+
+.menu:hover {
+    -fx-border-color: white;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.itensmenu:hover {
+    -fx-border-color:  white;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.buttonProduto:hover {
+    -fx-border-color:  lightgray;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0, 0, 4);
+}
+
+.buttonProduto{
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 2);
+}
