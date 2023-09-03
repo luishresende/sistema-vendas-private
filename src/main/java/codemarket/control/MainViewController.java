@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -76,7 +77,7 @@ public class MainViewController implements Initializable {
 
         KeyFrame transitionFrame1 = new KeyFrame(Duration.seconds(0.5), // Definição de KeyFrame para a animação do conteudo da sideBar
                 new KeyValue(sideBarContentGridPane.translateXProperty(), -sideBarWidth)
-        ); 
+        );
 
         KeyFrame transitionFrame2 = new KeyFrame(Duration.seconds(0.4), // Definição de KeyFrame para a animação da grid pai da side bar e da tela da aplicação
                 new KeyValue(sideBarColumn.percentWidthProperty(), 0),
@@ -115,6 +116,14 @@ public class MainViewController implements Initializable {
                 new KeyValue(applicationColumn.percentWidthProperty(), 75)
         );
 
+        // Aplicando o efeito de sombra no gridpane novamente
+        timeline.setOnFinished((ActionEvent e) -> {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(10);
+        dropShadow.setColor(javafx.scene.paint.Color.rgb(0, 0, 0, 0.8));
+        sideBarContentGridPane.setEffect(dropShadow);
+        });
+        
         // Adicionando os keyframes na timeline e executando
         timeline.getKeyFrames().add(transitionFrame1);
         timeline.getKeyFrames().add(transitionFrame2);
@@ -135,7 +144,7 @@ public class MainViewController implements Initializable {
         TranslateTransition sideBarTransition = new TranslateTransition(); // Instanciando uma transição
         sideBarTransition.setDuration(Duration.seconds(0.2)); // Delay de recuo
         sideBarTransition.setNode(menuSeparatorGridPane); // Setando o nó que receberá a transição
- 
+
         sideBarTransition.setToX(-21); // Definindo a posição final da animação
         sideBarTransition.play(); // Executando a transição
     }
@@ -146,13 +155,13 @@ public class MainViewController implements Initializable {
         try {
             // Carregando o conteudo da nova tela
             AnchorPane novoConteudo = loader.load();
-            
+
             // Definindo as costraints do novo conteudo para ocupar 100% da tela
             AnchorPane.setBottomAnchor(novoConteudo, 0.0);
             AnchorPane.setTopAnchor(novoConteudo, 0.0);
             AnchorPane.setRightAnchor(novoConteudo, 0.0);
             AnchorPane.setLeftAnchor(novoConteudo, 0.0);
-            
+
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
         } catch (IOException e) {
