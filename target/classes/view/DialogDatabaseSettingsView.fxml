@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPaneDBSettings" prefHeight="350.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.DialogDatabaseSettingsViewController">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneDBSettings" prefHeight="350.0" prefWidth="400.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.DialogDatabaseSettingsViewController">
    <children>
       <TextField fx:id="textFieldEnderecoDB" layoutX="86.0" layoutY="120.0" prefHeight="25.0" prefWidth="266.0" promptText="Endereço" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.topAnchor="120.0" />
       <TextField fx:id="textFieldNomeDB" layoutX="86.0" layoutY="160.0" prefHeight="25.0" prefWidth="266.0" promptText="Base de dados" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.topAnchor="160.0" />
@@ -24,6 +24,9 @@
          </font>
       </Text>
       <FontAwesomeIcon fill="#32a0ff" iconName="GEAR" layoutX="179.0" layoutY="63.0" size="4em" />
-      <Button fx:id="buttonSalvar" layoutX="158.0" layoutY="288.0" mnemonicParsing="false" onAction="#handlerButtonSalvar" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #32a0ff;" text="SALVAR" textFill="WHITE" />
+      <Button fx:id="buttonSalvar" layoutX="158.0" layoutY="288.0" mnemonicParsing="false" onAction="#handlerButtonSalvar" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #32a0ff;" styleClass="buttonProduto" text="SALVAR" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
    </children>
 </AnchorPane>

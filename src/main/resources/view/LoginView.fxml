@@ -23,11 +23,13 @@
       </Pane>
       <Pane layoutX="400.0" prefHeight="550.0" prefWidth="400.0">
          <children>
-            <FontAwesomeIcon iconName="GEAR" layoutX="353.0" layoutY="46.0" size="3em" text="" />
-            <Button fx:id="buttonDBSettings" layoutX="350.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleButtonDBSettings" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: transparent;" styleClass="buttonProduto">
+            <Button fx:id="buttonDBSettings" layoutX="341.0" mnemonicParsing="false" onAction="#handleButtonDBSettings" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: transparent;" styleClass="buttonConfig">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+               <graphic>
+                  <FontAwesomeIcon iconName="GEAR" size="3em" text="" />
+               </graphic></Button>
             <TextField fx:id="textFieldUsuario" layoutX="88.0" layoutY="258.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" />
             <TextField fx:id="textFieldSenha" layoutX="88.0" layoutY="317.0" prefHeight="25.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" />
             <Button fx:id="buttonEntrar" layoutX="158.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleButtonEntrar" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #32a0ff;" styleClass="buttonProduto" text="ENTRAR" textFill="WHITE">
