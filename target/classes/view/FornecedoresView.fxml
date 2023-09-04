@@ -8,15 +8,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutY="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" percentWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints percentHeight="5.0" valignment="CENTER" vgrow="ALWAYS" />
-          <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="25.0" minHeight="25.0" percentHeight="5.0" prefHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints percentHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
           <RowConstraints percentHeight="75.0" valignment="CENTER" vgrow="SOMETIMES" />
           <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -61,7 +61,7 @@
                         </FontAwesomeIcon>
                      </graphic>
                   </Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: Transparent;" styleClass="menubuttonProduto" text="Editar" GridPane.columnIndex="3">
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" GridPane.columnIndex="3">
                      <graphic>
                         <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="3.5em" textAlignment="CENTER" wrappingWidth="46.0" />
                      </graphic>
@@ -126,12 +126,12 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane style="-fx-background-color: #32a0ff;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <GridPane prefHeight="25.0" prefWidth="1230.0" style="-fx-background-color: #32a0ff;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" percentHeight="100.0" prefHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" text="Fornecedores" textAlignment="CENTER" textFill="WHITE">

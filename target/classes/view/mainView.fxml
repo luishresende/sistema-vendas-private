@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #32a0ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.MainViewController">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #32a0ff;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.MainViewController">
    <children>
       <GridPane fx:id="mainGridPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -22,7 +22,7 @@
           <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane fx:id="applicationAnchorPane" centerShape="false" style="-fx-background-color: #ffffff;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <AnchorPane fx:id="applicationAnchorPane" centerShape="false" style="-fx-background-color: #ffffff;" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -49,7 +49,7 @@
                   </ImageView>
                   <VBox GridPane.rowIndex="4">
                      <children>
-                        <Button fx:id="almoxarifadoButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Almoxarifado" textFill="WHITE">
+                        <Button fx:id="almoxarifadoButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Almoxarifado" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -174,7 +174,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="menuButton" mnemonicParsing="false" onAction="#closeSideBar" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0); -fx-background-color: Transparent;" text="MENU" textFill="WHITE" GridPane.rowIndex="1">
+                  <Button fx:id="menuButton" mnemonicParsing="false" onAction="#closeSideBar" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0); -fx-background-color: Transparent;" styleClass="itensmenu" text="MENU" textFill="WHITE" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
