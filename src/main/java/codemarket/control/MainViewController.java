@@ -118,12 +118,12 @@ public class MainViewController implements Initializable {
 
         // Aplicando o efeito de sombra no gridpane novamente
         timeline.setOnFinished((ActionEvent e) -> {
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setRadius(10);
-        dropShadow.setColor(javafx.scene.paint.Color.rgb(0, 0, 0, 0.8));
-        sideBarContentGridPane.setEffect(dropShadow);
+            DropShadow dropShadow = new DropShadow();
+            dropShadow.setRadius(10);
+            dropShadow.setColor(javafx.scene.paint.Color.rgb(0, 0, 0, 0.8));
+            sideBarContentGridPane.setEffect(dropShadow);
         });
-        
+
         // Adicionando os keyframes na timeline e executando
         timeline.getKeyFrames().add(transitionFrame1);
         timeline.getKeyFrames().add(transitionFrame2);
@@ -152,6 +152,26 @@ public class MainViewController implements Initializable {
     public void handleFornecedoresButton() {
         applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FornecedoresView.fxml"));
+        try {
+            // Carregando o conteudo da nova tela
+            AnchorPane novoConteudo = loader.load();
+
+            // Definindo as costraints do novo conteudo para ocupar 100% da tela
+            AnchorPane.setBottomAnchor(novoConteudo, 0.0);
+            AnchorPane.setTopAnchor(novoConteudo, 0.0);
+            AnchorPane.setRightAnchor(novoConteudo, 0.0);
+            AnchorPane.setLeftAnchor(novoConteudo, 0.0);
+
+            // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
+            applicationAnchorPane.getChildren().setAll(novoConteudo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleEstoqueButton() {
+        applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EstoqueView.fxml"));
         try {
             // Carregando o conteudo da nova tela
             AnchorPane novoConteudo = loader.load();
