@@ -126,7 +126,7 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Button>
-                        <Button fx:id="pdvButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Ponto de Venda" textFill="WHITE">
+                        <Button fx:id="pdvButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handlePDVButton" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Ponto de Venda" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

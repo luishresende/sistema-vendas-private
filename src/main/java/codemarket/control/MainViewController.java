@@ -164,6 +164,7 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
+            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -204,6 +205,28 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
+            System.out.println(applicationAnchorPane.getHeight());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+        public void handlePDVButton() {
+        applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PDVView.fxml"));
+        try {
+            // Carregando o conteudo da nova tela
+            AnchorPane novoConteudo = loader.load();
+
+            // Definindo as costraints do novo conteudo para ocupar 100% da tela
+            AnchorPane.setBottomAnchor(novoConteudo, 0.0);
+            AnchorPane.setTopAnchor(novoConteudo, 0.0);
+            AnchorPane.setRightAnchor(novoConteudo, 0.0);
+            AnchorPane.setLeftAnchor(novoConteudo, 0.0);
+
+            // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
+            applicationAnchorPane.getChildren().setAll(novoConteudo);
+            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
