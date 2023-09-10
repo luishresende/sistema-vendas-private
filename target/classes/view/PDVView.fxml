@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.PDVViewController">
    <children>
       <GridPane layoutX="62.0" layoutY="157.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -157,7 +157,7 @@
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField alignment="CENTER" layoutX="86.0" layoutY="43.0" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="quantidade" alignment="CENTER" layoutX="86.0" layoutY="43.0" onKeyReleased="#validarQTD" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="40.0" />
                                              </font>
@@ -195,7 +195,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField alignment="CENTER" layoutX="86.0" layoutY="43.0" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="totaItem" alignment="CENTER" editable="false" layoutX="86.0" layoutY="43.0" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="40.0" />
                                              </font>
@@ -229,41 +229,12 @@
                             <ColumnConstraints hgrow="SOMETIMES" percentWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints percentHeight="48.5" valignment="CENTER" vgrow="ALWAYS" />
+                              <RowConstraints percentHeight="48.5" valignment="CENTER" vgrow="ALWAYS" />
                               <RowConstraints percentHeight="3.0" valignment="CENTER" vgrow="ALWAYS" />
                             <RowConstraints percentHeight="48.5" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                            <children>
-                              <GridPane style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" GridPane.rowIndex="2">
-                                <columnConstraints>
-                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints percentHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
-                                  <RowConstraints percentHeight="75.0" valignment="CENTER" vgrow="ALWAYS" />
-                                </rowConstraints>
-                                 <children>
-                                    <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                                       <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Subtotal" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font name="System Bold" size="15.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane GridPane.rowIndex="1">
-                                       <children>
-                                          <TextField alignment="CENTER" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <font>
-                                                <Font size="30.0" />
-                                             </font>
-                                          </TextField>
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </GridPane>
-                              <GridPane>
+                              <GridPane GridPane.rowIndex="2">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" percentWidth="49.5" />
                                     <ColumnConstraints hgrow="SOMETIMES" percentWidth="1.0" />
@@ -284,7 +255,7 @@
                                        <children>
                                           <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Subtotal" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Total Recebido" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
@@ -293,7 +264,7 @@
                                           </AnchorPane>
                                           <AnchorPane GridPane.rowIndex="1">
                                              <children>
-                                                <TextField alignment="CENTER" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TextField fx:id="totalRecebido" alignment="CENTER" onKeyReleased="#intRecebido" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -313,7 +284,7 @@
                                        <children>
                                           <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Subtotal" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Troco" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
@@ -322,7 +293,7 @@
                                           </AnchorPane>
                                           <AnchorPane GridPane.rowIndex="1">
                                              <children>
-                                                <TextField alignment="CENTER" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TextField fx:id="troco" alignment="CENTER" editable="false" onAction="#valorTroco" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -332,6 +303,35 @@
                                        </children>
                                     </GridPane>
                                  </children>
+                              </GridPane>
+                              <GridPane style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
+                                 <children>
+                                    <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Subtotal" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane GridPane.rowIndex="1">
+                                       <children>
+                                          <TextField fx:id="subtotal" alignment="CENTER" editable="false" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints percentHeight="25.0" valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints percentHeight="75.0" valignment="CENTER" vgrow="ALWAYS" />
+                                 </rowConstraints>
                               </GridPane>
                            </children>
                         </GridPane>
