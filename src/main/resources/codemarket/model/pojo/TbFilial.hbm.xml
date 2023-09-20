@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbFilial" table="tb_filial" catalog="code_market">
+        <id name="filId" type="int">
+            <column name="fil_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbEntidade" class="codemarket.model.pojo.TbEntidade" fetch="select">
+            <column name="fil_entidade" length="15" not-null="true" />
+        </many-to-one>
+        <property name="filPreferencias" type="string">
+            <column name="fil_preferencias" length="1073741824" not-null="true" />
+        </property>
+        <set name="tbFuncionarios" table="tb_funcionario_has_filial" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="ff_filial_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="codemarket.model.pojo.TbFuncionario">
+                <column name="ff_funcionario_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="tbFuncionarios_1" table="tb_funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="func_filial_id" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbFuncionario" />
+        </set>
+    </class>
+</hibernate-mapping>

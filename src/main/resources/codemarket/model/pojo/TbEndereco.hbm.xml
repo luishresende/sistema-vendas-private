@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbEndereco" table="tb_endereco" catalog="code_market">
+        <id name="endId" type="java.lang.Integer">
+            <column name="end_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbEndPostal" class="codemarket.model.pojo.TbEndPostal" fetch="select">
+            <column name="end_endP_id" not-null="true" />
+        </many-to-one>
+        <property name="endNumero" type="int">
+            <column name="end_numero" not-null="true" />
+        </property>
+        <property name="endComplemento" type="string">
+            <column name="end_complemento" length="45" />
+        </property>
+        <set name="tbEntidades" table="tb_entidade" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ent_endereco_principal" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbEntidade" />
+        </set>
+        <set name="tbEntidades_1" table="tb_entidade_has_endereco" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="ee_end_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="codemarket.model.pojo.TbEntidade">
+                <column name="ee_ent_cpfCnpj" length="15" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

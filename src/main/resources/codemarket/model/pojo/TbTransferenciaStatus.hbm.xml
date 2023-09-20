@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbTransferenciaStatus" table="tb_transferencia_status" catalog="code_market">
+        <id name="trsId" type="int">
+            <column name="trs_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="trsNome" type="string">
+            <column name="trs_nome" length="30" not-null="true" />
+        </property>
+        <property name="trsDescricao" type="string">
+            <column name="trs_descricao" length="50" />
+        </property>
+        <set name="tbTransferenciasAlmoxarifados" table="tb_transferencias_almoxarifado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tra_status" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbTransferenciasAlmoxarifado" />
+        </set>
+        <set name="tbEntradas" table="tb_entrada" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entr_status" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbEntrada" />
+        </set>
+    </class>
+</hibernate-mapping>

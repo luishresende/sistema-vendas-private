@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbUsuario" table="tb_usuario" catalog="code_market">
+        <id name="usuUsuario" type="string">
+            <column name="usu_usuario" length="30" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbStatus" class="codemarket.model.pojo.TbStatus" fetch="select">
+            <column name="usu_status" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbGrupoPermissoes" class="codemarket.model.pojo.TbGrupoPermissoes" fetch="select">
+            <column name="usu_gp_permissao" not-null="true" />
+        </many-to-one>
+        <property name="usuSenha" type="string">
+            <column name="usu_senha" length="45" not-null="true" />
+        </property>
+        <property name="usuValidade" type="date">
+            <column name="usu_validade" length="10" />
+        </property>
+        <set name="tbFuncionarios" table="tb_funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="func_usuario" length="30" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbFuncionario" />
+        </set>
+    </class>
+</hibernate-mapping>

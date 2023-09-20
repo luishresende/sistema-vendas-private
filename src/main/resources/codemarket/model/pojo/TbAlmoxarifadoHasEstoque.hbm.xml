@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbAlmoxarifadoHasEstoque" table="tb_almoxarifado_has_estoque" catalog="code_market">
+        <id name="almoId" type="int">
+            <column name="almo_id" />
+            <generator class="foreign">
+                <param name="property">tbAlmoxarifado</param>
+            </generator>
+        </id>
+        <one-to-one name="tbAlmoxarifado" class="codemarket.model.pojo.TbAlmoxarifado" constrained="true"></one-to-one>
+        <property name="estoId" type="int">
+            <column name="esto_id" not-null="true" />
+        </property>
+        <property name="tbAlmoxarifadoHasEstoquecol" type="string">
+            <column name="tb_almoxarifado_has_estoquecol" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

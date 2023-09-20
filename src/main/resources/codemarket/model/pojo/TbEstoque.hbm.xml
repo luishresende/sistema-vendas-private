@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbEstoque" table="tb_estoque" catalog="code_market">
+        <composite-id name="id" class="codemarket.model.pojo.TbEstoqueId">
+            <key-property name="estoAlmoxarifado" type="int">
+                <column name="esto_almoxarifado" />
+            </key-property>
+            <key-property name="estoProdutoCodigo" type="string">
+                <column name="esto_produto_codigo" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbAlmoxarifado" class="codemarket.model.pojo.TbAlmoxarifado" update="false" insert="false" fetch="select">
+            <column name="esto_almoxarifado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbProduto" class="codemarket.model.pojo.TbProduto" update="false" insert="false" fetch="select">
+            <column name="esto_produto_codigo" length="20" not-null="true" />
+        </many-to-one>
+        <property name="estoQuantidade" type="float">
+            <column name="esto_quantidade" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="estoValorFinal" type="float">
+            <column name="esto_valor_final" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="estoValorFinalPrazo" type="java.lang.Float">
+            <column name="esto_valor_final_prazo" precision="12" scale="0" />
+        </property>
+        <property name="estoLimiteMin" type="float">
+            <column name="esto_limite_min" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="estoProibirVendaLimMin" type="byte">
+            <column name="esto_proibir_venda_lim_min" not-null="true" />
+        </property>
+        <property name="estoAtualizarCustoNoPedido" type="byte">
+            <column name="esto_atualizar_custo_no_pedido" not-null="true" />
+        </property>
+        <set name="tbPedidos" table="tb_pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ped_esto_almoxarifado" not-null="true" />
+                <column name="ped_esto_produto" length="20" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbPedido" />
+        </set>
+        <set name="tbPedidoTransferencias" table="tb_pedido_transferencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ptr_estoque_produto" not-null="true" />
+                <column name="ptr_estoque_almoxarifado" length="20" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbPedidoTransferencia" />
+        </set>
+    </class>
+</hibernate-mapping>

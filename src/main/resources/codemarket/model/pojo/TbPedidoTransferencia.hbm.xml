@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbPedidoTransferencia" table="tb_pedido_transferencia" catalog="code_market">
+        <id name="ptrId" type="int">
+            <column name="ptr_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tbEstoque" class="codemarket.model.pojo.TbEstoque" fetch="select">
+            <column name="ptr_estoque_produto" not-null="true" />
+            <column name="ptr_estoque_almoxarifado" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbTransferenciasAlmoxarifado" class="codemarket.model.pojo.TbTransferenciasAlmoxarifado" fetch="select">
+            <column name="ptr_transferencia_id" not-null="true" />
+        </many-to-one>
+        <property name="ptrQuantidade" type="float">
+            <column name="ptr_quantidade" precision="12" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

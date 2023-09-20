@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbCategoriaProduto" table="tb_categoria_produto" catalog="code_market">
+        <id name="catpId" type="int">
+            <column name="catp_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="catpDescricao" type="string">
+            <column name="catp_descricao" length="50" not-null="true" />
+        </property>
+        <set name="tbProdutos" table="tb_produto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pdt_categoria" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbProduto" />
+        </set>
+    </class>
+</hibernate-mapping>

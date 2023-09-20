@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbAlmoxarifado" table="tb_almoxarifado" catalog="code_market">
+        <id name="almoId" type="int">
+            <column name="almo_id" />
+            <generator class="assigned" />
+        </id>
+        <one-to-one name="tbAlmoxarifadoHasEstoque" class="codemarket.model.pojo.TbAlmoxarifadoHasEstoque"></one-to-one>
+        <set name="tbTransferenciasAlmoxarifadosForTraAlmoxarifadoDestino" table="tb_transferencias_almoxarifado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tra_almoxarifado_destino" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbTransferenciasAlmoxarifado" />
+        </set>
+        <set name="tbTransferenciasAlmoxarifadosForTraAlmoxarifadoOrigem" table="tb_transferencias_almoxarifado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tra_almoxarifado_origem" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbTransferenciasAlmoxarifado" />
+        </set>
+        <set name="tbEstoques" table="tb_estoque" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="esto_almoxarifado" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbEstoque" />
+        </set>
+        <set name="tbEntradas" table="tb_entrada" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="entr_almo_id" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbEntrada" />
+        </set>
+        <set name="tbFuncionarios" table="tb_funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="func_status" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbFuncionario" />
+        </set>
+        <set name="tbFuncionarios_1" table="tb_funcionario_has_almoxarifado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="almo_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="codemarket.model.pojo.TbFuncionario">
+                <column name="func_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

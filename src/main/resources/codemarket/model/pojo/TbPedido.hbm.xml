@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbPedido" table="tb_pedido" catalog="code_market">
+        <composite-id name="id" class="codemarket.model.pojo.TbPedidoId">
+            <key-property name="pedId" type="int">
+                <column name="ped_id" />
+            </key-property>
+            <key-property name="pedVenda" type="string">
+                <column name="ped_venda" length="45" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbEstoque" class="codemarket.model.pojo.TbEstoque" fetch="select">
+            <column name="ped_esto_almoxarifado" not-null="true" />
+            <column name="ped_esto_produto" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbVenda" class="codemarket.model.pojo.TbVenda" update="false" insert="false" fetch="select">
+            <column name="ped_id" not-null="true" />
+        </many-to-one>
+        <property name="pedQuantidade" type="float">
+            <column name="ped_quantidade" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="pedDesconto" type="float">
+            <column name="ped_desconto" precision="12" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

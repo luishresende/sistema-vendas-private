@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20/09/2023 14:26:59 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="codemarket.model.pojo.TbCidEst" table="tb_cid_est" catalog="code_market">
+        <composite-id name="id" class="codemarket.model.pojo.TbCidEstId">
+            <key-property name="ceCidId" type="int">
+                <column name="ce_cid_id" />
+            </key-property>
+            <key-property name="ceEstSigla" type="string">
+                <column name="ce_est_sigla" length="2" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="tbEstado" class="codemarket.model.pojo.TbEstado" update="false" insert="false" fetch="select">
+            <column name="ce_est_sigla" length="2" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbCidade" class="codemarket.model.pojo.TbCidade" update="false" insert="false" fetch="select">
+            <column name="ce_cid_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbPais" class="codemarket.model.pojo.TbPais" fetch="select">
+            <column name="cep_pai_sigla" length="2" not-null="true" />
+        </many-to-one>
+        <set name="tbEndPostals" table="tb_end_postal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="endP_ce_cid_id" not-null="true" />
+                <column name="endP_ce_est_sigla" length="2" not-null="true" />
+            </key>
+            <one-to-many class="codemarket.model.pojo.TbEndPostal" />
+        </set>
+    </class>
+</hibernate-mapping>
