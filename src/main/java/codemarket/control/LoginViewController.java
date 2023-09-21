@@ -1,5 +1,7 @@
 package codemarket.control;
 
+import codemarket.model.dao.EstadoDAOImpl;
+import codemarket.model.pojo.TbEstado;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class LoginViewController implements Initializable {
 
@@ -29,10 +34,9 @@ public class LoginViewController implements Initializable {
     
     private Stage dialogStage;
     private boolean logged = false;
-        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }    
     
     @FXML
@@ -68,6 +72,5 @@ public class LoginViewController implements Initializable {
         mainStage.setScene(scene);
         mainStage.setTitle("CodeMarket");
         mainStage.show();
-        
     }
 }
