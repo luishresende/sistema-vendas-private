@@ -17,20 +17,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_cid_est")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCidEst.findAll", query = "SELECT t FROM TbCidEst t"),
-    @NamedQuery(name = "TbCidEst.findByCeCidId", query = "SELECT t FROM TbCidEst t WHERE t.tbCidEstPK.ceCidId = :ceCidId"),
-    @NamedQuery(name = "TbCidEst.findByCeEstSigla", query = "SELECT t FROM TbCidEst t WHERE t.tbCidEstPK.ceEstSigla = :ceEstSigla")})
+    @NamedQuery(name = "TbCidEst.findAll", query = "SELECT t FROM TbCidEst t")})
 public class TbCidEst implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -66,7 +61,6 @@ public class TbCidEst implements Serializable {
         this.tbCidEstPK = tbCidEstPK;
     }
 
-    @XmlTransient
     public List<TbEndPostal> getTbEndPostalList() {
         return tbEndPostalList;
     }

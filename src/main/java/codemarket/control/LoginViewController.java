@@ -1,6 +1,8 @@
 package codemarket.control;
 
+import codemarket.model.dao.BairroDAOImpl;
 import codemarket.model.dao.EstadoDAOImpl;
+import codemarket.model.pojo.TbBairro;
 import codemarket.model.pojo.TbEstado;
 import java.io.IOException;
 import java.net.URL;
@@ -63,14 +65,8 @@ public class LoginViewController implements Initializable {
     
     @FXML
     public void handleButtonEntrar() throws IOException {
+
         
-        Stage mainStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/view/mainView.fxml"));
-        Scene scene = new Scene(root);
         
-        //mainStage.initStyle(StageStyle.UNDECORATED);
-        mainStage.setScene(scene);
-        mainStage.setTitle("CodeMarket");
-        mainStage.show();
     }
 }

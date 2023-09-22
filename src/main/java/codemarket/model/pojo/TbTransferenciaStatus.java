@@ -17,21 +17,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_transferencia_status")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbTransferenciaStatus.findAll", query = "SELECT t FROM TbTransferenciaStatus t"),
-    @NamedQuery(name = "TbTransferenciaStatus.findByTrsId", query = "SELECT t FROM TbTransferenciaStatus t WHERE t.trsId = :trsId"),
-    @NamedQuery(name = "TbTransferenciaStatus.findByTrsNome", query = "SELECT t FROM TbTransferenciaStatus t WHERE t.trsNome = :trsNome"),
-    @NamedQuery(name = "TbTransferenciaStatus.findByTrsDescricao", query = "SELECT t FROM TbTransferenciaStatus t WHERE t.trsDescricao = :trsDescricao")})
+    @NamedQuery(name = "TbTransferenciaStatus.findAll", query = "SELECT t FROM TbTransferenciaStatus t")})
 public class TbTransferenciaStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -84,7 +78,6 @@ public class TbTransferenciaStatus implements Serializable {
         this.trsDescricao = trsDescricao;
     }
 
-    @XmlTransient
     public List<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoList() {
         return tbTransferenciasAlmoxarifadoList;
     }
@@ -93,7 +86,6 @@ public class TbTransferenciaStatus implements Serializable {
         this.tbTransferenciasAlmoxarifadoList = tbTransferenciasAlmoxarifadoList;
     }
 
-    @XmlTransient
     public List<TbEntrada> getTbEntradaList() {
         return tbEntradaList;
     }

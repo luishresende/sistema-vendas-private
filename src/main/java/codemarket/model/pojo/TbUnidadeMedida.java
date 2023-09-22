@@ -17,21 +17,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_unidade_medida")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbUnidadeMedida.findAll", query = "SELECT t FROM TbUnidadeMedida t"),
-    @NamedQuery(name = "TbUnidadeMedida.findByUmSigla", query = "SELECT t FROM TbUnidadeMedida t WHERE t.umSigla = :umSigla"),
-    @NamedQuery(name = "TbUnidadeMedida.findByUmDescricao", query = "SELECT t FROM TbUnidadeMedida t WHERE t.umDescricao = :umDescricao"),
-    @NamedQuery(name = "TbUnidadeMedida.findByUmTipo", query = "SELECT t FROM TbUnidadeMedida t WHERE t.umTipo = :umTipo")})
+    @NamedQuery(name = "TbUnidadeMedida.findAll", query = "SELECT t FROM TbUnidadeMedida t")})
 public class TbUnidadeMedida implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -84,7 +78,6 @@ public class TbUnidadeMedida implements Serializable {
         this.umTipo = umTipo;
     }
 
-    @XmlTransient
     public List<TbProduto> getTbProdutoList() {
         return tbProdutoList;
     }

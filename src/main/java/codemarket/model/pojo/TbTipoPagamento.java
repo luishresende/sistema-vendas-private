@@ -19,20 +19,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_tipo_pagamento")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbTipoPagamento.findAll", query = "SELECT t FROM TbTipoPagamento t"),
-    @NamedQuery(name = "TbTipoPagamento.findByTpId", query = "SELECT t FROM TbTipoPagamento t WHERE t.tpId = :tpId"),
-    @NamedQuery(name = "TbTipoPagamento.findByTpDescricao", query = "SELECT t FROM TbTipoPagamento t WHERE t.tpDescricao = :tpDescricao")})
+    @NamedQuery(name = "TbTipoPagamento.findAll", query = "SELECT t FROM TbTipoPagamento t")})
 public class TbTipoPagamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -74,7 +69,6 @@ public class TbTipoPagamento implements Serializable {
         this.tpDescricao = tpDescricao;
     }
 
-    @XmlTransient
     public List<TbVenda> getTbVendaList() {
         return tbVendaList;
     }

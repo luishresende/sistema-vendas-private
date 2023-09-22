@@ -24,20 +24,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_venda")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbVenda.findAll", query = "SELECT t FROM TbVenda t"),
-    @NamedQuery(name = "TbVenda.findByVenId", query = "SELECT t FROM TbVenda t WHERE t.venId = :venId"),
-    @NamedQuery(name = "TbVenda.findByVenData", query = "SELECT t FROM TbVenda t WHERE t.venData = :venData")})
+    @NamedQuery(name = "TbVenda.findAll", query = "SELECT t FROM TbVenda t")})
 public class TbVenda implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -88,7 +83,6 @@ public class TbVenda implements Serializable {
         this.venData = venData;
     }
 
-    @XmlTransient
     public List<TbOrdemServico> getTbOrdemServicoList() {
         return tbOrdemServicoList;
     }
@@ -97,7 +91,6 @@ public class TbVenda implements Serializable {
         this.tbOrdemServicoList = tbOrdemServicoList;
     }
 
-    @XmlTransient
     public List<TbPedido> getTbPedidoList() {
         return tbPedidoList;
     }

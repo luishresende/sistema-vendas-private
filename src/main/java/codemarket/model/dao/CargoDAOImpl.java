@@ -30,7 +30,7 @@ public class CargoDAOImpl implements CargoDAO{
     @Override
     public void atualizar(TbCargo cargo) {
         manager.getTransaction().begin();
-        manager.persist(cargo);
+        manager.merge(cargo);
         manager.getTransaction().commit();
     }
 

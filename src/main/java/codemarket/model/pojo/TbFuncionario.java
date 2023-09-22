@@ -20,19 +20,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_funcionario")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFuncionario.findAll", query = "SELECT t FROM TbFuncionario t"),
-    @NamedQuery(name = "TbFuncionario.findByFuncId", query = "SELECT t FROM TbFuncionario t WHERE t.funcId = :funcId")})
+    @NamedQuery(name = "TbFuncionario.findAll", query = "SELECT t FROM TbFuncionario t")})
 public class TbFuncionario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,7 +40,7 @@ public class TbFuncionario implements Serializable {
     private List<TbAlmoxarifado> tbAlmoxarifadoList;
     @ManyToMany(mappedBy = "tbFuncionarioList")
     private List<TbFilial> tbFilialList;
-    @JoinColumn(name = "func_status_almo", referencedColumnName = "almo_id")
+    @JoinColumn(name = "func_status", referencedColumnName = "almo_id")
     @ManyToOne(optional = false)
     private TbAlmoxarifado funcStatus;
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
@@ -56,7 +52,7 @@ public class TbFuncionario implements Serializable {
     @JoinColumn(name = "func_filial_id", referencedColumnName = "fil_id")
     @ManyToOne(optional = false)
     private TbFilial funcFilialId;
-    @JoinColumn(name = "func_status_sta", referencedColumnName = "sta_id")
+    @JoinColumn(name = "func_status", referencedColumnName = "sta_id")
     @ManyToOne(optional = false)
     private TbStatus funcStatus1;
     @JoinColumn(name = "func_usuario", referencedColumnName = "usu_usuario")
@@ -78,7 +74,6 @@ public class TbFuncionario implements Serializable {
         this.funcId = funcId;
     }
 
-    @XmlTransient
     public List<TbAlmoxarifado> getTbAlmoxarifadoList() {
         return tbAlmoxarifadoList;
     }
@@ -87,7 +82,6 @@ public class TbFuncionario implements Serializable {
         this.tbAlmoxarifadoList = tbAlmoxarifadoList;
     }
 
-    @XmlTransient
     public List<TbFilial> getTbFilialList() {
         return tbFilialList;
     }

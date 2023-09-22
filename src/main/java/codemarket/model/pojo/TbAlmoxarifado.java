@@ -64,10 +64,6 @@ public class TbAlmoxarifado implements Serializable {
     public TbAlmoxarifado() {
     }
 
-    public TbAlmoxarifado(Integer almoId) {
-        this.almoId = almoId;
-    }
-
     public Integer getAlmoId() {
         return almoId;
     }

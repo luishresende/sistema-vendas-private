@@ -21,19 +21,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_transferencias_almoxarifado")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbTransferenciasAlmoxarifado.findAll", query = "SELECT t FROM TbTransferenciasAlmoxarifado t"),
-    @NamedQuery(name = "TbTransferenciasAlmoxarifado.findByTraId", query = "SELECT t FROM TbTransferenciasAlmoxarifado t WHERE t.traId = :traId")})
+    @NamedQuery(name = "TbTransferenciasAlmoxarifado.findAll", query = "SELECT t FROM TbTransferenciasAlmoxarifado t")})
 public class TbTransferenciasAlmoxarifado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,12 +39,12 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
     private Integer traId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ptrTransferenciaId")
     private List<TbPedidoTransferencia> tbPedidoTransferenciaList;
-    @JoinColumn(name = "tra_almoxarifado_origem", referencedColumnName = "almo_id")
-    @ManyToOne(optional = false)
-    private TbAlmoxarifado traAlmoxarifadoOrigem;
     @JoinColumn(name = "tra_almoxarifado_destino", referencedColumnName = "almo_id")
     @ManyToOne(optional = false)
     private TbAlmoxarifado traAlmoxarifadoDestino;
+    @JoinColumn(name = "tra_almoxarifado_origem", referencedColumnName = "almo_id")
+    @ManyToOne(optional = false)
+    private TbAlmoxarifado traAlmoxarifadoOrigem;
     @JoinColumn(name = "tra_status", referencedColumnName = "trs_id")
     @ManyToOne(optional = false)
     private TbTransferenciaStatus traStatus;
@@ -68,7 +64,6 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
         this.traId = traId;
     }
 
-    @XmlTransient
     public List<TbPedidoTransferencia> getTbPedidoTransferenciaList() {
         return tbPedidoTransferenciaList;
     }
@@ -77,20 +72,20 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
         this.tbPedidoTransferenciaList = tbPedidoTransferenciaList;
     }
 
-    public TbAlmoxarifado getTraAlmoxarifadoOrigem() {
-        return traAlmoxarifadoOrigem;
-    }
-
-    public void setTraAlmoxarifadoOrigem(TbAlmoxarifado traAlmoxarifadoOrigem) {
-        this.traAlmoxarifadoOrigem = traAlmoxarifadoOrigem;
-    }
-
     public TbAlmoxarifado getTraAlmoxarifadoDestino() {
         return traAlmoxarifadoDestino;
     }
 
     public void setTraAlmoxarifadoDestino(TbAlmoxarifado traAlmoxarifadoDestino) {
         this.traAlmoxarifadoDestino = traAlmoxarifadoDestino;
+    }
+
+    public TbAlmoxarifado getTraAlmoxarifadoOrigem() {
+        return traAlmoxarifadoOrigem;
+    }
+
+    public void setTraAlmoxarifadoOrigem(TbAlmoxarifado traAlmoxarifadoOrigem) {
+        this.traAlmoxarifadoOrigem = traAlmoxarifadoOrigem;
     }
 
     public TbTransferenciaStatus getTraStatus() {

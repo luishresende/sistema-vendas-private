@@ -17,21 +17,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_pedido")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbPedido.findAll", query = "SELECT t FROM TbPedido t"),
-    @NamedQuery(name = "TbPedido.findByPedId", query = "SELECT t FROM TbPedido t WHERE t.tbPedidoPK.pedId = :pedId"),
-    @NamedQuery(name = "TbPedido.findByPedVenda", query = "SELECT t FROM TbPedido t WHERE t.tbPedidoPK.pedVenda = :pedVenda"),
-    @NamedQuery(name = "TbPedido.findByPedQuantidade", query = "SELECT t FROM TbPedido t WHERE t.pedQuantidade = :pedQuantidade"),
-    @NamedQuery(name = "TbPedido.findByPedDesconto", query = "SELECT t FROM TbPedido t WHERE t.pedDesconto = :pedDesconto")})
+    @NamedQuery(name = "TbPedido.findAll", query = "SELECT t FROM TbPedido t")})
 public class TbPedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId

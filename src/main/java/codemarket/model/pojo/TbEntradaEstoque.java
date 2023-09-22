@@ -16,18 +16,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_entrada_estoque")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntradaEstoque.findAll", query = "SELECT t FROM TbEntradaEstoque t"),
-    @NamedQuery(name = "TbEntradaEstoque.findByEntreId", query = "SELECT t FROM TbEntradaEstoque t WHERE t.entreId = :entreId")})
+    @NamedQuery(name = "TbEntradaEstoque.findAll", query = "SELECT t FROM TbEntradaEstoque t")})
 public class TbEntradaEstoque implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

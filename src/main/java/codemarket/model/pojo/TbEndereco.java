@@ -23,21 +23,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_endereco")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEndereco.findAll", query = "SELECT t FROM TbEndereco t"),
-    @NamedQuery(name = "TbEndereco.findByEndId", query = "SELECT t FROM TbEndereco t WHERE t.endId = :endId"),
-    @NamedQuery(name = "TbEndereco.findByEndNumero", query = "SELECT t FROM TbEndereco t WHERE t.endNumero = :endNumero"),
-    @NamedQuery(name = "TbEndereco.findByEndComplemento", query = "SELECT t FROM TbEndereco t WHERE t.endComplemento = :endComplemento")})
+    @NamedQuery(name = "TbEndereco.findAll", query = "SELECT t FROM TbEndereco t")})
 public class TbEndereco implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -97,7 +91,6 @@ public class TbEndereco implements Serializable {
         this.endComplemento = endComplemento;
     }
 
-    @XmlTransient
     public List<TbEntidade> getTbEntidadeList() {
         return tbEntidadeList;
     }
@@ -106,7 +99,6 @@ public class TbEndereco implements Serializable {
         this.tbEntidadeList = tbEntidadeList;
     }
 
-    @XmlTransient
     public List<TbEntidade> getTbEntidadeList1() {
         return tbEntidadeList1;
     }

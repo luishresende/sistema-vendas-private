@@ -17,20 +17,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_categoria_produto")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCategoriaProduto.findAll", query = "SELECT t FROM TbCategoriaProduto t"),
-    @NamedQuery(name = "TbCategoriaProduto.findByCatpId", query = "SELECT t FROM TbCategoriaProduto t WHERE t.catpId = :catpId"),
-    @NamedQuery(name = "TbCategoriaProduto.findByCatpDescricao", query = "SELECT t FROM TbCategoriaProduto t WHERE t.catpDescricao = :catpDescricao")})
+    @NamedQuery(name = "TbCategoriaProduto.findAll", query = "SELECT t FROM TbCategoriaProduto t")})
 public class TbCategoriaProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,7 +66,6 @@ public class TbCategoriaProduto implements Serializable {
         this.catpDescricao = catpDescricao;
     }
 
-    @XmlTransient
     public List<TbProduto> getTbProdutoList() {
         return tbProdutoList;
     }

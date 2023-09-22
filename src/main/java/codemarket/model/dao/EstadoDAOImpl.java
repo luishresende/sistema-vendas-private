@@ -6,25 +6,48 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-public class EstadoDAOImpl implements EstadoDAO{
+public class EstadoDAOImpl implements EstadoDAO {
+
     EntityManager manager;
-        
-    public EstadoDAOImpl(){
+
+    public EstadoDAOImpl() {
         manager = ConexaoHibernate.getInstance();
     }
-    
-    public void salvar(TbEstado estado){
+
+    @Override
+    public void salvar(TbEstado estado) {
         manager.getTransaction().begin();
         manager.persist(estado);
         manager.getTransaction().commit();
     }
-    
+
     @Override
-    public List<String> listar(){
-        String sql = "SELECT est.estDescricao FROM TbEstado est";
-        Query query = (Query) manager.createQuery(sql);
-        List<String> estados =  query.getResultList();
-        
-        return estados;
+    public void atualizar(TbEstado estado) {
+        manager.getTransaction().begin();
+        manager.merge(estado);
+        manager.getTransaction().commit();
+    }
+
+    @Override
+    public void excluir(TbEstado estado) {
+        manager.getTransaction().begin();
+        manager.remove(estado);
+        manager.getTransaction().commit();
+    }
+
+    @Override
+    public List<TbEstado> listarTodos() {
+        String jpql = "SELECT e FROM TbEstado e";
+        Query query = manager.createQuery(jpql);
+        List<TbEstado> estadoList = query.getResultList();
+        return estadoList;
+    }
+
+    @Override
+    public TbEstado listarUm(int id) {
+        String jpql = "SELECT e FROM TbEstado e WHERE e.id = " + id;
+        Query query = manager.createQuery(jpql);
+        Object obj = query.getSingleResult();
+        return (TbEstado) obj;
     }
 }

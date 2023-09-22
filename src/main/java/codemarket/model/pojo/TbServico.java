@@ -19,22 +19,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_servico")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbServico.findAll", query = "SELECT t FROM TbServico t"),
-    @NamedQuery(name = "TbServico.findBySerId", query = "SELECT t FROM TbServico t WHERE t.serId = :serId"),
-    @NamedQuery(name = "TbServico.findBySerNome", query = "SELECT t FROM TbServico t WHERE t.serNome = :serNome"),
-    @NamedQuery(name = "TbServico.findBySerDescricao", query = "SELECT t FROM TbServico t WHERE t.serDescricao = :serDescricao"),
-    @NamedQuery(name = "TbServico.findBySerValorBase", query = "SELECT t FROM TbServico t WHERE t.serValorBase = :serValorBase")})
+    @NamedQuery(name = "TbServico.findAll", query = "SELECT t FROM TbServico t")})
 public class TbServico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -100,7 +93,6 @@ public class TbServico implements Serializable {
         this.serValorBase = serValorBase;
     }
 
-    @XmlTransient
     public List<TbOrdemServico> getTbOrdemServicoList() {
         return tbOrdemServicoList;
     }

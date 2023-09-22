@@ -24,26 +24,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_entidade")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntidade.findAll", query = "SELECT t FROM TbEntidade t"),
-    @NamedQuery(name = "TbEntidade.findByEntNome", query = "SELECT t FROM TbEntidade t WHERE t.entNome = :entNome"),
-    @NamedQuery(name = "TbEntidade.findByEntnomeFantasia", query = "SELECT t FROM TbEntidade t WHERE t.entnomeFantasia = :entnomeFantasia"),
-    @NamedQuery(name = "TbEntidade.findByEntcpfCnpj", query = "SELECT t FROM TbEntidade t WHERE t.entcpfCnpj = :entcpfCnpj"),
-    @NamedQuery(name = "TbEntidade.findByEntrgIe", query = "SELECT t FROM TbEntidade t WHERE t.entrgIe = :entrgIe"),
-    @NamedQuery(name = "TbEntidade.findByEntFone", query = "SELECT t FROM TbEntidade t WHERE t.entFone = :entFone"),
-    @NamedQuery(name = "TbEntidade.findByEntEmail", query = "SELECT t FROM TbEntidade t WHERE t.entEmail = :entEmail"),
-    @NamedQuery(name = "TbEntidade.findByEntdtNasc", query = "SELECT t FROM TbEntidade t WHERE t.entdtNasc = :entdtNasc"),
-    @NamedQuery(name = "TbEntidade.findByEntTipo", query = "SELECT t FROM TbEntidade t WHERE t.entTipo = :entTipo")})
+    @NamedQuery(name = "TbEntidade.findAll", query = "SELECT t FROM TbEntidade t")})
 public class TbEntidade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
@@ -169,7 +158,6 @@ public class TbEntidade implements Serializable {
         this.entTipo = entTipo;
     }
 
-    @XmlTransient
     public List<TbEndereco> getTbEnderecoList() {
         return tbEnderecoList;
     }
@@ -202,7 +190,6 @@ public class TbEntidade implements Serializable {
         this.entSexo = entSexo;
     }
 
-    @XmlTransient
     public List<TbFuncionario> getTbFuncionarioList() {
         return tbFuncionarioList;
     }
@@ -211,7 +198,6 @@ public class TbEntidade implements Serializable {
         this.tbFuncionarioList = tbFuncionarioList;
     }
 
-    @XmlTransient
     public List<TbFilial> getTbFilialList() {
         return tbFilialList;
     }

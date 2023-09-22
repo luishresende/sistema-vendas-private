@@ -23,7 +23,7 @@ public class BairroDAOImpl implements BairroDAO {
     @Override
     public void atualizar(TbBairro bairro) {
         manager.getTransaction().begin();
-        manager.persist(bairro);
+        manager.merge(bairro);
         manager.getTransaction().commit();    }
 
     @Override

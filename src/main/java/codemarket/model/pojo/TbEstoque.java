@@ -19,26 +19,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_estoque")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t"),
-    @NamedQuery(name = "TbEstoque.findByEstoAlmoxarifado", query = "SELECT t FROM TbEstoque t WHERE t.tbEstoquePK.estoAlmoxarifado = :estoAlmoxarifado"),
-    @NamedQuery(name = "TbEstoque.findByEstoProdutoCodigo", query = "SELECT t FROM TbEstoque t WHERE t.tbEstoquePK.estoProdutoCodigo = :estoProdutoCodigo"),
-    @NamedQuery(name = "TbEstoque.findByEstoQuantidade", query = "SELECT t FROM TbEstoque t WHERE t.estoQuantidade = :estoQuantidade"),
-    @NamedQuery(name = "TbEstoque.findByEstoValorFinal", query = "SELECT t FROM TbEstoque t WHERE t.estoValorFinal = :estoValorFinal"),
-    @NamedQuery(name = "TbEstoque.findByEstoValorFinalPrazo", query = "SELECT t FROM TbEstoque t WHERE t.estoValorFinalPrazo = :estoValorFinalPrazo"),
-    @NamedQuery(name = "TbEstoque.findByEstoLimiteMin", query = "SELECT t FROM TbEstoque t WHERE t.estoLimiteMin = :estoLimiteMin"),
-    @NamedQuery(name = "TbEstoque.findByEstoProibirVendaLimMin", query = "SELECT t FROM TbEstoque t WHERE t.estoProibirVendaLimMin = :estoProibirVendaLimMin"),
-    @NamedQuery(name = "TbEstoque.findByEstoAtualizarCustoNoPedido", query = "SELECT t FROM TbEstoque t WHERE t.estoAtualizarCustoNoPedido = :estoAtualizarCustoNoPedido")})
+    @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t")})
 public class TbEstoque implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -148,7 +137,6 @@ public class TbEstoque implements Serializable {
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
     }
 
-    @XmlTransient
     public List<TbPedidoTransferencia> getTbPedidoTransferenciaList() {
         return tbPedidoTransferenciaList;
     }
@@ -173,7 +161,6 @@ public class TbEstoque implements Serializable {
         this.tbProduto = tbProduto;
     }
 
-    @XmlTransient
     public List<TbPedido> getTbPedidoList() {
         return tbPedidoList;
     }

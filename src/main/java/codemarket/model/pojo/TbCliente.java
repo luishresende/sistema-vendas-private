@@ -20,19 +20,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_cliente")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCliente.findAll", query = "SELECT t FROM TbCliente t"),
-    @NamedQuery(name = "TbCliente.findByCliId", query = "SELECT t FROM TbCliente t WHERE t.cliId = :cliId")})
+    @NamedQuery(name = "TbCliente.findAll", query = "SELECT t FROM TbCliente t")})
 public class TbCliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -69,7 +65,6 @@ public class TbCliente implements Serializable {
         this.clicpfCnpj = clicpfCnpj;
     }
 
-    @XmlTransient
     public List<TbVenda> getTbVendaList() {
         return tbVendaList;
     }

@@ -19,20 +19,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_produto")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbProduto.findAll", query = "SELECT t FROM TbProduto t"),
-    @NamedQuery(name = "TbProduto.findByPdtCodigo", query = "SELECT t FROM TbProduto t WHERE t.pdtCodigo = :pdtCodigo"),
-    @NamedQuery(name = "TbProduto.findByPdtNome", query = "SELECT t FROM TbProduto t WHERE t.pdtNome = :pdtNome")})
+    @NamedQuery(name = "TbProduto.findAll", query = "SELECT t FROM TbProduto t")})
 public class TbProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -83,7 +78,6 @@ public class TbProduto implements Serializable {
         this.pdtNome = pdtNome;
     }
 
-    @XmlTransient
     public List<TbEstoque> getTbEstoqueList() {
         return tbEstoqueList;
     }
@@ -92,7 +86,6 @@ public class TbProduto implements Serializable {
         this.tbEstoqueList = tbEstoqueList;
     }
 
-    @XmlTransient
     public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
         return tbEntradaEstoqueList;
     }
@@ -101,7 +94,6 @@ public class TbProduto implements Serializable {
         this.tbEntradaEstoqueList = tbEntradaEstoqueList;
     }
 
-    @XmlTransient
     public List<TbFornecedorHasProduto> getTbFornecedorHasProdutoList() {
         return tbFornecedorHasProdutoList;
     }

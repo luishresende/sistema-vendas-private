@@ -20,21 +20,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_grupo_permissoes")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbGrupoPermissoes.findAll", query = "SELECT t FROM TbGrupoPermissoes t"),
-    @NamedQuery(name = "TbGrupoPermissoes.findByGpermId", query = "SELECT t FROM TbGrupoPermissoes t WHERE t.gpermId = :gpermId"),
-    @NamedQuery(name = "TbGrupoPermissoes.findByGpermNome", query = "SELECT t FROM TbGrupoPermissoes t WHERE t.gpermNome = :gpermNome"),
-    @NamedQuery(name = "TbGrupoPermissoes.findByGpermDescricao", query = "SELECT t FROM TbGrupoPermissoes t WHERE t.gpermDescricao = :gpermDescricao")})
+    @NamedQuery(name = "TbGrupoPermissoes.findAll", query = "SELECT t FROM TbGrupoPermissoes t")})
 public class TbGrupoPermissoes implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -101,7 +95,6 @@ public class TbGrupoPermissoes implements Serializable {
         this.gpermPermisoes = gpermPermisoes;
     }
 
-    @XmlTransient
     public List<TbUsuario> getTbUsuarioList() {
         return tbUsuarioList;
     }

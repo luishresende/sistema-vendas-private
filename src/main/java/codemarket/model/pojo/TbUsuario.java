@@ -22,21 +22,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_usuario")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t"),
-    @NamedQuery(name = "TbUsuario.findByUsuUsuario", query = "SELECT t FROM TbUsuario t WHERE t.usuUsuario = :usuUsuario"),
-    @NamedQuery(name = "TbUsuario.findByUsuSenha", query = "SELECT t FROM TbUsuario t WHERE t.usuSenha = :usuSenha"),
-    @NamedQuery(name = "TbUsuario.findByUsuValidade", query = "SELECT t FROM TbUsuario t WHERE t.usuValidade = :usuValidade")})
+    @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t")})
 public class TbUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -110,7 +104,6 @@ public class TbUsuario implements Serializable {
         this.usuStatus = usuStatus;
     }
 
-    @XmlTransient
     public List<TbFuncionario> getTbFuncionarioList() {
         return tbFuncionarioList;
     }

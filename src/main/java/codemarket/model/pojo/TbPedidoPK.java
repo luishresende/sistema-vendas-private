@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Embeddable
 public class TbPedidoPK implements Serializable {

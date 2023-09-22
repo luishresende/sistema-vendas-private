@@ -31,7 +31,7 @@ public class AlmoxarifadoDAOImpl implements AlmoxarifadoDAO{
     @Override
     public void atualizar(TbAlmoxarifado almoxarifado){
         manager.getTransaction().begin();
-        manager.persist(almoxarifado);
+        manager.merge(almoxarifado);
         manager.getTransaction().commit();
     }
     
