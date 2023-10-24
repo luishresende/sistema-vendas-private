@@ -17,13 +17,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_transferencia_status")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbTransferenciaStatus.findAll", query = "SELECT t FROM TbTransferenciaStatus t")})
 public class TbTransferenciaStatus implements Serializable {
@@ -78,6 +81,7 @@ public class TbTransferenciaStatus implements Serializable {
         this.trsDescricao = trsDescricao;
     }
 
+    @XmlTransient
     public List<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoList() {
         return tbTransferenciasAlmoxarifadoList;
     }
@@ -86,6 +90,7 @@ public class TbTransferenciaStatus implements Serializable {
         this.tbTransferenciasAlmoxarifadoList = tbTransferenciasAlmoxarifadoList;
     }
 
+    @XmlTransient
     public List<TbEntrada> getTbEntradaList() {
         return tbEntradaList;
     }

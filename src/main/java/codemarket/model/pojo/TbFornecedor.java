@@ -21,13 +21,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_fornecedor")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbFornecedor.findAll", query = "SELECT t FROM TbFornecedor t")})
 public class TbFornecedor implements Serializable {
@@ -68,6 +71,7 @@ public class TbFornecedor implements Serializable {
         this.forcpfCnpj = forcpfCnpj;
     }
 
+    @XmlTransient
     public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
         return tbEntradaEstoqueList;
     }
@@ -76,6 +80,7 @@ public class TbFornecedor implements Serializable {
         this.tbEntradaEstoqueList = tbEntradaEstoqueList;
     }
 
+    @XmlTransient
     public List<TbFornecedorHasProduto> getTbFornecedorHasProdutoList() {
         return tbFornecedorHasProdutoList;
     }

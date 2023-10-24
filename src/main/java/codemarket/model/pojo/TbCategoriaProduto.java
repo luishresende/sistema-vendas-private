@@ -17,13 +17,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_categoria_produto")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbCategoriaProduto.findAll", query = "SELECT t FROM TbCategoriaProduto t")})
 public class TbCategoriaProduto implements Serializable {
@@ -66,6 +69,7 @@ public class TbCategoriaProduto implements Serializable {
         this.catpDescricao = catpDescricao;
     }
 
+    @XmlTransient
     public List<TbProduto> getTbProdutoList() {
         return tbProdutoList;
     }

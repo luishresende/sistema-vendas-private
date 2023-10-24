@@ -12,6 +12,12 @@ public class EstadoDAOImpl implements EstadoDAO {
 
     public EstadoDAOImpl() {
         manager = ConexaoHibernate.getInstance();
+        if (manager == null) {
+            System.out.println("EntityManager não inicializado corretamente.");
+        }else {
+            System.out.println("EntityManager foi inicializado corretamente.");
+        }
+        System.out.println("Instancia obtida!");
     }
 
     @Override

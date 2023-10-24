@@ -22,13 +22,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_end_postal")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbEndPostal.findAll", query = "SELECT t FROM TbEndPostal t")})
 public class TbEndPostal implements Serializable {
@@ -119,6 +122,7 @@ public class TbEndPostal implements Serializable {
         this.endPlogid = endPlogid;
     }
 
+    @XmlTransient
     public List<TbEndereco> getTbEnderecoList() {
         return tbEnderecoList;
     }

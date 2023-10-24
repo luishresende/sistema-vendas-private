@@ -19,13 +19,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_cidade")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbCidade.findAll", query = "SELECT t FROM TbCidade t")})
 public class TbCidade implements Serializable {
@@ -69,6 +72,7 @@ public class TbCidade implements Serializable {
         this.cidDescricao = cidDescricao;
     }
 
+    @XmlTransient
     public List<TbCidEst> getTbCidEstList() {
         return tbCidEstList;
     }

@@ -23,13 +23,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_endereco")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbEndereco.findAll", query = "SELECT t FROM TbEndereco t")})
 public class TbEndereco implements Serializable {
@@ -91,6 +94,7 @@ public class TbEndereco implements Serializable {
         this.endComplemento = endComplemento;
     }
 
+    @XmlTransient
     public List<TbEntidade> getTbEntidadeList() {
         return tbEntidadeList;
     }
@@ -99,6 +103,7 @@ public class TbEndereco implements Serializable {
         this.tbEntidadeList = tbEntidadeList;
     }
 
+    @XmlTransient
     public List<TbEntidade> getTbEntidadeList1() {
         return tbEntidadeList1;
     }

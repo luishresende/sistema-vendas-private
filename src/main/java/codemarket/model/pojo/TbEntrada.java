@@ -19,13 +19,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_entrada")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbEntrada.findAll", query = "SELECT t FROM TbEntrada t")})
 public class TbEntrada implements Serializable {
@@ -58,6 +61,7 @@ public class TbEntrada implements Serializable {
         this.entrId = entrId;
     }
 
+    @XmlTransient
     public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
         return tbEntradaEstoqueList;
     }

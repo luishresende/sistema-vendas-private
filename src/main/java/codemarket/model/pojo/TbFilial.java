@@ -24,13 +24,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_filial")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbFilial.findAll", query = "SELECT t FROM TbFilial t")})
 public class TbFilial implements Serializable {
@@ -83,6 +86,7 @@ public class TbFilial implements Serializable {
         this.filPreferencias = filPreferencias;
     }
 
+    @XmlTransient
     public List<TbFuncionario> getTbFuncionarioList() {
         return tbFuncionarioList;
     }
@@ -91,6 +95,7 @@ public class TbFilial implements Serializable {
         this.tbFuncionarioList = tbFuncionarioList;
     }
 
+    @XmlTransient
     public List<TbFuncionario> getTbFuncionarioList1() {
         return tbFuncionarioList1;
     }

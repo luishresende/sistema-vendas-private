@@ -66,7 +66,9 @@ public class LoginViewController implements Initializable {
     @FXML
     public void handleButtonEntrar() throws IOException {
 
-        
+        TbEstado bairro = new TbEstado("IB", "Ibitira");
+        EstadoDAOImpl bai = new EstadoDAOImpl();
+        bai.salvar(bairro);
         
     }
 }

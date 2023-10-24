@@ -24,13 +24,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_entidade")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbEntidade.findAll", query = "SELECT t FROM TbEntidade t")})
 public class TbEntidade implements Serializable {
@@ -158,6 +161,7 @@ public class TbEntidade implements Serializable {
         this.entTipo = entTipo;
     }
 
+    @XmlTransient
     public List<TbEndereco> getTbEnderecoList() {
         return tbEnderecoList;
     }
@@ -190,6 +194,7 @@ public class TbEntidade implements Serializable {
         this.entSexo = entSexo;
     }
 
+    @XmlTransient
     public List<TbFuncionario> getTbFuncionarioList() {
         return tbFuncionarioList;
     }
@@ -198,6 +203,7 @@ public class TbEntidade implements Serializable {
         this.tbFuncionarioList = tbFuncionarioList;
     }
 
+    @XmlTransient
     public List<TbFilial> getTbFilialList() {
         return tbFilialList;
     }

@@ -5,6 +5,7 @@
  */
 package codemarket.control;
 
+import codemarket.model.conexao.ConexaoHibernate;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,15 +19,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -47,7 +46,7 @@ public class DialogDatabaseSettingsViewController implements Initializable {
 
     private Stage dialogStage;
     private boolean buttonSalvarClicked = false;
-    private File settingsFile = new File("./src/main/resources/META-INF/hibernate.cfg.xml");
+    private File settingsFile = new File("./src/main/resources/META-INF/persistence.xml");
 
     public Stage getDialogStage() {
         return dialogStage;
@@ -74,21 +73,19 @@ public class DialogDatabaseSettingsViewController implements Initializable {
     }
 
     public boolean isValidConnection() throws SQLException {
-        Configuration configuration = new Configuration().configure(settingsFile);
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-
-        Session session = sessionFactory.openSession();
+        ConexaoHibernate conexao = new ConexaoHibernate();
+        EntityManager manager = conexao.getInstance();
 
         boolean connected = false;
 
         try {
             // Tentar executar uma consulta simples para validar a conexão
-            session.createSQLQuery("SELECT 1").uniqueResult();
+            manager.createQuery("SELECT 1");
             connected = true;
         } catch (Exception e) {
             connected = false;
         } finally {
-            session.close();
+            manager.close();
         }
 
         return connected;
@@ -115,15 +112,16 @@ public class DialogDatabaseSettingsViewController implements Initializable {
             org.w3c.dom.Document oldDoc = dBuilder.parse(settingsFile);
             doc.getDocumentElement().normalize();
 
-            // Obtendo os elementos da tag properties, de dentro do arquivo xml
-            Element elemHibernateConfiguration = (Element) doc.getElementsByTagName("hibernate-configuration").item(0);
-            Element sessionFactory = (Element) elemHibernateConfiguration.getElementsByTagName("session-factory").item(0);
-
-            // Atribuindo cada um deles a sua determinada variável
-            NodeList properties = sessionFactory.getElementsByTagName("property");
-            String urlConfig = properties.item(2).getTextContent();
-            String usernameConfig = properties.item(3).getTextContent();
-            String passwordConfig = properties.item(4).getTextContent();
+            // Obtendo todos os elementos com a tag property
+            NodeList properties = doc.getElementsByTagName("property");
+            Element urlElement = (Element) properties.item(0);
+            Element userElement = (Element) properties.item(1);
+            Element passwordElement = (Element) properties.item(3);
+            
+            // Definindo cada uma para as variaveis
+            String urlConfig = urlElement.getAttribute("value");
+            String usernameConfig = userElement.getAttribute("value");
+            String passwordConfig = passwordElement.getAttribute("value");
 
             // Manipulação de strings para obter apenas o conteudo desejado de determinados atributos
             int indexInicial = urlConfig.indexOf("//") + 2;
@@ -145,31 +143,30 @@ public class DialogDatabaseSettingsViewController implements Initializable {
             // Validando os dados
             if (validateNewSettings(endereco, dbNome, usuario, senha)) {
                 // Atribuindo as novas propriedades ao documento XML
-                properties.item(2).setTextContent(urlConfig.substring(0, indexInicial) + endereco + "/" + dbNome);
-                properties.item(3).setTextContent(usuario);
-                properties.item(4).setTextContent(senha);
+                properties.item(0).setTextContent(urlConfig.substring(0, indexInicial) + endereco + "/" + dbNome);
+                properties.item(1).setTextContent(usuario);
+                properties.item(3).setTextContent(senha);
 
                 // Definição do objeto transformador, responsável por editar e salvar o XML
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 javax.xml.transform.Transformer transformer = transformerFactory.newTransformer();
-                transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//Hibernate/Hibernate Configuration DTD 3.0//EN");
-                transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd");
+                //transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, "-//Hibernate/Hibernate Configuration DTD 3.0//EN");
 
                 // Definindo o source de ambos os documentos, antigo(atual) e novo
                 DOMSource source = new DOMSource(doc);
                 DOMSource oldSource = new DOMSource(oldDoc);
 
                 // Criando um novo arquivo que receberá o documento XML sem as alterações aplicadas pelo usuário
-                File oldFile = new File("./src/main/resources/META-INF/oldHibernate.cfg.xml");
+                File oldFile = new File("./src/main/resources/META-INF/oldPersistence.xml");
 
                 // Atribuindo os antigos valores do XML para o "antigo" arquivo
                 StreamResult oldResult = new StreamResult(oldFile);
                 transformer.transform(oldSource, oldResult);
 
                 // Atribuindo os novos valores para o arquivo de configuração padrão do hibernate e atualizando a variável que armazena ele na classe
-                StreamResult result = new StreamResult(new File("./src/main/resources/META-INF/hibernate.cfg.xml"));
+                StreamResult result = new StreamResult(new File("./src/main/resources/META-INF/persistence.xml"));
                 transformer.transform(source, result);
-                settingsFile = new File("./src/main/resources/META-INF/hibernate.cfg.xml");
+                settingsFile = new File("./src/main/resources/META-INF/persistence.xml");
 
                 // Validanddo conexão
                 if (isValidConnection()) {
@@ -178,7 +175,7 @@ public class DialogDatabaseSettingsViewController implements Initializable {
                 } else {
                     // Retorno os atribuitos antigos para não serem perdidos
                     transformer.transform(oldSource, result);
-                    settingsFile = new File("./src/main/resources/META-INF/hibernate.cfg.xml");
+                    settingsFile = new File("./src/main/resources/META-INF/persistence.xml");
                     displayErrorScreen();
                 }
                 // Apago o arquivo XML que possuia os antigos valores
@@ -192,26 +189,33 @@ public class DialogDatabaseSettingsViewController implements Initializable {
         }
     }
 
-    public void loadSettings(int operacao) {
+    public void loadSettings() {
+        System.out.println(settingsFile.getAbsolutePath());
         try {
             // Definindo o objeto responsável por "ler" o XML
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            
+            // Normalizando o documento
             org.w3c.dom.Document doc = dBuilder.parse(settingsFile);
             doc.getDocumentElement().normalize();
 
-            // Obtendo os elementos das tags properties
-            Element sessionFactory = (Element) doc.getElementsByTagName("session-factory").item(0);
-            NodeList properties = sessionFactory.getElementsByTagName("property");
-
+            // Obtendo todos os elementos com a tag property
+            NodeList nodeList = doc.getElementsByTagName("property");
+            Element urlElement = (Element) nodeList.item(0);
+            Element userElement = (Element) nodeList.item(1);
+            Element passwordElement = (Element) nodeList.item(3);
+            
             // Definindo cada uma para as variaveis
-            String urlConfig = properties.item(2).getTextContent();
-            String usernameConfig = properties.item(3).getTextContent();
-            String passwordConfig = properties.item(4).getTextContent();
+            String urlConfig = urlElement.getAttribute("value");
+            String usernameConfig = userElement.getAttribute("value");
+            String passwordConfig = passwordElement.getAttribute("value");
 
             // Manipulação de strings para obtenção do conteudo desejado
             int indexInicial = urlConfig.indexOf("//") + 2;
             int indexFinal = urlConfig.indexOf("/", indexInicial);
+            System.out.println(indexInicial);
+            System.out.println(indexFinal);
             String schema;
             try {
                 int indexInterrogacao = urlConfig.indexOf("?", indexInicial);
@@ -234,6 +238,6 @@ public class DialogDatabaseSettingsViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadSettings(0);
+        loadSettings();
     }
 }

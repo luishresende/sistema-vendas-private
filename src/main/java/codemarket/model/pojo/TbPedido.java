@@ -17,13 +17,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_pedido")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbPedido.findAll", query = "SELECT t FROM TbPedido t")})
 public class TbPedido implements Serializable {

@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Embeddable
 public class TbCidEstPK implements Serializable {

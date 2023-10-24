@@ -34,8 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_almoxarifado")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbAlmoxarifado.findAll", query = "SELECT t FROM TbAlmoxarifado t"),
-    @NamedQuery(name = "TbAlmoxarifado.findByAlmoId", query = "SELECT t FROM TbAlmoxarifado t WHERE t.almoId = :almoId")})
+    @NamedQuery(name = "TbAlmoxarifado.findAll", query = "SELECT t FROM TbAlmoxarifado t")})
 public class TbAlmoxarifado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,7 +49,7 @@ public class TbAlmoxarifado implements Serializable {
     private List<TbFuncionario> tbFuncionarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbAlmoxarifado")
     private List<TbEstoque> tbEstoqueList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcStatus")
+    @OneToMany(mappedBy = "funcAlmoPadrao")
     private List<TbFuncionario> tbFuncionarioList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "traAlmoxarifadoOrigem")
     private List<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoList;
@@ -62,6 +61,10 @@ public class TbAlmoxarifado implements Serializable {
     private TbAlmoxarifadoHasEstoque tbAlmoxarifadoHasEstoque;
 
     public TbAlmoxarifado() {
+    }
+
+    public TbAlmoxarifado(Integer almoId) {
+        this.almoId = almoId;
     }
 
     public Integer getAlmoId() {

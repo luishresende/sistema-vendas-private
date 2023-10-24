@@ -20,13 +20,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_funcionario")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TbFuncionario.findAll", query = "SELECT t FROM TbFuncionario t")})
 public class TbFuncionario implements Serializable {
@@ -40,9 +43,9 @@ public class TbFuncionario implements Serializable {
     private List<TbAlmoxarifado> tbAlmoxarifadoList;
     @ManyToMany(mappedBy = "tbFuncionarioList")
     private List<TbFilial> tbFilialList;
-    @JoinColumn(name = "func_status", referencedColumnName = "almo_id")
-    @ManyToOne(optional = false)
-    private TbAlmoxarifado funcStatus;
+    @JoinColumn(name = "func_almo_padrao", referencedColumnName = "almo_id")
+    @ManyToOne
+    private TbAlmoxarifado funcAlmoPadrao;
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
     @ManyToOne(optional = false)
     private TbCargo funcCargo;
@@ -54,7 +57,7 @@ public class TbFuncionario implements Serializable {
     private TbFilial funcFilialId;
     @JoinColumn(name = "func_status", referencedColumnName = "sta_id")
     @ManyToOne(optional = false)
-    private TbStatus funcStatus1;
+    private TbStatus funcStatus;
     @JoinColumn(name = "func_usuario", referencedColumnName = "usu_usuario")
     @ManyToOne(optional = false)
     private TbUsuario funcUsuario;
@@ -74,6 +77,7 @@ public class TbFuncionario implements Serializable {
         this.funcId = funcId;
     }
 
+    @XmlTransient
     public List<TbAlmoxarifado> getTbAlmoxarifadoList() {
         return tbAlmoxarifadoList;
     }
@@ -82,6 +86,7 @@ public class TbFuncionario implements Serializable {
         this.tbAlmoxarifadoList = tbAlmoxarifadoList;
     }
 
+    @XmlTransient
     public List<TbFilial> getTbFilialList() {
         return tbFilialList;
     }
@@ -90,12 +95,12 @@ public class TbFuncionario implements Serializable {
         this.tbFilialList = tbFilialList;
     }
 
-    public TbAlmoxarifado getFuncStatus() {
-        return funcStatus;
+    public TbAlmoxarifado getFuncAlmoPadrao() {
+        return funcAlmoPadrao;
     }
 
-    public void setFuncStatus(TbAlmoxarifado funcStatus) {
-        this.funcStatus = funcStatus;
+    public void setFuncAlmoPadrao(TbAlmoxarifado funcAlmoPadrao) {
+        this.funcAlmoPadrao = funcAlmoPadrao;
     }
 
     public TbCargo getFuncCargo() {
@@ -122,12 +127,12 @@ public class TbFuncionario implements Serializable {
         this.funcFilialId = funcFilialId;
     }
 
-    public TbStatus getFuncStatus1() {
-        return funcStatus1;
+    public TbStatus getFuncStatus() {
+        return funcStatus;
     }
 
-    public void setFuncStatus1(TbStatus funcStatus1) {
-        this.funcStatus1 = funcStatus1;
+    public void setFuncStatus(TbStatus funcStatus) {
+        this.funcStatus = funcStatus;
     }
 
     public TbUsuario getFuncUsuario() {

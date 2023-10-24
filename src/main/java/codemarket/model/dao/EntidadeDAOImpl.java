@@ -12,6 +12,7 @@ public class EntidadeDAOImpl implements EntidadeDAO {
 
     public EntidadeDAOImpl() {
         manager = ConexaoHibernate.getInstance();
+        System.out.println("Instancia obtida!");
     }
 
     @Override
