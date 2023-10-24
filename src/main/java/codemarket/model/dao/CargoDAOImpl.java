@@ -21,7 +21,7 @@ public class CargoDAOImpl implements CargoDAO{
     }
 
     @Override
-    public void remover(TbCargo cargo) {
+    public void excluir(TbCargo cargo) {
         manager.getTransaction().begin();
         manager.remove(cargo);
         manager.getTransaction().commit();

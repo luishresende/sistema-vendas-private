@@ -6,6 +6,7 @@
 
 package codemarket.model.dao;
 
+import codemarket.model.pojo.TbAlmoxarifado;
 import codemarket.model.pojo.TbAlmoxarifadoHasEstoque;
 import java.util.List;
 

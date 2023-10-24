@@ -22,7 +22,7 @@ public class AlmoxarifadoDAOImpl implements AlmoxarifadoDAO{
     }
     
     @Override
-    public void remover(TbAlmoxarifado almoxarifado){
+    public void excluir(TbAlmoxarifado almoxarifado){
         manager.getTransaction().begin();
         manager.remove(almoxarifado);
         manager.getTransaction().commit();
