@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_produto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbProduto.findAll", query = "SELECT t FROM TbProduto t")})
+    @NamedQuery(name = "TbProduto.findAll", query = "SELECT t FROM TbProduto t"),
+    @NamedQuery(name = "TbProduto.findByPdtCodigo", query = "SELECT t FROM TbProduto t WHERE t.pdtCodigo = :pdtCodigo"),
+    @NamedQuery(name = "TbProduto.findByPdtNome", query = "SELECT t FROM TbProduto t WHERE t.pdtNome = :pdtNome")})
 public class TbProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,11 +43,9 @@ public class TbProduto implements Serializable {
     @Column(name = "pdt_nome")
     private String pdtNome;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbProduto")
-    private List<TbEstoque> tbEstoqueList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrePdtCodigo")
-    private List<TbEntradaEstoque> tbEntradaEstoqueList;
+    private Collection<TbEstoque> tbEstoqueCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbProduto")
-    private List<TbFornecedorHasProduto> tbFornecedorHasProdutoList;
+    private Collection<TbFornecedorHasProduto> tbFornecedorHasProdutoCollection;
     @JoinColumn(name = "pdt_categoria", referencedColumnName = "catp_id")
     @ManyToOne(optional = false)
     private TbCategoriaProduto pdtCategoria;
@@ -82,30 +82,21 @@ public class TbProduto implements Serializable {
     }
 
     @XmlTransient
-    public List<TbEstoque> getTbEstoqueList() {
-        return tbEstoqueList;
+    public Collection<TbEstoque> getTbEstoqueCollection() {
+        return tbEstoqueCollection;
     }
 
-    public void setTbEstoqueList(List<TbEstoque> tbEstoqueList) {
-        this.tbEstoqueList = tbEstoqueList;
-    }
-
-    @XmlTransient
-    public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
-        return tbEntradaEstoqueList;
-    }
-
-    public void setTbEntradaEstoqueList(List<TbEntradaEstoque> tbEntradaEstoqueList) {
-        this.tbEntradaEstoqueList = tbEntradaEstoqueList;
+    public void setTbEstoqueCollection(Collection<TbEstoque> tbEstoqueCollection) {
+        this.tbEstoqueCollection = tbEstoqueCollection;
     }
 
     @XmlTransient
-    public List<TbFornecedorHasProduto> getTbFornecedorHasProdutoList() {
-        return tbFornecedorHasProdutoList;
+    public Collection<TbFornecedorHasProduto> getTbFornecedorHasProdutoCollection() {
+        return tbFornecedorHasProdutoCollection;
     }
 
-    public void setTbFornecedorHasProdutoList(List<TbFornecedorHasProduto> tbFornecedorHasProdutoList) {
-        this.tbFornecedorHasProdutoList = tbFornecedorHasProdutoList;
+    public void setTbFornecedorHasProdutoCollection(Collection<TbFornecedorHasProduto> tbFornecedorHasProdutoCollection) {
+        this.tbFornecedorHasProdutoCollection = tbFornecedorHasProdutoCollection;
     }
 
     public TbCategoriaProduto getPdtCategoria() {
@@ -146,7 +137,7 @@ public class TbProduto implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbProduto[ pdtCodigo=" + pdtCodigo + " ]";
+        return "codemarket.model.vo.TbProduto[ pdtCodigo=" + pdtCodigo + " ]";
     }
     
 }

@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbEstado;
+import java.util.List;;
 
 public class EstadoRN {
 
@@ -20,5 +21,9 @@ public class EstadoRN {
 
     public void excluir(TbEstado Estado) {
         genericDao.excluir(Estado);
+    }
+    public List buscarTodos() {
+        List<TbEstado> Estados = genericDao.listarTodos(TbEstado.class);
+        return Estados;
     }
 }

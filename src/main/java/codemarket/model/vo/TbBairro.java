@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_bairro")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbBairro.findAll", query = "SELECT t FROM TbBairro t")})
+    @NamedQuery(name = "TbBairro.findAll", query = "SELECT t FROM TbBairro t"),
+    @NamedQuery(name = "TbBairro.findByBaiId", query = "SELECT t FROM TbBairro t WHERE t.baiId = :baiId"),
+    @NamedQuery(name = "TbBairro.findByBaiDescricao", query = "SELECT t FROM TbBairro t WHERE t.baiDescricao = :baiDescricao")})
 public class TbBairro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,13 +44,13 @@ public class TbBairro implements Serializable {
     @Column(name = "bai_descricao")
     private String baiDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endPbaiid")
-    private List<TbEndPostal> tbEndPostalList;
+    private Collection<TbEndPostal> tbEndPostalCollection;
 
     public TbBairro() {
     }
 
-    public TbBairro(String baiDescricao) {
-        this.baiDescricao = baiDescricao;
+    public TbBairro(Integer baiId) {
+        this.baiId = baiId;
     }
 
     public TbBairro(Integer baiId, String baiDescricao) {
@@ -73,12 +75,12 @@ public class TbBairro implements Serializable {
     }
 
     @XmlTransient
-    public List<TbEndPostal> getTbEndPostalList() {
-        return tbEndPostalList;
+    public Collection<TbEndPostal> getTbEndPostalCollection() {
+        return tbEndPostalCollection;
     }
 
-    public void setTbEndPostalList(List<TbEndPostal> tbEndPostalList) {
-        this.tbEndPostalList = tbEndPostalList;
+    public void setTbEndPostalCollection(Collection<TbEndPostal> tbEndPostalCollection) {
+        this.tbEndPostalCollection = tbEndPostalCollection;
     }
 
     @Override
@@ -103,7 +105,7 @@ public class TbBairro implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbBairro[ baiId=" + baiId + " ]";
+        return "codemarket.model.vo.TbBairro[ baiId=" + baiId + " ]";
     }
     
 }

@@ -7,8 +7,9 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,19 +20,21 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_funcionario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFuncionario.findAll", query = "SELECT t FROM TbFuncionario t")})
+    @NamedQuery(name = "TbFuncionario.findAll", query = "SELECT t FROM TbFuncionario t"),
+    @NamedQuery(name = "TbFuncionario.findByFuncId", query = "SELECT t FROM TbFuncionario t WHERE t.funcId = :funcId")})
 public class TbFuncionario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,13 +42,10 @@ public class TbFuncionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "func_id")
     private Integer funcId;
-    @ManyToMany(mappedBy = "tbFuncionarioList")
-    private List<TbAlmoxarifado> tbAlmoxarifadoList;
-    @ManyToMany(mappedBy = "tbFuncionarioList")
-    private List<TbFilial> tbFilialList;
-    @JoinColumn(name = "func_almo_padrao", referencedColumnName = "almo_id")
-    @ManyToOne
-    private TbAlmoxarifado funcAlmoPadrao;
+    @ManyToMany(mappedBy = "tbFuncionarioCollection")
+    private Collection<TbFilial> tbFilialCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbFuncionario")
+    private Collection<TbFuncionarioHasAlmoxarifado> tbFuncionarioHasAlmoxarifadoCollection;
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
     @ManyToOne(optional = false)
     private TbCargo funcCargo;
@@ -78,29 +78,21 @@ public class TbFuncionario implements Serializable {
     }
 
     @XmlTransient
-    public List<TbAlmoxarifado> getTbAlmoxarifadoList() {
-        return tbAlmoxarifadoList;
+    public Collection<TbFilial> getTbFilialCollection() {
+        return tbFilialCollection;
     }
 
-    public void setTbAlmoxarifadoList(List<TbAlmoxarifado> tbAlmoxarifadoList) {
-        this.tbAlmoxarifadoList = tbAlmoxarifadoList;
+    public void setTbFilialCollection(Collection<TbFilial> tbFilialCollection) {
+        this.tbFilialCollection = tbFilialCollection;
     }
 
     @XmlTransient
-    public List<TbFilial> getTbFilialList() {
-        return tbFilialList;
+    public Collection<TbFuncionarioHasAlmoxarifado> getTbFuncionarioHasAlmoxarifadoCollection() {
+        return tbFuncionarioHasAlmoxarifadoCollection;
     }
 
-    public void setTbFilialList(List<TbFilial> tbFilialList) {
-        this.tbFilialList = tbFilialList;
-    }
-
-    public TbAlmoxarifado getFuncAlmoPadrao() {
-        return funcAlmoPadrao;
-    }
-
-    public void setFuncAlmoPadrao(TbAlmoxarifado funcAlmoPadrao) {
-        this.funcAlmoPadrao = funcAlmoPadrao;
+    public void setTbFuncionarioHasAlmoxarifadoCollection(Collection<TbFuncionarioHasAlmoxarifado> tbFuncionarioHasAlmoxarifadoCollection) {
+        this.tbFuncionarioHasAlmoxarifadoCollection = tbFuncionarioHasAlmoxarifadoCollection;
     }
 
     public TbCargo getFuncCargo() {
@@ -165,7 +157,7 @@ public class TbFuncionario implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbFuncionario[ funcId=" + funcId + " ]";
+        return "codemarket.model.vo.TbFuncionario[ funcId=" + funcId + " ]";
     }
     
 }

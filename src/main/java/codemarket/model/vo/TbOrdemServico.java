@@ -22,13 +22,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_ordem_servico")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbOrdemServico.findAll", query = "SELECT t FROM TbOrdemServico t")})
+    @NamedQuery(name = "TbOrdemServico.findAll", query = "SELECT t FROM TbOrdemServico t"),
+    @NamedQuery(name = "TbOrdemServico.findByOsId", query = "SELECT t FROM TbOrdemServico t WHERE t.osId = :osId"),
+    @NamedQuery(name = "TbOrdemServico.findByOsValorServico", query = "SELECT t FROM TbOrdemServico t WHERE t.osValorServico = :osValorServico")})
 public class TbOrdemServico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -112,7 +114,7 @@ public class TbOrdemServico implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbOrdemServico[ osId=" + osId + " ]";
+        return "codemarket.model.vo.TbOrdemServico[ osId=" + osId + " ]";
     }
     
 }

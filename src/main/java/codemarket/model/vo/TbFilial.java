@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,13 +29,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_filial")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFilial.findAll", query = "SELECT t FROM TbFilial t")})
+    @NamedQuery(name = "TbFilial.findAll", query = "SELECT t FROM TbFilial t"),
+    @NamedQuery(name = "TbFilial.findByFilId", query = "SELECT t FROM TbFilial t WHERE t.filId = :filId")})
 public class TbFilial implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,9 +52,9 @@ public class TbFilial implements Serializable {
         @JoinColumn(name = "ff_filial_id", referencedColumnName = "fil_id")}, inverseJoinColumns = {
         @JoinColumn(name = "ff_funcionario_id", referencedColumnName = "func_id")})
     @ManyToMany
-    private List<TbFuncionario> tbFuncionarioList;
+    private Collection<TbFuncionario> tbFuncionarioCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcFilialId")
-    private List<TbFuncionario> tbFuncionarioList1;
+    private Collection<TbFuncionario> tbFuncionarioCollection1;
     @JoinColumn(name = "fil_entidade", referencedColumnName = "ent_cpfCnpj")
     @ManyToOne(optional = false)
     private TbEntidade filEntidade;
@@ -87,21 +88,21 @@ public class TbFilial implements Serializable {
     }
 
     @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public Collection<TbFuncionario> getTbFuncionarioCollection() {
+        return tbFuncionarioCollection;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
+        this.tbFuncionarioCollection = tbFuncionarioCollection;
     }
 
     @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList1() {
-        return tbFuncionarioList1;
+    public Collection<TbFuncionario> getTbFuncionarioCollection1() {
+        return tbFuncionarioCollection1;
     }
 
-    public void setTbFuncionarioList1(List<TbFuncionario> tbFuncionarioList1) {
-        this.tbFuncionarioList1 = tbFuncionarioList1;
+    public void setTbFuncionarioCollection1(Collection<TbFuncionario> tbFuncionarioCollection1) {
+        this.tbFuncionarioCollection1 = tbFuncionarioCollection1;
     }
 
     public TbEntidade getFilEntidade() {
@@ -134,7 +135,7 @@ public class TbFilial implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbFilial[ filId=" + filId + " ]";
+        return "codemarket.model.vo.TbFilial[ filId=" + filId + " ]";
     }
     
 }

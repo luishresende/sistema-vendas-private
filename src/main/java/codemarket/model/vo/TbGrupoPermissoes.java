@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,13 +25,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_grupo_permissoes")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbGrupoPermissoes.findAll", query = "SELECT t FROM TbGrupoPermissoes t")})
+    @NamedQuery(name = "TbGrupoPermissoes.findAll", query = "SELECT t FROM TbGrupoPermissoes t"),
+    @NamedQuery(name = "TbGrupoPermissoes.findByGpermId", query = "SELECT t FROM TbGrupoPermissoes t WHERE t.gpermId = :gpermId"),
+    @NamedQuery(name = "TbGrupoPermissoes.findByGpermNome", query = "SELECT t FROM TbGrupoPermissoes t WHERE t.gpermNome = :gpermNome"),
+    @NamedQuery(name = "TbGrupoPermissoes.findByGpermDescricao", query = "SELECT t FROM TbGrupoPermissoes t WHERE t.gpermDescricao = :gpermDescricao")})
 public class TbGrupoPermissoes implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,7 +53,7 @@ public class TbGrupoPermissoes implements Serializable {
     @Column(name = "gperm_permisoes")
     private String gpermPermisoes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuGpPermissao")
-    private List<TbUsuario> tbUsuarioList;
+    private Collection<TbUsuario> tbUsuarioCollection;
 
     public TbGrupoPermissoes() {
     }
@@ -99,12 +102,12 @@ public class TbGrupoPermissoes implements Serializable {
     }
 
     @XmlTransient
-    public List<TbUsuario> getTbUsuarioList() {
-        return tbUsuarioList;
+    public Collection<TbUsuario> getTbUsuarioCollection() {
+        return tbUsuarioCollection;
     }
 
-    public void setTbUsuarioList(List<TbUsuario> tbUsuarioList) {
-        this.tbUsuarioList = tbUsuarioList;
+    public void setTbUsuarioCollection(Collection<TbUsuario> tbUsuarioCollection) {
+        this.tbUsuarioCollection = tbUsuarioCollection;
     }
 
     @Override
@@ -129,7 +132,7 @@ public class TbGrupoPermissoes implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbGrupoPermissoes[ gpermId=" + gpermId + " ]";
+        return "codemarket.model.vo.TbGrupoPermissoes[ gpermId=" + gpermId + " ]";
     }
     
 }

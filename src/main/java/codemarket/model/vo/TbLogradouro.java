@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_logradouro")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbLogradouro.findAll", query = "SELECT t FROM TbLogradouro t")})
+    @NamedQuery(name = "TbLogradouro.findAll", query = "SELECT t FROM TbLogradouro t"),
+    @NamedQuery(name = "TbLogradouro.findByLogId", query = "SELECT t FROM TbLogradouro t WHERE t.logId = :logId"),
+    @NamedQuery(name = "TbLogradouro.findByLogDescricao", query = "SELECT t FROM TbLogradouro t WHERE t.logDescricao = :logDescricao")})
 public class TbLogradouro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,7 +44,7 @@ public class TbLogradouro implements Serializable {
     @Column(name = "log_descricao")
     private String logDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endPlogid")
-    private List<TbEndPostal> tbEndPostalList;
+    private Collection<TbEndPostal> tbEndPostalCollection;
 
     public TbLogradouro() {
     }
@@ -73,12 +75,12 @@ public class TbLogradouro implements Serializable {
     }
 
     @XmlTransient
-    public List<TbEndPostal> getTbEndPostalList() {
-        return tbEndPostalList;
+    public Collection<TbEndPostal> getTbEndPostalCollection() {
+        return tbEndPostalCollection;
     }
 
-    public void setTbEndPostalList(List<TbEndPostal> tbEndPostalList) {
-        this.tbEndPostalList = tbEndPostalList;
+    public void setTbEndPostalCollection(Collection<TbEndPostal> tbEndPostalCollection) {
+        this.tbEndPostalCollection = tbEndPostalCollection;
     }
 
     @Override
@@ -103,7 +105,7 @@ public class TbLogradouro implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbLogradouro[ logId=" + logId + " ]";
+        return "codemarket.model.vo.TbLogradouro[ logId=" + logId + " ]";
     }
     
 }

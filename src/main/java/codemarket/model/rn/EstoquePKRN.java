@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbEstoquePK;
+import java.util.List;;
 
 public class EstoquePKRN {
 
@@ -20,5 +21,9 @@ public class EstoquePKRN {
 
     public void excluir(TbEstoquePK EstoquePK) {
         genericDao.excluir(EstoquePK);
+    }
+    public List buscarTodos() {
+        List<TbEstoquePK> EstoquePKs = genericDao.listarTodos(TbEstoquePK.class);
+        return EstoquePKs;
     }
 }

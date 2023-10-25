@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,17 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_servico")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbServico.findAll", query = "SELECT t FROM TbServico t")})
+    @NamedQuery(name = "TbServico.findAll", query = "SELECT t FROM TbServico t"),
+    @NamedQuery(name = "TbServico.findBySerId", query = "SELECT t FROM TbServico t WHERE t.serId = :serId"),
+    @NamedQuery(name = "TbServico.findBySerNome", query = "SELECT t FROM TbServico t WHERE t.serNome = :serNome"),
+    @NamedQuery(name = "TbServico.findBySerDescricao", query = "SELECT t FROM TbServico t WHERE t.serDescricao = :serDescricao"),
+    @NamedQuery(name = "TbServico.findBySerValorBase", query = "SELECT t FROM TbServico t WHERE t.serValorBase = :serValorBase")})
 public class TbServico implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,7 +52,7 @@ public class TbServico implements Serializable {
     @Column(name = "ser_valor_base")
     private float serValorBase;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "osServico")
-    private List<TbOrdemServico> tbOrdemServicoList;
+    private Collection<TbOrdemServico> tbOrdemServicoCollection;
 
     public TbServico() {
     }
@@ -97,12 +101,12 @@ public class TbServico implements Serializable {
     }
 
     @XmlTransient
-    public List<TbOrdemServico> getTbOrdemServicoList() {
-        return tbOrdemServicoList;
+    public Collection<TbOrdemServico> getTbOrdemServicoCollection() {
+        return tbOrdemServicoCollection;
     }
 
-    public void setTbOrdemServicoList(List<TbOrdemServico> tbOrdemServicoList) {
-        this.tbOrdemServicoList = tbOrdemServicoList;
+    public void setTbOrdemServicoCollection(Collection<TbOrdemServico> tbOrdemServicoCollection) {
+        this.tbOrdemServicoCollection = tbOrdemServicoCollection;
     }
 
     @Override
@@ -127,7 +131,7 @@ public class TbServico implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbServico[ serId=" + serId + " ]";
+        return "codemarket.model.vo.TbServico[ serId=" + serId + " ]";
     }
     
 }

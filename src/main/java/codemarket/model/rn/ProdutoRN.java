@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbProduto;
+import java.util.List;;
 
 public class ProdutoRN {
 
@@ -20,5 +21,9 @@ public class ProdutoRN {
 
     public void excluir(TbProduto Produto) {
         genericDao.excluir(Produto);
+    }
+    public List buscarTodos() {
+        List<TbProduto> Produtos = genericDao.listarTodos(TbProduto.class);
+        return Produtos;
     }
 }

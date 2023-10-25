@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,13 +23,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_sexo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbSexo.findAll", query = "SELECT t FROM TbSexo t")})
+    @NamedQuery(name = "TbSexo.findAll", query = "SELECT t FROM TbSexo t"),
+    @NamedQuery(name = "TbSexo.findBySexId", query = "SELECT t FROM TbSexo t WHERE t.sexId = :sexId"),
+    @NamedQuery(name = "TbSexo.findBySexDescricao", query = "SELECT t FROM TbSexo t WHERE t.sexDescricao = :sexDescricao")})
 public class TbSexo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,7 +43,7 @@ public class TbSexo implements Serializable {
     @Column(name = "sex_descricao")
     private String sexDescricao;
     @OneToMany(mappedBy = "entSexo")
-    private List<TbEntidade> tbEntidadeList;
+    private Collection<TbEntidade> tbEntidadeCollection;
 
     public TbSexo() {
     }
@@ -72,12 +74,12 @@ public class TbSexo implements Serializable {
     }
 
     @XmlTransient
-    public List<TbEntidade> getTbEntidadeList() {
-        return tbEntidadeList;
+    public Collection<TbEntidade> getTbEntidadeCollection() {
+        return tbEntidadeCollection;
     }
 
-    public void setTbEntidadeList(List<TbEntidade> tbEntidadeList) {
-        this.tbEntidadeList = tbEntidadeList;
+    public void setTbEntidadeCollection(Collection<TbEntidade> tbEntidadeCollection) {
+        this.tbEntidadeCollection = tbEntidadeCollection;
     }
 
     @Override
@@ -102,7 +104,7 @@ public class TbSexo implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbSexo[ sexId=" + sexId + " ]";
+        return "codemarket.model.vo.TbSexo[ sexId=" + sexId + " ]";
     }
     
 }

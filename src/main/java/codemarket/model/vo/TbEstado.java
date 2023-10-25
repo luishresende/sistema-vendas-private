@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,13 +22,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_estado")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEstado.findAll", query = "SELECT t FROM TbEstado t")})
+    @NamedQuery(name = "TbEstado.findAll", query = "SELECT t FROM TbEstado t"),
+    @NamedQuery(name = "TbEstado.findByEstSigla", query = "SELECT t FROM TbEstado t WHERE t.estSigla = :estSigla"),
+    @NamedQuery(name = "TbEstado.findByEstDescricao", query = "SELECT t FROM TbEstado t WHERE t.estDescricao = :estDescricao")})
 public class TbEstado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,7 +41,7 @@ public class TbEstado implements Serializable {
     @Column(name = "est_descricao")
     private String estDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstado")
-    private List<TbCidEst> tbCidEstList;
+    private Collection<TbCidEstPai> tbCidEstPaiCollection;
 
     public TbEstado() {
     }
@@ -70,12 +72,12 @@ public class TbEstado implements Serializable {
     }
 
     @XmlTransient
-    public List<TbCidEst> getTbCidEstList() {
-        return tbCidEstList;
+    public Collection<TbCidEstPai> getTbCidEstPaiCollection() {
+        return tbCidEstPaiCollection;
     }
 
-    public void setTbCidEstList(List<TbCidEst> tbCidEstList) {
-        this.tbCidEstList = tbCidEstList;
+    public void setTbCidEstPaiCollection(Collection<TbCidEstPai> tbCidEstPaiCollection) {
+        this.tbCidEstPaiCollection = tbCidEstPaiCollection;
     }
 
     @Override
@@ -100,7 +102,7 @@ public class TbEstado implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbEstado[ estSigla=" + estSigla + " ]";
+        return "codemarket.model.vo.TbEstado[ estSigla=" + estSigla + " ]";
     }
     
 }

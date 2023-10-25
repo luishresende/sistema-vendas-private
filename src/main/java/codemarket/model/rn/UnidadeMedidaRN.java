@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbUnidadeMedida;
+import java.util.List;;
 
 public class UnidadeMedidaRN {
 
@@ -20,5 +21,9 @@ public class UnidadeMedidaRN {
 
     public void excluir(TbUnidadeMedida UnidadeMedida) {
         genericDao.excluir(UnidadeMedida);
+    }
+    public List buscarTodos() {
+        List<TbUnidadeMedida> UnidadeMedidas = genericDao.listarTodos(TbUnidadeMedida.class);
+        return UnidadeMedidas;
     }
 }

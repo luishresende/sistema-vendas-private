@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,13 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_cliente")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCliente.findAll", query = "SELECT t FROM TbCliente t")})
+    @NamedQuery(name = "TbCliente.findAll", query = "SELECT t FROM TbCliente t"),
+    @NamedQuery(name = "TbCliente.findByCliId", query = "SELECT t FROM TbCliente t WHERE t.cliId = :cliId")})
 public class TbCliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,7 +44,7 @@ public class TbCliente implements Serializable {
     @OneToOne(optional = false)
     private TbEntidade clicpfCnpj;
     @OneToMany(mappedBy = "venCliId")
-    private List<TbVenda> tbVendaList;
+    private Collection<TbVenda> tbVendaCollection;
 
     public TbCliente() {
     }
@@ -69,12 +70,12 @@ public class TbCliente implements Serializable {
     }
 
     @XmlTransient
-    public List<TbVenda> getTbVendaList() {
-        return tbVendaList;
+    public Collection<TbVenda> getTbVendaCollection() {
+        return tbVendaCollection;
     }
 
-    public void setTbVendaList(List<TbVenda> tbVendaList) {
-        this.tbVendaList = tbVendaList;
+    public void setTbVendaCollection(Collection<TbVenda> tbVendaCollection) {
+        this.tbVendaCollection = tbVendaCollection;
     }
 
     @Override
@@ -99,7 +100,7 @@ public class TbCliente implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbCliente[ cliId=" + cliId + " ]";
+        return "codemarket.model.vo.TbCliente[ cliId=" + cliId + " ]";
     }
     
 }

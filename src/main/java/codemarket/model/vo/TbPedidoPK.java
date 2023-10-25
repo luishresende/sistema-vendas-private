@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Embeddable
 public class TbPedidoPK implements Serializable {
@@ -74,7 +74,7 @@ public class TbPedidoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbPedidoPK[ pedId=" + pedId + ", pedVenda=" + pedVenda + " ]";
+        return "codemarket.model.vo.TbPedidoPK[ pedId=" + pedId + ", pedVenda=" + pedVenda + " ]";
     }
     
 }

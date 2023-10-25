@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_tipo_pagamento")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbTipoPagamento.findAll", query = "SELECT t FROM TbTipoPagamento t")})
+    @NamedQuery(name = "TbTipoPagamento.findAll", query = "SELECT t FROM TbTipoPagamento t"),
+    @NamedQuery(name = "TbTipoPagamento.findByTpId", query = "SELECT t FROM TbTipoPagamento t WHERE t.tpId = :tpId"),
+    @NamedQuery(name = "TbTipoPagamento.findByTpDescricao", query = "SELECT t FROM TbTipoPagamento t WHERE t.tpDescricao = :tpDescricao")})
 public class TbTipoPagamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,7 +44,7 @@ public class TbTipoPagamento implements Serializable {
     @Column(name = "tp_descricao")
     private String tpDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "venTpId")
-    private List<TbVenda> tbVendaList;
+    private Collection<TbVenda> tbVendaCollection;
 
     public TbTipoPagamento() {
     }
@@ -73,12 +75,12 @@ public class TbTipoPagamento implements Serializable {
     }
 
     @XmlTransient
-    public List<TbVenda> getTbVendaList() {
-        return tbVendaList;
+    public Collection<TbVenda> getTbVendaCollection() {
+        return tbVendaCollection;
     }
 
-    public void setTbVendaList(List<TbVenda> tbVendaList) {
-        this.tbVendaList = tbVendaList;
+    public void setTbVendaCollection(Collection<TbVenda> tbVendaCollection) {
+        this.tbVendaCollection = tbVendaCollection;
     }
 
     @Override
@@ -103,7 +105,7 @@ public class TbTipoPagamento implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbTipoPagamento[ tpId=" + tpId + " ]";
+        return "codemarket.model.vo.TbTipoPagamento[ tpId=" + tpId + " ]";
     }
     
 }

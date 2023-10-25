@@ -1,25 +1,17 @@
 package codemarket.control;
 
-import codemarket.model.dao.BairroDAOImpl;
-import codemarket.model.dao.EstadoDAOImpl;
-import codemarket.model.pojo.TbBairro;
-import codemarket.model.pojo.TbEstado;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class LoginViewController implements Initializable {
 
@@ -35,7 +27,8 @@ public class LoginViewController implements Initializable {
     private TextField textFieldSenha;
     
     private Stage dialogStage;
-    private boolean logged = false;
+    private final FXMLLoader loader = new FXMLLoader();;
+    private final boolean logged = false;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -43,7 +36,6 @@ public class LoginViewController implements Initializable {
     
     @FXML
     public void handleButtonDBSettings() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
         loader.setLocation(DialogDatabaseSettingsViewController.class.getResource("/view/DialogDatabaseSettingsView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
@@ -65,10 +57,18 @@ public class LoginViewController implements Initializable {
     
     @FXML
     public void handleButtonEntrar() throws IOException {
+        loader.setLocation(DialogDatabaseSettingsViewController.class.getResource("/view/mainView.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
 
-        TbEstado bairro = new TbEstado("IB", "Ibitira");
-        EstadoDAOImpl bai = new EstadoDAOImpl();
-        bai.salvar(bairro);
+        Scene scene = new Scene(page);
+        dialogStage = new Stage();
+        dialogStage.setTitle("Main");
+        dialogStage.setScene(scene);
+        
+        Stage stage = (Stage) buttonEntrar.getScene().getWindow(); // Obtém o palco atual (primaryStage)
+        stage.close();
+    
+        dialogStage.show();
         
     }
 }

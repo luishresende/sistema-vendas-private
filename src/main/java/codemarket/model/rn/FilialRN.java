@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbFilial;
+import java.util.List;;
 
 public class FilialRN {
 
@@ -20,5 +21,9 @@ public class FilialRN {
 
     public void excluir(TbFilial Filial) {
         genericDao.excluir(Filial);
+    }
+    public List buscarTodos() {
+        List<TbFilial> Filials = genericDao.listarTodos(TbFilial.class);
+        return Filials;
     }
 }

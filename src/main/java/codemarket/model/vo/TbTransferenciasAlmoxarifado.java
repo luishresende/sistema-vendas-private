@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,13 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_transferencias_almoxarifado")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbTransferenciasAlmoxarifado.findAll", query = "SELECT t FROM TbTransferenciasAlmoxarifado t")})
+    @NamedQuery(name = "TbTransferenciasAlmoxarifado.findAll", query = "SELECT t FROM TbTransferenciasAlmoxarifado t"),
+    @NamedQuery(name = "TbTransferenciasAlmoxarifado.findByTraId", query = "SELECT t FROM TbTransferenciasAlmoxarifado t WHERE t.traId = :traId")})
 public class TbTransferenciasAlmoxarifado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,13 +42,13 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
     @Column(name = "tra_id")
     private Integer traId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ptrTransferenciaId")
-    private List<TbPedidoTransferencia> tbPedidoTransferenciaList;
-    @JoinColumn(name = "tra_almoxarifado_origem", referencedColumnName = "almo_id")
-    @ManyToOne(optional = false)
-    private TbAlmoxarifado traAlmoxarifadoOrigem;
+    private Collection<TbPedidoTransferencia> tbPedidoTransferenciaCollection;
     @JoinColumn(name = "tra_almoxarifado_destino", referencedColumnName = "almo_id")
     @ManyToOne(optional = false)
     private TbAlmoxarifado traAlmoxarifadoDestino;
+    @JoinColumn(name = "tra_almoxarifado_origem", referencedColumnName = "almo_id")
+    @ManyToOne(optional = false)
+    private TbAlmoxarifado traAlmoxarifadoOrigem;
     @JoinColumn(name = "tra_status", referencedColumnName = "trs_id")
     @ManyToOne(optional = false)
     private TbTransferenciaStatus traStatus;
@@ -68,20 +69,12 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
     }
 
     @XmlTransient
-    public List<TbPedidoTransferencia> getTbPedidoTransferenciaList() {
-        return tbPedidoTransferenciaList;
+    public Collection<TbPedidoTransferencia> getTbPedidoTransferenciaCollection() {
+        return tbPedidoTransferenciaCollection;
     }
 
-    public void setTbPedidoTransferenciaList(List<TbPedidoTransferencia> tbPedidoTransferenciaList) {
-        this.tbPedidoTransferenciaList = tbPedidoTransferenciaList;
-    }
-
-    public TbAlmoxarifado getTraAlmoxarifadoOrigem() {
-        return traAlmoxarifadoOrigem;
-    }
-
-    public void setTraAlmoxarifadoOrigem(TbAlmoxarifado traAlmoxarifadoOrigem) {
-        this.traAlmoxarifadoOrigem = traAlmoxarifadoOrigem;
+    public void setTbPedidoTransferenciaCollection(Collection<TbPedidoTransferencia> tbPedidoTransferenciaCollection) {
+        this.tbPedidoTransferenciaCollection = tbPedidoTransferenciaCollection;
     }
 
     public TbAlmoxarifado getTraAlmoxarifadoDestino() {
@@ -90,6 +83,14 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
 
     public void setTraAlmoxarifadoDestino(TbAlmoxarifado traAlmoxarifadoDestino) {
         this.traAlmoxarifadoDestino = traAlmoxarifadoDestino;
+    }
+
+    public TbAlmoxarifado getTraAlmoxarifadoOrigem() {
+        return traAlmoxarifadoOrigem;
+    }
+
+    public void setTraAlmoxarifadoOrigem(TbAlmoxarifado traAlmoxarifadoOrigem) {
+        this.traAlmoxarifadoOrigem = traAlmoxarifadoOrigem;
     }
 
     public TbTransferenciaStatus getTraStatus() {
@@ -122,7 +123,7 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbTransferenciasAlmoxarifado[ traId=" + traId + " ]";
+        return "codemarket.model.vo.TbTransferenciasAlmoxarifado[ traId=" + traId + " ]";
     }
     
 }

@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbGrupoPermissoes;
+import java.util.List;;
 
 public class GrupoPermissoesRN {
 
@@ -20,5 +21,9 @@ public class GrupoPermissoesRN {
 
     public void excluir(TbGrupoPermissoes GrupoPermissoes) {
         genericDao.excluir(GrupoPermissoes);
+    }
+    public List buscarTodos() {
+        List<TbGrupoPermissoes> GrupoPermissoess = genericDao.listarTodos(TbGrupoPermissoes.class);
+        return GrupoPermissoess;
     }
 }

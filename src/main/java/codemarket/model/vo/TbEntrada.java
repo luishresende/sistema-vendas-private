@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_entrada")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntrada.findAll", query = "SELECT t FROM TbEntrada t")})
+    @NamedQuery(name = "TbEntrada.findAll", query = "SELECT t FROM TbEntrada t"),
+    @NamedQuery(name = "TbEntrada.findByEntrId", query = "SELECT t FROM TbEntrada t WHERE t.entrId = :entrId")})
 public class TbEntrada implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,13 +39,13 @@ public class TbEntrada implements Serializable {
     @Column(name = "entr_id")
     private Integer entrId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entreEntradaId")
-    private List<TbEntradaEstoque> tbEntradaEstoqueList;
+    private Collection<TbEntradaEstoque> tbEntradaEstoqueCollection;
     @JoinColumn(name = "entr_almo_id", referencedColumnName = "almo_id")
     @ManyToOne(optional = false)
     private TbAlmoxarifado entrAlmoId;
-    @JoinColumn(name = "entr_status", referencedColumnName = "trs_id")
+    @JoinColumn(name = "entr_status", referencedColumnName = "tes_id")
     @ManyToOne(optional = false)
-    private TbTransferenciaStatus entrStatus;
+    private TbEntradaStatus entrStatus;
 
     public TbEntrada() {
     }
@@ -62,12 +63,12 @@ public class TbEntrada implements Serializable {
     }
 
     @XmlTransient
-    public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
-        return tbEntradaEstoqueList;
+    public Collection<TbEntradaEstoque> getTbEntradaEstoqueCollection() {
+        return tbEntradaEstoqueCollection;
     }
 
-    public void setTbEntradaEstoqueList(List<TbEntradaEstoque> tbEntradaEstoqueList) {
-        this.tbEntradaEstoqueList = tbEntradaEstoqueList;
+    public void setTbEntradaEstoqueCollection(Collection<TbEntradaEstoque> tbEntradaEstoqueCollection) {
+        this.tbEntradaEstoqueCollection = tbEntradaEstoqueCollection;
     }
 
     public TbAlmoxarifado getEntrAlmoId() {
@@ -78,11 +79,11 @@ public class TbEntrada implements Serializable {
         this.entrAlmoId = entrAlmoId;
     }
 
-    public TbTransferenciaStatus getEntrStatus() {
+    public TbEntradaStatus getEntrStatus() {
         return entrStatus;
     }
 
-    public void setEntrStatus(TbTransferenciaStatus entrStatus) {
+    public void setEntrStatus(TbEntradaStatus entrStatus) {
         this.entrStatus = entrStatus;
     }
 
@@ -108,7 +109,7 @@ public class TbEntrada implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbEntrada[ entrId=" + entrId + " ]";
+        return "codemarket.model.vo.TbEntrada[ entrId=" + entrId + " ]";
     }
     
 }

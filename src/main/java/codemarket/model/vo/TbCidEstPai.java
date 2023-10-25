@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -22,55 +22,57 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
-@Table(name = "tb_cid_est")
+@Table(name = "tb_cid_est_pai")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCidEst.findAll", query = "SELECT t FROM TbCidEst t")})
-public class TbCidEst implements Serializable {
+    @NamedQuery(name = "TbCidEstPai.findAll", query = "SELECT t FROM TbCidEstPai t"),
+    @NamedQuery(name = "TbCidEstPai.findByCepCidId", query = "SELECT t FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepCidId = :cepCidId"),
+    @NamedQuery(name = "TbCidEstPai.findByCepEstSigla", query = "SELECT t FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = :cepEstSigla")})
+public class TbCidEstPai implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected TbCidEstPK tbCidEstPK;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbCidEst")
-    private List<TbEndPostal> tbEndPostalList;
-    @JoinColumn(name = "ce_cid_id", referencedColumnName = "cid_id", insertable = false, updatable = false)
+    protected TbCidEstPaiPK tbCidEstPaiPK;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbCidEstPai")
+    private Collection<TbEndPostal> tbEndPostalCollection;
+    @JoinColumn(name = "cep_cid_id", referencedColumnName = "cid_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TbCidade tbCidade;
-    @JoinColumn(name = "ce_est_sigla", referencedColumnName = "est_sigla", insertable = false, updatable = false)
+    @JoinColumn(name = "cep_est_sigla", referencedColumnName = "est_sigla", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TbEstado tbEstado;
     @JoinColumn(name = "cep_pai_sigla", referencedColumnName = "pai_sigla")
     @ManyToOne(optional = false)
     private TbPais cepPaiSigla;
 
-    public TbCidEst() {
+    public TbCidEstPai() {
     }
 
-    public TbCidEst(TbCidEstPK tbCidEstPK) {
-        this.tbCidEstPK = tbCidEstPK;
+    public TbCidEstPai(TbCidEstPaiPK tbCidEstPaiPK) {
+        this.tbCidEstPaiPK = tbCidEstPaiPK;
     }
 
-    public TbCidEst(int ceCidId, String ceEstSigla) {
-        this.tbCidEstPK = new TbCidEstPK(ceCidId, ceEstSigla);
+    public TbCidEstPai(int cepCidId, String cepEstSigla) {
+        this.tbCidEstPaiPK = new TbCidEstPaiPK(cepCidId, cepEstSigla);
     }
 
-    public TbCidEstPK getTbCidEstPK() {
-        return tbCidEstPK;
+    public TbCidEstPaiPK getTbCidEstPaiPK() {
+        return tbCidEstPaiPK;
     }
 
-    public void setTbCidEstPK(TbCidEstPK tbCidEstPK) {
-        this.tbCidEstPK = tbCidEstPK;
+    public void setTbCidEstPaiPK(TbCidEstPaiPK tbCidEstPaiPK) {
+        this.tbCidEstPaiPK = tbCidEstPaiPK;
     }
 
     @XmlTransient
-    public List<TbEndPostal> getTbEndPostalList() {
-        return tbEndPostalList;
+    public Collection<TbEndPostal> getTbEndPostalCollection() {
+        return tbEndPostalCollection;
     }
 
-    public void setTbEndPostalList(List<TbEndPostal> tbEndPostalList) {
-        this.tbEndPostalList = tbEndPostalList;
+    public void setTbEndPostalCollection(Collection<TbEndPostal> tbEndPostalCollection) {
+        this.tbEndPostalCollection = tbEndPostalCollection;
     }
 
     public TbCidade getTbCidade() {
@@ -100,18 +102,18 @@ public class TbCidEst implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tbCidEstPK != null ? tbCidEstPK.hashCode() : 0);
+        hash += (tbCidEstPaiPK != null ? tbCidEstPaiPK.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TbCidEst)) {
+        if (!(object instanceof TbCidEstPai)) {
             return false;
         }
-        TbCidEst other = (TbCidEst) object;
-        if ((this.tbCidEstPK == null && other.tbCidEstPK != null) || (this.tbCidEstPK != null && !this.tbCidEstPK.equals(other.tbCidEstPK))) {
+        TbCidEstPai other = (TbCidEstPai) object;
+        if ((this.tbCidEstPaiPK == null && other.tbCidEstPaiPK != null) || (this.tbCidEstPaiPK != null && !this.tbCidEstPaiPK.equals(other.tbCidEstPaiPK))) {
             return false;
         }
         return true;
@@ -119,7 +121,7 @@ public class TbCidEst implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbCidEst[ tbCidEstPK=" + tbCidEstPK + " ]";
+        return "codemarket.model.vo.TbCidEstPai[ tbCidEstPaiPK=" + tbCidEstPaiPK + " ]";
     }
     
 }

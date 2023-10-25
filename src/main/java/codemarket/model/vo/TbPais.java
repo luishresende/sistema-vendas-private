@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,13 +22,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_pais")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbPais.findAll", query = "SELECT t FROM TbPais t")})
+    @NamedQuery(name = "TbPais.findAll", query = "SELECT t FROM TbPais t"),
+    @NamedQuery(name = "TbPais.findByPaiSigla", query = "SELECT t FROM TbPais t WHERE t.paiSigla = :paiSigla"),
+    @NamedQuery(name = "TbPais.findByPaiDescricao", query = "SELECT t FROM TbPais t WHERE t.paiDescricao = :paiDescricao")})
 public class TbPais implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,7 +41,7 @@ public class TbPais implements Serializable {
     @Column(name = "pai_descricao")
     private String paiDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cepPaiSigla")
-    private List<TbCidEst> tbCidEstList;
+    private Collection<TbCidEstPai> tbCidEstPaiCollection;
 
     public TbPais() {
     }
@@ -70,12 +72,12 @@ public class TbPais implements Serializable {
     }
 
     @XmlTransient
-    public List<TbCidEst> getTbCidEstList() {
-        return tbCidEstList;
+    public Collection<TbCidEstPai> getTbCidEstPaiCollection() {
+        return tbCidEstPaiCollection;
     }
 
-    public void setTbCidEstList(List<TbCidEst> tbCidEstList) {
-        this.tbCidEstList = tbCidEstList;
+    public void setTbCidEstPaiCollection(Collection<TbCidEstPai> tbCidEstPaiCollection) {
+        this.tbCidEstPaiCollection = tbCidEstPaiCollection;
     }
 
     @Override
@@ -100,7 +102,7 @@ public class TbPais implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbPais[ paiSigla=" + paiSigla + " ]";
+        return "codemarket.model.vo.TbPais[ paiSigla=" + paiSigla + " ]";
     }
     
 }

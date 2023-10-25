@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbCidade;
+import java.util.List;;
 
 public class CidadeRN {
 
@@ -20,5 +21,9 @@ public class CidadeRN {
 
     public void excluir(TbCidade Cidade) {
         genericDao.excluir(Cidade);
+    }
+    public List buscarTodos() {
+        List<TbCidade> Cidades = genericDao.listarTodos(TbCidade.class);
+        return Cidades;
     }
 }

@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,13 +22,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_transferencia_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbTransferenciaStatus.findAll", query = "SELECT t FROM TbTransferenciaStatus t")})
+    @NamedQuery(name = "TbTransferenciaStatus.findAll", query = "SELECT t FROM TbTransferenciaStatus t"),
+    @NamedQuery(name = "TbTransferenciaStatus.findByTrsId", query = "SELECT t FROM TbTransferenciaStatus t WHERE t.trsId = :trsId"),
+    @NamedQuery(name = "TbTransferenciaStatus.findByTrsNome", query = "SELECT t FROM TbTransferenciaStatus t WHERE t.trsNome = :trsNome"),
+    @NamedQuery(name = "TbTransferenciaStatus.findByTrsDescricao", query = "SELECT t FROM TbTransferenciaStatus t WHERE t.trsDescricao = :trsDescricao")})
 public class TbTransferenciaStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,9 +44,7 @@ public class TbTransferenciaStatus implements Serializable {
     @Column(name = "trs_descricao")
     private String trsDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "traStatus")
-    private List<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrStatus")
-    private List<TbEntrada> tbEntradaList;
+    private Collection<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoCollection;
 
     public TbTransferenciaStatus() {
     }
@@ -82,21 +83,12 @@ public class TbTransferenciaStatus implements Serializable {
     }
 
     @XmlTransient
-    public List<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoList() {
-        return tbTransferenciasAlmoxarifadoList;
+    public Collection<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoCollection() {
+        return tbTransferenciasAlmoxarifadoCollection;
     }
 
-    public void setTbTransferenciasAlmoxarifadoList(List<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoList) {
-        this.tbTransferenciasAlmoxarifadoList = tbTransferenciasAlmoxarifadoList;
-    }
-
-    @XmlTransient
-    public List<TbEntrada> getTbEntradaList() {
-        return tbEntradaList;
-    }
-
-    public void setTbEntradaList(List<TbEntrada> tbEntradaList) {
-        this.tbEntradaList = tbEntradaList;
+    public void setTbTransferenciasAlmoxarifadoCollection(Collection<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoCollection) {
+        this.tbTransferenciasAlmoxarifadoCollection = tbTransferenciasAlmoxarifadoCollection;
     }
 
     @Override
@@ -121,7 +113,7 @@ public class TbTransferenciaStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbTransferenciaStatus[ trsId=" + trsId + " ]";
+        return "codemarket.model.vo.TbTransferenciaStatus[ trsId=" + trsId + " ]";
     }
     
 }

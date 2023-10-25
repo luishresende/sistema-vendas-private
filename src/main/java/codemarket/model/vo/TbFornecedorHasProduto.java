@@ -20,13 +20,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_fornecedor_has_produto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFornecedorHasProduto.findAll", query = "SELECT t FROM TbFornecedorHasProduto t")})
+    @NamedQuery(name = "TbFornecedorHasProduto.findAll", query = "SELECT t FROM TbFornecedorHasProduto t"),
+    @NamedQuery(name = "TbFornecedorHasProduto.findByFhpId", query = "SELECT t FROM TbFornecedorHasProduto t WHERE t.tbFornecedorHasProdutoPK.fhpId = :fhpId"),
+    @NamedQuery(name = "TbFornecedorHasProduto.findByFhpPdt", query = "SELECT t FROM TbFornecedorHasProduto t WHERE t.tbFornecedorHasProdutoPK.fhpPdt = :fhpPdt"),
+    @NamedQuery(name = "TbFornecedorHasProduto.findByFhpValorCompra", query = "SELECT t FROM TbFornecedorHasProduto t WHERE t.fhpValorCompra = :fhpValorCompra")})
 public class TbFornecedorHasProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -111,7 +114,7 @@ public class TbFornecedorHasProduto implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbFornecedorHasProduto[ tbFornecedorHasProdutoPK=" + tbFornecedorHasProdutoPK + " ]";
+        return "codemarket.model.vo.TbFornecedorHasProduto[ tbFornecedorHasProdutoPK=" + tbFornecedorHasProdutoPK + " ]";
     }
     
 }

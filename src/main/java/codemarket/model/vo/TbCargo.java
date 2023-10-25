@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_cargo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCargo.findAll", query = "SELECT t FROM TbCargo t")})
+    @NamedQuery(name = "TbCargo.findAll", query = "SELECT t FROM TbCargo t"),
+    @NamedQuery(name = "TbCargo.findByCarId", query = "SELECT t FROM TbCargo t WHERE t.carId = :carId"),
+    @NamedQuery(name = "TbCargo.findByCarDescricao", query = "SELECT t FROM TbCargo t WHERE t.carDescricao = :carDescricao"),
+    @NamedQuery(name = "TbCargo.findByCarsalarioBase", query = "SELECT t FROM TbCargo t WHERE t.carsalarioBase = :carsalarioBase")})
 public class TbCargo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,7 +48,7 @@ public class TbCargo implements Serializable {
     @Column(name = "car_salarioBase")
     private double carsalarioBase;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcCargo")
-    private List<TbFuncionario> tbFuncionarioList;
+    private Collection<TbFuncionario> tbFuncionarioCollection;
 
     public TbCargo() {
     }
@@ -85,12 +88,12 @@ public class TbCargo implements Serializable {
     }
 
     @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public Collection<TbFuncionario> getTbFuncionarioCollection() {
+        return tbFuncionarioCollection;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
+        this.tbFuncionarioCollection = tbFuncionarioCollection;
     }
 
     @Override
@@ -115,7 +118,7 @@ public class TbCargo implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbCargo[ carId=" + carId + " ]";
+        return "codemarket.model.vo.TbCargo[ carId=" + carId + " ]";
     }
     
 }

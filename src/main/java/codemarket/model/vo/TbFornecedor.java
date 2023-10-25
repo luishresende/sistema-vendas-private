@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,13 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_fornecedor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFornecedor.findAll", query = "SELECT t FROM TbFornecedor t")})
+    @NamedQuery(name = "TbFornecedor.findAll", query = "SELECT t FROM TbFornecedor t"),
+    @NamedQuery(name = "TbFornecedor.findByForId", query = "SELECT t FROM TbFornecedor t WHERE t.forId = :forId")})
 public class TbFornecedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,9 +45,9 @@ public class TbFornecedor implements Serializable {
     @OneToOne(optional = false)
     private TbEntidade forcpfCnpj;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entreForId")
-    private List<TbEntradaEstoque> tbEntradaEstoqueList;
+    private Collection<TbEntradaEstoque> tbEntradaEstoqueCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbFornecedor")
-    private List<TbFornecedorHasProduto> tbFornecedorHasProdutoList;
+    private Collection<TbFornecedorHasProduto> tbFornecedorHasProdutoCollection;
 
     public TbFornecedor() {
     }
@@ -72,21 +73,21 @@ public class TbFornecedor implements Serializable {
     }
 
     @XmlTransient
-    public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
-        return tbEntradaEstoqueList;
+    public Collection<TbEntradaEstoque> getTbEntradaEstoqueCollection() {
+        return tbEntradaEstoqueCollection;
     }
 
-    public void setTbEntradaEstoqueList(List<TbEntradaEstoque> tbEntradaEstoqueList) {
-        this.tbEntradaEstoqueList = tbEntradaEstoqueList;
+    public void setTbEntradaEstoqueCollection(Collection<TbEntradaEstoque> tbEntradaEstoqueCollection) {
+        this.tbEntradaEstoqueCollection = tbEntradaEstoqueCollection;
     }
 
     @XmlTransient
-    public List<TbFornecedorHasProduto> getTbFornecedorHasProdutoList() {
-        return tbFornecedorHasProdutoList;
+    public Collection<TbFornecedorHasProduto> getTbFornecedorHasProdutoCollection() {
+        return tbFornecedorHasProdutoCollection;
     }
 
-    public void setTbFornecedorHasProdutoList(List<TbFornecedorHasProduto> tbFornecedorHasProdutoList) {
-        this.tbFornecedorHasProdutoList = tbFornecedorHasProdutoList;
+    public void setTbFornecedorHasProdutoCollection(Collection<TbFornecedorHasProduto> tbFornecedorHasProdutoCollection) {
+        this.tbFornecedorHasProdutoCollection = tbFornecedorHasProdutoCollection;
     }
 
     @Override
@@ -111,7 +112,7 @@ public class TbFornecedor implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbFornecedor[ forId=" + forId + " ]";
+        return "codemarket.model.vo.TbFornecedor[ forId=" + forId + " ]";
     }
     
 }

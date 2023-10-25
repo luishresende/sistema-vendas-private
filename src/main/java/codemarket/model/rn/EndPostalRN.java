@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbEndPostal;
+import java.util.List;;
 
 public class EndPostalRN {
 
@@ -20,5 +21,9 @@ public class EndPostalRN {
 
     public void excluir(TbEndPostal EndPostal) {
         genericDao.excluir(EndPostal);
+    }
+    public List buscarTodos() {
+        List<TbEndPostal> EndPostals = genericDao.listarTodos(TbEndPostal.class);
+        return EndPostals;
     }
 }

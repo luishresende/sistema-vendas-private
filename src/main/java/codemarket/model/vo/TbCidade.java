@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_cidade")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCidade.findAll", query = "SELECT t FROM TbCidade t")})
+    @NamedQuery(name = "TbCidade.findAll", query = "SELECT t FROM TbCidade t"),
+    @NamedQuery(name = "TbCidade.findByCidId", query = "SELECT t FROM TbCidade t WHERE t.cidId = :cidId"),
+    @NamedQuery(name = "TbCidade.findByCidDescricao", query = "SELECT t FROM TbCidade t WHERE t.cidDescricao = :cidDescricao")})
 public class TbCidade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,7 +44,7 @@ public class TbCidade implements Serializable {
     @Column(name = "cid_descricao")
     private String cidDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbCidade")
-    private List<TbCidEst> tbCidEstList;
+    private Collection<TbCidEstPai> tbCidEstPaiCollection;
 
     public TbCidade() {
     }
@@ -73,12 +75,12 @@ public class TbCidade implements Serializable {
     }
 
     @XmlTransient
-    public List<TbCidEst> getTbCidEstList() {
-        return tbCidEstList;
+    public Collection<TbCidEstPai> getTbCidEstPaiCollection() {
+        return tbCidEstPaiCollection;
     }
 
-    public void setTbCidEstList(List<TbCidEst> tbCidEstList) {
-        this.tbCidEstList = tbCidEstList;
+    public void setTbCidEstPaiCollection(Collection<TbCidEstPai> tbCidEstPaiCollection) {
+        this.tbCidEstPaiCollection = tbCidEstPaiCollection;
     }
 
     @Override
@@ -103,7 +105,7 @@ public class TbCidade implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbCidade[ cidId=" + cidId + " ]";
+        return "codemarket.model.vo.TbCidade[ cidId=" + cidId + " ]";
     }
     
 }

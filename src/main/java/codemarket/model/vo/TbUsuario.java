@@ -7,8 +7,8 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,13 +27,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t")})
+    @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t"),
+    @NamedQuery(name = "TbUsuario.findByUsuUsuario", query = "SELECT t FROM TbUsuario t WHERE t.usuUsuario = :usuUsuario"),
+    @NamedQuery(name = "TbUsuario.findByUsuSenha", query = "SELECT t FROM TbUsuario t WHERE t.usuSenha = :usuSenha"),
+    @NamedQuery(name = "TbUsuario.findByUsuValidade", query = "SELECT t FROM TbUsuario t WHERE t.usuValidade = :usuValidade")})
 public class TbUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,7 +56,7 @@ public class TbUsuario implements Serializable {
     @ManyToOne(optional = false)
     private TbStatus usuStatus;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcUsuario")
-    private List<TbFuncionario> tbFuncionarioList;
+    private Collection<TbFuncionario> tbFuncionarioCollection;
 
     public TbUsuario() {
     }
@@ -108,12 +111,12 @@ public class TbUsuario implements Serializable {
     }
 
     @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public Collection<TbFuncionario> getTbFuncionarioCollection() {
+        return tbFuncionarioCollection;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
+        this.tbFuncionarioCollection = tbFuncionarioCollection;
     }
 
     @Override
@@ -138,7 +141,7 @@ public class TbUsuario implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbUsuario[ usuUsuario=" + usuUsuario + " ]";
+        return "codemarket.model.vo.TbUsuario[ usuUsuario=" + usuUsuario + " ]";
     }
     
 }

@@ -7,8 +7,8 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,13 +29,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_venda")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbVenda.findAll", query = "SELECT t FROM TbVenda t")})
+    @NamedQuery(name = "TbVenda.findAll", query = "SELECT t FROM TbVenda t"),
+    @NamedQuery(name = "TbVenda.findByVenId", query = "SELECT t FROM TbVenda t WHERE t.venId = :venId"),
+    @NamedQuery(name = "TbVenda.findByVenData", query = "SELECT t FROM TbVenda t WHERE t.venData = :venData")})
 public class TbVenda implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,9 +50,9 @@ public class TbVenda implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date venData;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "osVenda")
-    private List<TbOrdemServico> tbOrdemServicoList;
+    private Collection<TbOrdemServico> tbOrdemServicoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbVenda")
-    private List<TbPedido> tbPedidoList;
+    private Collection<TbPedido> tbPedidoCollection;
     @JoinColumn(name = "ven_cli_id", referencedColumnName = "cli_id")
     @ManyToOne
     private TbCliente venCliId;
@@ -87,21 +89,21 @@ public class TbVenda implements Serializable {
     }
 
     @XmlTransient
-    public List<TbOrdemServico> getTbOrdemServicoList() {
-        return tbOrdemServicoList;
+    public Collection<TbOrdemServico> getTbOrdemServicoCollection() {
+        return tbOrdemServicoCollection;
     }
 
-    public void setTbOrdemServicoList(List<TbOrdemServico> tbOrdemServicoList) {
-        this.tbOrdemServicoList = tbOrdemServicoList;
+    public void setTbOrdemServicoCollection(Collection<TbOrdemServico> tbOrdemServicoCollection) {
+        this.tbOrdemServicoCollection = tbOrdemServicoCollection;
     }
 
     @XmlTransient
-    public List<TbPedido> getTbPedidoList() {
-        return tbPedidoList;
+    public Collection<TbPedido> getTbPedidoCollection() {
+        return tbPedidoCollection;
     }
 
-    public void setTbPedidoList(List<TbPedido> tbPedidoList) {
-        this.tbPedidoList = tbPedidoList;
+    public void setTbPedidoCollection(Collection<TbPedido> tbPedidoCollection) {
+        this.tbPedidoCollection = tbPedidoCollection;
     }
 
     public TbCliente getVenCliId() {
@@ -142,7 +144,7 @@ public class TbVenda implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbVenda[ venId=" + venId + " ]";
+        return "codemarket.model.vo.TbVenda[ venId=" + venId + " ]";
     }
     
 }

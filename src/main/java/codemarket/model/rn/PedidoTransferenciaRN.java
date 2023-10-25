@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbPedidoTransferencia;
+import java.util.List;;
 
 public class PedidoTransferenciaRN {
 
@@ -20,5 +21,9 @@ public class PedidoTransferenciaRN {
 
     public void excluir(TbPedidoTransferencia PedidoTransferencia) {
         genericDao.excluir(PedidoTransferencia);
+    }
+    public List buscarTodos() {
+        List<TbPedidoTransferencia> PedidoTransferencias = genericDao.listarTodos(TbPedidoTransferencia.class);
+        return PedidoTransferencias;
     }
 }

@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Embeddable
 public class TbFornecedorHasProdutoPK implements Serializable {
@@ -74,7 +74,7 @@ public class TbFornecedorHasProdutoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbFornecedorHasProdutoPK[ fhpId=" + fhpId + ", fhpPdt=" + fhpPdt + " ]";
+        return "codemarket.model.vo.TbFornecedorHasProdutoPK[ fhpId=" + fhpId + ", fhpPdt=" + fhpPdt + " ]";
     }
     
 }

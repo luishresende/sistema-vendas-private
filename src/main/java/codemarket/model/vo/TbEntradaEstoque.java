@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,13 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_entrada_estoque")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntradaEstoque.findAll", query = "SELECT t FROM TbEntradaEstoque t")})
+    @NamedQuery(name = "TbEntradaEstoque.findAll", query = "SELECT t FROM TbEntradaEstoque t"),
+    @NamedQuery(name = "TbEntradaEstoque.findByEntreId", query = "SELECT t FROM TbEntradaEstoque t WHERE t.entreId = :entreId")})
 public class TbEntradaEstoque implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,12 +38,14 @@ public class TbEntradaEstoque implements Serializable {
     @JoinColumn(name = "entre_entrada_id", referencedColumnName = "entr_id")
     @ManyToOne(optional = false)
     private TbEntrada entreEntradaId;
+    @JoinColumns({
+        @JoinColumn(name = "entre_pdt_codigo", referencedColumnName = "esto_produto_codigo"),
+        @JoinColumn(name = "entre_almo_id", referencedColumnName = "esto_almoxarifado")})
+    @ManyToOne(optional = false)
+    private TbEstoque tbEstoque;
     @JoinColumn(name = "entre_for_id", referencedColumnName = "for_id")
     @ManyToOne(optional = false)
     private TbFornecedor entreForId;
-    @JoinColumn(name = "entre_pdt_codigo", referencedColumnName = "pdt_codigo")
-    @ManyToOne(optional = false)
-    private TbProduto entrePdtCodigo;
 
     public TbEntradaEstoque() {
     }
@@ -66,20 +70,20 @@ public class TbEntradaEstoque implements Serializable {
         this.entreEntradaId = entreEntradaId;
     }
 
+    public TbEstoque getTbEstoque() {
+        return tbEstoque;
+    }
+
+    public void setTbEstoque(TbEstoque tbEstoque) {
+        this.tbEstoque = tbEstoque;
+    }
+
     public TbFornecedor getEntreForId() {
         return entreForId;
     }
 
     public void setEntreForId(TbFornecedor entreForId) {
         this.entreForId = entreForId;
-    }
-
-    public TbProduto getEntrePdtCodigo() {
-        return entrePdtCodigo;
-    }
-
-    public void setEntrePdtCodigo(TbProduto entrePdtCodigo) {
-        this.entrePdtCodigo = entrePdtCodigo;
     }
 
     @Override
@@ -104,7 +108,7 @@ public class TbEntradaEstoque implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbEntradaEstoque[ entreId=" + entreId + " ]";
+        return "codemarket.model.vo.TbEntradaEstoque[ entreId=" + entreId + " ]";
     }
     
 }

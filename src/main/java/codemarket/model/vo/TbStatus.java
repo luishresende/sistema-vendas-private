@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,13 +22,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbStatus.findAll", query = "SELECT t FROM TbStatus t")})
+    @NamedQuery(name = "TbStatus.findAll", query = "SELECT t FROM TbStatus t"),
+    @NamedQuery(name = "TbStatus.findByStaId", query = "SELECT t FROM TbStatus t WHERE t.staId = :staId"),
+    @NamedQuery(name = "TbStatus.findByStaDescricao", query = "SELECT t FROM TbStatus t WHERE t.staDescricao = :staDescricao")})
 public class TbStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,9 +41,9 @@ public class TbStatus implements Serializable {
     @Column(name = "sta_descricao")
     private String staDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuStatus")
-    private List<TbUsuario> tbUsuarioList;
+    private Collection<TbUsuario> tbUsuarioCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcStatus")
-    private List<TbFuncionario> tbFuncionarioList;
+    private Collection<TbFuncionario> tbFuncionarioCollection;
 
     public TbStatus() {
     }
@@ -72,21 +74,21 @@ public class TbStatus implements Serializable {
     }
 
     @XmlTransient
-    public List<TbUsuario> getTbUsuarioList() {
-        return tbUsuarioList;
+    public Collection<TbUsuario> getTbUsuarioCollection() {
+        return tbUsuarioCollection;
     }
 
-    public void setTbUsuarioList(List<TbUsuario> tbUsuarioList) {
-        this.tbUsuarioList = tbUsuarioList;
+    public void setTbUsuarioCollection(Collection<TbUsuario> tbUsuarioCollection) {
+        this.tbUsuarioCollection = tbUsuarioCollection;
     }
 
     @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public Collection<TbFuncionario> getTbFuncionarioCollection() {
+        return tbFuncionarioCollection;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
+        this.tbFuncionarioCollection = tbFuncionarioCollection;
     }
 
     @Override
@@ -111,7 +113,7 @@ public class TbStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbStatus[ staId=" + staId + " ]";
+        return "codemarket.model.vo.TbStatus[ staId=" + staId + " ]";
     }
     
 }

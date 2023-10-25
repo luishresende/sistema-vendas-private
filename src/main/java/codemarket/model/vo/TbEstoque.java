@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,13 +24,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_estoque")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t")})
+    @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t"),
+    @NamedQuery(name = "TbEstoque.findByEstoAlmoxarifado", query = "SELECT t FROM TbEstoque t WHERE t.tbEstoquePK.estoAlmoxarifado = :estoAlmoxarifado"),
+    @NamedQuery(name = "TbEstoque.findByEstoProdutoCodigo", query = "SELECT t FROM TbEstoque t WHERE t.tbEstoquePK.estoProdutoCodigo = :estoProdutoCodigo"),
+    @NamedQuery(name = "TbEstoque.findByEstoQuantidade", query = "SELECT t FROM TbEstoque t WHERE t.estoQuantidade = :estoQuantidade"),
+    @NamedQuery(name = "TbEstoque.findByEstoValorFinal", query = "SELECT t FROM TbEstoque t WHERE t.estoValorFinal = :estoValorFinal"),
+    @NamedQuery(name = "TbEstoque.findByEstoValorFinalPrazo", query = "SELECT t FROM TbEstoque t WHERE t.estoValorFinalPrazo = :estoValorFinalPrazo"),
+    @NamedQuery(name = "TbEstoque.findByEstoLimiteMin", query = "SELECT t FROM TbEstoque t WHERE t.estoLimiteMin = :estoLimiteMin"),
+    @NamedQuery(name = "TbEstoque.findByEstoProibirVendaLimMin", query = "SELECT t FROM TbEstoque t WHERE t.estoProibirVendaLimMin = :estoProibirVendaLimMin"),
+    @NamedQuery(name = "TbEstoque.findByEstoAtualizarCustoNoPedido", query = "SELECT t FROM TbEstoque t WHERE t.estoAtualizarCustoNoPedido = :estoAtualizarCustoNoPedido")})
 public class TbEstoque implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -54,7 +62,7 @@ public class TbEstoque implements Serializable {
     @Column(name = "esto_atualizar_custo_no_pedido")
     private short estoAtualizarCustoNoPedido;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstoque")
-    private List<TbPedidoTransferencia> tbPedidoTransferenciaList;
+    private Collection<TbPedidoTransferencia> tbPedidoTransferenciaCollection;
     @JoinColumn(name = "esto_almoxarifado", referencedColumnName = "almo_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TbAlmoxarifado tbAlmoxarifado;
@@ -62,7 +70,9 @@ public class TbEstoque implements Serializable {
     @ManyToOne(optional = false)
     private TbProduto tbProduto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstoque")
-    private List<TbPedido> tbPedidoList;
+    private Collection<TbEntradaEstoque> tbEntradaEstoqueCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstoque")
+    private Collection<TbPedido> tbPedidoCollection;
 
     public TbEstoque() {
     }
@@ -141,12 +151,12 @@ public class TbEstoque implements Serializable {
     }
 
     @XmlTransient
-    public List<TbPedidoTransferencia> getTbPedidoTransferenciaList() {
-        return tbPedidoTransferenciaList;
+    public Collection<TbPedidoTransferencia> getTbPedidoTransferenciaCollection() {
+        return tbPedidoTransferenciaCollection;
     }
 
-    public void setTbPedidoTransferenciaList(List<TbPedidoTransferencia> tbPedidoTransferenciaList) {
-        this.tbPedidoTransferenciaList = tbPedidoTransferenciaList;
+    public void setTbPedidoTransferenciaCollection(Collection<TbPedidoTransferencia> tbPedidoTransferenciaCollection) {
+        this.tbPedidoTransferenciaCollection = tbPedidoTransferenciaCollection;
     }
 
     public TbAlmoxarifado getTbAlmoxarifado() {
@@ -166,12 +176,21 @@ public class TbEstoque implements Serializable {
     }
 
     @XmlTransient
-    public List<TbPedido> getTbPedidoList() {
-        return tbPedidoList;
+    public Collection<TbEntradaEstoque> getTbEntradaEstoqueCollection() {
+        return tbEntradaEstoqueCollection;
     }
 
-    public void setTbPedidoList(List<TbPedido> tbPedidoList) {
-        this.tbPedidoList = tbPedidoList;
+    public void setTbEntradaEstoqueCollection(Collection<TbEntradaEstoque> tbEntradaEstoqueCollection) {
+        this.tbEntradaEstoqueCollection = tbEntradaEstoqueCollection;
+    }
+
+    @XmlTransient
+    public Collection<TbPedido> getTbPedidoCollection() {
+        return tbPedidoCollection;
+    }
+
+    public void setTbPedidoCollection(Collection<TbPedido> tbPedidoCollection) {
+        this.tbPedidoCollection = tbPedidoCollection;
     }
 
     @Override
@@ -196,7 +215,7 @@ public class TbEstoque implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbEstoque[ tbEstoquePK=" + tbEstoquePK + " ]";
+        return "codemarket.model.vo.TbEstoque[ tbEstoquePK=" + tbEstoquePK + " ]";
     }
     
 }

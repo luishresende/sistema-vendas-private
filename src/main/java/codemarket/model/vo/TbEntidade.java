@@ -7,8 +7,8 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,13 +29,21 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_entidade")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntidade.findAll", query = "SELECT t FROM TbEntidade t")})
+    @NamedQuery(name = "TbEntidade.findAll", query = "SELECT t FROM TbEntidade t"),
+    @NamedQuery(name = "TbEntidade.findByEntNome", query = "SELECT t FROM TbEntidade t WHERE t.entNome = :entNome"),
+    @NamedQuery(name = "TbEntidade.findByEntnomeFantasia", query = "SELECT t FROM TbEntidade t WHERE t.entnomeFantasia = :entnomeFantasia"),
+    @NamedQuery(name = "TbEntidade.findByEntcpfCnpj", query = "SELECT t FROM TbEntidade t WHERE t.entcpfCnpj = :entcpfCnpj"),
+    @NamedQuery(name = "TbEntidade.findByEntrgIe", query = "SELECT t FROM TbEntidade t WHERE t.entrgIe = :entrgIe"),
+    @NamedQuery(name = "TbEntidade.findByEntFone", query = "SELECT t FROM TbEntidade t WHERE t.entFone = :entFone"),
+    @NamedQuery(name = "TbEntidade.findByEntEmail", query = "SELECT t FROM TbEntidade t WHERE t.entEmail = :entEmail"),
+    @NamedQuery(name = "TbEntidade.findByEntdtNasc", query = "SELECT t FROM TbEntidade t WHERE t.entdtNasc = :entdtNasc"),
+    @NamedQuery(name = "TbEntidade.findByEntTipo", query = "SELECT t FROM TbEntidade t WHERE t.entTipo = :entTipo")})
 public class TbEntidade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
@@ -63,8 +71,8 @@ public class TbEntidade implements Serializable {
     @Basic(optional = false)
     @Column(name = "ent_tipo")
     private String entTipo;
-    @ManyToMany(mappedBy = "tbEntidadeList")
-    private List<TbEndereco> tbEnderecoList;
+    @ManyToMany(mappedBy = "tbEntidadeCollection")
+    private Collection<TbEndereco> tbEnderecoCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "forcpfCnpj")
     private TbFornecedor tbFornecedor;
     @JoinColumn(name = "ent_endereco_principal", referencedColumnName = "end_id")
@@ -74,9 +82,9 @@ public class TbEntidade implements Serializable {
     @ManyToOne
     private TbSexo entSexo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcEntId")
-    private List<TbFuncionario> tbFuncionarioList;
+    private Collection<TbFuncionario> tbFuncionarioCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "filEntidade")
-    private List<TbFilial> tbFilialList;
+    private Collection<TbFilial> tbFilialCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "clicpfCnpj")
     private TbCliente tbCliente;
 
@@ -162,12 +170,12 @@ public class TbEntidade implements Serializable {
     }
 
     @XmlTransient
-    public List<TbEndereco> getTbEnderecoList() {
-        return tbEnderecoList;
+    public Collection<TbEndereco> getTbEnderecoCollection() {
+        return tbEnderecoCollection;
     }
 
-    public void setTbEnderecoList(List<TbEndereco> tbEnderecoList) {
-        this.tbEnderecoList = tbEnderecoList;
+    public void setTbEnderecoCollection(Collection<TbEndereco> tbEnderecoCollection) {
+        this.tbEnderecoCollection = tbEnderecoCollection;
     }
 
     public TbFornecedor getTbFornecedor() {
@@ -195,21 +203,21 @@ public class TbEntidade implements Serializable {
     }
 
     @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public Collection<TbFuncionario> getTbFuncionarioCollection() {
+        return tbFuncionarioCollection;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
+        this.tbFuncionarioCollection = tbFuncionarioCollection;
     }
 
     @XmlTransient
-    public List<TbFilial> getTbFilialList() {
-        return tbFilialList;
+    public Collection<TbFilial> getTbFilialCollection() {
+        return tbFilialCollection;
     }
 
-    public void setTbFilialList(List<TbFilial> tbFilialList) {
-        this.tbFilialList = tbFilialList;
+    public void setTbFilialCollection(Collection<TbFilial> tbFilialCollection) {
+        this.tbFilialCollection = tbFilialCollection;
     }
 
     public TbCliente getTbCliente() {
@@ -242,7 +250,7 @@ public class TbEntidade implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbEntidade[ entcpfCnpj=" + entcpfCnpj + " ]";
+        return "codemarket.model.vo.TbEntidade[ entcpfCnpj=" + entcpfCnpj + " ]";
     }
     
 }

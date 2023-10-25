@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,13 +22,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_categoria_produto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCategoriaProduto.findAll", query = "SELECT t FROM TbCategoriaProduto t")})
+    @NamedQuery(name = "TbCategoriaProduto.findAll", query = "SELECT t FROM TbCategoriaProduto t"),
+    @NamedQuery(name = "TbCategoriaProduto.findByCatpId", query = "SELECT t FROM TbCategoriaProduto t WHERE t.catpId = :catpId"),
+    @NamedQuery(name = "TbCategoriaProduto.findByCatpDescricao", query = "SELECT t FROM TbCategoriaProduto t WHERE t.catpDescricao = :catpDescricao")})
 public class TbCategoriaProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,7 +41,7 @@ public class TbCategoriaProduto implements Serializable {
     @Column(name = "catp_descricao")
     private String catpDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pdtCategoria")
-    private List<TbProduto> tbProdutoList;
+    private Collection<TbProduto> tbProdutoCollection;
 
     public TbCategoriaProduto() {
     }
@@ -70,12 +72,12 @@ public class TbCategoriaProduto implements Serializable {
     }
 
     @XmlTransient
-    public List<TbProduto> getTbProdutoList() {
-        return tbProdutoList;
+    public Collection<TbProduto> getTbProdutoCollection() {
+        return tbProdutoCollection;
     }
 
-    public void setTbProdutoList(List<TbProduto> tbProdutoList) {
-        this.tbProdutoList = tbProdutoList;
+    public void setTbProdutoCollection(Collection<TbProduto> tbProdutoCollection) {
+        this.tbProdutoCollection = tbProdutoCollection;
     }
 
     @Override
@@ -100,7 +102,7 @@ public class TbCategoriaProduto implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbCategoriaProduto[ catpId=" + catpId + " ]";
+        return "codemarket.model.vo.TbCategoriaProduto[ catpId=" + catpId + " ]";
     }
     
 }

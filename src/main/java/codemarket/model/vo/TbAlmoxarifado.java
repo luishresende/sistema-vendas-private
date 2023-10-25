@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,26 +15,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Luis Resende
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_almoxarifado")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbAlmoxarifado.findAll", query = "SELECT t FROM TbAlmoxarifado t")})
+    @NamedQuery(name = "TbAlmoxarifado.findAll", query = "SELECT t FROM TbAlmoxarifado t"),
+    @NamedQuery(name = "TbAlmoxarifado.findByAlmoId", query = "SELECT t FROM TbAlmoxarifado t WHERE t.almoId = :almoId"),
+    @NamedQuery(name = "TbAlmoxarifado.findByAlmoNome", query = "SELECT t FROM TbAlmoxarifado t WHERE t.almoNome = :almoNome"),
+    @NamedQuery(name = "TbAlmoxarifado.findByAlmoDescricao", query = "SELECT t FROM TbAlmoxarifado t WHERE t.almoDescricao = :almoDescricao")})
 public class TbAlmoxarifado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,29 +41,34 @@ public class TbAlmoxarifado implements Serializable {
     @Basic(optional = false)
     @Column(name = "almo_id")
     private Integer almoId;
-    @JoinTable(name = "tb_funcionario_has_almoxarifado", joinColumns = {
-        @JoinColumn(name = "almo_id", referencedColumnName = "almo_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "func_id", referencedColumnName = "func_id")})
-    @ManyToMany
-    private List<TbFuncionario> tbFuncionarioList;
+    @Basic(optional = false)
+    @Column(name = "almo_nome")
+    private String almoNome;
+    @Basic(optional = false)
+    @Column(name = "almo_descricao")
+    private String almoDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbAlmoxarifado")
-    private List<TbEstoque> tbEstoqueList;
-    @OneToMany(mappedBy = "funcAlmoPadrao")
-    private List<TbFuncionario> tbFuncionarioList1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "traAlmoxarifadoOrigem")
-    private List<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoList;
+    private Collection<TbFuncionarioHasAlmoxarifado> tbFuncionarioHasAlmoxarifadoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbAlmoxarifado")
+    private Collection<TbEstoque> tbEstoqueCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "traAlmoxarifadoDestino")
-    private List<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoList1;
+    private Collection<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "traAlmoxarifadoOrigem")
+    private Collection<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrAlmoId")
-    private List<TbEntrada> tbEntradaList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "tbAlmoxarifado")
-    private TbAlmoxarifadoHasEstoque tbAlmoxarifadoHasEstoque;
+    private Collection<TbEntrada> tbEntradaCollection;
 
     public TbAlmoxarifado() {
     }
 
     public TbAlmoxarifado(Integer almoId) {
         this.almoId = almoId;
+    }
+
+    public TbAlmoxarifado(Integer almoId, String almoNome, String almoDescricao) {
+        this.almoId = almoId;
+        this.almoNome = almoNome;
+        this.almoDescricao = almoDescricao;
     }
 
     public Integer getAlmoId() {
@@ -75,66 +79,65 @@ public class TbAlmoxarifado implements Serializable {
         this.almoId = almoId;
     }
 
-    @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public String getAlmoNome() {
+        return almoNome;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setAlmoNome(String almoNome) {
+        this.almoNome = almoNome;
     }
 
-    @XmlTransient
-    public List<TbEstoque> getTbEstoqueList() {
-        return tbEstoqueList;
+    public String getAlmoDescricao() {
+        return almoDescricao;
     }
 
-    public void setTbEstoqueList(List<TbEstoque> tbEstoqueList) {
-        this.tbEstoqueList = tbEstoqueList;
-    }
-
-    @XmlTransient
-    public List<TbFuncionario> getTbFuncionarioList1() {
-        return tbFuncionarioList1;
-    }
-
-    public void setTbFuncionarioList1(List<TbFuncionario> tbFuncionarioList1) {
-        this.tbFuncionarioList1 = tbFuncionarioList1;
+    public void setAlmoDescricao(String almoDescricao) {
+        this.almoDescricao = almoDescricao;
     }
 
     @XmlTransient
-    public List<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoList() {
-        return tbTransferenciasAlmoxarifadoList;
+    public Collection<TbFuncionarioHasAlmoxarifado> getTbFuncionarioHasAlmoxarifadoCollection() {
+        return tbFuncionarioHasAlmoxarifadoCollection;
     }
 
-    public void setTbTransferenciasAlmoxarifadoList(List<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoList) {
-        this.tbTransferenciasAlmoxarifadoList = tbTransferenciasAlmoxarifadoList;
-    }
-
-    @XmlTransient
-    public List<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoList1() {
-        return tbTransferenciasAlmoxarifadoList1;
-    }
-
-    public void setTbTransferenciasAlmoxarifadoList1(List<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoList1) {
-        this.tbTransferenciasAlmoxarifadoList1 = tbTransferenciasAlmoxarifadoList1;
+    public void setTbFuncionarioHasAlmoxarifadoCollection(Collection<TbFuncionarioHasAlmoxarifado> tbFuncionarioHasAlmoxarifadoCollection) {
+        this.tbFuncionarioHasAlmoxarifadoCollection = tbFuncionarioHasAlmoxarifadoCollection;
     }
 
     @XmlTransient
-    public List<TbEntrada> getTbEntradaList() {
-        return tbEntradaList;
+    public Collection<TbEstoque> getTbEstoqueCollection() {
+        return tbEstoqueCollection;
     }
 
-    public void setTbEntradaList(List<TbEntrada> tbEntradaList) {
-        this.tbEntradaList = tbEntradaList;
+    public void setTbEstoqueCollection(Collection<TbEstoque> tbEstoqueCollection) {
+        this.tbEstoqueCollection = tbEstoqueCollection;
     }
 
-    public TbAlmoxarifadoHasEstoque getTbAlmoxarifadoHasEstoque() {
-        return tbAlmoxarifadoHasEstoque;
+    @XmlTransient
+    public Collection<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoCollection() {
+        return tbTransferenciasAlmoxarifadoCollection;
     }
 
-    public void setTbAlmoxarifadoHasEstoque(TbAlmoxarifadoHasEstoque tbAlmoxarifadoHasEstoque) {
-        this.tbAlmoxarifadoHasEstoque = tbAlmoxarifadoHasEstoque;
+    public void setTbTransferenciasAlmoxarifadoCollection(Collection<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoCollection) {
+        this.tbTransferenciasAlmoxarifadoCollection = tbTransferenciasAlmoxarifadoCollection;
+    }
+
+    @XmlTransient
+    public Collection<TbTransferenciasAlmoxarifado> getTbTransferenciasAlmoxarifadoCollection1() {
+        return tbTransferenciasAlmoxarifadoCollection1;
+    }
+
+    public void setTbTransferenciasAlmoxarifadoCollection1(Collection<TbTransferenciasAlmoxarifado> tbTransferenciasAlmoxarifadoCollection1) {
+        this.tbTransferenciasAlmoxarifadoCollection1 = tbTransferenciasAlmoxarifadoCollection1;
+    }
+
+    @XmlTransient
+    public Collection<TbEntrada> getTbEntradaCollection() {
+        return tbEntradaCollection;
+    }
+
+    public void setTbEntradaCollection(Collection<TbEntrada> tbEntradaCollection) {
+        this.tbEntradaCollection = tbEntradaCollection;
     }
 
     @Override
@@ -159,7 +162,7 @@ public class TbAlmoxarifado implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.pojo.TbAlmoxarifado[ almoId=" + almoId + " ]";
+        return "codemarket.model.vo.TbAlmoxarifado[ almoId=" + almoId + " ]";
     }
     
 }
