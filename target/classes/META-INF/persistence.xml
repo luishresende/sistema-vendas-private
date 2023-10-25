@@ -2,41 +2,41 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="Hibernate" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>codemarket.model.pojo.TbTransferenciaStatus</class>
-    <class>codemarket.model.pojo.TbAlmoxarifado</class>
-    <class>codemarket.model.pojo.TbFuncionario</class>
-    <class>codemarket.model.pojo.TbEstoque</class>
-    <class>codemarket.model.pojo.TbPedido</class>
-    <class>codemarket.model.pojo.TbEntidade</class>
-    <class>codemarket.model.pojo.TbCidade</class>
-    <class>codemarket.model.pojo.TbSexo</class>
-    <class>codemarket.model.pojo.TbEstado</class>
-    <class>codemarket.model.pojo.TbStatus</class>
-    <class>codemarket.model.pojo.TbPedidoTransferencia</class>
-    <class>codemarket.model.pojo.TbFornecedorHasProduto</class>
-    <class>codemarket.model.pojo.TbVenda</class>
-    <class>codemarket.model.pojo.TbCliente</class>
-    <class>codemarket.model.pojo.TbTipoPagamento</class>
-    <class>codemarket.model.pojo.TbBairro</class>
-    <class>codemarket.model.pojo.TbLogradouro</class>
-    <class>codemarket.model.pojo.TbUnidadeMedida</class>
-    <class>codemarket.model.pojo.TbEntrada</class>
-    <class>codemarket.model.pojo.TbProduto</class>
-    <class>codemarket.model.pojo.TbGrupoPermissoes</class>
-    <class>codemarket.model.pojo.TbEndPostal</class>
-    <class>codemarket.model.pojo.TbFornecedor</class>
-    <class>codemarket.model.pojo.TbOrdemServico</class>
-    <class>codemarket.model.pojo.TbTransferenciasAlmoxarifado</class>
-    <class>codemarket.model.pojo.TbCidEst</class>
-    <class>codemarket.model.pojo.TbPais</class>
-    <class>codemarket.model.pojo.TbUsuario</class>
-    <class>codemarket.model.pojo.TbCargo</class>
-    <class>codemarket.model.pojo.TbServico</class>
-    <class>codemarket.model.pojo.TbFilial</class>
-    <class>codemarket.model.pojo.TbAlmoxarifadoHasEstoque</class>
-    <class>codemarket.model.pojo.TbCategoriaProduto</class>
-    <class>codemarket.model.pojo.TbEntradaEstoque</class>
-    <class>codemarket.model.pojo.TbEndereco</class>
+    <class>codemarket.model.vo.TbVenda</class>
+    <class>codemarket.model.vo.TbTransferenciaStatus</class>
+    <class>codemarket.model.vo.TbEndPostal</class>
+    <class>codemarket.model.vo.TbFornecedor</class>
+    <class>codemarket.model.vo.TbCidade</class>
+    <class>codemarket.model.vo.TbPais</class>
+    <class>codemarket.model.vo.TbCidEst</class>
+    <class>codemarket.model.vo.TbFornecedorHasProduto</class>
+    <class>codemarket.model.vo.TbServico</class>
+    <class>codemarket.model.vo.TbEstado</class>
+    <class>codemarket.model.vo.TbOrdemServico</class>
+    <class>codemarket.model.vo.TbStatus</class>
+    <class>codemarket.model.vo.TbUnidadeMedida</class>
+    <class>codemarket.model.vo.TbEndereco</class>
+    <class>codemarket.model.vo.TbAlmoxarifadoHasEstoque</class>
+    <class>codemarket.model.vo.TbCargo</class>
+    <class>codemarket.model.vo.TbPedido</class>
+    <class>codemarket.model.vo.TbFuncionario</class>
+    <class>codemarket.model.vo.TbCliente</class>
+    <class>codemarket.model.vo.TbEstoque</class>
+    <class>codemarket.model.vo.TbEntidade</class>
+    <class>codemarket.model.vo.TbTransferenciasAlmoxarifado</class>
+    <class>codemarket.model.vo.TbAlmoxarifado</class>
+    <class>codemarket.model.vo.TbPedidoTransferencia</class>
+    <class>codemarket.model.vo.TbEntrada</class>
+    <class>codemarket.model.vo.TbLogradouro</class>
+    <class>codemarket.model.vo.TbBairro</class>
+    <class>codemarket.model.vo.TbEntradaEstoque</class>
+    <class>codemarket.model.vo.TbGrupoPermissoes</class>
+    <class>codemarket.model.vo.TbProduto</class>
+    <class>codemarket.model.vo.TbCategoriaProduto</class>
+    <class>codemarket.model.vo.TbTipoPagamento</class>
+    <class>codemarket.model.vo.TbSexo</class>
+    <class>codemarket.model.vo.TbUsuario</class>
+    <class>codemarket.model.vo.TbFilial</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/code_market"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
