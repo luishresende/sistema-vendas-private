@@ -58,12 +58,7 @@ public class TbGrupoPermissoes implements Serializable {
     public TbGrupoPermissoes() {
     }
 
-    public TbGrupoPermissoes(Integer gpermId) {
-        this.gpermId = gpermId;
-    }
-
-    public TbGrupoPermissoes(Integer gpermId, String gpermNome, String gpermDescricao, String gpermPermisoes) {
-        this.gpermId = gpermId;
+    public TbGrupoPermissoes(String gpermNome, String gpermDescricao, String gpermPermisoes) {
         this.gpermNome = gpermNome;
         this.gpermDescricao = gpermDescricao;
         this.gpermPermisoes = gpermPermisoes;

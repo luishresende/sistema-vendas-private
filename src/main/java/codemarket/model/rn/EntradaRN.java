@@ -26,4 +26,9 @@ public class EntradaRN {
         List<TbEntrada> Entradas = genericDao.listarTodos(TbEntrada.class);
         return Entradas;
     }
+    public TbEntrada listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbEntrada obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

@@ -57,12 +57,7 @@ public class TbServico implements Serializable {
     public TbServico() {
     }
 
-    public TbServico(Integer serId) {
-        this.serId = serId;
-    }
-
-    public TbServico(Integer serId, String serNome, String serDescricao, float serValorBase) {
-        this.serId = serId;
+    public TbServico(String serNome, String serDescricao, float serValorBase) {
         this.serNome = serNome;
         this.serDescricao = serDescricao;
         this.serValorBase = serValorBase;

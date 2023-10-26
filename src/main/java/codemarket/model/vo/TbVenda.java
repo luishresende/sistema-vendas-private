@@ -63,13 +63,10 @@ public class TbVenda implements Serializable {
     public TbVenda() {
     }
 
-    public TbVenda(Integer venId) {
-        this.venId = venId;
-    }
-
-    public TbVenda(Integer venId, Date venData) {
-        this.venId = venId;
+    public TbVenda(Date venData, TbCliente venCliId, TbTipoPagamento venTpId) {
         this.venData = venData;
+        this.venCliId = venCliId;
+        this.venTpId = venTpId;
     }
 
     public Integer getVenId() {

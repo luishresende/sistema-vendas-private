@@ -26,4 +26,9 @@ public class GrupoPermissoesRN {
         List<TbGrupoPermissoes> GrupoPermissoess = genericDao.listarTodos(TbGrupoPermissoes.class);
         return GrupoPermissoess;
     }
+    public TbGrupoPermissoes listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbGrupoPermissoes obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

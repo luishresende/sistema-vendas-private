@@ -64,13 +64,10 @@ public class TbEndereco implements Serializable {
     public TbEndereco() {
     }
 
-    public TbEndereco(Integer endId) {
-        this.endId = endId;
-    }
-
-    public TbEndereco(Integer endId, int endNumero) {
-        this.endId = endId;
+    public TbEndereco(int endNumero, String endComplemento, TbEndPostal endendPid) {
         this.endNumero = endNumero;
+        this.endComplemento = endComplemento;
+        this.endendPid = endendPid;
     }
 
     public Integer getEndId() {

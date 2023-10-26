@@ -26,4 +26,9 @@ public class TipoPagamentoRN {
         List<TbTipoPagamento> TipoPagamentos = genericDao.listarTodos(TbTipoPagamento.class);
         return TipoPagamentos;
     }
+    public TbTipoPagamento listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbTipoPagamento obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

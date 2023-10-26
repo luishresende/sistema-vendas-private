@@ -65,8 +65,12 @@ public class TbFuncionario implements Serializable {
     public TbFuncionario() {
     }
 
-    public TbFuncionario(Integer funcId) {
-        this.funcId = funcId;
+    public TbFuncionario(TbCargo funcCargo, TbEntidade funcEntId, TbFilial funcFilialId, TbStatus funcStatus, TbUsuario funcUsuario) {
+        this.funcCargo = funcCargo;
+        this.funcEntId = funcEntId;
+        this.funcFilialId = funcFilialId;
+        this.funcStatus = funcStatus;
+        this.funcUsuario = funcUsuario;
     }
 
     public Integer getFuncId() {

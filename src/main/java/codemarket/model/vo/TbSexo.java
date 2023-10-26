@@ -48,12 +48,7 @@ public class TbSexo implements Serializable {
     public TbSexo() {
     }
 
-    public TbSexo(Integer sexId) {
-        this.sexId = sexId;
-    }
-
-    public TbSexo(Integer sexId, String sexDescricao) {
-        this.sexId = sexId;
+    public TbSexo(String sexDescricao) {
         this.sexDescricao = sexDescricao;
     }
 

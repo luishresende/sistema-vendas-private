@@ -26,4 +26,9 @@ public class FilialRN {
         List<TbFilial> Filials = genericDao.listarTodos(TbFilial.class);
         return Filials;
     }
+    public TbFilial listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbFilial obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

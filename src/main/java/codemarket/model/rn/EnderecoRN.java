@@ -26,4 +26,9 @@ public class EnderecoRN {
         List<TbEndereco> Enderecos = genericDao.listarTodos(TbEndereco.class);
         return Enderecos;
     }
+    public TbEndereco listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbEndereco obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

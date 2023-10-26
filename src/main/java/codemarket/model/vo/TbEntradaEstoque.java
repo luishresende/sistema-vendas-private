@@ -50,8 +50,10 @@ public class TbEntradaEstoque implements Serializable {
     public TbEntradaEstoque() {
     }
 
-    public TbEntradaEstoque(Integer entreId) {
-        this.entreId = entreId;
+    public TbEntradaEstoque(TbEntrada entreEntradaId, TbEstoque tbEstoque, TbFornecedor entreForId) {
+        this.entreEntradaId = entreEntradaId;
+        this.tbEstoque = tbEstoque;
+        this.entreForId = entreForId;
     }
 
     public Integer getEntreId() {

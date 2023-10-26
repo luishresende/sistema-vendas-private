@@ -26,4 +26,9 @@ public class SexoRN {
         List<TbSexo> Sexos = genericDao.listarTodos(TbSexo.class);
         return Sexos;
     }
+    public TbSexo listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbSexo obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

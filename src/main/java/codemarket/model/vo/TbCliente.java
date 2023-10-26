@@ -49,10 +49,10 @@ public class TbCliente implements Serializable {
     public TbCliente() {
     }
 
-    public TbCliente(Integer cliId) {
-        this.cliId = cliId;
+    public TbCliente(TbEntidade clicpfCnpj) {
+        this.clicpfCnpj = clicpfCnpj;
     }
-
+    
     public Integer getCliId() {
         return cliId;
     }

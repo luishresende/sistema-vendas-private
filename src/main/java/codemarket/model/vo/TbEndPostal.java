@@ -67,16 +67,14 @@ public class TbEndPostal implements Serializable {
     public TbEndPostal() {
     }
 
-    public TbEndPostal(Integer endPid) {
-        this.endPid = endPid;
-    }
-
-    public TbEndPostal(Integer endPid, String endPnomerua, String endCEP) {
-        this.endPid = endPid;
+    public TbEndPostal(String endPnomerua, String endCEP, TbBairro endPbaiid, TbCidEstPai tbCidEstPai, TbLogradouro endPlogid) {
         this.endPnomerua = endPnomerua;
         this.endCEP = endCEP;
+        this.endPbaiid = endPbaiid;
+        this.tbCidEstPai = tbCidEstPai;
+        this.endPlogid = endPlogid;
     }
-
+    
     public Integer getEndPid() {
         return endPid;
     }

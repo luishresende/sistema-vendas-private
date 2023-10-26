@@ -26,4 +26,9 @@ public class OrdemServicoRN {
         List<TbOrdemServico> OrdemServicos = genericDao.listarTodos(TbOrdemServico.class);
         return OrdemServicos;
     }
+    public TbOrdemServico listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbOrdemServico obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

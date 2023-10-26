@@ -54,14 +54,11 @@ public class TbPedido implements Serializable {
     public TbPedido() {
     }
 
-    public TbPedido(TbPedidoPK tbPedidoPK) {
-        this.tbPedidoPK = tbPedidoPK;
-    }
-
-    public TbPedido(TbPedidoPK tbPedidoPK, float pedQuantidade, float pedDesconto) {
-        this.tbPedidoPK = tbPedidoPK;
+    public TbPedido(float pedQuantidade, float pedDesconto, TbEstoque tbEstoque, TbVenda tbVenda) {
         this.pedQuantidade = pedQuantidade;
         this.pedDesconto = pedDesconto;
+        this.tbEstoque = tbEstoque;
+        this.tbVenda = tbVenda;
     }
 
     public TbPedido(int pedId, String pedVenda) {

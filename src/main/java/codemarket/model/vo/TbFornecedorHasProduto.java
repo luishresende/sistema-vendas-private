@@ -47,21 +47,10 @@ public class TbFornecedorHasProduto implements Serializable {
     public TbFornecedorHasProduto() {
     }
 
-    public TbFornecedorHasProduto(TbFornecedorHasProdutoPK tbFornecedorHasProdutoPK) {
-        this.tbFornecedorHasProdutoPK = tbFornecedorHasProdutoPK;
-    }
-
-    public TbFornecedorHasProduto(TbFornecedorHasProdutoPK tbFornecedorHasProdutoPK, float fhpValorCompra) {
-        this.tbFornecedorHasProdutoPK = tbFornecedorHasProdutoPK;
+    public TbFornecedorHasProduto(float fhpValorCompra, TbFornecedor tbFornecedor, TbProduto tbProduto) {
         this.fhpValorCompra = fhpValorCompra;
-    }
-
-    public TbFornecedorHasProduto(int fhpId, String fhpPdt) {
-        this.tbFornecedorHasProdutoPK = new TbFornecedorHasProdutoPK(fhpId, fhpPdt);
-    }
-
-    public TbFornecedorHasProdutoPK getTbFornecedorHasProdutoPK() {
-        return tbFornecedorHasProdutoPK;
+        this.tbFornecedor = tbFornecedor;
+        this.tbProduto = tbProduto;
     }
 
     public void setTbFornecedorHasProdutoPK(TbFornecedorHasProdutoPK tbFornecedorHasProdutoPK) {

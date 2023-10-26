@@ -26,4 +26,9 @@ public class PaisRN {
         List<TbPais> Paiss = genericDao.listarTodos(TbPais.class);
         return Paiss;
     }
+    public TbPais listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbPais obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

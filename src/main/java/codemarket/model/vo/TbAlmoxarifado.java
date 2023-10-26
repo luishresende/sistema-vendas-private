@@ -61,12 +61,7 @@ public class TbAlmoxarifado implements Serializable {
     public TbAlmoxarifado() {
     }
 
-    public TbAlmoxarifado(Integer almoId) {
-        this.almoId = almoId;
-    }
-
-    public TbAlmoxarifado(Integer almoId, String almoNome, String almoDescricao) {
-        this.almoId = almoId;
+    public TbAlmoxarifado(String almoNome, String almoDescricao) {
         this.almoNome = almoNome;
         this.almoDescricao = almoDescricao;
     }

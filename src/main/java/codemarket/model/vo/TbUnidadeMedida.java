@@ -50,12 +50,7 @@ public class TbUnidadeMedida implements Serializable {
     public TbUnidadeMedida() {
     }
 
-    public TbUnidadeMedida(String umSigla) {
-        this.umSigla = umSigla;
-    }
-
-    public TbUnidadeMedida(String umSigla, String umDescricao, String umTipo) {
-        this.umSigla = umSigla;
+    public TbUnidadeMedida(String umDescricao, String umTipo) {
         this.umDescricao = umDescricao;
         this.umTipo = umTipo;
     }

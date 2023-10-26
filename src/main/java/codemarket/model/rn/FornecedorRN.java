@@ -26,4 +26,9 @@ public class FornecedorRN {
         List<TbFornecedor> Fornecedors = genericDao.listarTodos(TbFornecedor.class);
         return Fornecedors;
     }
+    public TbFornecedor listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbFornecedor obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

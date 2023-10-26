@@ -49,12 +49,7 @@ public class TbBairro implements Serializable {
     public TbBairro() {
     }
 
-    public TbBairro(Integer baiId) {
-        this.baiId = baiId;
-    }
-
-    public TbBairro(Integer baiId, String baiDescricao) {
-        this.baiId = baiId;
+    public TbBairro(String baiDescricao) {
         this.baiDescricao = baiDescricao;
     }
 
@@ -105,7 +100,7 @@ public class TbBairro implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbBairro[ baiId=" + baiId + " ]";
+        return "Bairros: \n" + baiDescricao + " ";
     }
     
 }

@@ -50,12 +50,10 @@ public class TbCidEstPai implements Serializable {
     public TbCidEstPai() {
     }
 
-    public TbCidEstPai(TbCidEstPaiPK tbCidEstPaiPK) {
-        this.tbCidEstPaiPK = tbCidEstPaiPK;
-    }
-
-    public TbCidEstPai(int cepCidId, String cepEstSigla) {
-        this.tbCidEstPaiPK = new TbCidEstPaiPK(cepCidId, cepEstSigla);
+    public TbCidEstPai(TbCidade tbCidade, TbEstado tbEstado, TbPais cepPaiSigla) {
+        this.tbCidade = tbCidade;
+        this.tbEstado = tbEstado;
+        this.cepPaiSigla = cepPaiSigla;
     }
 
     public TbCidEstPaiPK getTbCidEstPaiPK() {

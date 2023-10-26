@@ -26,4 +26,9 @@ public class EstoqueRN {
         List<TbEstoque> Estoques = genericDao.listarTodos(TbEstoque.class);
         return Estoques;
     }
+    public TbEstoque listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbEstoque obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

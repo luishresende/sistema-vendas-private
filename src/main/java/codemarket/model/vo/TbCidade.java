@@ -49,12 +49,7 @@ public class TbCidade implements Serializable {
     public TbCidade() {
     }
 
-    public TbCidade(Integer cidId) {
-        this.cidId = cidId;
-    }
-
-    public TbCidade(Integer cidId, String cidDescricao) {
-        this.cidId = cidId;
+    public TbCidade(String cidDescricao) {
         this.cidDescricao = cidDescricao;
     }
 

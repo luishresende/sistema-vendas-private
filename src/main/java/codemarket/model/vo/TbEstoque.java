@@ -77,21 +77,15 @@ public class TbEstoque implements Serializable {
     public TbEstoque() {
     }
 
-    public TbEstoque(TbEstoquePK tbEstoquePK) {
-        this.tbEstoquePK = tbEstoquePK;
-    }
-
-    public TbEstoque(TbEstoquePK tbEstoquePK, float estoQuantidade, float estoValorFinal, float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido) {
-        this.tbEstoquePK = tbEstoquePK;
+    public TbEstoque(float estoQuantidade, float estoValorFinal, Float estoValorFinalPrazo, float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido, TbAlmoxarifado tbAlmoxarifado, TbProduto tbProduto) {
         this.estoQuantidade = estoQuantidade;
         this.estoValorFinal = estoValorFinal;
+        this.estoValorFinalPrazo = estoValorFinalPrazo;
         this.estoLimiteMin = estoLimiteMin;
         this.estoProibirVendaLimMin = estoProibirVendaLimMin;
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
-    }
-
-    public TbEstoque(int estoAlmoxarifado, String estoProdutoCodigo) {
-        this.tbEstoquePK = new TbEstoquePK(estoAlmoxarifado, estoProdutoCodigo);
+        this.tbAlmoxarifado = tbAlmoxarifado;
+        this.tbProduto = tbProduto;
     }
 
     public TbEstoquePK getTbEstoquePK() {

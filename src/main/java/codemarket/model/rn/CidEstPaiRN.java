@@ -26,4 +26,9 @@ public class CidEstPaiRN {
         List<TbCidEstPai> CidEstPais = genericDao.listarTodos(TbCidEstPai.class);
         return CidEstPais;
     }
+    public TbCidEstPai listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbCidEstPai obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

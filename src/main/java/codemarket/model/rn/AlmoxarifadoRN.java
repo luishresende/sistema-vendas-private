@@ -26,4 +26,9 @@ public class AlmoxarifadoRN {
         List<TbAlmoxarifado> Almoxarifados = genericDao.listarTodos(TbAlmoxarifado.class);
         return Almoxarifados;
     }
+    public TbAlmoxarifado listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbAlmoxarifado obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

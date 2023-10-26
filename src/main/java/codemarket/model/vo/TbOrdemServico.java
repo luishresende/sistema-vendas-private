@@ -51,13 +51,10 @@ public class TbOrdemServico implements Serializable {
     public TbOrdemServico() {
     }
 
-    public TbOrdemServico(Integer osId) {
-        this.osId = osId;
-    }
-
-    public TbOrdemServico(Integer osId, float osValorServico) {
-        this.osId = osId;
+    public TbOrdemServico(float osValorServico, TbServico osServico, TbVenda osVenda) {
         this.osValorServico = osValorServico;
+        this.osServico = osServico;
+        this.osVenda = osVenda;
     }
 
     public Integer getOsId() {

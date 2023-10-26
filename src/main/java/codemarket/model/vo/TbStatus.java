@@ -48,12 +48,7 @@ public class TbStatus implements Serializable {
     public TbStatus() {
     }
 
-    public TbStatus(Integer staId) {
-        this.staId = staId;
-    }
-
-    public TbStatus(Integer staId, String staDescricao) {
-        this.staId = staId;
+    public TbStatus(String staDescricao) {
         this.staDescricao = staDescricao;
     }
 

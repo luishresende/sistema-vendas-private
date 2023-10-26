@@ -26,4 +26,9 @@ public class UnidadeMedidaRN {
         List<TbUnidadeMedida> UnidadeMedidas = genericDao.listarTodos(TbUnidadeMedida.class);
         return UnidadeMedidas;
     }
+    public TbUnidadeMedida listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbUnidadeMedida obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

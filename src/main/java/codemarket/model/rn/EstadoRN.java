@@ -26,4 +26,9 @@ public class EstadoRN {
         List<TbEstado> Estados = genericDao.listarTodos(TbEstado.class);
         return Estados;
     }
+    public TbEstado listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbEstado obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

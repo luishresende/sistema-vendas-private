@@ -51,13 +51,10 @@ public class TbPedidoTransferencia implements Serializable {
     public TbPedidoTransferencia() {
     }
 
-    public TbPedidoTransferencia(Integer ptrId) {
-        this.ptrId = ptrId;
-    }
-
-    public TbPedidoTransferencia(Integer ptrId, float ptrQuantidade) {
-        this.ptrId = ptrId;
+    public TbPedidoTransferencia(float ptrQuantidade, TbEstoque tbEstoque, TbTransferenciasAlmoxarifado ptrTransferenciaId) {
         this.ptrQuantidade = ptrQuantidade;
+        this.tbEstoque = tbEstoque;
+        this.ptrTransferenciaId = ptrTransferenciaId;
     }
 
     public Integer getPtrId() {

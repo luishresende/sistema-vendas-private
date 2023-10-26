@@ -56,8 +56,10 @@ public class TbTransferenciasAlmoxarifado implements Serializable {
     public TbTransferenciasAlmoxarifado() {
     }
 
-    public TbTransferenciasAlmoxarifado(Integer traId) {
-        this.traId = traId;
+    public TbTransferenciasAlmoxarifado(TbAlmoxarifado traAlmoxarifadoDestino, TbAlmoxarifado traAlmoxarifadoOrigem, TbTransferenciaStatus traStatus) {
+        this.traAlmoxarifadoDestino = traAlmoxarifadoDestino;
+        this.traAlmoxarifadoOrigem = traAlmoxarifadoOrigem;
+        this.traStatus = traStatus;
     }
 
     public Integer getTraId() {

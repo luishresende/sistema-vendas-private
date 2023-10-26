@@ -56,13 +56,10 @@ public class TbProduto implements Serializable {
     public TbProduto() {
     }
 
-    public TbProduto(String pdtCodigo) {
-        this.pdtCodigo = pdtCodigo;
-    }
-
-    public TbProduto(String pdtCodigo, String pdtNome) {
-        this.pdtCodigo = pdtCodigo;
+    public TbProduto(String pdtNome, TbCategoriaProduto pdtCategoria, TbUnidadeMedida pdtUmSigla) {
         this.pdtNome = pdtNome;
+        this.pdtCategoria = pdtCategoria;
+        this.pdtUmSigla = pdtUmSigla;
     }
 
     public String getPdtCodigo() {

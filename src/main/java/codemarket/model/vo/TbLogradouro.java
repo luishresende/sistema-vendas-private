@@ -49,12 +49,7 @@ public class TbLogradouro implements Serializable {
     public TbLogradouro() {
     }
 
-    public TbLogradouro(Integer logId) {
-        this.logId = logId;
-    }
-
-    public TbLogradouro(Integer logId, String logDescricao) {
-        this.logId = logId;
+    public TbLogradouro(String logDescricao) {
         this.logDescricao = logDescricao;
     }
 

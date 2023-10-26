@@ -53,12 +53,7 @@ public class TbCargo implements Serializable {
     public TbCargo() {
     }
 
-    public TbCargo(Integer carId) {
-        this.carId = carId;
-    }
-
-    public TbCargo(Integer carId, String carDescricao, double carsalarioBase) {
-        this.carId = carId;
+    public TbCargo(String carDescricao, double carsalarioBase) {
         this.carDescricao = carDescricao;
         this.carsalarioBase = carsalarioBase;
     }

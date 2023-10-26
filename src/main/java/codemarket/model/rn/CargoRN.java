@@ -26,4 +26,9 @@ public class CargoRN {
         List<TbCargo> Cargos = genericDao.listarTodos(TbCargo.class);
         return Cargos;
     }
+    public TbCargo listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbCargo obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

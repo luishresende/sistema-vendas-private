@@ -26,4 +26,9 @@ public class LogradouroRN {
         List<TbLogradouro> Logradouros = genericDao.listarTodos(TbLogradouro.class);
         return Logradouros;
     }
+    public TbLogradouro listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbLogradouro obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

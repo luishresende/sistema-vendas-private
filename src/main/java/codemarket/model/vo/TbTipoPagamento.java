@@ -49,12 +49,7 @@ public class TbTipoPagamento implements Serializable {
     public TbTipoPagamento() {
     }
 
-    public TbTipoPagamento(Integer tpId) {
-        this.tpId = tpId;
-    }
-
-    public TbTipoPagamento(Integer tpId, String tpDescricao) {
-        this.tpId = tpId;
+    public TbTipoPagamento(String tpDescricao) {
         this.tpDescricao = tpDescricao;
     }
 

@@ -50,8 +50,9 @@ public class TbEntrada implements Serializable {
     public TbEntrada() {
     }
 
-    public TbEntrada(Integer entrId) {
-        this.entrId = entrId;
+    public TbEntrada(TbAlmoxarifado entrAlmoId, TbEntradaStatus entrStatus) {
+        this.entrAlmoId = entrAlmoId;
+        this.entrStatus = entrStatus;
     }
 
     public Integer getEntrId() {

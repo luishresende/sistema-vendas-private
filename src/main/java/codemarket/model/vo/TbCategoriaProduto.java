@@ -46,12 +46,7 @@ public class TbCategoriaProduto implements Serializable {
     public TbCategoriaProduto() {
     }
 
-    public TbCategoriaProduto(Integer catpId) {
-        this.catpId = catpId;
-    }
-
-    public TbCategoriaProduto(Integer catpId, String catpDescricao) {
-        this.catpId = catpId;
+    public TbCategoriaProduto(String catpDescricao) {
         this.catpDescricao = catpDescricao;
     }
 

@@ -62,15 +62,11 @@ public class TbFilial implements Serializable {
     public TbFilial() {
     }
 
-    public TbFilial(Integer filId) {
-        this.filId = filId;
-    }
-
-    public TbFilial(Integer filId, String filPreferencias) {
-        this.filId = filId;
+    public TbFilial(String filPreferencias, TbEntidade filEntidade) {
         this.filPreferencias = filPreferencias;
+        this.filEntidade = filEntidade;
     }
-
+    
     public Integer getFilId() {
         return filId;
     }

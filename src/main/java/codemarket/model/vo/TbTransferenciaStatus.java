@@ -49,13 +49,9 @@ public class TbTransferenciaStatus implements Serializable {
     public TbTransferenciaStatus() {
     }
 
-    public TbTransferenciaStatus(Integer trsId) {
-        this.trsId = trsId;
-    }
-
-    public TbTransferenciaStatus(Integer trsId, String trsNome) {
-        this.trsId = trsId;
+    public TbTransferenciaStatus(String trsNome, String trsDescricao) {
         this.trsNome = trsNome;
+        this.trsDescricao = trsDescricao;
     }
 
     public Integer getTrsId() {

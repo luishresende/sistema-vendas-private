@@ -51,8 +51,8 @@ public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
     }
 
     @Override
-    public Tabela listarUm(String name, int value, Class classe) {
-        String jpql = " SELECT t FROM " + classe.getTypeName() + " t WHERE t." + name + " = " + value;
+    public Tabela listarUm(String name, String value, Class classe) {
+        String jpql = " SELECT t FROM " + classe.getTypeName() + " t WHERE t." + name + " = '" + value +"'";
         Query query = manager.createQuery (jpql);
         Object obj = query.getSingleResult();
         return (Tabela) obj;    

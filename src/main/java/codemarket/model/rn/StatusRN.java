@@ -26,4 +26,9 @@ public class StatusRN {
         List<TbStatus> Statuss = genericDao.listarTodos(TbStatus.class);
         return Statuss;
     }
+    public TbStatus listaUm(String pesquisa, String valor, Class classe) {
+        String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
+        TbStatus obj = genericDao.listarUm(pesquisa, valor, classe);
+        return obj;
+    }
 }

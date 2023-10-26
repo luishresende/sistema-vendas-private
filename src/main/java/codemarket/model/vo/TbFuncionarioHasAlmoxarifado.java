@@ -47,27 +47,12 @@ public class TbFuncionarioHasAlmoxarifado implements Serializable {
     public TbFuncionarioHasAlmoxarifado() {
     }
 
-    public TbFuncionarioHasAlmoxarifado(TbFuncionarioHasAlmoxarifadoPK tbFuncionarioHasAlmoxarifadoPK) {
-        this.tbFuncionarioHasAlmoxarifadoPK = tbFuncionarioHasAlmoxarifadoPK;
-    }
-
-    public TbFuncionarioHasAlmoxarifado(TbFuncionarioHasAlmoxarifadoPK tbFuncionarioHasAlmoxarifadoPK, short isPadrao) {
-        this.tbFuncionarioHasAlmoxarifadoPK = tbFuncionarioHasAlmoxarifadoPK;
+    public TbFuncionarioHasAlmoxarifado(short isPadrao, TbAlmoxarifado tbAlmoxarifado, TbFuncionario tbFuncionario) {
         this.isPadrao = isPadrao;
+        this.tbAlmoxarifado = tbAlmoxarifado;
+        this.tbFuncionario = tbFuncionario;
     }
-
-    public TbFuncionarioHasAlmoxarifado(int funcId, int almoId) {
-        this.tbFuncionarioHasAlmoxarifadoPK = new TbFuncionarioHasAlmoxarifadoPK(funcId, almoId);
-    }
-
-    public TbFuncionarioHasAlmoxarifadoPK getTbFuncionarioHasAlmoxarifadoPK() {
-        return tbFuncionarioHasAlmoxarifadoPK;
-    }
-
-    public void setTbFuncionarioHasAlmoxarifadoPK(TbFuncionarioHasAlmoxarifadoPK tbFuncionarioHasAlmoxarifadoPK) {
-        this.tbFuncionarioHasAlmoxarifadoPK = tbFuncionarioHasAlmoxarifadoPK;
-    }
-
+    
     public short getIsPadrao() {
         return isPadrao;
     }
