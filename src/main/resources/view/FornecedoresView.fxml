@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="961.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="720.0" prefWidth="961.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FornecedoresViewController">
    <children>
       <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -46,7 +46,7 @@
                         </TextField>
                      </graphic>
                   </Label>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
+                  <Button fx:id="buttonCadastrar" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -61,7 +61,7 @@
                         </FontAwesomeIcon>
                      </graphic>
                   </Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" textAlignment="CENTER" GridPane.columnIndex="3">
+                  <Button fx:id="buttonEditar" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" textAlignment="CENTER" GridPane.columnIndex="3">
                      <graphic>
                         <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="3.5em" textAlignment="CENTER" wrappingWidth="50.0" />
                      </graphic>
@@ -75,7 +75,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Deletar" GridPane.columnIndex="4">
+                  <Button fx:id="buttonRemover" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Deletar" GridPane.columnIndex="4">
                      <graphic>
                         <FontAwesomeIcon glyphStyleClass="" iconName="TRASH" size="3.5em" text="" textAlignment="CENTER">
                            <cursor>

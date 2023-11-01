@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.CadastroEntidadeViewController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Cadastro de Entidades" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="108.0" layoutY="73.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="98.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints minHeight="10.0" percentHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <TabPane focusTraversable="false" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab style="-fx-font-weight: bold;" text="Entidade">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane layoutX="140.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="2.5" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="2.5" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Código" textFill="#0022ff">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField disable="true" prefHeight="31.0" prefWidth="569.0">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font></TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome" textFill="#0022ff">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField prefHeight="31.0" prefWidth="569.0">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font></TextField>
+                                       </children>
+                                       <GridPane.margin>
+                                          <Insets right="10.0" />
+                                       </GridPane.margin>
+                                    </VBox>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                                       <children>
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Tipo de Entidade" textFill="#0022ff">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane style="-fx-border-style: solid; -fx-border-color: lightgray;">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <CheckBox mnemonicParsing="false" text="Cliente">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="5.0" />
+                                                   </GridPane.margin>
+                                                </CheckBox>
+                                                <CheckBox layoutX="10.0" layoutY="15.0" mnemonicParsing="false" text="Fornecedor" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="5.0" />
+                                                   </GridPane.margin>
+                                                </CheckBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Transparent;" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
+              <tabs>
+                <Tab style="-fx-font-weight: bold;" text="Dados Iniciais">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane layoutX="74.0" layoutY="54.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="544.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="405.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="294.0" valignment="CENTER" vgrow="ALWAYS" />
+                                </rowConstraints>
+                                 <children>
+                                    <GridPane GridPane.columnIndex="1">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="127.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="83.0" spacing="2.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label fx:id="labelCPFCNPJ" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="CPF / CNPJ">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="cpfcnpj" onKeyReleased="#validarCPFCNPJ" />
+                                             </children>
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                          <GridPane>
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Sexo">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="tipoSexo" prefHeight="31.0" prefWidth="179.0" promptText="Selecione..." />
+                                                   </children>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </VBox>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Físico / Jurídico">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="tipoCliente" onAction="#onTipoClienteChanged" prefHeight="31.0" prefWidth="179.0" promptText="Selecione..." />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                                      </rowConstraints>
+                                       <children>
+                                          <TableView prefHeight="268.0" prefWidth="390.0">
+                                             <columns>
+                                                <TableColumn prefWidth="32.0" text="Id" />
+                                                <TableColumn prefWidth="123.0" text="Nome" />
+                                                <TableColumn prefWidth="44.0" text="DDD" />
+                                                <TableColumn prefWidth="126.0" text="Fone" />
+                                                <TableColumn prefWidth="67.0" text="Tipo" />
+                                             </columns>
+                                             <GridPane.margin>
+                                                <Insets left="15.0" />
+                                             </GridPane.margin>
+                                          </TableView>
+                                       </children>
+                                    </GridPane>
+                                    <GridPane prefHeight="289.0" prefWidth="524.0" style="-fx-border-style: solid; -fx-border-color: lightgray;" GridPane.rowIndex="1">
+                                       <children>
+                                          <VBox prefHeight="71.0" prefWidth="522.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <GridPane>
+                                                   <children>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Tipo Contato">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <ComboBox editable="true" prefHeight="31.0" prefWidth="179.0" />
+                                                         </children>
+                                                      </VBox>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
+                                                         <children>
+                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome Contato">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField prefHeight="31.0" prefWidth="261.0">
+                                                               <font>
+                                                                  <Font size="13.0" />
+                                                               </font>
+                                                            </TextField>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="192.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="320.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                                   </rowConstraints>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <GridPane GridPane.rowIndex="2">
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="DDD">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="ddd" onKeyReleased="#validarDDD" prefHeight="31.0" prefWidth="176.0">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Fone">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="fone" onKeyReleased="#validarFONE" prefHeight="31.0">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets left="10.0" />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="82.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="430.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                                             </rowConstraints>
+                                             <GridPane.margin>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </GridPane.margin>
+                                          </GridPane>
+                                          <GridPane GridPane.rowIndex="4">
+                                             <children>
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIcon iconName="SAVE" size="2em" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </FontAwesomeIcon>
+                                                   </graphic>
+                                                </Button>
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIcon iconName="CLOSE" size="2em" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </FontAwesomeIcon>
+                                                   </graphic>
+                                                </Button>
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIcon iconName="PLUS_CIRCLE" size="2em" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </FontAwesomeIcon>
+                                                   </graphic>
+                                                </Button>
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="3">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIcon iconName="EDIT" size="2em" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </FontAwesomeIcon>
+                                                   </graphic>
+                                                </Button>
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="4">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <graphic>
+                                                      <FontAwesomeIcon iconName="TRASH" size="2em" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </FontAwesomeIcon>
+                                                   </graphic>
+                                                </Button>
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="113.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="101.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="107.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <GridPane.margin>
+                                                <Insets bottom="5.0" />
+                                             </GridPane.margin>
+                                          </GridPane>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                                             <children>
+                                                <Label alignment="TOP_LEFT" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="65.0" prefHeight="25.0" prefWidth="519.0" text="Observação">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField prefHeight="31.0" prefWidth="419.0">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                             <GridPane.margin>
+                                                <Insets left="5.0" right="5.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="217.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints />
+                                          <RowConstraints minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints minHeight="10.0" prefHeight="55.0" valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints minHeight="10.0" prefHeight="65.0" valignment="CENTER" vgrow="ALWAYS" />
+                                          <RowConstraints minHeight="10.0" prefHeight="35.0" valignment="CENTER" vgrow="ALWAYS" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="544.0" spacing="2.0">
+                                             <children>
+                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome Fantasia">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField prefHeight="31.0" prefWidth="569.0">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                          <GridPane GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="158.0" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="386.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="239.0" spacing="3.0">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Data Nasccimento">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <DatePicker fx:id="dataNASC" prefHeight="31.0" prefWidth="140.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="306.0" spacing="2.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Email">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField prefHeight="31.0" prefWidth="353.0">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab style="-fx-font-weight: bold;" text="Endereço">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox prefHeight="385.0" prefWidth="949.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                       <children>
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Localidade" textFill="#0022ff">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <GridPane prefHeight="387.0" prefWidth="949.0" style="-fx-border-style: solid; -fx-border-color: lightgray;">
+                                             <children>
+                                                <VBox prefHeight="108.0" prefWidth="669.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                   <children>
+                                                      <GridPane prefHeight="144.0" prefWidth="659.0">
+                                                        <columnConstraints>
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="470.0" />
+                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="467.0" />
+                                                        </columnConstraints>
+                                                        <rowConstraints>
+                                                          <RowConstraints minHeight="10.0" prefHeight="48.0" valignment="CENTER" vgrow="ALWAYS" />
+                                                          <RowConstraints minHeight="10.0" prefHeight="52.0" valignment="CENTER" vgrow="ALWAYS" />
+                                                        </rowConstraints>
+                                                         <children>
+                                                            <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1">
+                                                               <children>
+                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" text="País">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ComboBox prefHeight="26.0" prefWidth="191.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox prefHeight="62.0" prefWidth="330.0" spacing="2.0" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" text="Cidade">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ComboBox prefHeight="26.0" prefWidth="191.0" />
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox prefHeight="58.0" prefWidth="330.0">
+                                                               <children>
+                                                                  <HBox prefHeight="20.0" prefWidth="329.0">
+                                                                     <children>
+                                                                        <RadioButton mnemonicParsing="false" text="Brasileiro" />
+                                                                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Estrangeiro">
+                                                                           <HBox.margin>
+                                                                              <Insets left="50.0" />
+                                                                           </HBox.margin>
+                                                                        </RadioButton>
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="5.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                            <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                               <children>
+                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="98.0" text="Estado">
+                                                                     <font>
+                                                                        <Font name="System Bold" size="14.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ComboBox prefHeight="26.0" prefWidth="190.0" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                         </VBox.margin>
+                                                      </GridPane>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane prefHeight="49.0" prefWidth="947.0" GridPane.rowIndex="3">
+                                                   <children>
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <FontAwesomeIcon iconName="SAVE" size="2em" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </FontAwesomeIcon>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <FontAwesomeIcon iconName="CLOSE" size="2em" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </FontAwesomeIcon>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <FontAwesomeIcon iconName="PLUS_CIRCLE" size="2em" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </FontAwesomeIcon>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="3">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <FontAwesomeIcon iconName="EDIT" size="2em" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </FontAwesomeIcon>
+                                                         </graphic>
+                                                      </Button>
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="4">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <FontAwesomeIcon iconName="TRASH" size="2em" textAlignment="CENTER">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </FontAwesomeIcon>
+                                                         </graphic>
+                                                      </Button>
+                                                   </children>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="113.0" />
+                                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="101.0" />
+                                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="107.0" />
+                                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                </GridPane>
+                                                <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                  <columns>
+                                                      <TableColumn prefWidth="150.0" text="Tipo" />
+                                                    <TableColumn minWidth="0.0" prefWidth="119.0" text="CEP" />
+                                                    <TableColumn prefWidth="287.0" text="Cidade" />
+                                                      <TableColumn prefWidth="201.0" text="Estado" />
+                                                      <TableColumn prefWidth="189.0" text="País" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints minHeight="10.0" percentHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="0.0" percentHeight="20.0" valignment="CENTER" vgrow="ALWAYS" />
+                                             </rowConstraints>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </VBox>
+                                    <GridPane prefHeight="102.0" prefWidth="949.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="613.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="188.0" minWidth="10.0" prefWidth="188.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="56.0" valignment="CENTER" vgrow="ALWAYS" />
+                                        <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox prefHeight="55.0" prefWidth="816.0" spacing="2.0">
+                                             <children>
+                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" text="Logradouro">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField prefHeight="29.0" prefWidth="743.0">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                             <children>
+                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" text="Tipo de Endereço">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <ComboBox prefHeight="29.0" prefWidth="173.0" promptText="Selecione...">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                             <GridPane.margin>
+                                                <Insets left="15.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                          <VBox prefHeight="46.0" prefWidth="336.0" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Número">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="numero" onKeyReleased="#validarNUM" prefHeight="29.0" prefWidth="188.0">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                             <GridPane.margin>
+                                                <Insets left="15.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                          <GridPane prefHeight="31.0" prefWidth="761.0" GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="243.0" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="426.0" />
+                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="265.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="44.0" text="Bairro">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField prefHeight="29.0" prefWidth="326.0">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" text="Complemento">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField prefHeight="29.0" prefWidth="200.0">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" text="CEP">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="cep" onKeyReleased="#validarCEP" prefHeight="29.0" prefWidth="200.0">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                    <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

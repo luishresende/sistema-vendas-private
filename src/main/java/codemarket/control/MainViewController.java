@@ -205,7 +205,7 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
-            System.out.println(applicationAnchorPane.getHeight());
+//            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -59,7 +59,7 @@
                         </TextField>
                      </graphic>
                   </Label>
-                  <Button alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
+                  <Button fx:id="buttonCadastrar" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -74,7 +74,7 @@
                         </FontAwesomeIcon>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" textAlignment="CENTER" GridPane.columnIndex="3">
+                  <Button fx:id="buttonEditar" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" textAlignment="CENTER" GridPane.columnIndex="3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -85,7 +85,7 @@
                         <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="3.5em" />
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Remover" textAlignment="CENTER" GridPane.columnIndex="4">
+                  <Button fx:id="buttonRemover" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Remover" textAlignment="CENTER" GridPane.columnIndex="4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>

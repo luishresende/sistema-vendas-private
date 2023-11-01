@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author Iuri Pereira
  */
-public class EstoqueViewController implements Initializable {
+public class FornecedoresViewController implements Initializable {
 
     @FXML
     private Button buttonCadastrar;
@@ -31,10 +31,10 @@ public class EstoqueViewController implements Initializable {
     private Button buttonEditar;
     @FXML
     private Button buttonRemover;
-
+    
     private Stage dialogStage;
     private final FXMLLoader loader = new FXMLLoader();
- 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -42,17 +42,17 @@ public class EstoqueViewController implements Initializable {
 
     @FXML
     private void handleButtonCadastrar() throws IOException {
-        loader.setLocation(codemarket.control.InserirProdutoController.class.getResource("/view/InserirProdutoView.fxml"));
+        loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
         dialogStage = new Stage();
-        dialogStage.setTitle("Cadastrar Produto");
+        dialogStage.setTitle("Cadastrar Fornecedor");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
         dialogStage.setScene(scene);
         
-        codemarket.control.InserirProdutoController controller = loader.getController();
+        codemarket.control.CadastroEntidadeViewController controller = loader.getController();
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();
@@ -60,24 +60,24 @@ public class EstoqueViewController implements Initializable {
 
     @FXML
     private void handleButtonEditar() throws IOException {
-        loader.setLocation(codemarket.control.InserirProdutoController.class.getResource("/view/InserirProdutoView.fxml"));
+        loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
         dialogStage = new Stage();
-        dialogStage.setTitle("Editar Produto");
+        dialogStage.setTitle("Editar Fornecedor");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
         dialogStage.setScene(scene);
         
-        codemarket.control.InserirProdutoController controller = loader.getController();
+        codemarket.control.CadastroEntidadeViewController controller = loader.getController();
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();
     }
 
     @FXML
-    private void handlebuttonRemover(ActionEvent event) {
+    private void handleButtonRemover() {
     }
     
 }
