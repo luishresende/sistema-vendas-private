@@ -34,7 +34,7 @@
           <RowConstraints percentHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <GridPane alignment="CENTER" stylesheets="@../../Documents/4-Periodo-2023.1/CC24A-Linguagem-de-Projeto-Objeto-Orientada/Projeto/sistema-vendas/src/main/resources/view/style.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <GridPane alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="2.5" />
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="65.0" />

@@ -157,14 +157,12 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
-            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
-    @FXML
-    void handleFilialButton(ActionEvent event) {
+    public void handleFilialButton(ActionEvent event) {
         applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FilialView.fxml"));
         try {
@@ -179,7 +177,6 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
-            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -220,13 +217,12 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
-//            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    @FXML
-    void handleFuncionariosButton() {
+
+    public void handleFuncionariosButton() {
         applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FuncionariosView.fxml"));
         try {
@@ -241,7 +237,6 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
-//            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -262,7 +257,6 @@ public class MainViewController implements Initializable {
 
             // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
             applicationAnchorPane.getChildren().setAll(novoConteudo);
-            System.out.println(applicationAnchorPane.getHeight());
         } catch (IOException e) {
             e.printStackTrace();
         }
