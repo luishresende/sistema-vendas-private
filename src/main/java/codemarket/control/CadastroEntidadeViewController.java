@@ -13,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class CadastroEntidadeViewController implements Initializable {
@@ -25,6 +26,9 @@ public class CadastroEntidadeViewController implements Initializable {
 
     @FXML
     private Label labelCPFCNPJ;
+    
+    @FXML
+    private Label tituloJanela;
 
     @FXML
     private DatePicker dataNASC;
@@ -53,7 +57,26 @@ public class CadastroEntidadeViewController implements Initializable {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-
+    
+    public void setTituloJanela(String titulo) {
+        this.tituloJanela.setText(titulo);
+    }
+    
+    private double xOffset = 0;
+    private double yOffset = 0;
+    
+    @FXML
+    void ativarMover(MouseEvent event) {
+        xOffset = event.getSceneX();
+        yOffset = event.getSceneY();
+    }
+    
+    @FXML
+    void moverJanela(MouseEvent event) {
+        dialogStage.setX(event.getScreenX() - xOffset);
+        dialogStage.setY(event.getScreenY() - yOffset);
+    }
+    
     // Função para limpara o campo e ativar e desativar campos de pessoa Fisica 
     @FXML
     void onTipoClienteChanged(ActionEvent event) {

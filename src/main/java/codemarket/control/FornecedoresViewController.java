@@ -18,11 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Iuri Pereira
- */
 public class FornecedoresViewController implements Initializable {
 
     @FXML
@@ -53,6 +48,7 @@ public class FornecedoresViewController implements Initializable {
         dialogStage.setScene(scene);
         
         codemarket.control.CadastroEntidadeViewController controller = loader.getController();
+        controller.setTituloJanela("Cadastrar Fornecedor");
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();
@@ -71,6 +67,7 @@ public class FornecedoresViewController implements Initializable {
         dialogStage.setScene(scene);
         
         codemarket.control.CadastroEntidadeViewController controller = loader.getController();
+        controller.setTituloJanela("Editar Cadastro do Fornecedor");
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();

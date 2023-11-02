@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class ClienteViewController implements Initializable {
     
@@ -30,17 +31,19 @@ public class ClienteViewController implements Initializable {
     void handleButtonCadastrar() throws IOException {
         loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
-
+        
         Scene scene = new Scene(page);
         dialogStage = new Stage();
         dialogStage.setTitle("Cadastrar Cliente");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
+//        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.setScene(scene);
         
         codemarket.control.CadastroEntidadeViewController controller = loader.getController();
+        controller.setTituloJanela("Cadastrar Cliente");
         controller.setDialogStage(dialogStage);
-    
+        
         dialogStage.showAndWait();
     }
     
@@ -54,9 +57,11 @@ public class ClienteViewController implements Initializable {
         dialogStage.setTitle("Editar Cliente");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
+//        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.setScene(scene);
         
         codemarket.control.CadastroEntidadeViewController controller = loader.getController();
+        controller.setTituloJanela("Editar Cadastro do Cliente");
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package codemarket.control;
 
 import java.io.IOException;
@@ -13,7 +18,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class EstoqueViewController implements Initializable {
+/**
+ * FXML Controller class
+ *
+ * @author Iuri Pereira
+ */
+public class FuncionariosViewController implements Initializable {
 
     @FXML
     private Button buttonCadastrar;
@@ -21,10 +31,12 @@ public class EstoqueViewController implements Initializable {
     private Button buttonEditar;
     @FXML
     private Button buttonRemover;
+    @FXML
+    private Button buttonVisualizar;
 
     private Stage dialogStage;
     private final FXMLLoader loader = new FXMLLoader();
- 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -32,42 +44,48 @@ public class EstoqueViewController implements Initializable {
 
     @FXML
     private void handleButtonCadastrar() throws IOException {
-        loader.setLocation(codemarket.control.InserirProdutoController.class.getResource("/view/InserirProdutoView.fxml"));
+        loader.setLocation(codemarket.control.CadastroFuncionarioViewController.class.getResource("/view/CadastroFuncionarioView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
-
+        
         Scene scene = new Scene(page);
         dialogStage = new Stage();
-        dialogStage.setTitle("Cadastrar Produto");
+        dialogStage.setTitle("Cadastrar Cliente");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
+//        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.setScene(scene);
         
-        codemarket.control.InserirProdutoController controller = loader.getController();
+        codemarket.control.CadastroFuncionarioViewController controller = loader.getController();
         controller.setDialogStage(dialogStage);
-    
+        
         dialogStage.showAndWait();
     }
 
     @FXML
     private void handleButtonEditar() throws IOException {
-        loader.setLocation(codemarket.control.InserirProdutoController.class.getResource("/view/InserirProdutoView.fxml"));
+        loader.setLocation(codemarket.control.CadastroFuncionarioViewController.class.getResource("/view/CadastroFuncionarioView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
         dialogStage = new Stage();
-        dialogStage.setTitle("Editar Produto");
+        dialogStage.setTitle("Editar Cliente");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
+//        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.setScene(scene);
         
-        codemarket.control.InserirProdutoController controller = loader.getController();
+        codemarket.control.CadastroFuncionarioViewController controller = loader.getController();
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();
     }
 
     @FXML
-    private void handlebuttonRemover(ActionEvent event) {
+    private void handleButtonRemover(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleButtonVisualizar(ActionEvent event) {
     }
     
 }

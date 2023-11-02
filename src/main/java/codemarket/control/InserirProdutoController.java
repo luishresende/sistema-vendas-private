@@ -5,17 +5,11 @@
  */
 package codemarket.control;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Iuri Pereira
- */
 public class InserirProdutoController implements Initializable {
     
     
