@@ -36,7 +36,7 @@ public class LoginViewController implements Initializable {
     
     @FXML
     public void handleButtonDBSettings() throws IOException {
-        loader.setLocation(DialogDatabaseSettingsViewController.class.getResource("/view/DialogDatabaseSettingsView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DialogDatabaseSettingsView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         // Criando um Estágio de Diálogo (Stage Dialog)
@@ -57,7 +57,7 @@ public class LoginViewController implements Initializable {
     
     @FXML
     public void handleButtonEntrar() throws IOException {
-        loader.setLocation(DialogDatabaseSettingsViewController.class.getResource("/view/mainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
