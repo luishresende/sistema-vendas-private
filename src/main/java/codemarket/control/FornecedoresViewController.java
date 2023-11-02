@@ -37,7 +37,7 @@ public class FornecedoresViewController implements Initializable {
 
     @FXML
     private void handleButtonCadastrar() throws IOException {
-        loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroEntidadeView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
@@ -56,7 +56,7 @@ public class FornecedoresViewController implements Initializable {
 
     @FXML
     private void handleButtonEditar() throws IOException {
-        loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroEntidadeView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);

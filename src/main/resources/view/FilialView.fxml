@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="961.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.FilialViewController">
+   <children>
+      <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="5.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints percentHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints percentHeight="75.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints percentHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <GridPane alignment="CENTER" stylesheets="@../../Documents/4-Periodo-2023.1/CC24A-Linguagem-de-Projeto-Objeto-Orientada/Projeto/sistema-vendas/src/main/resources/view/style.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="2.5" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="65.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="10.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="2.5" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="100.0" valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <Label contentDisplay="RIGHT" prefHeight="32.0" prefWidth="589.0" text="Pesquisar Filial" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <TextField prefHeight="25.0" prefWidth="468.0">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                     </graphic>
+                  </Label>
+                  <Button fx:id="buttonCadastrar" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon iconName="PLUS_SQUARE_ALT" size="3.5em" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </FontAwesomeIcon>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonEditar" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" textAlignment="CENTER" GridPane.columnIndex="3">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="3.5em" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="buttonRemover" alignment="CENTER" contentDisplay="TOP" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Remover" textAlignment="CENTER" GridPane.columnIndex="4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <FontAwesomeIcon glyphStyleClass="" iconName="TRASH" size="3.5em" text="" textAlignment="CENTER" wrappingWidth="50.71428680419922" />
+                     </graphic>
+                  </Button>
+               </children>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </GridPane>
+            <GridPane GridPane.rowIndex="3">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="20.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="30.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="15.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="15.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="20.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <CheckBox mnemonicParsing="false" text="Cores de Controle da Situação" GridPane.columnIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </CheckBox>
+                  <Label prefHeight="26.0" prefWidth="75.0" text="Ativo" GridPane.columnIndex="2">
+                     <graphic>
+                        <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #41E2EF; -fx-border-style: solid;" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="21.0" prefWidth="139.0" text="Desativado" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <graphic>
+                        <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #FF7A42; -fx-border-style: solid;" />
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane alignment="CENTER" style="-fx-background-color: #32a0ff;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints percentHeight="100.0" valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Filiais" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="50.0" right="50.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </GridPane>
+            <TableView fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn prefWidth="116.0" text="Código" />
+                  <TableColumn prefWidth="229.0" text="CNPJ" />
+                  <TableColumn minWidth="0.0" prefWidth="291.0" text="Razão Social" />
+                  <TableColumn prefWidth="157.0" text="Perfil" />
+                  <TableColumn prefWidth="175.0" text="Telefone" />
+               </columns>
+            </TableView>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

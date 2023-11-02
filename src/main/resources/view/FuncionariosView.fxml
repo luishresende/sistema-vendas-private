@@ -155,7 +155,7 @@
                   </GridPane>
                   <GridPane alignment="CENTER" prefHeight="81.0" prefWidth="969.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Funcionários" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Funcionários" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>

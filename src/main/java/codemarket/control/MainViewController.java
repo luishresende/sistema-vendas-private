@@ -28,40 +28,30 @@ public class MainViewController implements Initializable {
 
     @FXML
     private AnchorPane applicationAnchorPane;
-
     @FXML
     private Button menuButton;
-
     @FXML
     private GridPane mainGridPane;
-
     @FXML
     private GridPane sideBarContentGridPane;
-
     @FXML
     private GridPane menuSeparatorGridPane;
-
     @FXML
     private ColumnConstraints sideBarColumn;
-
     @FXML
     private ColumnConstraints sideBarContentColumn;
-
     @FXML
     private ColumnConstraints applicationColumn;
-
     @FXML
     private ColumnConstraints menuSeparatorColumn;
-
     @FXML
     private Button fornecedoresButton;
-    
     @FXML
     private Button funcionarioButton;
-
+    @FXML
+    private Button filialButton;
     @FXML
     private AnchorPane mainAnchorPane;
-
     @FXML
     private Separator menuSeparator;
 
@@ -155,6 +145,28 @@ public class MainViewController implements Initializable {
     public void handleFornecedoresButton() {
         applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FornecedoresView.fxml"));
+        try {
+            // Carregando o conteudo da nova tela
+            AnchorPane novoConteudo = loader.load();
+
+            // Definindo as costraints do novo conteudo para ocupar 100% da tela
+            AnchorPane.setBottomAnchor(novoConteudo, 0.0);
+            AnchorPane.setTopAnchor(novoConteudo, 0.0);
+            AnchorPane.setRightAnchor(novoConteudo, 0.0);
+            AnchorPane.setLeftAnchor(novoConteudo, 0.0);
+
+            // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
+            applicationAnchorPane.getChildren().setAll(novoConteudo);
+            System.out.println(applicationAnchorPane.getHeight());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    void handleFilialButton(ActionEvent event) {
+        applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FilialView.fxml"));
         try {
             // Carregando o conteudo da nova tela
             AnchorPane novoConteudo = loader.load();

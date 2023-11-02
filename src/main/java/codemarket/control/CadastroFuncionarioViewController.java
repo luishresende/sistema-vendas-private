@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 public class CadastroFuncionarioViewController implements Initializable {
 
     @FXML
+    private Label tituloJanela;
+    @FXML
     private Label labelCPFCNPJ;
     @FXML
     private TextField cpfcnpj;
@@ -44,6 +46,10 @@ public class CadastroFuncionarioViewController implements Initializable {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+    }
+    
+    public void setTituloJanela(String titulo) {
+        this.tituloJanela.setText(titulo);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class EstoqueViewController implements Initializable {
 
     private Stage dialogStage;
     private final FXMLLoader loader = new FXMLLoader();
- 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -32,7 +32,7 @@ public class EstoqueViewController implements Initializable {
 
     @FXML
     private void handleButtonCadastrar() throws IOException {
-        loader.setLocation(codemarket.control.InserirProdutoController.class.getResource("/view/InserirProdutoView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/InserirProdutoView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
@@ -43,6 +43,7 @@ public class EstoqueViewController implements Initializable {
         dialogStage.setScene(scene);
         
         codemarket.control.InserirProdutoController controller = loader.getController();
+        controller.setTituloJanela("Cadastrar Novo Produto");
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();
@@ -50,7 +51,7 @@ public class EstoqueViewController implements Initializable {
 
     @FXML
     private void handleButtonEditar() throws IOException {
-        loader.setLocation(codemarket.control.InserirProdutoController.class.getResource("/view/InserirProdutoView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/InserirProdutoView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
@@ -61,6 +62,7 @@ public class EstoqueViewController implements Initializable {
         dialogStage.setScene(scene);
         
         codemarket.control.InserirProdutoController controller = loader.getController();
+        controller.setTituloJanela("Editar Produto");
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();

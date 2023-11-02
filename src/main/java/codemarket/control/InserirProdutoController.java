@@ -7,11 +7,15 @@ package codemarket.control;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class InserirProdutoController implements Initializable {
     
+    @FXML
+    private Label tituloJanela;
     
     private Stage dialogStage;
 
@@ -21,6 +25,10 @@ public class InserirProdutoController implements Initializable {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+    }
+    
+    public void setTituloJanela(String titulo) {
+        this.tituloJanela.setText(titulo);
     }
     
     @Override

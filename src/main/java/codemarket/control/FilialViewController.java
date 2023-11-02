@@ -18,12 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Iuri Pereira
- */
-public class FuncionariosViewController implements Initializable {
+public class FilialViewController implements Initializable {
 
     @FXML
     private Button buttonCadastrar;
@@ -31,8 +26,6 @@ public class FuncionariosViewController implements Initializable {
     private Button buttonEditar;
     @FXML
     private Button buttonRemover;
-    @FXML
-    private Button buttonVisualizar;
 
     private Stage dialogStage;
     private final FXMLLoader loader = new FXMLLoader();
@@ -44,50 +37,40 @@ public class FuncionariosViewController implements Initializable {
 
     @FXML
     private void handleButtonCadastrar() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroFuncionarioView.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        
-        Scene scene = new Scene(page);
-        dialogStage = new Stage();
-        dialogStage.setTitle("Cadastrar Funcionário");
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.setResizable(false);
-//        dialogStage.initStyle(StageStyle.UNDECORATED);
-        dialogStage.setScene(scene);
-        
-        codemarket.control.CadastroFuncionarioViewController controller = loader.getController();
-        controller.setTituloJanela("Cadastrar Funcionário");
-        controller.setDialogStage(dialogStage);
-        
-        dialogStage.showAndWait();
-    }
-
-    @FXML
-    private void handleButtonEditar() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroFuncionarioView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroFilialView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
         dialogStage = new Stage();
-        dialogStage.setTitle("Editar Funcionário");
+        dialogStage.setTitle("Cadastrar Filial");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
-//        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.setScene(scene);
         
-        codemarket.control.CadastroFuncionarioViewController controller = loader.getController();
-        controller.setTituloJanela("Editar Cadastro do Funcionário");
+        codemarket.control.CadastroFilialViewController controller = loader.getController();
+        controller.setTituloJanela("Cadastrar Nova Filial");
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();
     }
 
     @FXML
-    private void handleButtonRemover(ActionEvent event) {
-    }
+    private void handleButtonEditar() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroFilialView.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
 
-    @FXML
-    private void handleButtonVisualizar(ActionEvent event) {
+        Scene scene = new Scene(page);
+        dialogStage = new Stage();
+        dialogStage.setTitle("Editar Filial");
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.setResizable(false);
+        dialogStage.setScene(scene);
+        
+        codemarket.control.CadastroFilialViewController controller = loader.getController();
+        controller.setTituloJanela("Editar Cadastro da Filial");
+        controller.setDialogStage(dialogStage);
+    
+        dialogStage.showAndWait();
     }
     
 }

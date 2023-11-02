@@ -29,7 +29,8 @@ public class ClienteViewController implements Initializable {
     
     @FXML
     void handleButtonCadastrar() throws IOException {
-        loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroEntidadeView.fxml")); // Aqui pode ser aberto várias vezes a tela
+//        loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml")); // Aqui estava dando problema, só podia abrir uma vez
         AnchorPane page = (AnchorPane) loader.load();
         
         Scene scene = new Scene(page);
@@ -49,7 +50,7 @@ public class ClienteViewController implements Initializable {
     
     @FXML
     void handleButtonEditar() throws IOException {
-        loader.setLocation(codemarket.control.CadastroEntidadeViewController.class.getResource("/view/CadastroEntidadeView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroEntidadeView.fxml"));
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
