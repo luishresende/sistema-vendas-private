@@ -3,41 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package codemarket.model.conexao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.xml.parsers.ParserConfigurationException;
 import org.hibernate.HibernateException;
 
 /**
  *
  * @author Luis Resende
  */
-public class ConexaoHibernate {
+public class HibernateConnection {
+
     private static EntityManagerFactory factory;
     private static EntityManager manager;
-    
+    PersistenceManipulation persistenceManipulation;
+
     public static EntityManager getInstance() {
-        if (manager == null)
-        {
-            synchronized (ConexaoHibernate.class) {
-                if (manager == null)
-                {
+        PersistenceManipulation persistenceManipulation = PersistenceManipulation.getInstance();
+        
+        if (manager == null) {
+            synchronized (HibernateConnection.class) {
+                if (manager == null) {
                     try {
+                        persistenceManipulation.decryptSensitiveData();
                         factory = Persistence.createEntityManagerFactory("Hibernate");
                         manager = factory.createEntityManager();
-                    } catch(HibernateException he) {
-                        System.err.println(he.getMessage());
+                        
+                    } catch (HibernateException he) {
+                        System.out.println("Erro: " + he.getMessage());
+                    } finally {
+                        persistenceManipulation.encryptSensitiveData();
                     }
                 }
             }
         }
-        
+
         return manager;
     }
-    
+
     public static void close() {
         manager.close();
         factory.close();
