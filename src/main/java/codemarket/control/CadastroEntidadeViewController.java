@@ -1,6 +1,5 @@
 package codemarket.control;
 
-import codemarket.model.conexao.HibernateConnection;
 import codemarket.model.rn.BairroRN;
 import codemarket.model.rn.CidEstPaiRN;
 import codemarket.model.rn.CidadeRN;
@@ -42,24 +41,20 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 public class CadastroEntidadeViewController implements Initializable {
-    EntityManager manager = HibernateConnection.getInstance();
     @FXML
     private Label tituloJanela;
     @FXML
-    private CheckBox tipoEntidade1;
-    @FXML
     private CheckBox tipoEntidade2;
     @FXML
-    private TextField observacao;
+    private CheckBox tipoEntidade1;
     @FXML
     private ComboBox<String> cidade;
     @FXML
@@ -73,6 +68,8 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private TextField cpfcnpj;
     @FXML
+    private TableView<String> tableEnd;
+    @FXML
     private TextField cep;
     @FXML
     private TextField nomeFantasia;
@@ -81,13 +78,19 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private ComboBox<String> tipoContato;
     @FXML
+    private Button buttonCancelar;
+    @FXML
     private TextField nomeContato;
+    @FXML
+    private Button buttonSalvar;
+    @FXML
+    private Button buttonFinalizar;
+    @FXML
+    private TableView<String> tableFone;
     @FXML
     private Label labelCPFCNPJ;
     @FXML
     private TextField email;
-    @FXML
-    private TextField codigo;
     @FXML
     private TextField ddd;
     @FXML
@@ -108,12 +111,10 @@ public class CadastroEntidadeViewController implements Initializable {
     private TextField logradouro;
     @FXML
     private ComboBox<String> tipoEndereco;
-    @FXML
-    private Button buttonSalvar;
-    @FXML
-    private Button buttonCancelar;
+    
     private ToggleGroup nacionalidade;
     private ToggleGroup seleEntidade;
+    private ArrayList<Object[]> enderecos = new ArrayList<>();
 
     private Stage dialogStage;
 
@@ -317,7 +318,7 @@ public class CadastroEntidadeViewController implements Initializable {
     }
 
     @FXML
-    void handleSalvarButton() {
+    void handleFinalizarButton() {
         // Dados Pessoais
         String name = this.nome.getText();
         String nomeFant = this.nomeFantasia.getText();
@@ -331,7 +332,6 @@ public class CadastroEntidadeViewController implements Initializable {
         String nomContato = this.nomeContato.getText();
         String DDD = this.ddd.getText();
         String telefone = this.fone.getText();
-        String obs = this.observacao.getText();
         // Dados de Endereço
         String log = this.logradouro.getText();
         String tipoEnd = this.tipoEndereco.getValue();
@@ -394,5 +394,32 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     void handleCancelarbutton() {
         dialogStage.close();
+    }
+    
+    @FXML
+    void handleSalvarEndbutton() {
+        String dado1 = logradouro.getText();
+        String dado2 = bairro.getText();
+        String dado3 = complemento.getText();
+        String dado4 = cep.getText();
+        String dado5 = numero.getText();
+        String dado6 = tipoEndereco.getValue();
+        String dado7 = pais.getValue();
+        String dado8 = cidade.getValue();
+        String dado9 = estado.getValue();
+        
+        List<String> dadosString = new ArrayList<>();
+        for (Object[] objArray : enderecos) {
+            StringBuilder sb = new StringBuilder();
+            for (Object obj : objArray) {
+                sb.append(obj.toString()).append(" "); // Converte cada objeto em string e separa com espaço
+            }
+            dadosString.add(sb.toString());
+        }
+
+        // Configurar a tabela com a lista de strings
+        ObservableList<String> dadosDaTabelaString = FXCollections.observableArrayList(dadosString);
+        tableEnd.setItems(dadosDaTabelaString);
+              
     }
 }

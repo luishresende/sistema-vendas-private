@@ -37,6 +37,7 @@
                                   <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="2.5" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
@@ -66,7 +67,7 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField prefHeight="31.0" prefWidth="569.0">
+                                          <TextField fx:id="nome" prefHeight="31.0" prefWidth="569.0">
                                              <font>
                                                 <Font size="13.0" />
                                              </font></TextField>
@@ -111,6 +112,47 @@
                                           </GridPane>
                                        </children>
                                     </VBox>
+                                    <GridPane GridPane.columnIndex="4">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Button fx:id="buttonCancelar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleCancelarbutton" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIcon iconName="CLOSE" size="2em" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </FontAwesomeIcon>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="buttonFinalizar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleFinalizarButton" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Finalizar" textAlignment="CENTER">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <FontAwesomeIcon iconName="CHECK" size="2em" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </FontAwesomeIcon>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </GridPane>
                                  </children>
                               </GridPane>
                            </children>
@@ -154,7 +196,7 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="cpfcnpj" onKeyReleased="#validarCPFCNPJ" />
+                                                <TextField fx:id="cpfcnpj" onKeyReleased="#validarCPFCNPJ" prefHeight="31.0" />
                                              </children>
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
@@ -204,7 +246,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                                       </rowConstraints>
                                        <children>
-                                          <TableView prefHeight="268.0" prefWidth="390.0">
+                                          <TableView fx:id="tableFone" prefHeight="268.0" prefWidth="390.0">
                                              <columns>
                                                 <TableColumn prefWidth="32.0" text="Id" />
                                                 <TableColumn prefWidth="123.0" text="Nome" />
@@ -231,7 +273,7 @@
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <ComboBox editable="true" prefHeight="31.0" prefWidth="179.0" />
+                                                            <ComboBox fx:id="tipoContato" prefHeight="31.0" prefWidth="179.0" promptText="Selecione..." />
                                                          </children>
                                                       </VBox>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
@@ -241,7 +283,7 @@
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <TextField prefHeight="31.0" prefWidth="261.0">
+                                                            <TextField fx:id="nomeContato" prefHeight="31.0" prefWidth="261.0">
                                                                <font>
                                                                   <Font size="13.0" />
                                                                </font>
@@ -310,7 +352,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </GridPane.margin>
                                           </GridPane>
-                                          <GridPane GridPane.rowIndex="4">
+                                          <GridPane GridPane.rowIndex="3">
                                              <children>
                                                 <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
                                                    <cursor>
@@ -327,22 +369,7 @@
                                                       </FontAwesomeIcon>
                                                    </graphic>
                                                 </Button>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                   <graphic>
-                                                      <FontAwesomeIcon iconName="CLOSE" size="2em" textAlignment="CENTER">
-                                                         <font>
-                                                            <Font name="System Bold" size="12.0" />
-                                                         </font>
-                                                      </FontAwesomeIcon>
-                                                   </graphic>
-                                                </Button>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="1">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -357,7 +384,7 @@
                                                       </FontAwesomeIcon>
                                                    </graphic>
                                                 </Button>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="3">
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="2">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -372,7 +399,7 @@
                                                       </FontAwesomeIcon>
                                                    </graphic>
                                                 </Button>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="4">
+                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="3">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -390,7 +417,6 @@
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="113.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="101.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="107.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -402,23 +428,6 @@
                                                 <Insets bottom="5.0" />
                                              </GridPane.margin>
                                           </GridPane>
-                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
-                                             <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="65.0" prefHeight="25.0" prefWidth="519.0" text="Observação">
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField prefHeight="31.0" prefWidth="419.0">
-                                                   <font>
-                                                      <Font size="13.0" />
-                                                   </font>
-                                                </TextField>
-                                             </children>
-                                             <GridPane.margin>
-                                                <Insets left="5.0" right="5.0" />
-                                             </GridPane.margin>
-                                          </VBox>
                                        </children>
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="217.0" />
@@ -427,7 +436,6 @@
                                           <RowConstraints />
                                           <RowConstraints minHeight="10.0" prefHeight="62.0" valignment="CENTER" vgrow="ALWAYS" />
                                           <RowConstraints minHeight="10.0" prefHeight="55.0" valignment="CENTER" vgrow="ALWAYS" />
-                                          <RowConstraints minHeight="10.0" prefHeight="65.0" valignment="CENTER" vgrow="ALWAYS" />
                                           <RowConstraints minHeight="10.0" prefHeight="35.0" valignment="CENTER" vgrow="ALWAYS" />
                                        </rowConstraints>
                                     </GridPane>
@@ -447,7 +455,7 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField prefHeight="31.0" prefWidth="569.0">
+                                                <TextField fx:id="nomeFantasia" prefHeight="31.0" prefWidth="569.0">
                                                    <font>
                                                       <Font size="13.0" />
                                                    </font>
@@ -480,7 +488,7 @@
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField prefHeight="31.0" prefWidth="353.0">
+                                                      <TextField fx:id="email" prefHeight="31.0" prefWidth="353.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -537,7 +545,7 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <ComboBox fx:id="pais" prefHeight="26.0" prefWidth="191.0" />
+                                                                  <ComboBox fx:id="pais" prefHeight="26.0" prefWidth="191.0" promptText="Selecione..." />
                                                                </children>
                                                             </VBox>
                                                             <VBox prefHeight="62.0" prefWidth="330.0" spacing="2.0" GridPane.rowIndex="1">
@@ -547,7 +555,7 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <ComboBox fx:id="cidade" prefHeight="26.0" prefWidth="191.0" />
+                                                                  <ComboBox fx:id="cidade" prefHeight="26.0" prefWidth="191.0" promptText="Selecione..." />
                                                                </children>
                                                             </VBox>
                                                             <VBox prefHeight="58.0" prefWidth="330.0">
@@ -574,7 +582,7 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <ComboBox fx:id="estado" prefHeight="26.0" prefWidth="190.0" />
+                                                                  <ComboBox fx:id="estado" prefHeight="26.0" prefWidth="190.0" promptText="Selecione..." />
                                                                </children>
                                                             </VBox>
                                                          </children>
@@ -586,7 +594,7 @@
                                                 </VBox>
                                                 <GridPane prefHeight="49.0" prefWidth="947.0" GridPane.rowIndex="3">
                                                    <children>
-                                                      <Button fx:id="buttonSalvar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarButton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                      <Button fx:id="buttonSalvar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarEndbutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -601,22 +609,7 @@
                                                             </FontAwesomeIcon>
                                                          </graphic>
                                                       </Button>
-                                                      <Button fx:id="buttonCancelar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleCancelarbutton" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                         <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                         </font>
-                                                         <graphic>
-                                                            <FontAwesomeIcon iconName="CLOSE" size="2em" textAlignment="CENTER">
-                                                               <font>
-                                                                  <Font name="System Bold" size="12.0" />
-                                                               </font>
-                                                            </FontAwesomeIcon>
-                                                         </graphic>
-                                                      </Button>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="1">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -631,7 +624,7 @@
                                                             </FontAwesomeIcon>
                                                          </graphic>
                                                       </Button>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="3">
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="2">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -646,7 +639,7 @@
                                                             </FontAwesomeIcon>
                                                          </graphic>
                                                       </Button>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="4">
+                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="3">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -664,7 +657,6 @@
                                                    </children>
                                                    <columnConstraints>
                                                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="113.0" />
                                                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="101.0" />
                                                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="107.0" />
                                                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -673,7 +665,7 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                 </GridPane>
-                                                <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                                <TableView fx:id="tableEnd" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                   <columns>
                                                       <TableColumn prefWidth="150.0" text="Tipo" />
                                                     <TableColumn minWidth="0.0" prefWidth="119.0" text="CEP" />
@@ -715,7 +707,7 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField prefHeight="29.0" prefWidth="743.0">
+                                                <TextField fx:id="logradouro" prefHeight="29.0" prefWidth="743.0">
                                                    <font>
                                                       <Font size="13.0" />
                                                    </font>
@@ -776,7 +768,7 @@
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField prefHeight="29.0" prefWidth="326.0">
+                                                      <TextField fx:id="bairro" prefHeight="29.0" prefWidth="326.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
@@ -790,7 +782,7 @@
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField prefHeight="29.0" prefWidth="200.0">
+                                                      <TextField fx:id="complemento" prefHeight="29.0" prefWidth="200.0">
                                                          <font>
                                                             <Font size="13.0" />
                                                          </font>
