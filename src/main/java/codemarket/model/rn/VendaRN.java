@@ -22,8 +22,8 @@ public class VendaRN {
     public void excluir(TbVenda Venda) {
         genericDao.excluir(Venda);
     }
-    public List buscarTodos() {
-        List<TbVenda> Vendas = genericDao.listarTodos(TbVenda.class);
+    public List buscarTodos(String coluna) {
+        List<TbVenda> Vendas = genericDao.listarTodos(TbVenda.class, coluna);
         return Vendas;
     }
     public TbVenda listaUm(String pesquisa, String valor, Class classe) {

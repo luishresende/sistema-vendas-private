@@ -22,8 +22,8 @@ public class TipoPagamentoRN {
     public void excluir(TbTipoPagamento TipoPagamento) {
         genericDao.excluir(TipoPagamento);
     }
-    public List buscarTodos() {
-        List<TbTipoPagamento> TipoPagamentos = genericDao.listarTodos(TbTipoPagamento.class);
+    public List buscarTodos(String coluna) {
+        List<TbTipoPagamento> TipoPagamentos = genericDao.listarTodos(TbTipoPagamento.class, coluna);
         return TipoPagamentos;
     }
     public TbTipoPagamento listaUm(String pesquisa, String valor, Class classe) {

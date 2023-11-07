@@ -39,9 +39,9 @@
         
         <!-- Validador de endereço IP -->
         <dependency>
-            <groupId>de.envisia</groupId>
-            <artifactId>validator</artifactId>
-            <version>1.0.0</version>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
         </dependency>
 
     </dependencies>

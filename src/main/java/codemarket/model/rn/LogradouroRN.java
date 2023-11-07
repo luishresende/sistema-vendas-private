@@ -22,8 +22,8 @@ public class LogradouroRN {
     public void excluir(TbLogradouro Logradouro) {
         genericDao.excluir(Logradouro);
     }
-    public List buscarTodos() {
-        List<TbLogradouro> Logradouros = genericDao.listarTodos(TbLogradouro.class);
+    public List buscarTodos(String coluna) {
+        List<TbLogradouro> Logradouros = genericDao.listarTodos(TbLogradouro.class, coluna);
         return Logradouros;
     }
     public TbLogradouro listaUm(String pesquisa, String valor, Class classe) {

@@ -22,8 +22,8 @@ public class PedidoPKRN {
     public void excluir(TbPedidoPK PedidoPK) {
         genericDao.excluir(PedidoPK);
     }
-    public List buscarTodos() {
-        List<TbPedidoPK> PedidoPKs = genericDao.listarTodos(TbPedidoPK.class);
+    public List buscarTodos(String coluna) {
+        List<TbPedidoPK> PedidoPKs = genericDao.listarTodos(TbPedidoPK.class, coluna);
         return PedidoPKs;
     }
     public TbPedidoPK listaUm(String pesquisa, String valor, Class classe) {

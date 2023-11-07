@@ -22,8 +22,8 @@ public class GrupoPermissoesRN {
     public void excluir(TbGrupoPermissoes GrupoPermissoes) {
         genericDao.excluir(GrupoPermissoes);
     }
-    public List buscarTodos() {
-        List<TbGrupoPermissoes> GrupoPermissoess = genericDao.listarTodos(TbGrupoPermissoes.class);
+    public List buscarTodos(String coluna) {
+        List<TbGrupoPermissoes> GrupoPermissoess = genericDao.listarTodos(TbGrupoPermissoes.class, coluna);
         return GrupoPermissoess;
     }
     public TbGrupoPermissoes listaUm(String pesquisa, String valor, Class classe) {

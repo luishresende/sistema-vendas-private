@@ -22,8 +22,8 @@ public class EntradaStatusRN {
     public void excluir(TbEntradaStatus EntradaStatus) {
         genericDao.excluir(EntradaStatus);
     }
-    public List buscarTodos() {
-        List<TbEntradaStatus> EntradaStatuss = genericDao.listarTodos(TbEntradaStatus.class);
+    public List buscarTodos(String coluna) {
+        List<TbEntradaStatus> EntradaStatuss = genericDao.listarTodos(TbEntradaStatus.class, coluna);
         return EntradaStatuss;
     }
     public TbEntradaStatus listaUm(String pesquisa, String valor, Class classe) {

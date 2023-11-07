@@ -22,8 +22,8 @@ public class ServicoRN {
     public void excluir(TbServico Servico) {
         genericDao.excluir(Servico);
     }
-    public List buscarTodos() {
-        List<TbServico> Servicos = genericDao.listarTodos(TbServico.class);
+    public List buscarTodos(String coluna) {
+        List<TbServico> Servicos = genericDao.listarTodos(TbServico.class, coluna);
         return Servicos;
     }
     public TbServico listaUm(String pesquisa, String valor, Class classe) {

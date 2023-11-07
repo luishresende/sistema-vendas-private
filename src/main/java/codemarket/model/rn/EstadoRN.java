@@ -22,8 +22,8 @@ public class EstadoRN {
     public void excluir(TbEstado Estado) {
         genericDao.excluir(Estado);
     }
-    public List buscarTodos() {
-        List<TbEstado> Estados = genericDao.listarTodos(TbEstado.class);
+    public List buscarTodos(String coluna) {
+        List<TbEstado> Estados = genericDao.listarTodos(TbEstado.class, coluna);
         return Estados;
     }
     public TbEstado listaUm(String pesquisa, String valor, Class classe) {

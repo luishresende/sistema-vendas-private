@@ -22,8 +22,8 @@ public class FuncionarioRN {
     public void excluir(TbFuncionario Funcionario) {
         genericDao.excluir(Funcionario);
     }
-    public List buscarTodos() {
-        List<TbFuncionario> Funcionarios = genericDao.listarTodos(TbFuncionario.class);
+    public List buscarTodos(String coluna) {
+        List<TbFuncionario> Funcionarios = genericDao.listarTodos(TbFuncionario.class, coluna);
         return Funcionarios;
     }
     public TbFuncionario listaUm(String pesquisa, String valor, Class classe) {

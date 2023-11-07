@@ -22,8 +22,8 @@ public class PaisRN {
     public void excluir(TbPais Pais) {
         genericDao.excluir(Pais);
     }
-    public List buscarTodos() {
-        List<TbPais> Paiss = genericDao.listarTodos(TbPais.class);
+    public List buscarTodos(String coluna) {
+        List<TbPais> Paiss = genericDao.listarTodos(TbPais.class, coluna);
         return Paiss;
     }
     public TbPais listaUm(String pesquisa, String valor, Class classe) {

@@ -22,8 +22,8 @@ public class FilialRN {
     public void excluir(TbFilial Filial) {
         genericDao.excluir(Filial);
     }
-    public List buscarTodos() {
-        List<TbFilial> Filials = genericDao.listarTodos(TbFilial.class);
+    public List buscarTodos(String coluna) {
+        List<TbFilial> Filials = genericDao.listarTodos(TbFilial.class, coluna);
         return Filials;
     }
     public TbFilial listaUm(String pesquisa, String valor, Class classe) {

@@ -22,8 +22,8 @@ public class FuncionarioHasAlmoxarifadoRN {
     public void excluir(TbFuncionarioHasAlmoxarifado FuncionarioHasAlmoxarifado) {
         genericDao.excluir(FuncionarioHasAlmoxarifado);
     }
-    public List buscarTodos() {
-        List<TbFuncionarioHasAlmoxarifado> FuncionarioHasAlmoxarifados = genericDao.listarTodos(TbFuncionarioHasAlmoxarifado.class);
+    public List buscarTodos(String coluna) {
+        List<TbFuncionarioHasAlmoxarifado> FuncionarioHasAlmoxarifados = genericDao.listarTodos(TbFuncionarioHasAlmoxarifado.class, coluna);
         return FuncionarioHasAlmoxarifados;
     }
     public TbFuncionarioHasAlmoxarifado listaUm(String pesquisa, String valor, Class classe) {

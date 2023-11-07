@@ -22,8 +22,8 @@ public class TransferenciasAlmoxarifadoRN {
     public void excluir(TbTransferenciasAlmoxarifado TransferenciasAlmoxarifado) {
         genericDao.excluir(TransferenciasAlmoxarifado);
     }
-    public List buscarTodos() {
-        List<TbTransferenciasAlmoxarifado> TransferenciasAlmoxarifados = genericDao.listarTodos(TbTransferenciasAlmoxarifado.class);
+    public List buscarTodos(String coluna) {
+        List<TbTransferenciasAlmoxarifado> TransferenciasAlmoxarifados = genericDao.listarTodos(TbTransferenciasAlmoxarifado.class, coluna);
         return TransferenciasAlmoxarifados;
     }
     public TbTransferenciasAlmoxarifado listaUm(String pesquisa, String valor, Class classe) {

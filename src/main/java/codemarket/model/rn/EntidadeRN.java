@@ -22,8 +22,8 @@ public class EntidadeRN {
     public void excluir(TbEntidade Entidade) {
         genericDao.excluir(Entidade);
     }
-    public List buscarTodos() {
-        List<TbEntidade> Entidades = genericDao.listarTodos(TbEntidade.class);
+    public List buscarTodos(String coluna) {
+        List<TbEntidade> Entidades = genericDao.listarTodos(TbEntidade.class, coluna);
         return Entidades;
     }
     public TbEntidade listaUm(String pesquisa, String valor, Class classe) {

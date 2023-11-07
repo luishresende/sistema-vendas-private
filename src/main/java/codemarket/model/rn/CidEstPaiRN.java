@@ -22,8 +22,8 @@ public class CidEstPaiRN {
     public void excluir(TbCidEstPai CidEstPai) {
         genericDao.excluir(CidEstPai);
     }
-    public List buscarTodos() {
-        List<TbCidEstPai> CidEstPais = genericDao.listarTodos(TbCidEstPai.class);
+    public List buscarTodos(String coluna) {
+        List<TbCidEstPai> CidEstPais = genericDao.listarTodos(TbCidEstPai.class, coluna);
         return CidEstPais;
     }
     public TbCidEstPai listaUm(String pesquisa, String valor, Class classe) {

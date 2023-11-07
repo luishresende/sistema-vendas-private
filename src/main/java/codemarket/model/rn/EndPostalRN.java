@@ -22,8 +22,8 @@ public class EndPostalRN {
     public void excluir(TbEndPostal EndPostal) {
         genericDao.excluir(EndPostal);
     }
-    public List buscarTodos() {
-        List<TbEndPostal> EndPostals = genericDao.listarTodos(TbEndPostal.class);
+    public List buscarTodos(String coluna) {
+        List<TbEndPostal> EndPostals = genericDao.listarTodos(TbEndPostal.class, coluna);
         return EndPostals;
     }
     public TbEndPostal listaUm(String pesquisa, String valor, Class classe) {

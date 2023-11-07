@@ -5,7 +5,7 @@
  */
 package codemarket.model.dao;
 
-import codemarket.model.conexao.ConexaoHibernate;
+import codemarket.model.conexao.HibernateConnection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -16,7 +16,7 @@ import javax.persistence.Query;
  */
 public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
     
-    EntityManager manager = ConexaoHibernate.getInstance();
+    EntityManager manager = HibernateConnection.getInstance();
     
     public void commit(){
         manager.getTransaction().commit();
@@ -43,8 +43,8 @@ public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
         manager.getTransaction().commit();    }
     
     @Override
-    public List listarTodos(Class classe) {
-        String jpql = " SELECT t FROM " + classe.getTypeName() + " t";
+    public List listarTodos(Class classe, String coluna) {
+        String jpql = " SELECT t." + coluna + " FROM " + classe.getTypeName() + " t";
         Query query = manager.createQuery(jpql);
         List<Tabela> objeto = query.getResultList();
         return objeto;    

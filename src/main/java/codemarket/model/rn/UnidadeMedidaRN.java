@@ -22,8 +22,8 @@ public class UnidadeMedidaRN {
     public void excluir(TbUnidadeMedida UnidadeMedida) {
         genericDao.excluir(UnidadeMedida);
     }
-    public List buscarTodos() {
-        List<TbUnidadeMedida> UnidadeMedidas = genericDao.listarTodos(TbUnidadeMedida.class);
+    public List buscarTodos(String coluna) {
+        List<TbUnidadeMedida> UnidadeMedidas = genericDao.listarTodos(TbUnidadeMedida.class, coluna);
         return UnidadeMedidas;
     }
     public TbUnidadeMedida listaUm(String pesquisa, String valor, Class classe) {

@@ -22,8 +22,8 @@ public class EnderecoRN {
     public void excluir(TbEndereco Endereco) {
         genericDao.excluir(Endereco);
     }
-    public List buscarTodos() {
-        List<TbEndereco> Enderecos = genericDao.listarTodos(TbEndereco.class);
+    public List buscarTodos(String coluna) {
+        List<TbEndereco> Enderecos = genericDao.listarTodos(TbEndereco.class, coluna);
         return Enderecos;
     }
     public TbEndereco listaUm(String pesquisa, String valor, Class classe) {
