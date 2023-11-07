@@ -31,4 +31,8 @@ public class FornecedorRN {
         TbFornecedor obj = genericDao.listarUm(pesquisa, valor, classe);
         return obj;
     }
+    public List pesquisar(String jpql) {
+        List obj = genericDao.pesquisar(jpql);
+        return obj;
+    }
 }

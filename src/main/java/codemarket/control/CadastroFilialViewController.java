@@ -5,22 +5,24 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class CadastroFilialViewController implements Initializable {
-
+    
     @FXML
-    private Label tituloJanela;    
+    private ComboBox<String> cidade;
     @FXML
-    private TextField cnpj;
+    private ComboBox<String> estado;
     @FXML
-    private CheckBox checkIE;
+    private TextField fone;
     @FXML
-    private TextField ie;
+    private Label tituloJanela;
     @FXML
     private CheckBox checkIM;
     @FXML
@@ -28,11 +30,19 @@ public class CadastroFilialViewController implements Initializable {
     @FXML
     private TextField numero;
     @FXML
-    private TextField cep;
-    @FXML
     private TextField ddd;
     @FXML
-    private TextField fone;
+    private Button buttonCancelar;
+    @FXML
+    private Button buttonSalvar;
+    @FXML
+    private CheckBox checkIE;
+    @FXML
+    private TextField cnpj;
+    @FXML
+    private TextField ie;
+    @FXML
+    private TextField cep;
 
     private Stage dialogStage;
 
@@ -149,6 +159,16 @@ public class CadastroFilialViewController implements Initializable {
         if (texto.length() >= 9) {
             event.consume(); // Impede que mais de 2 caracteres sejam inseridos
         }
+    }
+    
+    @FXML
+    void handleButtonSalvar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleButtonCancelar(ActionEvent event) {
+
     }
     
 }

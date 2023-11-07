@@ -46,7 +46,8 @@ public class TbEstado implements Serializable {
     public TbEstado() {
     }
 
-    public TbEstado(String estDescricao) {
+    public TbEstado(String estDescricao, String estSigla) {
+        this.estSigla = estSigla;
         this.estDescricao = estDescricao;
     }
 

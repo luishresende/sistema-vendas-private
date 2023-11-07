@@ -17,4 +17,5 @@ public interface iGenericDAO<Tabela> {
     public void atualizar(Tabela objeto);
     public List listarTodos(Class object, String coluna);
     public Tabela listarUm(String name, String value, Class classe);
+    public List pesquisar(String jpql);
 }

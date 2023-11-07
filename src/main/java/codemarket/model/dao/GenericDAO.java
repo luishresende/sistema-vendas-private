@@ -57,4 +57,11 @@ public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
         Object obj = query.getSingleResult();
         return (Tabela) obj;    
     }
+    
+    @Override
+    public List pesquisar(String jpql) {
+        Query query = manager.createQuery(jpql);
+        List<Tabela> objeto = query.getResultList();
+        return objeto;  
+    }
 }

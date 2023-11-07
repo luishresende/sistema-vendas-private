@@ -91,7 +91,7 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <CheckBox mnemonicParsing="false" text="Cliente">
+                                                <CheckBox fx:id="tipoEntidade1" mnemonicParsing="false" text="Cliente">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -99,7 +99,7 @@
                                                       <Insets left="5.0" />
                                                    </GridPane.margin>
                                                 </CheckBox>
-                                                <CheckBox layoutX="10.0" layoutY="15.0" mnemonicParsing="false" text="Fornecedor" GridPane.columnIndex="1">
+                                                <CheckBox fx:id="tipoEntidade2" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" text="Fornecedor" GridPane.columnIndex="1">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -537,7 +537,7 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <ComboBox prefHeight="26.0" prefWidth="191.0" />
+                                                                  <ComboBox fx:id="pais" prefHeight="26.0" prefWidth="191.0" />
                                                                </children>
                                                             </VBox>
                                                             <VBox prefHeight="62.0" prefWidth="330.0" spacing="2.0" GridPane.rowIndex="1">
@@ -547,15 +547,15 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <ComboBox prefHeight="26.0" prefWidth="191.0" />
+                                                                  <ComboBox fx:id="cidade" prefHeight="26.0" prefWidth="191.0" />
                                                                </children>
                                                             </VBox>
                                                             <VBox prefHeight="58.0" prefWidth="330.0">
                                                                <children>
                                                                   <HBox prefHeight="20.0" prefWidth="329.0">
                                                                      <children>
-                                                                        <RadioButton mnemonicParsing="false" text="Brasileiro" />
-                                                                        <RadioButton layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Estrangeiro">
+                                                                        <RadioButton fx:id="brasileiro" mnemonicParsing="false" text="Brasileiro" />
+                                                                        <RadioButton fx:id="estrangeiro" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Estrangeiro">
                                                                            <HBox.margin>
                                                                               <Insets left="50.0" />
                                                                            </HBox.margin>
@@ -574,7 +574,7 @@
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <ComboBox prefHeight="26.0" prefWidth="190.0" />
+                                                                  <ComboBox fx:id="estado" prefHeight="26.0" prefWidth="190.0" />
                                                                </children>
                                                             </VBox>
                                                          </children>
@@ -586,7 +586,7 @@
                                                 </VBox>
                                                 <GridPane prefHeight="49.0" prefWidth="947.0" GridPane.rowIndex="3">
                                                    <children>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                      <Button fx:id="buttonSalvar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarButton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -601,7 +601,7 @@
                                                             </FontAwesomeIcon>
                                                          </graphic>
                                                       </Button>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
+                                                      <Button fx:id="buttonCancelar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleCancelarbutton" prefHeight="48.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -732,7 +732,7 @@
                                                       <Insets />
                                                    </VBox.margin>
                                                 </Label>
-                                                <ComboBox prefHeight="29.0" prefWidth="173.0" promptText="Selecione...">
+                                                <ComboBox fx:id="tipoEndereco" prefHeight="29.0" prefWidth="173.0" promptText="Selecione...">
                                                    <VBox.margin>
                                                       <Insets />
                                                    </VBox.margin>

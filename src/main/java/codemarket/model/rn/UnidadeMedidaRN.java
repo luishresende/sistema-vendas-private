@@ -31,4 +31,8 @@ public class UnidadeMedidaRN {
         TbUnidadeMedida obj = genericDao.listarUm(pesquisa, valor, classe);
         return obj;
     }
+    public List pesquisar(String jpql) {
+        List obj = genericDao.pesquisar(jpql);
+        return obj;
+    }
 }

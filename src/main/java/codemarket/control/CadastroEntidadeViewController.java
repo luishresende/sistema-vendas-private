@@ -270,7 +270,7 @@ public class CadastroEntidadeViewController implements Initializable {
         );
         tipoEndereco.setItems(der);
         /* ------------------------------------------------------------------ */
-        /* ----------------- Combo Box - Tipo de Endereço ------------------- */
+        /* ----------------- Combo Box - Tipo de Estado ------------------- */
         // Adicionando dados do Tipo de Estado
         EstadoRN es = new EstadoRN();
         ArrayList listEstados = (ArrayList) es.buscarTodos("estSigla");
@@ -280,19 +280,25 @@ public class CadastroEntidadeViewController implements Initializable {
         estado.setItems(ET);
        
         /* ------------------------------------------------------------------ */
-         /* ----------------- Combo Box - Tipo de Endereço ------------------- */
+        /* ------------------ Combo Box - Tipo de Cidade -------------------- */
         // Adicionando dados do Tipo de Estado
-        estado.setOnAction(event -> {
-            est = this.estado.getValue();
-            System.out.println(est);
-            String jpql = " SELECT t.tbCidade.cidDescricao FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = '" + est + "'";
-            Query query = manager.createQuery(jpql);
-            List<String> listCidades = query.getResultList();
-            ObservableList<String> CI = FXCollections.observableArrayList(
-                listCidades
-            );
-            cidade.setItems(CI);
-        });
+//        estado.setOnAction(event -> {
+//            est = this.estado.getValue();
+//            System.out.println(est);
+//            String jpql = " SELECT t.tbCidade.cidDescricao FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = '" + est + "'";
+//            List<String> listCidades = pesquisa.
+//            ObservableList<String> CI = FXCollections.observableArrayList(
+//                listCidades
+//            );
+//            cidade.setItems(CI);
+//        });
+        CidadeRN cd = new CidadeRN();
+        String jpql = " SELECT t.cidDescricao FROM TbCidade t";
+        List<String> listCidades = cd.pesquisar(jpql);
+        ObservableList<String> CI = FXCollections.observableArrayList(
+            listCidades
+        );
+        cidade.setItems(CI);
         
         nacionalidade = new ToggleGroup();
         // Associe o ToggleGroup aos RadioButtons

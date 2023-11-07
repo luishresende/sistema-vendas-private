@@ -313,7 +313,7 @@
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox prefHeight="31.0" prefWidth="359.0" />
+                                                <ComboBox fx:id="cidade" prefHeight="31.0" prefWidth="359.0" />
                                              </children>
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
@@ -326,7 +326,7 @@
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox prefHeight="31.0" prefWidth="359.0" />
+                                                <ComboBox fx:id="estado" prefHeight="31.0" prefWidth="359.0" />
                                              </children>
                                              <GridPane.margin>
                                                 <Insets left="10.0" />
@@ -472,7 +472,7 @@
             </TabPane>
             <GridPane GridPane.rowIndex="2">
                <children>
-                  <Button alignment="TOP_CENTER" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                  <Button fx:id="buttonSalvar" alignment="TOP_CENTER" graphicTextGap="15.0" mnemonicParsing="false" onAction="#handleButtonSalvar" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -487,7 +487,7 @@
                         </FontAwesomeIcon>
                      </graphic>
                   </Button>
-                  <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="300.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
+                  <Button fx:id="buttonCancelar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleButtonCancelar" prefHeight="48.0" prefWidth="300.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
