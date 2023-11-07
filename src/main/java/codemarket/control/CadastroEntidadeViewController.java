@@ -1,5 +1,6 @@
 package codemarket.control;
 
+import codemarket.model.conexao.HibernateConnection;
 import codemarket.model.rn.BairroRN;
 import codemarket.model.rn.CidEstPaiRN;
 import codemarket.model.rn.CidadeRN;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,14 +49,20 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 
 public class CadastroEntidadeViewController implements Initializable {
+    EntityManager manager = HibernateConnection.getInstance();
     @FXML
     private Label tituloJanela;
     @FXML
+    private CheckBox tipoEntidade1;
+    @FXML
     private CheckBox tipoEntidade2;
     @FXML
-    private CheckBox tipoEntidade1;
+    private TextField observacao;
     @FXML
     private ComboBox<String> cidade;
     @FXML
@@ -68,8 +76,6 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private TextField cpfcnpj;
     @FXML
-    private TableView<String> tableEnd;
-    @FXML
     private TextField cep;
     @FXML
     private TextField nomeFantasia;
@@ -78,19 +84,13 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private ComboBox<String> tipoContato;
     @FXML
-    private Button buttonCancelar;
-    @FXML
     private TextField nomeContato;
-    @FXML
-    private Button buttonSalvar;
-    @FXML
-    private Button buttonFinalizar;
-    @FXML
-    private TableView<String> tableFone;
     @FXML
     private Label labelCPFCNPJ;
     @FXML
     private TextField email;
+    @FXML
+    private TextField codigo;
     @FXML
     private TextField ddd;
     @FXML
@@ -111,7 +111,17 @@ public class CadastroEntidadeViewController implements Initializable {
     private TextField logradouro;
     @FXML
     private ComboBox<String> tipoEndereco;
-    
+    @FXML
+    private Button buttonFinalizar;
+    @FXML
+    private Button buttonCancelar; 
+    @FXML
+    private Button buttonSalvarEnd;
+    @FXML
+    private Button buttonSalvarInicial;
+    @FXML
+    private TableView<String> tableEnd;
+        
     private ToggleGroup nacionalidade;
     private ToggleGroup seleEntidade;
     private ArrayList<Object[]> enderecos = new ArrayList<>();
@@ -275,31 +285,20 @@ public class CadastroEntidadeViewController implements Initializable {
         // Adicionando dados do Tipo de Estado
         EstadoRN es = new EstadoRN();
         ArrayList listEstados = (ArrayList) es.buscarTodos("estSigla");
-        ObservableList<String> ET = FXCollections.observableArrayList(
-            listEstados
-        );
+        ObservableList<String> ET = FXCollections.observableArrayList(listEstados);
         estado.setItems(ET);
-       
         /* ------------------------------------------------------------------ */
         /* ------------------ Combo Box - Tipo de Cidade -------------------- */
-        // Adicionando dados do Tipo de Estado
-//        estado.setOnAction(event -> {
-//            est = this.estado.getValue();
-//            System.out.println(est);
-//            String jpql = " SELECT t.tbCidade.cidDescricao FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = '" + est + "'";
-//            List<String> listCidades = pesquisa.
-//            ObservableList<String> CI = FXCollections.observableArrayList(
-//                listCidades
-//            );
-//            cidade.setItems(CI);
-//        });
+        // Adicionando dados do Tipo de Cidade
         CidadeRN cd = new CidadeRN();
-        String jpql = " SELECT t.cidDescricao FROM TbCidade t";
-        List<String> listCidades = cd.pesquisar(jpql);
-        ObservableList<String> CI = FXCollections.observableArrayList(
-            listCidades
-        );
-        cidade.setItems(CI);
+        estado.setOnAction(event -> {
+            est = this.estado.getValue();
+            String jpql = " SELECT t.tbCidade.cidDescricao FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = '" + est + "'";
+            List<String> listCidades = cd.pesquisar(jpql);
+            ObservableList<String> CI = FXCollections.observableArrayList(listCidades);
+            cidade.setItems(CI);
+        });
+        /* ------------------------------------------------------------------ */
         
         nacionalidade = new ToggleGroup();
         // Associe o ToggleGroup aos RadioButtons
@@ -332,6 +331,7 @@ public class CadastroEntidadeViewController implements Initializable {
         String nomContato = this.nomeContato.getText();
         String DDD = this.ddd.getText();
         String telefone = this.fone.getText();
+        String obs = this.observacao.getText();
         // Dados de Endereço
         String log = this.logradouro.getText();
         String tipoEnd = this.tipoEndereco.getValue();
@@ -397,18 +397,22 @@ public class CadastroEntidadeViewController implements Initializable {
     }
     
     @FXML
-    void handleSalvarEndbutton() {
-        String dado1 = logradouro.getText();
-        String dado2 = bairro.getText();
-        String dado3 = complemento.getText();
-        String dado4 = cep.getText();
-        String dado5 = numero.getText();
-        String dado6 = tipoEndereco.getValue();
-        String dado7 = pais.getValue();
-        String dado8 = cidade.getValue();
-        String dado9 = estado.getValue();
+    void handleSalvarInicialbutton() {
         
+    }
+    
+    @FXML
+    void handleSalvarEndbutton() {
         List<String> dadosString = new ArrayList<>();
+        dadosString.add(logradouro.getText());
+        dadosString.add(bairro.getText());
+        dadosString.add(complemento.getText());
+        dadosString.add(cep.getText());
+        dadosString.add(numero.getText());
+        dadosString.add(tipoEndereco.getValue());
+        dadosString.add(pais.getValue());
+        dadosString.add(cidade.getValue());
+        dadosString.add(estado.getValue());
         for (Object[] objArray : enderecos) {
             StringBuilder sb = new StringBuilder();
             for (Object obj : objArray) {
@@ -420,6 +424,5 @@ public class CadastroEntidadeViewController implements Initializable {
         // Configurar a tabela com a lista de strings
         ObservableList<String> dadosDaTabelaString = FXCollections.observableArrayList(dadosString);
         tableEnd.setItems(dadosDaTabelaString);
-              
     }
 }

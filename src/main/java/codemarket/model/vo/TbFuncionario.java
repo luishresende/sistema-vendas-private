@@ -49,7 +49,7 @@ public class TbFuncionario implements Serializable {
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
     @ManyToOne(optional = false)
     private TbCargo funcCargo;
-    @JoinColumn(name = "func_ent_id", referencedColumnName = "ent_cpfCnpj")
+    @JoinColumn(name = "func_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
     @ManyToOne(optional = false)
     private TbEntidade funcEntId;
     @JoinColumn(name = "func_filial_id", referencedColumnName = "fil_id")

@@ -54,8 +54,8 @@ public class TbEndPostal implements Serializable {
     @ManyToOne(optional = false)
     private TbBairro endPbaiid;
     @JoinColumns({
-        @JoinColumn(name = "endP_ce_cid_id", referencedColumnName = "cep_cid_id"),
-        @JoinColumn(name = "endP_ce_est_sigla", referencedColumnName = "cep_est_sigla")})
+        @JoinColumn(name = "endP_cep_cid_id", referencedColumnName = "cep_cid_id"),
+        @JoinColumn(name = "endP_cep_est_sigla", referencedColumnName = "cep_est_sigla")})
     @ManyToOne(optional = false)
     private TbCidEstPai tbCidEstPai;
     @JoinColumn(name = "endP_log_id", referencedColumnName = "log_id")
