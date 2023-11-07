@@ -36,6 +36,13 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.1.0</version>
         </dependency>
+        
+        <!-- Validador de endereço IP -->
+        <dependency>
+            <groupId>de.envisia</groupId>
+            <artifactId>validator</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
     
