@@ -1,5 +1,5 @@
 
-package codemarket.control;
+package codemarket.control.tableViewModel;
 public class EnderecoModel {
     private String tipoEndereco;
     private String cep;

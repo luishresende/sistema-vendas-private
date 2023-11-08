@@ -1,5 +1,6 @@
 package codemarket.control;
 
+import codemarket.control.tableViewModel.EnderecoModel;
 import codemarket.model.conexao.HibernateConnection;
 import codemarket.model.rn.BairroRN;
 import codemarket.model.rn.CidEstPaiRN;
