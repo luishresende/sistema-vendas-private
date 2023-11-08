@@ -667,11 +667,11 @@
                                                 </GridPane>
                                                 <TableView fx:id="tableEnd" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                                   <columns>
-                                                      <TableColumn prefWidth="150.0" text="Tipo" />
-                                                    <TableColumn minWidth="0.0" prefWidth="119.0" text="CEP" />
-                                                    <TableColumn prefWidth="287.0" text="Cidade" />
-                                                      <TableColumn prefWidth="201.0" text="Estado" />
-                                                      <TableColumn prefWidth="189.0" text="País" />
+                                                      <TableColumn fx:id="tbEndtipo" prefWidth="150.0" text="Tipo" />
+                                                    <TableColumn fx:id="tbEndcep" minWidth="0.0" prefWidth="119.0" text="CEP" />
+                                                    <TableColumn fx:id="tbEndcidade" prefWidth="287.0" text="Cidade" />
+                                                      <TableColumn fx:id="tbEndest" prefWidth="201.0" text="Estado" />
+                                                      <TableColumn fx:id="tbEndpais" prefWidth="189.0" text="País" />
                                                   </columns>
                                                 </TableView>
                                              </children>

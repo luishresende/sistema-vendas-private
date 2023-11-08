@@ -43,9 +43,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -54,7 +56,6 @@ import javax.persistence.Query;
 
 
 public class CadastroEntidadeViewController implements Initializable {
-    EntityManager manager = HibernateConnection.getInstance();
     @FXML
     private Label tituloJanela;
     @FXML
@@ -120,11 +121,22 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private Button buttonSalvarInicial;
     @FXML
-    private TableView<String> tableEnd;
-        
+    private TableView<EnderecoModel> tableEnd;        
+    @FXML
+    private TableColumn<EnderecoModel, String> tbEndtipo;
+    @FXML
+    private TableColumn<EnderecoModel, String> tbEndcidade;
+    @FXML
+    private TableColumn<EnderecoModel, String> tbEndest;
+    @FXML
+    private TableColumn<EnderecoModel, String> tbEndpais;
+    @FXML
+    private TableColumn<EnderecoModel, String> tbEndcep;
+    
     private ToggleGroup nacionalidade;
     private ToggleGroup seleEntidade;
-    private ArrayList<Object[]> enderecos = new ArrayList<>();
+    
+    private ObservableList<EnderecoModel> enderecos = FXCollections.observableArrayList();
 
     private Stage dialogStage;
 
@@ -252,6 +264,17 @@ public class CadastroEntidadeViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+  
+        // Configure as colunas da tabela para exibir os campos da classe EnderecoData
+        tbEndtipo.setCellValueFactory(new PropertyValueFactory<>("tipoEndereco"));
+        tbEndcep.setCellValueFactory(new PropertyValueFactory<>("cep"));
+        tbEndcidade.setCellValueFactory(new PropertyValueFactory<>("cidade"));
+        tbEndpais.setCellValueFactory(new PropertyValueFactory<>("pais"));
+        tbEndest.setCellValueFactory(new PropertyValueFactory<>("estado"));
+
+        // Defina a tabela para usar a lista observável de endereços
+        tableEnd.setItems(enderecos);
+    
         /* --------------- Combo Box - Tipo de Cliente ---------------------- */
         // Adicionando dados do Tipo de Cliente
         ObservableList<String> tipo = FXCollections.observableArrayList(
@@ -403,26 +426,11 @@ public class CadastroEntidadeViewController implements Initializable {
     
     @FXML
     void handleSalvarEndbutton() {
-        List<String> dadosString = new ArrayList<>();
-        dadosString.add(logradouro.getText());
-        dadosString.add(bairro.getText());
-        dadosString.add(complemento.getText());
-        dadosString.add(cep.getText());
-        dadosString.add(numero.getText());
-        dadosString.add(tipoEndereco.getValue());
-        dadosString.add(pais.getValue());
-        dadosString.add(cidade.getValue());
-        dadosString.add(estado.getValue());
-        for (Object[] objArray : enderecos) {
-            StringBuilder sb = new StringBuilder();
-            for (Object obj : objArray) {
-                sb.append(obj.toString()).append(" "); // Converte cada objeto em string e separa com espaço
-            }
-            dadosString.add(sb.toString());
-        }
+        EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(), 
+                                                        cidade.getValue(), estado.getValue(), 
+                                                        pais.getValue(), logradouro.getText(),
+                                                        bairro.getText(), complemento.getText(), numero.getText());
+        enderecos.add(novoEndereco);
 
-        // Configurar a tabela com a lista de strings
-        ObservableList<String> dadosDaTabelaString = FXCollections.observableArrayList(dadosString);
-        tableEnd.setItems(dadosDaTabelaString);
     }
 }
