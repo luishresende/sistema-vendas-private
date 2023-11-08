@@ -2,31 +2,12 @@ package codemarket.control;
 
 import codemarket.control.tableViewModel.EnderecoModel;
 import codemarket.control.tableViewModel.FoneModel;
-import codemarket.model.conexao.HibernateConnection;
-import codemarket.model.rn.BairroRN;
-import codemarket.model.rn.CidEstPaiRN;
 import codemarket.model.rn.CidadeRN;
-import codemarket.model.rn.ClienteRN;
-import codemarket.model.rn.EndPostalRN;
-import codemarket.model.rn.EnderecoRN;
 import codemarket.model.rn.EntidadeRN;
 import codemarket.model.rn.EstadoRN;
-import codemarket.model.rn.LogradouroRN;
 import codemarket.model.rn.PaisRN;
 import codemarket.model.rn.SexoRN;
 import codemarket.model.rn.TelefoneTipoRN;
-import codemarket.model.vo.TbBairro;
-import codemarket.model.vo.TbCidEstPai;
-import codemarket.model.vo.TbCidade;
-import codemarket.model.vo.TbCliente;
-import codemarket.model.vo.TbEndPostal;
-import codemarket.model.vo.TbEndereco;
-import codemarket.model.vo.TbEntidade;
-import codemarket.model.vo.TbEstado;
-import codemarket.model.vo.TbFornecedor;
-import codemarket.model.vo.TbLogradouro;
-import codemarket.model.vo.TbPais;
-import codemarket.model.vo.TbSexo;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -34,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -78,6 +58,8 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private TextField cpfcnpj;
     @FXML
+    private TextField rgie;
+    @FXML
     private TextField cep;
     @FXML
     private TextField nomeFantasia;
@@ -89,6 +71,8 @@ public class CadastroEntidadeViewController implements Initializable {
     private TextField nomeContato;
     @FXML
     private Label labelCPFCNPJ;
+    @FXML
+    private Label labelRGIE;
     @FXML
     private TextField email;
     @FXML
@@ -173,21 +157,6 @@ public class CadastroEntidadeViewController implements Initializable {
         this.tituloJanela.setText(titulo);
     }
 
-    private double xOffset = 0;
-    private double yOffset = 0;
-
-    @FXML
-    void ativarMover(MouseEvent event) {
-        xOffset = event.getSceneX();
-        yOffset = event.getSceneY();
-    }
-
-    @FXML
-    void moverJanela(MouseEvent event) {
-        dialogStage.setX(event.getScreenX() - xOffset);
-        dialogStage.setY(event.getScreenY() - yOffset);
-    }
-
     // Função para limpara o campo e ativar e desativar campos de pessoa Fisica 
     @FXML
     void onTipoClienteChanged(ActionEvent event) {
@@ -195,19 +164,23 @@ public class CadastroEntidadeViewController implements Initializable {
         if ("Jurídico".equals(tipoSelecionado)) {
             // Formatação para CNPJ
             labelCPFCNPJ.setText("CNPJ");
+            labelRGIE.setText("Inscrição Estadual");
             tipoSexo.setDisable(true);
             dataNASC.setDisable(true);
         } else if ("Físico".equals(tipoSelecionado)) {
             // Formatação para CPF
             labelCPFCNPJ.setText("CPF");
+            labelRGIE.setText("RG");
             tipoSexo.setDisable(false);
             dataNASC.setDisable(false);
         } else {
             labelCPFCNPJ.setText("CPF / CNPJ");
+            labelRGIE.setText("RG / IE");
             tipoSexo.setDisable(true);
             dataNASC.setDisable(true);
         }
         cpfcnpj.clear();
+        rgie.clear();
         tipoSexo.setValue("Selecione...");
     }
 
@@ -276,6 +249,14 @@ public class CadastroEntidadeViewController implements Initializable {
         }
         if (texto.length() == 8) {
             cep.setText(texto.substring(0, 5) + " - " + texto.substring(5, 8));
+        }
+    }
+    
+    @FXML
+    private void validarRGIE(KeyEvent event) {
+        String texto = rgie.getText();
+        if (!texto.matches("[0-9]*")) {
+            rgie.setText(texto.replaceAll("[^0-9]", ""));
         }
     }
 

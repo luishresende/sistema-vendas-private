@@ -60,27 +60,26 @@ public class LoginViewController implements Initializable {
 
     @FXML
     public void handleButtonEntrar() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainView.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Scene scene = new Scene(page);
+            dialogStage = new Stage();
+            dialogStage.setTitle("Main");
+            dialogStage.setScene(scene);
+
+            Stage stage = (Stage) buttonEntrar.getScene().getWindow(); // Obtém o palco atual (primaryStage)
+            stage.close();
+
+            dialogStage.show();
+        } catch (Exception e) {
+
+        }
         buttonEntrar.setDisable(true);
         AuthController auth = new AuthController(textFieldUsuario.getText(), textFieldSenha.getText());
         Thread thread = new Thread(() -> {
             TbUsuario user = auth.authenticate();
             if (user != null) {
-
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainView.fxml"));
-                    AnchorPane page = (AnchorPane) loader.load();
-                    Scene scene = new Scene(page);
-                    dialogStage = new Stage();
-                    dialogStage.setTitle("Main");
-                    dialogStage.setScene(scene);
-
-                    Stage stage = (Stage) buttonEntrar.getScene().getWindow(); // Obtém o palco atual (primaryStage)
-                    stage.close();
-
-                    dialogStage.show();
-                } catch (Exception e) {
-
-                }
 
             } else {
                 buttonEntrar.setDisable(false);

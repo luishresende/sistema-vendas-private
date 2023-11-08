@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.CadastroEntidadeViewController">
    <children>
-      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" onMouseDragged="#moverJanela" onMousePressed="#ativarMover" prefHeight="25.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Cadastro de Entidades" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Cadastro de Entidades" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -169,8 +169,8 @@
                            <children>
                               <GridPane layoutX="74.0" layoutY="54.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columnConstraints>
-                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="544.0" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="405.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="538.0" minWidth="10.0" prefWidth="503.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="446.0" minWidth="10.0" prefWidth="446.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
@@ -189,19 +189,6 @@
                                           <Insets left="5.0" />
                                        </GridPane.margin>
                                        <children>
-                                          <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="83.0" spacing="2.0" GridPane.rowIndex="1">
-                                             <children>
-                                                <Label fx:id="labelCPFCNPJ" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="CPF / CNPJ">
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="cpfcnpj" onKeyReleased="#validarCPFCNPJ" prefHeight="31.0" />
-                                             </children>
-                                             <GridPane.margin>
-                                                <Insets left="10.0" />
-                                             </GridPane.margin>
-                                          </VBox>
                                           <GridPane>
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -235,6 +222,46 @@
                                                    </children>
                                                 </VBox>
                                              </children>
+                                          </GridPane>
+                                          <GridPane GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="83.0" spacing="2.0">
+                                                   <children>
+                                                      <Label fx:id="labelCPFCNPJ" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="CPF / CNPJ">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="cpfcnpj" onKeyReleased="#validarCPFCNPJ" prefHeight="31.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="83.0" spacing="2.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label fx:id="labelRGIE" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="RG / IE">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="rgie" onKeyReleased="#validarRGIE" prefHeight="31.0" />
+                                                   </children>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </VBox>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets left="10.0" />
+                                             </opaqueInsets>
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin>
                                           </GridPane>
                                        </children>
                                     </GridPane>
@@ -291,8 +318,8 @@
                                                       </VBox>
                                                    </children>
                                                    <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="192.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="320.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="193.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="298.0" />
                                                    </columnConstraints>
                                                    <rowConstraints>
                                                       <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
@@ -447,8 +474,8 @@
                                           </VBox>
                                           <GridPane GridPane.rowIndex="1">
                                             <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="158.0" />
-                                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="386.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="160.0" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="359.0" minWidth="10.0" prefWidth="343.0" />
                                             </columnConstraints>
                                             <rowConstraints>
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -461,7 +488,7 @@
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <DatePicker fx:id="dataNASC" prefHeight="31.0" prefWidth="140.0" />
+                                                      <DatePicker fx:id="dataNASC" prefHeight="31.0" prefWidth="153.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="306.0" spacing="2.0" GridPane.columnIndex="1">
