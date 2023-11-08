@@ -3,6 +3,8 @@ package codemarket.model.conexao;
 import codemarket.model.utils.CryptoXML;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.xml.parsers.DocumentBuilder;
@@ -31,6 +33,7 @@ public class PersistenceManipulation {
     private Document persistenceDoc;
     private boolean encrypted = true;
     private static PersistenceManipulation persistenceManipulation;
+    private Map<String, String> properties;
 
     /**
      * Inicializa o objeto PersistenceManipulation. <br>
@@ -109,7 +112,7 @@ public class PersistenceManipulation {
             getUserElement().setAttribute("value", crypto.decryptText(getUserElement().getAttribute("value")));
             getPasswordElement().setAttribute("value", crypto.decryptText(getPasswordElement().getAttribute("value")));
             getAddressElement().setAttribute("value", crypto.decryptText(getAddressElement().getAttribute("value")));
-
+            
             savePersistence();
             encrypted = false;
         } catch (Exception e) {
@@ -137,9 +140,12 @@ public class PersistenceManipulation {
 
             // Transformar e escrever as alterações no arquivo
             transformer.transform(source, result);
+            Thread.sleep(2000);
         } catch (TransformerConfigurationException e) {
 
         } catch (TransformerException e) {
+
+        } catch (InterruptedException e) {
 
         }
 
@@ -150,13 +156,15 @@ public class PersistenceManipulation {
         String oldAddress = getAddressElement().getAttribute("value");
         String oldUser = getUserElement().getAttribute("value");
         String oldPassword = getPasswordElement().getAttribute("value");
-
+        
         getAddressElement().setAttribute("value", "jdbc:mysql://" + newAddress + "/" + newDatabaseName);
         getUserElement().setAttribute("value", newUser);
         getPasswordElement().setAttribute("value", newPassword);
         savePersistence();
+        
+        updateProperties();
 
-        ConnectionValidator conValidator = new ConnectionValidator();
+        ConnectionValidator conValidator = new ConnectionValidator(this);
         if (!conValidator.testConnection(newAddress, newUser, newPassword, newDatabaseName)) {
             getAddressElement().setAttribute("value", oldAddress);
             getUserElement().setAttribute("value", oldUser);
@@ -185,4 +193,15 @@ public class PersistenceManipulation {
         return passwordElement;
     }
 
+    public void updateProperties() {
+        this.properties = new HashMap<>();
+        this.properties.put("javax.persistence.jdbc.url", addressElement.getAttribute("value"));
+        this.properties.put("javax.persistence.jdbc.user", userElement.getAttribute("value"));
+        this.properties.put("javax.persistence.jdbc.password", passwordElement.getAttribute("value"));
+        this.properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
+    }
+
+    public Map<String, String> getProperties() {
+        return properties;
+    }    
 }

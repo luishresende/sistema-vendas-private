@@ -3,13 +3,17 @@ package codemarket.model.conexao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import org.apache.commons.validator.routines.InetAddressValidator;
 
 public class ConnectionValidator {
 
     private EntityManagerFactory factory;
     private EntityManager manager;
+    private PersistenceManipulation persistenceManipulation;
+
+    public ConnectionValidator(PersistenceManipulation persistenceManipulation) {
+        this.persistenceManipulation = persistenceManipulation;
+    }
 
     public boolean testConnection(String address, String user, String password, String databaseName) {
         if (!(isValidAddress(address) && isValidUser(user) && isValidPassword(password) && isValidDatabaseName(databaseName))) {
@@ -17,11 +21,11 @@ public class ConnectionValidator {
         }
 
         try {
-            javax.persistence.spi.PersistenceProviderResolverHolder.setPersistenceProviderResolver(null);
-            this.factory = Persistence.createEntityManagerFactory("Hibernate");
-            this.manager = factory.createEntityManager();
             
-            if(manager.isOpen()){
+            this.factory = Persistence.createEntityManagerFactory("Hibernate", persistenceManipulation.getProperties());
+            this.manager = factory.createEntityManager();
+
+            if (manager.isOpen()) {
                 manager.close();
                 factory.close();
                 return true;
@@ -30,7 +34,7 @@ public class ConnectionValidator {
             // Lidar com qualquer exceção que possa ocorrer
             e.printStackTrace();
         }
-        
+
         return false; // Se as informações não são válidas ou ocorreram exceções, retorne falso
     }
 

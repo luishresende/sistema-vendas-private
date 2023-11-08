@@ -1,21 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package codemarket.model.conexao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.xml.parsers.ParserConfigurationException;
 import org.hibernate.HibernateException;
 
-/**
- *
- * @author Luis Resende
- */
 public class HibernateConnection {
 
     private static EntityManagerFactory factory;
@@ -30,7 +19,8 @@ public class HibernateConnection {
                 if (manager == null) {
                     try {
                         persistenceManipulation.decryptSensitiveData();
-                        factory = Persistence.createEntityManagerFactory("Hibernate");
+                        persistenceManipulation.updateProperties();
+                        factory = Persistence.createEntityManagerFactory("Hibernate", persistenceManipulation.getProperties());
                         manager = factory.createEntityManager();
                         
                     } catch (HibernateException he) {
