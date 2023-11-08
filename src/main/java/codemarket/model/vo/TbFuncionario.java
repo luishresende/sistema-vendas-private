@@ -7,23 +7,17 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,10 +25,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_funcionario")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFuncionario.findAll", query = "SELECT t FROM TbFuncionario t"),
-    @NamedQuery(name = "TbFuncionario.findByFuncId", query = "SELECT t FROM TbFuncionario t WHERE t.funcId = :funcId")})
+    @NamedQuery(name = "TbFuncionario.findAll", query = "SELECT t FROM TbFuncionario t")})
 public class TbFuncionario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,35 +34,24 @@ public class TbFuncionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "func_id")
     private Integer funcId;
-    @ManyToMany(mappedBy = "tbFuncionarioCollection")
-    private Collection<TbFilial> tbFilialCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbFuncionario")
-    private Collection<TbFuncionarioHasAlmoxarifado> tbFuncionarioHasAlmoxarifadoCollection;
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
     @ManyToOne(optional = false)
     private TbCargo funcCargo;
     @JoinColumn(name = "func_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
     @ManyToOne(optional = false)
-    private TbEntidade funcEntId;
-    @JoinColumn(name = "func_filial_id", referencedColumnName = "fil_id")
-    @ManyToOne(optional = false)
-    private TbFilial funcFilialId;
+    private TbEntidade funcentcpfCnpj;
     @JoinColumn(name = "func_status", referencedColumnName = "sta_id")
     @ManyToOne(optional = false)
     private TbStatus funcStatus;
     @JoinColumn(name = "func_usuario", referencedColumnName = "usu_usuario")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TbUsuario funcUsuario;
 
     public TbFuncionario() {
     }
 
-    public TbFuncionario(TbCargo funcCargo, TbEntidade funcEntId, TbFilial funcFilialId, TbStatus funcStatus, TbUsuario funcUsuario) {
-        this.funcCargo = funcCargo;
-        this.funcEntId = funcEntId;
-        this.funcFilialId = funcFilialId;
-        this.funcStatus = funcStatus;
-        this.funcUsuario = funcUsuario;
+    public TbFuncionario(Integer funcId) {
+        this.funcId = funcId;
     }
 
     public Integer getFuncId() {
@@ -81,24 +62,6 @@ public class TbFuncionario implements Serializable {
         this.funcId = funcId;
     }
 
-    @XmlTransient
-    public Collection<TbFilial> getTbFilialCollection() {
-        return tbFilialCollection;
-    }
-
-    public void setTbFilialCollection(Collection<TbFilial> tbFilialCollection) {
-        this.tbFilialCollection = tbFilialCollection;
-    }
-
-    @XmlTransient
-    public Collection<TbFuncionarioHasAlmoxarifado> getTbFuncionarioHasAlmoxarifadoCollection() {
-        return tbFuncionarioHasAlmoxarifadoCollection;
-    }
-
-    public void setTbFuncionarioHasAlmoxarifadoCollection(Collection<TbFuncionarioHasAlmoxarifado> tbFuncionarioHasAlmoxarifadoCollection) {
-        this.tbFuncionarioHasAlmoxarifadoCollection = tbFuncionarioHasAlmoxarifadoCollection;
-    }
-
     public TbCargo getFuncCargo() {
         return funcCargo;
     }
@@ -107,20 +70,12 @@ public class TbFuncionario implements Serializable {
         this.funcCargo = funcCargo;
     }
 
-    public TbEntidade getFuncEntId() {
-        return funcEntId;
+    public TbEntidade getFuncentcpfCnpj() {
+        return funcentcpfCnpj;
     }
 
-    public void setFuncEntId(TbEntidade funcEntId) {
-        this.funcEntId = funcEntId;
-    }
-
-    public TbFilial getFuncFilialId() {
-        return funcFilialId;
-    }
-
-    public void setFuncFilialId(TbFilial funcFilialId) {
-        this.funcFilialId = funcFilialId;
+    public void setFuncentcpfCnpj(TbEntidade funcentcpfCnpj) {
+        this.funcentcpfCnpj = funcentcpfCnpj;
     }
 
     public TbStatus getFuncStatus() {

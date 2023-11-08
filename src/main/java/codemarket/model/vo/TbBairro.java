@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,11 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_bairro")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbBairro.findAll", query = "SELECT t FROM TbBairro t"),
-    @NamedQuery(name = "TbBairro.findByBaiId", query = "SELECT t FROM TbBairro t WHERE t.baiId = :baiId"),
-    @NamedQuery(name = "TbBairro.findByBaiDescricao", query = "SELECT t FROM TbBairro t WHERE t.baiDescricao = :baiDescricao")})
+    @NamedQuery(name = "TbBairro.findAll", query = "SELECT t FROM TbBairro t")})
 public class TbBairro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,12 +39,17 @@ public class TbBairro implements Serializable {
     @Column(name = "bai_descricao")
     private String baiDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endPbaiid")
-    private Collection<TbEndPostal> tbEndPostalCollection;
+    private List<TbEndPostal> tbEndPostalList;
 
     public TbBairro() {
     }
 
-    public TbBairro(String baiDescricao) {
+    public TbBairro(Integer baiId) {
+        this.baiId = baiId;
+    }
+
+    public TbBairro(Integer baiId, String baiDescricao) {
+        this.baiId = baiId;
         this.baiDescricao = baiDescricao;
     }
 
@@ -69,13 +69,12 @@ public class TbBairro implements Serializable {
         this.baiDescricao = baiDescricao;
     }
 
-    @XmlTransient
-    public Collection<TbEndPostal> getTbEndPostalCollection() {
-        return tbEndPostalCollection;
+    public List<TbEndPostal> getTbEndPostalList() {
+        return tbEndPostalList;
     }
 
-    public void setTbEndPostalCollection(Collection<TbEndPostal> tbEndPostalCollection) {
-        this.tbEndPostalCollection = tbEndPostalCollection;
+    public void setTbEndPostalList(List<TbEndPostal> tbEndPostalList) {
+        this.tbEndPostalList = tbEndPostalList;
     }
 
     @Override
@@ -100,7 +99,7 @@ public class TbBairro implements Serializable {
 
     @Override
     public String toString() {
-        return "Bairros: \n" + baiDescricao + " ";
+        return "codemarket.model.vo.TbBairro[ baiId=" + baiId + " ]";
     }
     
 }

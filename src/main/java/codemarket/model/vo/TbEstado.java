@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,8 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,11 +24,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_estado")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEstado.findAll", query = "SELECT t FROM TbEstado t"),
-    @NamedQuery(name = "TbEstado.findByEstSigla", query = "SELECT t FROM TbEstado t WHERE t.estSigla = :estSigla"),
-    @NamedQuery(name = "TbEstado.findByEstDescricao", query = "SELECT t FROM TbEstado t WHERE t.estDescricao = :estDescricao")})
+    @NamedQuery(name = "TbEstado.findAll", query = "SELECT t FROM TbEstado t")})
 public class TbEstado implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,12 +36,16 @@ public class TbEstado implements Serializable {
     @Column(name = "est_descricao")
     private String estDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstado")
-    private Collection<TbCidEstPai> tbCidEstPaiCollection;
+    private List<TbCidEstPai> tbCidEstPaiList;
 
     public TbEstado() {
     }
 
-    public TbEstado(String estDescricao, String estSigla) {
+    public TbEstado(String estSigla) {
+        this.estSigla = estSigla;
+    }
+
+    public TbEstado(String estSigla, String estDescricao) {
         this.estSigla = estSigla;
         this.estDescricao = estDescricao;
     }
@@ -67,13 +66,12 @@ public class TbEstado implements Serializable {
         this.estDescricao = estDescricao;
     }
 
-    @XmlTransient
-    public Collection<TbCidEstPai> getTbCidEstPaiCollection() {
-        return tbCidEstPaiCollection;
+    public List<TbCidEstPai> getTbCidEstPaiList() {
+        return tbCidEstPaiList;
     }
 
-    public void setTbCidEstPaiCollection(Collection<TbCidEstPai> tbCidEstPaiCollection) {
-        this.tbCidEstPaiCollection = tbCidEstPaiCollection;
+    public void setTbCidEstPaiList(List<TbCidEstPai> tbCidEstPaiList) {
+        this.tbCidEstPaiList = tbCidEstPaiList;
     }
 
     @Override

@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package codemarket.model.vo;
 
 import java.io.Serializable;
@@ -18,22 +19,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Iuri Pereira
+ * @author kauan
  */
 @Entity
-@Table(name = "tb_telefone_tipo")
-@XmlRootElement
+@Table(name = "tb_tipo_telefone")
 @NamedQueries({
-    @NamedQuery(name = "TbTelefoneTipo.findAll", query = "SELECT t FROM TbTelefoneTipo t")
-    , @NamedQuery(name = "TbTelefoneTipo.findByTtId", query = "SELECT t FROM TbTelefoneTipo t WHERE t.ttId = :ttId")
-    , @NamedQuery(name = "TbTelefoneTipo.findByTtDescricao", query = "SELECT t FROM TbTelefoneTipo t WHERE t.ttDescricao = :ttDescricao")})
-public class TbTelefoneTipo implements Serializable {
-
+    @NamedQuery(name = "TbTipoTelefone.findAll", query = "SELECT t FROM TbTipoTelefone t")})
+public class TbTipoTelefone implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,14 +41,14 @@ public class TbTelefoneTipo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foneTipo")
     private List<TbTelefone> tbTelefoneList;
 
-    public TbTelefoneTipo() {
+    public TbTipoTelefone() {
     }
 
-    public TbTelefoneTipo(Integer ttId) {
+    public TbTipoTelefone(Integer ttId) {
         this.ttId = ttId;
     }
 
-    public TbTelefoneTipo(Integer ttId, String ttDescricao) {
+    public TbTipoTelefone(Integer ttId, String ttDescricao) {
         this.ttId = ttId;
         this.ttDescricao = ttDescricao;
     }
@@ -74,7 +69,6 @@ public class TbTelefoneTipo implements Serializable {
         this.ttDescricao = ttDescricao;
     }
 
-    @XmlTransient
     public List<TbTelefone> getTbTelefoneList() {
         return tbTelefoneList;
     }
@@ -93,10 +87,10 @@ public class TbTelefoneTipo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TbTelefoneTipo)) {
+        if (!(object instanceof TbTipoTelefone)) {
             return false;
         }
-        TbTelefoneTipo other = (TbTelefoneTipo) object;
+        TbTipoTelefone other = (TbTipoTelefone) object;
         if ((this.ttId == null && other.ttId != null) || (this.ttId != null && !this.ttId.equals(other.ttId))) {
             return false;
         }
@@ -105,7 +99,7 @@ public class TbTelefoneTipo implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbTelefoneTipo[ ttId=" + ttId + " ]";
+        return "codemarket.model.vo.TbTipoTelefone[ ttId=" + ttId + " ]";
     }
     
 }

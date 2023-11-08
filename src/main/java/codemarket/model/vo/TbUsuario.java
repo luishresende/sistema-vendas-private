@@ -7,10 +7,9 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,8 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,12 +28,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_usuario")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t"),
-    @NamedQuery(name = "TbUsuario.findByUsuUsuario", query = "SELECT t FROM TbUsuario t WHERE t.usuUsuario = :usuUsuario"),
-    @NamedQuery(name = "TbUsuario.findByUsuSenha", query = "SELECT t FROM TbUsuario t WHERE t.usuSenha = :usuSenha"),
-    @NamedQuery(name = "TbUsuario.findByUsuValidade", query = "SELECT t FROM TbUsuario t WHERE t.usuValidade = :usuValidade")})
+    @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t")})
 public class TbUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,24 +42,22 @@ public class TbUsuario implements Serializable {
     @Column(name = "usu_validade")
     @Temporal(TemporalType.DATE)
     private Date usuValidade;
-    @JoinColumn(name = "usu_gp_permissao", referencedColumnName = "gperm_id")
-    @ManyToOne(optional = false)
-    private TbGrupoPermissoes usuGpPermissao;
     @JoinColumn(name = "usu_status", referencedColumnName = "sta_id")
     @ManyToOne(optional = false)
     private TbStatus usuStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcUsuario")
-    private Collection<TbFuncionario> tbFuncionarioCollection;
+    @OneToMany(mappedBy = "funcUsuario")
+    private List<TbFuncionario> tbFuncionarioList;
 
     public TbUsuario() {
     }
 
-    public TbUsuario(String usuUsuario, String usuSenha, Date usuValidade, TbGrupoPermissoes usuGpPermissao, TbStatus usuStatus) {
+    public TbUsuario(String usuUsuario) {
+        this.usuUsuario = usuUsuario;
+    }
+
+    public TbUsuario(String usuUsuario, String usuSenha) {
         this.usuUsuario = usuUsuario;
         this.usuSenha = usuSenha;
-        this.usuValidade = usuValidade;
-        this.usuGpPermissao = usuGpPermissao;
-        this.usuStatus = usuStatus;
     }
 
     public String getUsuUsuario() {
@@ -93,14 +84,6 @@ public class TbUsuario implements Serializable {
         this.usuValidade = usuValidade;
     }
 
-    public TbGrupoPermissoes getUsuGpPermissao() {
-        return usuGpPermissao;
-    }
-
-    public void setUsuGpPermissao(TbGrupoPermissoes usuGpPermissao) {
-        this.usuGpPermissao = usuGpPermissao;
-    }
-
     public TbStatus getUsuStatus() {
         return usuStatus;
     }
@@ -109,13 +92,12 @@ public class TbUsuario implements Serializable {
         this.usuStatus = usuStatus;
     }
 
-    @XmlTransient
-    public Collection<TbFuncionario> getTbFuncionarioCollection() {
-        return tbFuncionarioCollection;
+    public List<TbFuncionario> getTbFuncionarioList() {
+        return tbFuncionarioList;
     }
 
-    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
-        this.tbFuncionarioCollection = tbFuncionarioCollection;
+    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
+        this.tbFuncionarioList = tbFuncionarioList;
     }
 
     @Override

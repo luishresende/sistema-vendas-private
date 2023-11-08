@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,11 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_logradouro")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbLogradouro.findAll", query = "SELECT t FROM TbLogradouro t"),
-    @NamedQuery(name = "TbLogradouro.findByLogId", query = "SELECT t FROM TbLogradouro t WHERE t.logId = :logId"),
-    @NamedQuery(name = "TbLogradouro.findByLogDescricao", query = "SELECT t FROM TbLogradouro t WHERE t.logDescricao = :logDescricao")})
+    @NamedQuery(name = "TbLogradouro.findAll", query = "SELECT t FROM TbLogradouro t")})
 public class TbLogradouro implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,12 +39,17 @@ public class TbLogradouro implements Serializable {
     @Column(name = "log_descricao")
     private String logDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endPlogid")
-    private Collection<TbEndPostal> tbEndPostalCollection;
+    private List<TbEndPostal> tbEndPostalList;
 
     public TbLogradouro() {
     }
 
-    public TbLogradouro(String logDescricao) {
+    public TbLogradouro(Integer logId) {
+        this.logId = logId;
+    }
+
+    public TbLogradouro(Integer logId, String logDescricao) {
+        this.logId = logId;
         this.logDescricao = logDescricao;
     }
 
@@ -69,13 +69,12 @@ public class TbLogradouro implements Serializable {
         this.logDescricao = logDescricao;
     }
 
-    @XmlTransient
-    public Collection<TbEndPostal> getTbEndPostalCollection() {
-        return tbEndPostalCollection;
+    public List<TbEndPostal> getTbEndPostalList() {
+        return tbEndPostalList;
     }
 
-    public void setTbEndPostalCollection(Collection<TbEndPostal> tbEndPostalCollection) {
-        this.tbEndPostalCollection = tbEndPostalCollection;
+    public void setTbEndPostalList(List<TbEndPostal> tbEndPostalList) {
+        this.tbEndPostalList = tbEndPostalList;
     }
 
     @Override

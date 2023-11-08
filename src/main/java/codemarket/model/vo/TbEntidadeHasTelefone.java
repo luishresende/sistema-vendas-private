@@ -3,41 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package codemarket.model.vo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Iuri Pereira
+ * @author kauan
  */
 @Entity
 @Table(name = "tb_entidade_has_telefone")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntidadeHasTelefone.findAll", query = "SELECT t FROM TbEntidadeHasTelefone t")
-    , @NamedQuery(name = "TbEntidadeHasTelefone.findByEhtentcpfCnpj", query = "SELECT t FROM TbEntidadeHasTelefone t WHERE t.ehtentcpfCnpj = :ehtentcpfCnpj")})
+    @NamedQuery(name = "TbEntidadeHasTelefone.findAll", query = "SELECT t FROM TbEntidadeHasTelefone t")})
 public class TbEntidadeHasTelefone implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "eht_ent_cpfCnpj")
-    private String ehtentcpfCnpj;
-    @JoinColumn(name = "eht_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private TbEntidade tbEntidade;
+    @Column(name = "eht_id")
+    private Integer ehtId;
+    @JoinColumn(name = "eht_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
+    @ManyToOne(optional = false)
+    private TbEntidade ehtentcpfCnpj;
     @JoinColumn(name = "eht_fone_id", referencedColumnName = "fone_id")
     @ManyToOne(optional = false)
     private TbTelefone ehtFoneId;
@@ -45,24 +44,24 @@ public class TbEntidadeHasTelefone implements Serializable {
     public TbEntidadeHasTelefone() {
     }
 
-    public TbEntidadeHasTelefone(String ehtentcpfCnpj) {
-        this.ehtentcpfCnpj = ehtentcpfCnpj;
+    public TbEntidadeHasTelefone(Integer ehtId) {
+        this.ehtId = ehtId;
     }
 
-    public String getEhtentcpfCnpj() {
+    public Integer getEhtId() {
+        return ehtId;
+    }
+
+    public void setEhtId(Integer ehtId) {
+        this.ehtId = ehtId;
+    }
+
+    public TbEntidade getEhtentcpfCnpj() {
         return ehtentcpfCnpj;
     }
 
-    public void setEhtentcpfCnpj(String ehtentcpfCnpj) {
+    public void setEhtentcpfCnpj(TbEntidade ehtentcpfCnpj) {
         this.ehtentcpfCnpj = ehtentcpfCnpj;
-    }
-
-    public TbEntidade getTbEntidade() {
-        return tbEntidade;
-    }
-
-    public void setTbEntidade(TbEntidade tbEntidade) {
-        this.tbEntidade = tbEntidade;
     }
 
     public TbTelefone getEhtFoneId() {
@@ -76,7 +75,7 @@ public class TbEntidadeHasTelefone implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (ehtentcpfCnpj != null ? ehtentcpfCnpj.hashCode() : 0);
+        hash += (ehtId != null ? ehtId.hashCode() : 0);
         return hash;
     }
 
@@ -87,7 +86,7 @@ public class TbEntidadeHasTelefone implements Serializable {
             return false;
         }
         TbEntidadeHasTelefone other = (TbEntidadeHasTelefone) object;
-        if ((this.ehtentcpfCnpj == null && other.ehtentcpfCnpj != null) || (this.ehtentcpfCnpj != null && !this.ehtentcpfCnpj.equals(other.ehtentcpfCnpj))) {
+        if ((this.ehtId == null && other.ehtId != null) || (this.ehtId != null && !this.ehtId.equals(other.ehtId))) {
             return false;
         }
         return true;
@@ -95,7 +94,7 @@ public class TbEntidadeHasTelefone implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbEntidadeHasTelefone[ ehtentcpfCnpj=" + ehtentcpfCnpj + " ]";
+        return "codemarket.model.vo.TbEntidadeHasTelefone[ ehtId=" + ehtId + " ]";
     }
     
 }

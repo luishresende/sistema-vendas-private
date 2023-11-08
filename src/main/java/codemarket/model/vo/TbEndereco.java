@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,8 +23,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,42 +30,40 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_endereco")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEndereco.findAll", query = "SELECT t FROM TbEndereco t"),
-    @NamedQuery(name = "TbEndereco.findByEndId", query = "SELECT t FROM TbEndereco t WHERE t.endId = :endId"),
-    @NamedQuery(name = "TbEndereco.findByEndNumero", query = "SELECT t FROM TbEndereco t WHERE t.endNumero = :endNumero"),
-    @NamedQuery(name = "TbEndereco.findByEndComplemento", query = "SELECT t FROM TbEndereco t WHERE t.endComplemento = :endComplemento")})
+    @NamedQuery(name = "TbEndereco.findAll", query = "SELECT t FROM TbEndereco t")})
 public class TbEndereco implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eeEndId")
+    private List<TbEntidadeHasEndereco> tbEntidadeHasEnderecoList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "end_id")
     private Integer endId;
-    @Basic(optional = false)
     @Column(name = "end_numero")
-    private int endNumero;
+    private Integer endNumero;
     @Column(name = "end_complemento")
     private String endComplemento;
     @JoinTable(name = "tb_entidade_has_endereco", joinColumns = {
         @JoinColumn(name = "ee_end_id", referencedColumnName = "end_id")}, inverseJoinColumns = {
         @JoinColumn(name = "ee_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")})
     @ManyToMany
-    private Collection<TbEntidade> tbEntidadeCollection;
+    private List<TbEntidade> tbEntidadeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entEnderecoPrincipal")
-    private Collection<TbEntidade> tbEntidadeCollection1;
+    private List<TbEntidade> tbEntidadeList1;
     @JoinColumn(name = "end_endP_id", referencedColumnName = "endP_id")
     @ManyToOne(optional = false)
     private TbEndPostal endendPid;
+    @JoinColumn(name = "end_tipo", referencedColumnName = "te_id")
+    @ManyToOne(optional = false)
+    private TbTipoEndereco endTipo;
 
     public TbEndereco() {
     }
 
-    public TbEndereco(int endNumero, String endComplemento, TbEndPostal endendPid) {
-        this.endNumero = endNumero;
-        this.endComplemento = endComplemento;
-        this.endendPid = endendPid;
+    public TbEndereco(Integer endId) {
+        this.endId = endId;
     }
 
     public Integer getEndId() {
@@ -78,11 +74,11 @@ public class TbEndereco implements Serializable {
         this.endId = endId;
     }
 
-    public int getEndNumero() {
+    public Integer getEndNumero() {
         return endNumero;
     }
 
-    public void setEndNumero(int endNumero) {
+    public void setEndNumero(Integer endNumero) {
         this.endNumero = endNumero;
     }
 
@@ -94,22 +90,20 @@ public class TbEndereco implements Serializable {
         this.endComplemento = endComplemento;
     }
 
-    @XmlTransient
-    public Collection<TbEntidade> getTbEntidadeCollection() {
-        return tbEntidadeCollection;
+    public List<TbEntidade> getTbEntidadeList() {
+        return tbEntidadeList;
     }
 
-    public void setTbEntidadeCollection(Collection<TbEntidade> tbEntidadeCollection) {
-        this.tbEntidadeCollection = tbEntidadeCollection;
+    public void setTbEntidadeList(List<TbEntidade> tbEntidadeList) {
+        this.tbEntidadeList = tbEntidadeList;
     }
 
-    @XmlTransient
-    public Collection<TbEntidade> getTbEntidadeCollection1() {
-        return tbEntidadeCollection1;
+    public List<TbEntidade> getTbEntidadeList1() {
+        return tbEntidadeList1;
     }
 
-    public void setTbEntidadeCollection1(Collection<TbEntidade> tbEntidadeCollection1) {
-        this.tbEntidadeCollection1 = tbEntidadeCollection1;
+    public void setTbEntidadeList1(List<TbEntidade> tbEntidadeList1) {
+        this.tbEntidadeList1 = tbEntidadeList1;
     }
 
     public TbEndPostal getEndendPid() {
@@ -118,6 +112,14 @@ public class TbEndereco implements Serializable {
 
     public void setEndendPid(TbEndPostal endendPid) {
         this.endendPid = endendPid;
+    }
+
+    public TbTipoEndereco getEndTipo() {
+        return endTipo;
+    }
+
+    public void setEndTipo(TbTipoEndereco endTipo) {
+        this.endTipo = endTipo;
     }
 
     @Override
@@ -143,6 +145,14 @@ public class TbEndereco implements Serializable {
     @Override
     public String toString() {
         return "codemarket.model.vo.TbEndereco[ endId=" + endId + " ]";
+    }
+
+    public List<TbEntidadeHasEndereco> getTbEntidadeHasEnderecoList() {
+        return tbEntidadeHasEnderecoList;
+    }
+
+    public void setTbEntidadeHasEnderecoList(List<TbEntidadeHasEndereco> tbEntidadeHasEnderecoList) {
+        this.tbEntidadeHasEnderecoList = tbEntidadeHasEnderecoList;
     }
     
 }

@@ -7,11 +7,13 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,8 +21,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,21 +28,20 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_entrada")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntrada.findAll", query = "SELECT t FROM TbEntrada t"),
-    @NamedQuery(name = "TbEntrada.findByEntrId", query = "SELECT t FROM TbEntrada t WHERE t.entrId = :entrId")})
+    @NamedQuery(name = "TbEntrada.findAll", query = "SELECT t FROM TbEntrada t")})
 public class TbEntrada implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "entr_id")
     private Integer entrId;
+    @Basic(optional = false)
+    @Column(name = "entr_almo_id")
+    private int entrAlmoId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entreEntradaId")
-    private Collection<TbEntradaEstoque> tbEntradaEstoqueCollection;
-    @JoinColumn(name = "entr_almo_id", referencedColumnName = "almo_id")
-    @ManyToOne(optional = false)
-    private TbAlmoxarifado entrAlmoId;
+    private List<TbEntradaEstoque> tbEntradaEstoqueList;
     @JoinColumn(name = "entr_status", referencedColumnName = "tes_id")
     @ManyToOne(optional = false)
     private TbEntradaStatus entrStatus;
@@ -50,9 +49,13 @@ public class TbEntrada implements Serializable {
     public TbEntrada() {
     }
 
-    public TbEntrada(TbAlmoxarifado entrAlmoId, TbEntradaStatus entrStatus) {
+    public TbEntrada(Integer entrId) {
+        this.entrId = entrId;
+    }
+
+    public TbEntrada(Integer entrId, int entrAlmoId) {
+        this.entrId = entrId;
         this.entrAlmoId = entrAlmoId;
-        this.entrStatus = entrStatus;
     }
 
     public Integer getEntrId() {
@@ -63,21 +66,20 @@ public class TbEntrada implements Serializable {
         this.entrId = entrId;
     }
 
-    @XmlTransient
-    public Collection<TbEntradaEstoque> getTbEntradaEstoqueCollection() {
-        return tbEntradaEstoqueCollection;
-    }
-
-    public void setTbEntradaEstoqueCollection(Collection<TbEntradaEstoque> tbEntradaEstoqueCollection) {
-        this.tbEntradaEstoqueCollection = tbEntradaEstoqueCollection;
-    }
-
-    public TbAlmoxarifado getEntrAlmoId() {
+    public int getEntrAlmoId() {
         return entrAlmoId;
     }
 
-    public void setEntrAlmoId(TbAlmoxarifado entrAlmoId) {
+    public void setEntrAlmoId(int entrAlmoId) {
         this.entrAlmoId = entrAlmoId;
+    }
+
+    public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
+        return tbEntradaEstoqueList;
+    }
+
+    public void setTbEntradaEstoqueList(List<TbEntradaEstoque> tbEntradaEstoqueList) {
+        this.tbEntradaEstoqueList = tbEntradaEstoqueList;
     }
 
     public TbEntradaStatus getEntrStatus() {

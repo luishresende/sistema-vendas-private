@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,12 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "tb_fornecedor_has_produto")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFornecedorHasProduto.findAll", query = "SELECT t FROM TbFornecedorHasProduto t"),
-    @NamedQuery(name = "TbFornecedorHasProduto.findByFhpId", query = "SELECT t FROM TbFornecedorHasProduto t WHERE t.tbFornecedorHasProdutoPK.fhpId = :fhpId"),
-    @NamedQuery(name = "TbFornecedorHasProduto.findByFhpPdt", query = "SELECT t FROM TbFornecedorHasProduto t WHERE t.tbFornecedorHasProdutoPK.fhpPdt = :fhpPdt"),
-    @NamedQuery(name = "TbFornecedorHasProduto.findByFhpValorCompra", query = "SELECT t FROM TbFornecedorHasProduto t WHERE t.fhpValorCompra = :fhpValorCompra")})
+    @NamedQuery(name = "TbFornecedorHasProduto.findAll", query = "SELECT t FROM TbFornecedorHasProduto t")})
 public class TbFornecedorHasProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -47,10 +42,21 @@ public class TbFornecedorHasProduto implements Serializable {
     public TbFornecedorHasProduto() {
     }
 
-    public TbFornecedorHasProduto(float fhpValorCompra, TbFornecedor tbFornecedor, TbProduto tbProduto) {
+    public TbFornecedorHasProduto(TbFornecedorHasProdutoPK tbFornecedorHasProdutoPK) {
+        this.tbFornecedorHasProdutoPK = tbFornecedorHasProdutoPK;
+    }
+
+    public TbFornecedorHasProduto(TbFornecedorHasProdutoPK tbFornecedorHasProdutoPK, float fhpValorCompra) {
+        this.tbFornecedorHasProdutoPK = tbFornecedorHasProdutoPK;
         this.fhpValorCompra = fhpValorCompra;
-        this.tbFornecedor = tbFornecedor;
-        this.tbProduto = tbProduto;
+    }
+
+    public TbFornecedorHasProduto(int fhpId, String fhpPdt) {
+        this.tbFornecedorHasProdutoPK = new TbFornecedorHasProdutoPK(fhpId, fhpPdt);
+    }
+
+    public TbFornecedorHasProdutoPK getTbFornecedorHasProdutoPK() {
+        return tbFornecedorHasProdutoPK;
     }
 
     public void setTbFornecedorHasProdutoPK(TbFornecedorHasProdutoPK tbFornecedorHasProdutoPK) {

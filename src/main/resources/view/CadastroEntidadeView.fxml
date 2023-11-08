@@ -248,11 +248,10 @@
                                        <children>
                                           <TableView fx:id="tableFone" prefHeight="268.0" prefWidth="390.0">
                                              <columns>
-                                                <TableColumn prefWidth="32.0" text="Id" />
-                                                <TableColumn prefWidth="123.0" text="Nome" />
-                                                <TableColumn prefWidth="44.0" text="DDD" />
-                                                <TableColumn prefWidth="126.0" text="Fone" />
-                                                <TableColumn prefWidth="67.0" text="Tipo" />
+                                                <TableColumn fx:id="tbFonenome" prefWidth="123.0" text="Nome" />
+                                                <TableColumn fx:id="tbFoneddd" prefWidth="44.0" text="DDD" />
+                                                <TableColumn fx:id="tbFonefone" prefWidth="126.0" text="Fone" />
+                                                <TableColumn fx:id="tbFonetipo" prefWidth="96.0" text="Tipo" />
                                              </columns>
                                              <GridPane.margin>
                                                 <Insets left="15.0" />
@@ -354,7 +353,7 @@
                                           </GridPane>
                                           <GridPane GridPane.rowIndex="3">
                                              <children>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                <Button fx:id="buttonSalvarFone" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarFonebutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -369,22 +368,7 @@
                                                       </FontAwesomeIcon>
                                                    </graphic>
                                                 </Button>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="1">
-                                                   <cursor>
-                                                      <Cursor fx:constant="HAND" />
-                                                   </cursor>
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                   <graphic>
-                                                      <FontAwesomeIcon iconName="PLUS_CIRCLE" size="2em" textAlignment="CENTER">
-                                                         <font>
-                                                            <Font name="System Bold" size="12.0" />
-                                                         </font>
-                                                      </FontAwesomeIcon>
-                                                   </graphic>
-                                                </Button>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                <Button fx:id="buttonAlterarFone" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerAlterarFoneButton" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="1">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -399,7 +383,7 @@
                                                       </FontAwesomeIcon>
                                                    </graphic>
                                                 </Button>
-                                                <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="3">
+                                                <Button fx:id="buttonCancelarFone" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerCancelarFone" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="2">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -417,7 +401,6 @@
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="101.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="107.0" />
                                                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                                              </columnConstraints>
@@ -558,12 +541,12 @@
                                                                   <ComboBox fx:id="cidade" prefHeight="26.0" prefWidth="191.0" promptText="Selecione..." />
                                                                </children>
                                                             </VBox>
-                                                            <VBox prefHeight="58.0" prefWidth="330.0">
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="330.0">
                                                                <children>
                                                                   <HBox prefHeight="20.0" prefWidth="329.0">
                                                                      <children>
-                                                                        <RadioButton fx:id="brasileiro" mnemonicParsing="false" text="Brasileiro" />
-                                                                        <RadioButton fx:id="estrangeiro" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Estrangeiro">
+                                                                        <RadioButton fx:id="brasileiro" mnemonicParsing="false" selected="true" text="Brasileiro" />
+                                                                        <RadioButton fx:id="estrangeiro" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Estrangeiro">
                                                                            <HBox.margin>
                                                                               <Insets left="50.0" />
                                                                            </HBox.margin>
@@ -594,7 +577,7 @@
                                                 </VBox>
                                                 <GridPane prefHeight="49.0" prefWidth="947.0" GridPane.rowIndex="3">
                                                    <children>
-                                                      <Button fx:id="buttonSalvar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarEndbutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                      <Button fx:id="buttonSalvarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarEndbutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -609,22 +592,7 @@
                                                             </FontAwesomeIcon>
                                                          </graphic>
                                                       </Button>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Novo" textAlignment="CENTER" GridPane.columnIndex="1">
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                         <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                         </font>
-                                                         <graphic>
-                                                            <FontAwesomeIcon iconName="PLUS_CIRCLE" size="2em" textAlignment="CENTER">
-                                                               <font>
-                                                                  <Font name="System Bold" size="12.0" />
-                                                               </font>
-                                                            </FontAwesomeIcon>
-                                                         </graphic>
-                                                      </Button>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                      <Button fx:id="buttonAlterarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerAlterarEndButton" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="1">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -639,7 +607,7 @@
                                                             </FontAwesomeIcon>
                                                          </graphic>
                                                       </Button>
-                                                      <Button alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="3">
+                                                      <Button fx:id="buttonCancelarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerCancelarEnd" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="2">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -657,7 +625,6 @@
                                                    </children>
                                                    <columnConstraints>
                                                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="101.0" />
                                                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="107.0" />
                                                       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                                                    </columnConstraints>

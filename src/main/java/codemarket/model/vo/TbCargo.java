@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,12 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_cargo")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCargo.findAll", query = "SELECT t FROM TbCargo t"),
-    @NamedQuery(name = "TbCargo.findByCarId", query = "SELECT t FROM TbCargo t WHERE t.carId = :carId"),
-    @NamedQuery(name = "TbCargo.findByCarDescricao", query = "SELECT t FROM TbCargo t WHERE t.carDescricao = :carDescricao"),
-    @NamedQuery(name = "TbCargo.findByCarsalarioBase", query = "SELECT t FROM TbCargo t WHERE t.carsalarioBase = :carsalarioBase")})
+    @NamedQuery(name = "TbCargo.findAll", query = "SELECT t FROM TbCargo t")})
 public class TbCargo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,12 +42,17 @@ public class TbCargo implements Serializable {
     @Column(name = "car_salarioBase")
     private double carsalarioBase;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcCargo")
-    private Collection<TbFuncionario> tbFuncionarioCollection;
+    private List<TbFuncionario> tbFuncionarioList;
 
     public TbCargo() {
     }
 
-    public TbCargo(String carDescricao, double carsalarioBase) {
+    public TbCargo(Integer carId) {
+        this.carId = carId;
+    }
+
+    public TbCargo(Integer carId, String carDescricao, double carsalarioBase) {
+        this.carId = carId;
         this.carDescricao = carDescricao;
         this.carsalarioBase = carsalarioBase;
     }
@@ -82,13 +81,12 @@ public class TbCargo implements Serializable {
         this.carsalarioBase = carsalarioBase;
     }
 
-    @XmlTransient
-    public Collection<TbFuncionario> getTbFuncionarioCollection() {
-        return tbFuncionarioCollection;
+    public List<TbFuncionario> getTbFuncionarioList() {
+        return tbFuncionarioList;
     }
 
-    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
-        this.tbFuncionarioCollection = tbFuncionarioCollection;
+    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
+        this.tbFuncionarioList = tbFuncionarioList;
     }
 
     @Override

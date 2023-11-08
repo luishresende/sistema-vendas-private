@@ -7,18 +7,18 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,14 +26,12 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_status")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbStatus.findAll", query = "SELECT t FROM TbStatus t"),
-    @NamedQuery(name = "TbStatus.findByStaId", query = "SELECT t FROM TbStatus t WHERE t.staId = :staId"),
-    @NamedQuery(name = "TbStatus.findByStaDescricao", query = "SELECT t FROM TbStatus t WHERE t.staDescricao = :staDescricao")})
+    @NamedQuery(name = "TbStatus.findAll", query = "SELECT t FROM TbStatus t")})
 public class TbStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "sta_id")
     private Integer staId;
@@ -41,14 +39,19 @@ public class TbStatus implements Serializable {
     @Column(name = "sta_descricao")
     private String staDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuStatus")
-    private Collection<TbUsuario> tbUsuarioCollection;
+    private List<TbUsuario> tbUsuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcStatus")
-    private Collection<TbFuncionario> tbFuncionarioCollection;
+    private List<TbFuncionario> tbFuncionarioList;
 
     public TbStatus() {
     }
 
-    public TbStatus(String staDescricao) {
+    public TbStatus(Integer staId) {
+        this.staId = staId;
+    }
+
+    public TbStatus(Integer staId, String staDescricao) {
+        this.staId = staId;
         this.staDescricao = staDescricao;
     }
 
@@ -68,22 +71,20 @@ public class TbStatus implements Serializable {
         this.staDescricao = staDescricao;
     }
 
-    @XmlTransient
-    public Collection<TbUsuario> getTbUsuarioCollection() {
-        return tbUsuarioCollection;
+    public List<TbUsuario> getTbUsuarioList() {
+        return tbUsuarioList;
     }
 
-    public void setTbUsuarioCollection(Collection<TbUsuario> tbUsuarioCollection) {
-        this.tbUsuarioCollection = tbUsuarioCollection;
+    public void setTbUsuarioList(List<TbUsuario> tbUsuarioList) {
+        this.tbUsuarioList = tbUsuarioList;
     }
 
-    @XmlTransient
-    public Collection<TbFuncionario> getTbFuncionarioCollection() {
-        return tbFuncionarioCollection;
+    public List<TbFuncionario> getTbFuncionarioList() {
+        return tbFuncionarioList;
     }
 
-    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
-        this.tbFuncionarioCollection = tbFuncionarioCollection;
+    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
+        this.tbFuncionarioList = tbFuncionarioList;
     }
 
     @Override

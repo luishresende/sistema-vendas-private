@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -17,8 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,17 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_cid_est_pai")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCidEstPai.findAll", query = "SELECT t FROM TbCidEstPai t"),
-    @NamedQuery(name = "TbCidEstPai.findByCepCidId", query = "SELECT t FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepCidId = :cepCidId"),
-    @NamedQuery(name = "TbCidEstPai.findByCepEstSigla", query = "SELECT t FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = :cepEstSigla")})
+    @NamedQuery(name = "TbCidEstPai.findAll", query = "SELECT t FROM TbCidEstPai t")})
 public class TbCidEstPai implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected TbCidEstPaiPK tbCidEstPaiPK;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbCidEstPai")
-    private Collection<TbEndPostal> tbEndPostalCollection;
+    private List<TbEndPostal> tbEndPostalList;
     @JoinColumn(name = "cep_cid_id", referencedColumnName = "cid_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TbCidade tbCidade;
@@ -50,10 +45,12 @@ public class TbCidEstPai implements Serializable {
     public TbCidEstPai() {
     }
 
-    public TbCidEstPai(TbCidade tbCidade, TbEstado tbEstado, TbPais cepPaiSigla) {
-        this.tbCidade = tbCidade;
-        this.tbEstado = tbEstado;
-        this.cepPaiSigla = cepPaiSigla;
+    public TbCidEstPai(TbCidEstPaiPK tbCidEstPaiPK) {
+        this.tbCidEstPaiPK = tbCidEstPaiPK;
+    }
+
+    public TbCidEstPai(int cepCidId, String cepEstSigla) {
+        this.tbCidEstPaiPK = new TbCidEstPaiPK(cepCidId, cepEstSigla);
     }
 
     public TbCidEstPaiPK getTbCidEstPaiPK() {
@@ -64,13 +61,12 @@ public class TbCidEstPai implements Serializable {
         this.tbCidEstPaiPK = tbCidEstPaiPK;
     }
 
-    @XmlTransient
-    public Collection<TbEndPostal> getTbEndPostalCollection() {
-        return tbEndPostalCollection;
+    public List<TbEndPostal> getTbEndPostalList() {
+        return tbEndPostalList;
     }
 
-    public void setTbEndPostalCollection(Collection<TbEndPostal> tbEndPostalCollection) {
-        this.tbEndPostalCollection = tbEndPostalCollection;
+    public void setTbEndPostalList(List<TbEndPostal> tbEndPostalList) {
+        this.tbEndPostalList = tbEndPostalList;
     }
 
     public TbCidade getTbCidade() {

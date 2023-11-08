@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,8 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,10 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_cliente")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbCliente.findAll", query = "SELECT t FROM TbCliente t"),
-    @NamedQuery(name = "TbCliente.findByCliId", query = "SELECT t FROM TbCliente t WHERE t.cliId = :cliId")})
+    @NamedQuery(name = "TbCliente.findAll", query = "SELECT t FROM TbCliente t")})
 public class TbCliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,15 +40,15 @@ public class TbCliente implements Serializable {
     @OneToOne(optional = false)
     private TbEntidade clicpfCnpj;
     @OneToMany(mappedBy = "venCliId")
-    private Collection<TbVenda> tbVendaCollection;
+    private List<TbVenda> tbVendaList;
 
     public TbCliente() {
     }
 
-    public TbCliente(TbEntidade clicpfCnpj) {
-        this.clicpfCnpj = clicpfCnpj;
+    public TbCliente(Integer cliId) {
+        this.cliId = cliId;
     }
-    
+
     public Integer getCliId() {
         return cliId;
     }
@@ -69,13 +65,12 @@ public class TbCliente implements Serializable {
         this.clicpfCnpj = clicpfCnpj;
     }
 
-    @XmlTransient
-    public Collection<TbVenda> getTbVendaCollection() {
-        return tbVendaCollection;
+    public List<TbVenda> getTbVendaList() {
+        return tbVendaList;
     }
 
-    public void setTbVendaCollection(Collection<TbVenda> tbVendaCollection) {
-        this.tbVendaCollection = tbVendaCollection;
+    public void setTbVendaList(List<TbVenda> tbVendaList) {
+        this.tbVendaList = tbVendaList;
     }
 
     @Override

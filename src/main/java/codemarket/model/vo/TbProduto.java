@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,9 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,11 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_produto")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbProduto.findAll", query = "SELECT t FROM TbProduto t"),
-    @NamedQuery(name = "TbProduto.findByPdtCodigo", query = "SELECT t FROM TbProduto t WHERE t.pdtCodigo = :pdtCodigo"),
-    @NamedQuery(name = "TbProduto.findByPdtNome", query = "SELECT t FROM TbProduto t WHERE t.pdtNome = :pdtNome")})
+    @NamedQuery(name = "TbProduto.findAll", query = "SELECT t FROM TbProduto t")})
 public class TbProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,10 +38,10 @@ public class TbProduto implements Serializable {
     @Basic(optional = false)
     @Column(name = "pdt_nome")
     private String pdtNome;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "tbProduto")
+    private TbEstoque tbEstoque;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbProduto")
-    private Collection<TbEstoque> tbEstoqueCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbProduto")
-    private Collection<TbFornecedorHasProduto> tbFornecedorHasProdutoCollection;
+    private List<TbFornecedorHasProduto> tbFornecedorHasProdutoList;
     @JoinColumn(name = "pdt_categoria", referencedColumnName = "catp_id")
     @ManyToOne(optional = false)
     private TbCategoriaProduto pdtCategoria;
@@ -56,10 +52,13 @@ public class TbProduto implements Serializable {
     public TbProduto() {
     }
 
-    public TbProduto(String pdtNome, TbCategoriaProduto pdtCategoria, TbUnidadeMedida pdtUmSigla) {
+    public TbProduto(String pdtCodigo) {
+        this.pdtCodigo = pdtCodigo;
+    }
+
+    public TbProduto(String pdtCodigo, String pdtNome) {
+        this.pdtCodigo = pdtCodigo;
         this.pdtNome = pdtNome;
-        this.pdtCategoria = pdtCategoria;
-        this.pdtUmSigla = pdtUmSigla;
     }
 
     public String getPdtCodigo() {
@@ -78,22 +77,20 @@ public class TbProduto implements Serializable {
         this.pdtNome = pdtNome;
     }
 
-    @XmlTransient
-    public Collection<TbEstoque> getTbEstoqueCollection() {
-        return tbEstoqueCollection;
+    public TbEstoque getTbEstoque() {
+        return tbEstoque;
     }
 
-    public void setTbEstoqueCollection(Collection<TbEstoque> tbEstoqueCollection) {
-        this.tbEstoqueCollection = tbEstoqueCollection;
+    public void setTbEstoque(TbEstoque tbEstoque) {
+        this.tbEstoque = tbEstoque;
     }
 
-    @XmlTransient
-    public Collection<TbFornecedorHasProduto> getTbFornecedorHasProdutoCollection() {
-        return tbFornecedorHasProdutoCollection;
+    public List<TbFornecedorHasProduto> getTbFornecedorHasProdutoList() {
+        return tbFornecedorHasProdutoList;
     }
 
-    public void setTbFornecedorHasProdutoCollection(Collection<TbFornecedorHasProduto> tbFornecedorHasProdutoCollection) {
-        this.tbFornecedorHasProdutoCollection = tbFornecedorHasProdutoCollection;
+    public void setTbFornecedorHasProdutoList(List<TbFornecedorHasProduto> tbFornecedorHasProdutoList) {
+        this.tbFornecedorHasProdutoList = tbFornecedorHasProdutoList;
     }
 
     public TbCategoriaProduto getPdtCategoria() {

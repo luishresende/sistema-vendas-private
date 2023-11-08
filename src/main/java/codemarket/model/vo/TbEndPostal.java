@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,8 +22,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,12 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_end_postal")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEndPostal.findAll", query = "SELECT t FROM TbEndPostal t"),
-    @NamedQuery(name = "TbEndPostal.findByEndPid", query = "SELECT t FROM TbEndPostal t WHERE t.endPid = :endPid"),
-    @NamedQuery(name = "TbEndPostal.findByEndPnomerua", query = "SELECT t FROM TbEndPostal t WHERE t.endPnomerua = :endPnomerua"),
-    @NamedQuery(name = "TbEndPostal.findByEndCEP", query = "SELECT t FROM TbEndPostal t WHERE t.endCEP = :endCEP")})
+    @NamedQuery(name = "TbEndPostal.findAll", query = "SELECT t FROM TbEndPostal t")})
 public class TbEndPostal implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,19 +56,21 @@ public class TbEndPostal implements Serializable {
     @ManyToOne(optional = false)
     private TbLogradouro endPlogid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endendPid")
-    private Collection<TbEndereco> tbEnderecoCollection;
+    private List<TbEndereco> tbEnderecoList;
 
     public TbEndPostal() {
     }
 
-    public TbEndPostal(String endPnomerua, String endCEP, TbBairro endPbaiid, TbCidEstPai tbCidEstPai, TbLogradouro endPlogid) {
+    public TbEndPostal(Integer endPid) {
+        this.endPid = endPid;
+    }
+
+    public TbEndPostal(Integer endPid, String endPnomerua, String endCEP) {
+        this.endPid = endPid;
         this.endPnomerua = endPnomerua;
         this.endCEP = endCEP;
-        this.endPbaiid = endPbaiid;
-        this.tbCidEstPai = tbCidEstPai;
-        this.endPlogid = endPlogid;
     }
-    
+
     public Integer getEndPid() {
         return endPid;
     }
@@ -123,13 +119,12 @@ public class TbEndPostal implements Serializable {
         this.endPlogid = endPlogid;
     }
 
-    @XmlTransient
-    public Collection<TbEndereco> getTbEnderecoCollection() {
-        return tbEnderecoCollection;
+    public List<TbEndereco> getTbEnderecoList() {
+        return tbEnderecoList;
     }
 
-    public void setTbEnderecoCollection(Collection<TbEndereco> tbEnderecoCollection) {
-        this.tbEnderecoCollection = tbEnderecoCollection;
+    public void setTbEnderecoList(List<TbEndereco> tbEnderecoList) {
+        this.tbEnderecoList = tbEnderecoList;
     }
 
     @Override

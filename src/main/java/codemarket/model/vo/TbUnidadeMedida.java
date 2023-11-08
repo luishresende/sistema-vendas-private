@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,8 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,12 +24,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_unidade_medida")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbUnidadeMedida.findAll", query = "SELECT t FROM TbUnidadeMedida t"),
-    @NamedQuery(name = "TbUnidadeMedida.findByUmSigla", query = "SELECT t FROM TbUnidadeMedida t WHERE t.umSigla = :umSigla"),
-    @NamedQuery(name = "TbUnidadeMedida.findByUmDescricao", query = "SELECT t FROM TbUnidadeMedida t WHERE t.umDescricao = :umDescricao"),
-    @NamedQuery(name = "TbUnidadeMedida.findByUmTipo", query = "SELECT t FROM TbUnidadeMedida t WHERE t.umTipo = :umTipo")})
+    @NamedQuery(name = "TbUnidadeMedida.findAll", query = "SELECT t FROM TbUnidadeMedida t")})
 public class TbUnidadeMedida implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,12 +39,17 @@ public class TbUnidadeMedida implements Serializable {
     @Column(name = "um_tipo")
     private String umTipo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pdtUmSigla")
-    private Collection<TbProduto> tbProdutoCollection;
+    private List<TbProduto> tbProdutoList;
 
     public TbUnidadeMedida() {
     }
 
-    public TbUnidadeMedida(String umDescricao, String umTipo) {
+    public TbUnidadeMedida(String umSigla) {
+        this.umSigla = umSigla;
+    }
+
+    public TbUnidadeMedida(String umSigla, String umDescricao, String umTipo) {
+        this.umSigla = umSigla;
         this.umDescricao = umDescricao;
         this.umTipo = umTipo;
     }
@@ -79,13 +78,12 @@ public class TbUnidadeMedida implements Serializable {
         this.umTipo = umTipo;
     }
 
-    @XmlTransient
-    public Collection<TbProduto> getTbProdutoCollection() {
-        return tbProdutoCollection;
+    public List<TbProduto> getTbProdutoList() {
+        return tbProdutoList;
     }
 
-    public void setTbProdutoCollection(Collection<TbProduto> tbProdutoCollection) {
-        this.tbProdutoCollection = tbProdutoCollection;
+    public void setTbProdutoList(List<TbProduto> tbProdutoList) {
+        this.tbProdutoList = tbProdutoList;
     }
 
     @Override

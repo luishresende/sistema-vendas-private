@@ -10,14 +10,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,24 +25,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "tb_entrada_estoque")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntradaEstoque.findAll", query = "SELECT t FROM TbEntradaEstoque t"),
-    @NamedQuery(name = "TbEntradaEstoque.findByEntreId", query = "SELECT t FROM TbEntradaEstoque t WHERE t.entreId = :entreId")})
+    @NamedQuery(name = "TbEntradaEstoque.findAll", query = "SELECT t FROM TbEntradaEstoque t")})
 public class TbEntradaEstoque implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "entre_id")
     private Integer entreId;
     @JoinColumn(name = "entre_entrada_id", referencedColumnName = "entr_id")
     @ManyToOne(optional = false)
     private TbEntrada entreEntradaId;
-    @JoinColumns({
-        @JoinColumn(name = "entre_pdt_codigo", referencedColumnName = "esto_produto_codigo"),
-        @JoinColumn(name = "entre_almo_id", referencedColumnName = "esto_almoxarifado")})
+    @JoinColumn(name = "entre_pdt_codigo", referencedColumnName = "esto_produto_codigo")
     @ManyToOne(optional = false)
-    private TbEstoque tbEstoque;
+    private TbEstoque entrePdtCodigo;
     @JoinColumn(name = "entre_for_id", referencedColumnName = "for_id")
     @ManyToOne(optional = false)
     private TbFornecedor entreForId;
@@ -50,10 +47,8 @@ public class TbEntradaEstoque implements Serializable {
     public TbEntradaEstoque() {
     }
 
-    public TbEntradaEstoque(TbEntrada entreEntradaId, TbEstoque tbEstoque, TbFornecedor entreForId) {
-        this.entreEntradaId = entreEntradaId;
-        this.tbEstoque = tbEstoque;
-        this.entreForId = entreForId;
+    public TbEntradaEstoque(Integer entreId) {
+        this.entreId = entreId;
     }
 
     public Integer getEntreId() {
@@ -72,12 +67,12 @@ public class TbEntradaEstoque implements Serializable {
         this.entreEntradaId = entreEntradaId;
     }
 
-    public TbEstoque getTbEstoque() {
-        return tbEstoque;
+    public TbEstoque getEntrePdtCodigo() {
+        return entrePdtCodigo;
     }
 
-    public void setTbEstoque(TbEstoque tbEstoque) {
-        this.tbEstoque = tbEstoque;
+    public void setEntrePdtCodigo(TbEstoque entrePdtCodigo) {
+        this.entrePdtCodigo = entrePdtCodigo;
     }
 
     public TbFornecedor getEntreForId() {

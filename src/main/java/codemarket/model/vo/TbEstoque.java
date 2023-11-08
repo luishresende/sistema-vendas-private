@@ -7,20 +7,18 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,21 +26,14 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_estoque")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t"),
-    @NamedQuery(name = "TbEstoque.findByEstoAlmoxarifado", query = "SELECT t FROM TbEstoque t WHERE t.tbEstoquePK.estoAlmoxarifado = :estoAlmoxarifado"),
-    @NamedQuery(name = "TbEstoque.findByEstoProdutoCodigo", query = "SELECT t FROM TbEstoque t WHERE t.tbEstoquePK.estoProdutoCodigo = :estoProdutoCodigo"),
-    @NamedQuery(name = "TbEstoque.findByEstoQuantidade", query = "SELECT t FROM TbEstoque t WHERE t.estoQuantidade = :estoQuantidade"),
-    @NamedQuery(name = "TbEstoque.findByEstoValorFinal", query = "SELECT t FROM TbEstoque t WHERE t.estoValorFinal = :estoValorFinal"),
-    @NamedQuery(name = "TbEstoque.findByEstoValorFinalPrazo", query = "SELECT t FROM TbEstoque t WHERE t.estoValorFinalPrazo = :estoValorFinalPrazo"),
-    @NamedQuery(name = "TbEstoque.findByEstoLimiteMin", query = "SELECT t FROM TbEstoque t WHERE t.estoLimiteMin = :estoLimiteMin"),
-    @NamedQuery(name = "TbEstoque.findByEstoProibirVendaLimMin", query = "SELECT t FROM TbEstoque t WHERE t.estoProibirVendaLimMin = :estoProibirVendaLimMin"),
-    @NamedQuery(name = "TbEstoque.findByEstoAtualizarCustoNoPedido", query = "SELECT t FROM TbEstoque t WHERE t.estoAtualizarCustoNoPedido = :estoAtualizarCustoNoPedido")})
+    @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t")})
 public class TbEstoque implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected TbEstoquePK tbEstoquePK;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "esto_produto_codigo")
+    private String estoProdutoCodigo;
     @Basic(optional = false)
     @Column(name = "esto_quantidade")
     private float estoQuantidade;
@@ -61,39 +52,36 @@ public class TbEstoque implements Serializable {
     @Basic(optional = false)
     @Column(name = "esto_atualizar_custo_no_pedido")
     private short estoAtualizarCustoNoPedido;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstoque")
-    private Collection<TbPedidoTransferencia> tbPedidoTransferenciaCollection;
-    @JoinColumn(name = "esto_almoxarifado", referencedColumnName = "almo_id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private TbAlmoxarifado tbAlmoxarifado;
     @JoinColumn(name = "esto_produto_codigo", referencedColumnName = "pdt_codigo", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private TbProduto tbProduto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstoque")
-    private Collection<TbEntradaEstoque> tbEntradaEstoqueCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbEstoque")
-    private Collection<TbPedido> tbPedidoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrePdtCodigo")
+    private List<TbEntradaEstoque> tbEntradaEstoqueList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedEstoProduto")
+    private List<TbPedido> tbPedidoList;
 
     public TbEstoque() {
     }
 
-    public TbEstoque(float estoQuantidade, float estoValorFinal, Float estoValorFinalPrazo, float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido, TbAlmoxarifado tbAlmoxarifado, TbProduto tbProduto) {
+    public TbEstoque(String estoProdutoCodigo) {
+        this.estoProdutoCodigo = estoProdutoCodigo;
+    }
+
+    public TbEstoque(String estoProdutoCodigo, float estoQuantidade, float estoValorFinal, float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido) {
+        this.estoProdutoCodigo = estoProdutoCodigo;
         this.estoQuantidade = estoQuantidade;
         this.estoValorFinal = estoValorFinal;
-        this.estoValorFinalPrazo = estoValorFinalPrazo;
         this.estoLimiteMin = estoLimiteMin;
         this.estoProibirVendaLimMin = estoProibirVendaLimMin;
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
-        this.tbAlmoxarifado = tbAlmoxarifado;
-        this.tbProduto = tbProduto;
     }
 
-    public TbEstoquePK getTbEstoquePK() {
-        return tbEstoquePK;
+    public String getEstoProdutoCodigo() {
+        return estoProdutoCodigo;
     }
 
-    public void setTbEstoquePK(TbEstoquePK tbEstoquePK) {
-        this.tbEstoquePK = tbEstoquePK;
+    public void setEstoProdutoCodigo(String estoProdutoCodigo) {
+        this.estoProdutoCodigo = estoProdutoCodigo;
     }
 
     public float getEstoQuantidade() {
@@ -144,23 +132,6 @@ public class TbEstoque implements Serializable {
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
     }
 
-    @XmlTransient
-    public Collection<TbPedidoTransferencia> getTbPedidoTransferenciaCollection() {
-        return tbPedidoTransferenciaCollection;
-    }
-
-    public void setTbPedidoTransferenciaCollection(Collection<TbPedidoTransferencia> tbPedidoTransferenciaCollection) {
-        this.tbPedidoTransferenciaCollection = tbPedidoTransferenciaCollection;
-    }
-
-    public TbAlmoxarifado getTbAlmoxarifado() {
-        return tbAlmoxarifado;
-    }
-
-    public void setTbAlmoxarifado(TbAlmoxarifado tbAlmoxarifado) {
-        this.tbAlmoxarifado = tbAlmoxarifado;
-    }
-
     public TbProduto getTbProduto() {
         return tbProduto;
     }
@@ -169,28 +140,26 @@ public class TbEstoque implements Serializable {
         this.tbProduto = tbProduto;
     }
 
-    @XmlTransient
-    public Collection<TbEntradaEstoque> getTbEntradaEstoqueCollection() {
-        return tbEntradaEstoqueCollection;
+    public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
+        return tbEntradaEstoqueList;
     }
 
-    public void setTbEntradaEstoqueCollection(Collection<TbEntradaEstoque> tbEntradaEstoqueCollection) {
-        this.tbEntradaEstoqueCollection = tbEntradaEstoqueCollection;
+    public void setTbEntradaEstoqueList(List<TbEntradaEstoque> tbEntradaEstoqueList) {
+        this.tbEntradaEstoqueList = tbEntradaEstoqueList;
     }
 
-    @XmlTransient
-    public Collection<TbPedido> getTbPedidoCollection() {
-        return tbPedidoCollection;
+    public List<TbPedido> getTbPedidoList() {
+        return tbPedidoList;
     }
 
-    public void setTbPedidoCollection(Collection<TbPedido> tbPedidoCollection) {
-        this.tbPedidoCollection = tbPedidoCollection;
+    public void setTbPedidoList(List<TbPedido> tbPedidoList) {
+        this.tbPedidoList = tbPedidoList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tbEstoquePK != null ? tbEstoquePK.hashCode() : 0);
+        hash += (estoProdutoCodigo != null ? estoProdutoCodigo.hashCode() : 0);
         return hash;
     }
 
@@ -201,7 +170,7 @@ public class TbEstoque implements Serializable {
             return false;
         }
         TbEstoque other = (TbEstoque) object;
-        if ((this.tbEstoquePK == null && other.tbEstoquePK != null) || (this.tbEstoquePK != null && !this.tbEstoquePK.equals(other.tbEstoquePK))) {
+        if ((this.estoProdutoCodigo == null && other.estoProdutoCodigo != null) || (this.estoProdutoCodigo != null && !this.estoProdutoCodigo.equals(other.estoProdutoCodigo))) {
             return false;
         }
         return true;
@@ -209,7 +178,7 @@ public class TbEstoque implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbEstoque[ tbEstoquePK=" + tbEstoquePK + " ]";
+        return "codemarket.model.vo.TbEstoque[ estoProdutoCodigo=" + estoProdutoCodigo + " ]";
     }
     
 }

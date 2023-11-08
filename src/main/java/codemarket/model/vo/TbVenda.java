@@ -7,8 +7,8 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,8 +24,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,11 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_venda")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbVenda.findAll", query = "SELECT t FROM TbVenda t"),
-    @NamedQuery(name = "TbVenda.findByVenId", query = "SELECT t FROM TbVenda t WHERE t.venId = :venId"),
-    @NamedQuery(name = "TbVenda.findByVenData", query = "SELECT t FROM TbVenda t WHERE t.venData = :venData")})
+    @NamedQuery(name = "TbVenda.findAll", query = "SELECT t FROM TbVenda t")})
 public class TbVenda implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,10 +44,8 @@ public class TbVenda implements Serializable {
     @Column(name = "ven_data")
     @Temporal(TemporalType.TIMESTAMP)
     private Date venData;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "osVenda")
-    private Collection<TbOrdemServico> tbOrdemServicoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbVenda")
-    private Collection<TbPedido> tbPedidoCollection;
+    private List<TbPedido> tbPedidoList;
     @JoinColumn(name = "ven_cli_id", referencedColumnName = "cli_id")
     @ManyToOne
     private TbCliente venCliId;
@@ -63,10 +56,13 @@ public class TbVenda implements Serializable {
     public TbVenda() {
     }
 
-    public TbVenda(Date venData, TbCliente venCliId, TbTipoPagamento venTpId) {
+    public TbVenda(Integer venId) {
+        this.venId = venId;
+    }
+
+    public TbVenda(Integer venId, Date venData) {
+        this.venId = venId;
         this.venData = venData;
-        this.venCliId = venCliId;
-        this.venTpId = venTpId;
     }
 
     public Integer getVenId() {
@@ -85,22 +81,12 @@ public class TbVenda implements Serializable {
         this.venData = venData;
     }
 
-    @XmlTransient
-    public Collection<TbOrdemServico> getTbOrdemServicoCollection() {
-        return tbOrdemServicoCollection;
+    public List<TbPedido> getTbPedidoList() {
+        return tbPedidoList;
     }
 
-    public void setTbOrdemServicoCollection(Collection<TbOrdemServico> tbOrdemServicoCollection) {
-        this.tbOrdemServicoCollection = tbOrdemServicoCollection;
-    }
-
-    @XmlTransient
-    public Collection<TbPedido> getTbPedidoCollection() {
-        return tbPedidoCollection;
-    }
-
-    public void setTbPedidoCollection(Collection<TbPedido> tbPedidoCollection) {
-        this.tbPedidoCollection = tbPedidoCollection;
+    public void setTbPedidoList(List<TbPedido> tbPedidoList) {
+        this.tbPedidoList = tbPedidoList;
     }
 
     public TbCliente getVenCliId() {

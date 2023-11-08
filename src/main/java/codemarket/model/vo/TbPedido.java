@@ -12,12 +12,10 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,13 +23,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "tb_pedido")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbPedido.findAll", query = "SELECT t FROM TbPedido t"),
-    @NamedQuery(name = "TbPedido.findByPedId", query = "SELECT t FROM TbPedido t WHERE t.tbPedidoPK.pedId = :pedId"),
-    @NamedQuery(name = "TbPedido.findByPedVenda", query = "SELECT t FROM TbPedido t WHERE t.tbPedidoPK.pedVenda = :pedVenda"),
-    @NamedQuery(name = "TbPedido.findByPedQuantidade", query = "SELECT t FROM TbPedido t WHERE t.pedQuantidade = :pedQuantidade"),
-    @NamedQuery(name = "TbPedido.findByPedDesconto", query = "SELECT t FROM TbPedido t WHERE t.pedDesconto = :pedDesconto")})
+    @NamedQuery(name = "TbPedido.findAll", query = "SELECT t FROM TbPedido t")})
 public class TbPedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -42,11 +35,9 @@ public class TbPedido implements Serializable {
     @Basic(optional = false)
     @Column(name = "ped_desconto")
     private float pedDesconto;
-    @JoinColumns({
-        @JoinColumn(name = "ped_esto_almoxarifado", referencedColumnName = "esto_almoxarifado"),
-        @JoinColumn(name = "ped_esto_produto", referencedColumnName = "esto_produto_codigo")})
+    @JoinColumn(name = "ped_esto_produto", referencedColumnName = "esto_produto_codigo")
     @ManyToOne(optional = false)
-    private TbEstoque tbEstoque;
+    private TbEstoque pedEstoProduto;
     @JoinColumn(name = "ped_id", referencedColumnName = "ven_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TbVenda tbVenda;
@@ -54,11 +45,14 @@ public class TbPedido implements Serializable {
     public TbPedido() {
     }
 
-    public TbPedido(float pedQuantidade, float pedDesconto, TbEstoque tbEstoque, TbVenda tbVenda) {
+    public TbPedido(TbPedidoPK tbPedidoPK) {
+        this.tbPedidoPK = tbPedidoPK;
+    }
+
+    public TbPedido(TbPedidoPK tbPedidoPK, float pedQuantidade, float pedDesconto) {
+        this.tbPedidoPK = tbPedidoPK;
         this.pedQuantidade = pedQuantidade;
         this.pedDesconto = pedDesconto;
-        this.tbEstoque = tbEstoque;
-        this.tbVenda = tbVenda;
     }
 
     public TbPedido(int pedId, String pedVenda) {
@@ -89,12 +83,12 @@ public class TbPedido implements Serializable {
         this.pedDesconto = pedDesconto;
     }
 
-    public TbEstoque getTbEstoque() {
-        return tbEstoque;
+    public TbEstoque getPedEstoProduto() {
+        return pedEstoProduto;
     }
 
-    public void setTbEstoque(TbEstoque tbEstoque) {
-        this.tbEstoque = tbEstoque;
+    public void setPedEstoProduto(TbEstoque pedEstoProduto) {
+        this.pedEstoProduto = pedEstoProduto;
     }
 
     public TbVenda getTbVenda() {

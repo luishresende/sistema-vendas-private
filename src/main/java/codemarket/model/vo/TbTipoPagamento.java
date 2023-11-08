@@ -7,7 +7,7 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,8 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,11 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_tipo_pagamento")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbTipoPagamento.findAll", query = "SELECT t FROM TbTipoPagamento t"),
-    @NamedQuery(name = "TbTipoPagamento.findByTpId", query = "SELECT t FROM TbTipoPagamento t WHERE t.tpId = :tpId"),
-    @NamedQuery(name = "TbTipoPagamento.findByTpDescricao", query = "SELECT t FROM TbTipoPagamento t WHERE t.tpDescricao = :tpDescricao")})
+    @NamedQuery(name = "TbTipoPagamento.findAll", query = "SELECT t FROM TbTipoPagamento t")})
 public class TbTipoPagamento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,12 +39,17 @@ public class TbTipoPagamento implements Serializable {
     @Column(name = "tp_descricao")
     private String tpDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "venTpId")
-    private Collection<TbVenda> tbVendaCollection;
+    private List<TbVenda> tbVendaList;
 
     public TbTipoPagamento() {
     }
 
-    public TbTipoPagamento(String tpDescricao) {
+    public TbTipoPagamento(Integer tpId) {
+        this.tpId = tpId;
+    }
+
+    public TbTipoPagamento(Integer tpId, String tpDescricao) {
+        this.tpId = tpId;
         this.tpDescricao = tpDescricao;
     }
 
@@ -69,13 +69,12 @@ public class TbTipoPagamento implements Serializable {
         this.tpDescricao = tpDescricao;
     }
 
-    @XmlTransient
-    public Collection<TbVenda> getTbVendaCollection() {
-        return tbVendaCollection;
+    public List<TbVenda> getTbVendaList() {
+        return tbVendaList;
     }
 
-    public void setTbVendaCollection(Collection<TbVenda> tbVendaCollection) {
-        this.tbVendaCollection = tbVendaCollection;
+    public void setTbVendaList(List<TbVenda> tbVendaList) {
+        this.tbVendaList = tbVendaList;
     }
 
     @Override

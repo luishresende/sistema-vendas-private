@@ -49,17 +49,6 @@
                   </ImageView>
                   <VBox GridPane.rowIndex="4">
                      <children>
-                        <Button fx:id="almoxarifadoButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Almoxarifado" textFill="WHITE">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <ColorAdjust />
-                           </effect>
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Button>
                         <Button fx:id="fornecedoresButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleFornecedoresButton" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Fornecedores" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -82,17 +71,6 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Button>
-                        <Button fx:id="filialButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleFilialButton" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Filial" textFill="WHITE">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <ColorAdjust />
-                           </effect>
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Button>
                         <Button fx:id="funcionarioButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleFuncionariosButton" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Funcionarios" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -105,17 +83,6 @@
                            </font>
                         </Button>
                         <Button fx:id="clientesButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleClientesButton" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Clientes" textFill="WHITE">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <ColorAdjust />
-                           </effect>
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="servicoButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Serviço" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

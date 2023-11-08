@@ -1,6 +1,7 @@
 package codemarket.control;
 
 import codemarket.control.tableViewModel.EnderecoModel;
+import codemarket.control.tableViewModel.FoneModel;
 import codemarket.model.conexao.HibernateConnection;
 import codemarket.model.rn.BairroRN;
 import codemarket.model.rn.CidEstPaiRN;
@@ -13,6 +14,7 @@ import codemarket.model.rn.EstadoRN;
 import codemarket.model.rn.LogradouroRN;
 import codemarket.model.rn.PaisRN;
 import codemarket.model.rn.SexoRN;
+import codemarket.model.rn.TelefoneTipoRN;
 import codemarket.model.vo.TbBairro;
 import codemarket.model.vo.TbCidEstPai;
 import codemarket.model.vo.TbCidade;
@@ -52,11 +54,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 
 public class CadastroEntidadeViewController implements Initializable {
+
     @FXML
     private Label tituloJanela;
     @FXML
@@ -116,13 +116,21 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private Button buttonFinalizar;
     @FXML
-    private Button buttonCancelar; 
+    private Button buttonCancelar;
     @FXML
-    private Button buttonSalvarEnd;
+    private Button buttonEndSalvar;
     @FXML
-    private Button buttonSalvarInicial;
+    private Button buttonFoneSalvar;
     @FXML
-    private TableView<EnderecoModel> tableEnd;        
+    private Button buttonAlterarFone;
+    @FXML
+    private Button buttonAlterarEnd;
+    @FXML
+    private Button buttonCancelarEnd;
+    @FXML
+    private Button buttonCancelarFone;
+    @FXML
+    private TableView<EnderecoModel> tableEnd;
     @FXML
     private TableColumn<EnderecoModel, String> tbEndtipo;
     @FXML
@@ -133,10 +141,22 @@ public class CadastroEntidadeViewController implements Initializable {
     private TableColumn<EnderecoModel, String> tbEndpais;
     @FXML
     private TableColumn<EnderecoModel, String> tbEndcep;
-    
+
+    @FXML
+    private TableView<FoneModel> tableFone;
+    @FXML
+    private TableColumn<FoneModel, String> tbFoneddd;
+    @FXML
+    private TableColumn<FoneModel, String> tbFonetipo;
+    @FXML
+    private TableColumn<FoneModel, String> tbFonefone;
+    @FXML
+    private TableColumn<FoneModel, String> tbFonenome;
+
     private ToggleGroup nacionalidade;
     private ToggleGroup seleEntidade;
-    
+
+    private ObservableList<FoneModel> telefones = FXCollections.observableArrayList();
     private ObservableList<EnderecoModel> enderecos = FXCollections.observableArrayList();
 
     private Stage dialogStage;
@@ -258,28 +278,26 @@ public class CadastroEntidadeViewController implements Initializable {
             cep.setText(texto.substring(0, 5) + " - " + texto.substring(5, 8));
         }
     }
-    
-    String pai;
-    String est;
-    String cid;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-  
-        // Configure as colunas da tabela para exibir os campos da classe EnderecoData
+
         tbEndtipo.setCellValueFactory(new PropertyValueFactory<>("tipoEndereco"));
         tbEndcep.setCellValueFactory(new PropertyValueFactory<>("cep"));
         tbEndcidade.setCellValueFactory(new PropertyValueFactory<>("cidade"));
         tbEndpais.setCellValueFactory(new PropertyValueFactory<>("pais"));
         tbEndest.setCellValueFactory(new PropertyValueFactory<>("estado"));
-
-        // Defina a tabela para usar a lista observável de endereços
         tableEnd.setItems(enderecos);
-    
+
+        tbFonenome.setCellValueFactory(new PropertyValueFactory<>("nomeContato"));
+        tbFoneddd.setCellValueFactory(new PropertyValueFactory<>("ddd"));
+        tbFonefone.setCellValueFactory(new PropertyValueFactory<>("Fone"));
+        tbFonetipo.setCellValueFactory(new PropertyValueFactory<>("tipoContato"));
+        tableFone.setItems(telefones);
+
         /* --------------- Combo Box - Tipo de Cliente ---------------------- */
         // Adicionando dados do Tipo de Cliente
         ObservableList<String> tipo = FXCollections.observableArrayList(
-                "Selecione...",
                 "Físico",
                 "Jurídico"
         );
@@ -288,18 +306,15 @@ public class CadastroEntidadeViewController implements Initializable {
 
         /* ----------------- Combo Box - Tipo de Sexo ----------------------- */
         // Adicionando dados do Tipo de Sexo
-        ObservableList<String> sexo = FXCollections.observableArrayList(
-                "Selecione...",
-                "Masculino",
-                "Feminino",
-                "Outro"
-        );
-        tipoSexo.setItems(sexo);
+        SexoRN sexo = new SexoRN();
+        ArrayList tiposSexo = (ArrayList) sexo.buscarTodos("sexDescricao");
+        ObservableList<String> TS = FXCollections.observableArrayList(tiposSexo);
+        tipoSexo.setItems(TS);
+
         /* ------------------------------------------------------------------ */
         /* ----------------- Combo Box - Tipo de Endereço ------------------- */
         // Adicionando dados do Tipo de Sexo
         ObservableList<String> der = FXCollections.observableArrayList(
-                "Selecione...",
                 "Residencial",
                 "Outro"
         );
@@ -316,122 +331,148 @@ public class CadastroEntidadeViewController implements Initializable {
         // Adicionando dados do Tipo de Cidade
         CidadeRN cd = new CidadeRN();
         estado.setOnAction(event -> {
-            est = this.estado.getValue();
-            String jpql = " SELECT t.tbCidade.cidDescricao FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = '" + est + "'";
+            String jpql = " SELECT t.tbCidade.cidDescricao FROM TbCidEstPai t WHERE t.tbCidEstPaiPK.cepEstSigla = '" + estado.getValue() + "'";
             List<String> listCidades = cd.pesquisar(jpql);
             ObservableList<String> CI = FXCollections.observableArrayList(listCidades);
             cidade.setItems(CI);
         });
         /* ------------------------------------------------------------------ */
+
+        TelefoneTipoRN telRN = new TelefoneTipoRN();
+        ArrayList tipotelefones = (ArrayList) telRN.buscarTodos("ttDescricao");
+        ObservableList<String> TT = FXCollections.observableArrayList(tipotelefones);
+        tipoContato.setItems(TT);
+
+        PaisRN paiRN = new PaisRN();
+        ArrayList paises = (ArrayList) paiRN.buscarTodos("paiDescricao");
+        ObservableList<String> P = FXCollections.observableArrayList(paises);
+        pais.setItems(P);
         
-        nacionalidade = new ToggleGroup();
-        // Associe o ToggleGroup aos RadioButtons
-        brasileiro.setToggleGroup(nacionalidade);
-        estrangeiro.setToggleGroup(nacionalidade);
-        // Adicione um evento para lidar com a seleção
-        nacionalidade.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (nacionalidade.getSelectedToggle() == brasileiro) {
-                pais.setValue("Brasil");
-                // Faça algo quando o "Brasileiro" for selecionado
-            } else if (nacionalidade.getSelectedToggle() == estrangeiro) {
-                pais.setValue("Selecione...");
-                // Faça algo quando o "Estrangeiro" for selecionado
+        brasileiro.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) {
+                brasileiro.setSelected(true); // Impede que o CheckBox seja desmarcado
             }
         });
+
     }
 
     @FXML
     void handleFinalizarButton() {
-        // Dados Pessoais
-        String name = this.nome.getText();
+        
+    for (FoneModel fones : telefones) {
+        
+    }
+
+    for (EnderecoModel endereco : enderecos) {
+        
+    }
+        
+        
+        
+        // Inserindo os dados na tabela entidade
+                String name = this.nome.getText();
         String nomeFant = this.nomeFantasia.getText();
-        String sexoSele = this.tipoSexo.getValue();
+        String sexoSele = this.tipoSexo.getValue(); 
         String tipocliente = this.tipoCliente.getValue();
         LocalDate dataNasc = this.dataNASC.getValue();
         Date dataNascDate = Date.from(dataNasc.atStartOfDay(ZoneId.systemDefault()).toInstant());
         String Email = this.email.getText();
         String doc = this.cpfcnpj.getText();
-        String contato = this.tipoContato.getValue();
-        String nomContato = this.nomeContato.getText();
-        String DDD = this.ddd.getText();
-        String telefone = this.fone.getText();
-        String obs = this.observacao.getText();
-        // Dados de Endereço
-        String log = this.logradouro.getText();
-        String tipoEnd = this.tipoEndereco.getValue();
-        String bai = this.bairro.getText();
-        String comp = this.complemento.getText();
-        String CEP = this.cep.getText();
-        String numeroTex = this.numero.getText();
-        // Inserindo os dados de endereço
-        int num = 0;
-        try {
-            num = Integer.parseInt(numeroTex);
-        } catch (NumberFormatException e) {}
-
-        // Inserindo no Banco de Dados
-        TbBairro BAIRRO = new TbBairro(bai);
-        BairroRN ba = new BairroRN();
-        ba.salvar(BAIRRO);
-        TbLogradouro LOGR = new TbLogradouro(log);
-        LogradouroRN logradourorn = new LogradouroRN();
-        logradourorn.salvar(LOGR);
-        TbPais PAI = new TbPais("BR",pai);
-        PaisRN p = new PaisRN();
-        p.salvar(PAI);
-        TbEstado ESTADO = new TbEstado("PR",est);
-        EstadoRN es = new EstadoRN();
-        es.salvar(ESTADO);
-        TbCidade CIDADE = new TbCidade(cid);
-        CidadeRN cd = new CidadeRN();
-        cd.salvar(CIDADE);
-        TbCidEstPai CIESPA = new TbCidEstPai(CIDADE, ESTADO, PAI);
-        CidEstPaiRN ciespa = new CidEstPaiRN();
-        ciespa.salvar(CIESPA);
-        TbEndPostal ENDPOSTAL = new TbEndPostal(tipoEnd, CEP, BAIRRO, CIESPA, LOGR);
-        EndPostalRN ed = new EndPostalRN();
-        ed.salvar(ENDPOSTAL);
-        TbEndereco ENDERECO = new TbEndereco(num, comp, ENDPOSTAL);
-        EnderecoRN end = new EnderecoRN();
-        end.salvar(ENDERECO);
-        // Inserindo na tabela Sexo        
-        TbSexo SEX = new TbSexo(sexoSele);
-        SexoRN s = new SexoRN();
-        s.salvar(SEX);
-        // Inserindo os dados na tabela entidade
-        TbEntidade ENTIDADE = new TbEntidade(name, nomeFant, tipoEnd, est, telefone, Email, dataNascDate, est, ENDERECO, SEX);
+//        TbEntidade ENTIDADE = new TbEntidade(name, nomeFant, tipoEnd, est, telefone, Email, dataNascDate, est, ENDERECO, SEX);
         EntidadeRN ent = new EntidadeRN();
-        ent.salvar(ENTIDADE);
+//        ent.salvar(ENTIDADE);
 
-        if (tipoEntidade1.isSelected()) {
-            TbCliente CLIENTE = new TbCliente(ENTIDADE);
-            ClienteRN cliente = new ClienteRN();
-            cliente.salvar(CLIENTE);
-        }
-        if (tipoEntidade2.isSelected()) {
-            TbFornecedor FORNECEDOR = new TbFornecedor(ENTIDADE);
-            EntidadeRN entidade = new EntidadeRN();
-            entidade.salvar(ENTIDADE);
-        }
+//        if (tipoEntidade1.isSelected()) {
+//            TbCliente CLIENTE = new TbCliente(ENTIDADE);
+//            ClienteRN cliente = new ClienteRN();
+//            cliente.salvar(CLIENTE);
+//        }
+//        if (tipoEntidade2.isSelected()) {
+//            TbFornecedor FORNECEDOR = new TbFornecedor(ENTIDADE);
+//            EntidadeRN entidade = new EntidadeRN();
+//            entidade.salvar(ENTIDADE);
+//        }
     }
 
     @FXML
     void handleCancelarbutton() {
         dialogStage.close();
     }
-    
+
     @FXML
-    void handleSalvarInicialbutton() {
-        
+    void handleSalvarFonebutton() {
+        FoneModel novoFone = new FoneModel(nomeContato.getText(), ddd.getText(), fone.getText(), tipoContato.getValue());
+        telefones.add(novoFone);
+
+        nomeContato.clear();
+        ddd.clear();
+        fone.clear();
+        tipoContato.setValue("Selecione...");
+    }
+
+    @FXML
+    void handleSalvarEndbutton() {
+        EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(),
+                cidade.getValue(), estado.getValue(),
+                pais.getValue(), logradouro.getText(),
+                bairro.getText(), complemento.getText(), numero.getText());
+        enderecos.add(novoEndereco);
+
+        tipoEndereco.setValue("Selecione...");
+        cep.clear();
+        cidade.setValue("Selecione...");
+        estado.setValue("Selecione...");
+        pais.setValue("Selecione...");
+        logradouro.clear();
+        bairro.clear();
+        complemento.clear();
+        numero.clear();
+
+    }
+
+    @FXML
+    void handlerAlterarEndButton() {
+        EnderecoModel selectedEndereco = tableEnd.getSelectionModel().getSelectedItem();
+        if (selectedEndereco != null) {
+            tipoEndereco.setValue(selectedEndereco.getTipoEndereco());
+            cep.setText(selectedEndereco.getCep());
+            cidade.setValue(selectedEndereco.getCidade());
+            estado.setValue(selectedEndereco.getEstado());
+            pais.setValue(selectedEndereco.getPais());
+            logradouro.setText(selectedEndereco.getLogradouro());
+            bairro.setText(selectedEndereco.getBairro());
+            complemento.setText(selectedEndereco.getComplemento());
+            numero.setText(selectedEndereco.getNumero());
+
+            // Remova o item da lista de endereços
+            enderecos.remove(selectedEndereco);
+        }
+    }
+
+    @FXML
+    void handlerAlterarFoneButton() {
+        FoneModel selectedFone = tableFone.getSelectionModel().getSelectedItem();
+        if (selectedFone != null) {
+            nomeContato.setText(selectedFone.getNomeContato());
+            ddd.setText(selectedFone.getDdd());
+            fone.setText(selectedFone.getFone());
+            tipoContato.setValue(selectedFone.getTipoContato());
+
+            // Remova o item da lista de telefones
+            telefones.remove(selectedFone);
+        }
     }
     
     @FXML
-    void handleSalvarEndbutton() {
-        EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(), 
-                                                        cidade.getValue(), estado.getValue(), 
-                                                        pais.getValue(), logradouro.getText(),
-                                                        bairro.getText(), complemento.getText(), numero.getText());
-        enderecos.add(novoEndereco);
+    void handlerCancelarFone() {
+        FoneModel selectedFone = tableFone.getSelectionModel().getSelectedItem();
+        telefones.remove(selectedFone);
 
+    }
+    
+    @FXML
+    void handlerCancelarEnd() {
+        EnderecoModel selectedEndereco = tableEnd.getSelectionModel().getSelectedItem();
+        enderecos.remove(selectedEndereco);
     }
 }

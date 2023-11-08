@@ -6,7 +6,7 @@
 package codemarket.model.rn;
 
 import codemarket.model.dao.GenericDAO;
-import codemarket.model.vo.TbTelefoneTipo;
+import codemarket.model.vo.TbTipoTelefone;
 import java.util.List;
 
 /**
@@ -15,32 +15,32 @@ import java.util.List;
  */
 public class TelefoneTipoRN {
 
-    private GenericDAO<TbTelefoneTipo> genericDao;
+    private GenericDAO<TbTipoTelefone> genericDao;
 
     public TelefoneTipoRN() {
         genericDao = new GenericDAO<>();
     }
 
-    public void salvar(TbTelefoneTipo Fone) {
+    public void salvar(TbTipoTelefone Fone) {
         genericDao.salvar(Fone);
     }
 
-    public void atualizar(TbTelefoneTipo Fone) {
+    public void atualizar(TbTipoTelefone Fone) {
         genericDao.atualizar(Fone);
     }
 
-    public void excluir(TbTelefoneTipo Fone) {
+    public void excluir(TbTipoTelefone Fone) {
         genericDao.excluir(Fone);
     }
 
     public List buscarTodos(String coluna) {
-        List<TbTelefoneTipo> Bairros = genericDao.listarTodos(TbTelefoneTipo.class, coluna);
+        List<TbTipoTelefone> Bairros = genericDao.listarTodos(TbTipoTelefone.class, coluna);
         return Bairros;
     }
 
-    public TbTelefoneTipo listaUm(String pesquisa, String valor, Class classe) {
+    public TbTipoTelefone listaUm(String pesquisa, String valor, Class classe) {
         String jpql = "SELECT t FROM " + classe.getTypeName() + "t where t." + pesquisa + " = '" + valor + "'";
-        TbTelefoneTipo obj = genericDao.listarUm(pesquisa, valor, classe);
+        TbTipoTelefone obj = genericDao.listarUm(pesquisa, valor, classe);
         return obj;
     }
 

@@ -7,14 +7,15 @@
 package codemarket.model.vo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -24,8 +25,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,18 +32,13 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "tb_entidade")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbEntidade.findAll", query = "SELECT t FROM TbEntidade t"),
-    @NamedQuery(name = "TbEntidade.findByEntNome", query = "SELECT t FROM TbEntidade t WHERE t.entNome = :entNome"),
-    @NamedQuery(name = "TbEntidade.findByEntnomeFantasia", query = "SELECT t FROM TbEntidade t WHERE t.entnomeFantasia = :entnomeFantasia"),
-    @NamedQuery(name = "TbEntidade.findByEntcpfCnpj", query = "SELECT t FROM TbEntidade t WHERE t.entcpfCnpj = :entcpfCnpj"),
-    @NamedQuery(name = "TbEntidade.findByEntrgIe", query = "SELECT t FROM TbEntidade t WHERE t.entrgIe = :entrgIe"),
-    @NamedQuery(name = "TbEntidade.findByEntFone", query = "SELECT t FROM TbEntidade t WHERE t.entFone = :entFone"),
-    @NamedQuery(name = "TbEntidade.findByEntEmail", query = "SELECT t FROM TbEntidade t WHERE t.entEmail = :entEmail"),
-    @NamedQuery(name = "TbEntidade.findByEntdtNasc", query = "SELECT t FROM TbEntidade t WHERE t.entdtNasc = :entdtNasc"),
-    @NamedQuery(name = "TbEntidade.findByEntTipo", query = "SELECT t FROM TbEntidade t WHERE t.entTipo = :entTipo")})
+    @NamedQuery(name = "TbEntidade.findAll", query = "SELECT t FROM TbEntidade t")})
 public class TbEntidade implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eeentcpfCnpj")
+    private List<TbEntidadeHasEndereco> tbEntidadeHasEnderecoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ehtentcpfCnpj")
+    private List<TbEntidadeHasTelefone> tbEntidadeHasTelefoneList;
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "ent_nome")
@@ -60,9 +54,6 @@ public class TbEntidade implements Serializable {
     @Column(name = "ent_rgIe")
     private String entrgIe;
     @Basic(optional = false)
-    @Column(name = "ent_fone")
-    private String entFone;
-    @Basic(optional = false)
     @Column(name = "ent_email")
     private String entEmail;
     @Column(name = "ent_dtNasc")
@@ -71,8 +62,13 @@ public class TbEntidade implements Serializable {
     @Basic(optional = false)
     @Column(name = "ent_tipo")
     private String entTipo;
-    @ManyToMany(mappedBy = "tbEntidadeCollection")
-    private Collection<TbEndereco> tbEnderecoCollection;
+    @ManyToMany(mappedBy = "tbEntidadeList")
+    private List<TbEndereco> tbEnderecoList;
+    @JoinTable(name = "tb_entidade_has_telefone", joinColumns = {
+        @JoinColumn(name = "eht_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")}, inverseJoinColumns = {
+        @JoinColumn(name = "eht_fone_id", referencedColumnName = "fone_id")})
+    @ManyToMany
+    private List<TbTelefone> tbTelefoneList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "forcpfCnpj")
     private TbFornecedor tbFornecedor;
     @JoinColumn(name = "ent_endereco_principal", referencedColumnName = "end_id")
@@ -81,29 +77,27 @@ public class TbEntidade implements Serializable {
     @JoinColumn(name = "ent_sexo", referencedColumnName = "sex_id")
     @ManyToOne
     private TbSexo entSexo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcEntId")
-    private Collection<TbFuncionario> tbFuncionarioCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "filEntidade")
-    private Collection<TbFilial> tbFilialCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcentcpfCnpj")
+    private List<TbFuncionario> tbFuncionarioList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "clicpfCnpj")
     private TbCliente tbCliente;
 
     public TbEntidade() {
     }
 
-    public TbEntidade(String entNome, String entnomeFantasia, String entcpfCnpj, String entrgIe, String entFone, String entEmail, Date entdtNasc, String entTipo, TbEndereco entEnderecoPrincipal, TbSexo entSexo) {
+    public TbEntidade(String entcpfCnpj) {
+        this.entcpfCnpj = entcpfCnpj;
+    }
+
+    public TbEntidade(String entcpfCnpj, String entNome, String entnomeFantasia, String entrgIe, String entEmail, String entTipo) {
+        this.entcpfCnpj = entcpfCnpj;
         this.entNome = entNome;
         this.entnomeFantasia = entnomeFantasia;
-        this.entcpfCnpj = entcpfCnpj;
         this.entrgIe = entrgIe;
-        this.entFone = entFone;
         this.entEmail = entEmail;
-        this.entdtNasc = entdtNasc;
         this.entTipo = entTipo;
-        this.entEnderecoPrincipal = entEnderecoPrincipal;
-        this.entSexo = entSexo;
     }
-    
+
     public String getEntNome() {
         return entNome;
     }
@@ -136,14 +130,6 @@ public class TbEntidade implements Serializable {
         this.entrgIe = entrgIe;
     }
 
-    public String getEntFone() {
-        return entFone;
-    }
-
-    public void setEntFone(String entFone) {
-        this.entFone = entFone;
-    }
-
     public String getEntEmail() {
         return entEmail;
     }
@@ -168,13 +154,20 @@ public class TbEntidade implements Serializable {
         this.entTipo = entTipo;
     }
 
-    @XmlTransient
-    public Collection<TbEndereco> getTbEnderecoCollection() {
-        return tbEnderecoCollection;
+    public List<TbEndereco> getTbEnderecoList() {
+        return tbEnderecoList;
     }
 
-    public void setTbEnderecoCollection(Collection<TbEndereco> tbEnderecoCollection) {
-        this.tbEnderecoCollection = tbEnderecoCollection;
+    public void setTbEnderecoList(List<TbEndereco> tbEnderecoList) {
+        this.tbEnderecoList = tbEnderecoList;
+    }
+
+    public List<TbTelefone> getTbTelefoneList() {
+        return tbTelefoneList;
+    }
+
+    public void setTbTelefoneList(List<TbTelefone> tbTelefoneList) {
+        this.tbTelefoneList = tbTelefoneList;
     }
 
     public TbFornecedor getTbFornecedor() {
@@ -201,22 +194,12 @@ public class TbEntidade implements Serializable {
         this.entSexo = entSexo;
     }
 
-    @XmlTransient
-    public Collection<TbFuncionario> getTbFuncionarioCollection() {
-        return tbFuncionarioCollection;
+    public List<TbFuncionario> getTbFuncionarioList() {
+        return tbFuncionarioList;
     }
 
-    public void setTbFuncionarioCollection(Collection<TbFuncionario> tbFuncionarioCollection) {
-        this.tbFuncionarioCollection = tbFuncionarioCollection;
-    }
-
-    @XmlTransient
-    public Collection<TbFilial> getTbFilialCollection() {
-        return tbFilialCollection;
-    }
-
-    public void setTbFilialCollection(Collection<TbFilial> tbFilialCollection) {
-        this.tbFilialCollection = tbFilialCollection;
+    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
+        this.tbFuncionarioList = tbFuncionarioList;
     }
 
     public TbCliente getTbCliente() {
@@ -250,6 +233,22 @@ public class TbEntidade implements Serializable {
     @Override
     public String toString() {
         return "codemarket.model.vo.TbEntidade[ entcpfCnpj=" + entcpfCnpj + " ]";
+    }
+
+    public List<TbEntidadeHasEndereco> getTbEntidadeHasEnderecoList() {
+        return tbEntidadeHasEnderecoList;
+    }
+
+    public void setTbEntidadeHasEnderecoList(List<TbEntidadeHasEndereco> tbEntidadeHasEnderecoList) {
+        this.tbEntidadeHasEnderecoList = tbEntidadeHasEnderecoList;
+    }
+
+    public List<TbEntidadeHasTelefone> getTbEntidadeHasTelefoneList() {
+        return tbEntidadeHasTelefoneList;
+    }
+
+    public void setTbEntidadeHasTelefoneList(List<TbEntidadeHasTelefone> tbEntidadeHasTelefoneList) {
+        this.tbEntidadeHasTelefoneList = tbEntidadeHasTelefoneList;
     }
     
 }
