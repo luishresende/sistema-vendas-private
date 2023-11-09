@@ -1,18 +1,26 @@
 package codemarket.control;
 
-import codemarket.model.vo.TbUsuario;
+import codemarket.model.conexao.HibernateConnection;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 
 public class LoginViewController implements Initializable {
 
@@ -25,16 +33,36 @@ public class LoginViewController implements Initializable {
     @FXML
     private TextField textFieldUsuario;
     @FXML
-    private TextField textFieldSenha;
+    private PasswordField passwordFieldSenha;
+    @FXML
+    private Text textStatus;
 
+    private boolean connectedToTheServer; // Váriavel que define a função do botão entrar (entrar/conectar)
     private Stage dialogStage;
-    private final FXMLLoader loader = new FXMLLoader();
-    ;
-    private final boolean logged = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Adicionando o evento ao botão após a cena ser inicializada
+        buttonEntrar.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                textFieldUsuario.requestFocus(); // Requisito o foco para o textField de usuario
+                // Adiciono evento para o botão "entrar" ser pressionado quando a tecla enter for ativada, e o botão estiver habilitado
+                newScene.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER && !buttonEntrar.isDisabled()) {
+                        handleButtonEntrar();
+                    }
+                });
 
+                // Adiciono evento para passar para o proximo textField, quando o usuário apertar TAB e estiver no primeiro textField da cena
+                textFieldUsuario.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.TAB) {
+                        passwordFieldSenha.requestFocus();
+                        event.consume(); // Consome o evento para evitar que o foco seja transferido pelo sistema
+                    }
+                });
+            }
+        });
+        tryServerConnection(); // Tento realizar a conexão com o servidor, inicialmente
     }
 
     @FXML
@@ -59,33 +87,74 @@ public class LoginViewController implements Initializable {
     }
 
     @FXML
-    public void handleButtonEntrar() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainView.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            Scene scene = new Scene(page);
-            dialogStage = new Stage();
-            dialogStage.setTitle("Main");
-            dialogStage.setScene(scene);
-
-            Stage stage = (Stage) buttonEntrar.getScene().getWindow(); // Obtém o palco atual (primaryStage)
-            stage.close();
-
-            dialogStage.show();
-        } catch (Exception e) {
-
+    public void handleButtonEntrar() {
+        if (!connectedToTheServer) {
+            tryServerConnection(); // Tentando conectar novamente
+        } else {
+            buttonEntrar.setDisable(true);
+            setStatus("Realizando autenticação...", Color.BLACK);
+            Thread thread = new Thread(() -> {
+                AuthController auth = AuthController.getInstance();
+                boolean authenticationResult = auth.authenticate(textFieldUsuario.getText(), passwordFieldSenha.getText());
+                Platform.runLater(() -> { // Realizando as alterações da GUI dentro da thread principal da interface, garantindo a sua integridade.
+                    if (authenticationResult) {
+                        setStatus("Carregando...", Color.GREEN);
+                        setMainView();
+                    } else {
+                        setStatus("Credenciais inválidas!", Color.RED);
+                        buttonEntrar.setDisable(false);
+                    }
+                });
+            });
+            thread.start();
         }
-        buttonEntrar.setDisable(true);
-        AuthController auth = new AuthController(textFieldUsuario.getText(), textFieldSenha.getText());
-        Thread thread = new Thread(() -> {
-            TbUsuario user = auth.authenticate();
-            if (user != null) {
+    }
 
+    private void setStatus(String status, Color color) {
+        textStatus.setText(status);
+        textStatus.setFill(color);
+    }
+
+    private void tryServerConnection() {
+        // Executo a tentativa de conexão em uma nova thread, para não travar a tela
+        Thread thread = new Thread(() -> {
+            EntityManager em = HibernateConnection.getInstance(); // Inicializando a conexão do programa
+            if (!em.isOpen()) {
+                setStatus("Falha ao conectar com servidor.", Color.RED);
+                buttonEntrar.setText("CONECTAR");
+                buttonEntrar.setDisable(false);
             } else {
+                if (!connectedToTheServer) {
+                    buttonEntrar.setText("ENTRAR");
+                }
+                this.connectedToTheServer = true;
+                setStatus("Conexão realizada com sucesso!", Color.GREEN);
                 buttonEntrar.setDisable(false);
             }
         });
         thread.start();
+    }
 
+    private void setMainView() {
+        // Carrego a mainView
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainView.fxml"));
+        AnchorPane page = null;
+        try {
+            page = (AnchorPane) loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene scene = new Scene(page);
+        Stage mainStage = new Stage();
+        mainStage.setTitle("Code Market");
+        mainStage.setScene(scene);
+
+        MainViewController mainController = loader.getController();
+        mainController.updateUserInfo(); // Atualizo as informações do usuário na mainView
+
+        Stage loginStage = (Stage) buttonEntrar.getScene().getWindow(); // 
+        loginStage.close(); // Fecho o stage de login
+
+        mainStage.show(); // Ativo o stage da mainView
     }
 }

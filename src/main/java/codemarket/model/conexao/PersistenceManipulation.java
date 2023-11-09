@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -140,12 +138,9 @@ public class PersistenceManipulation {
 
             // Transformar e escrever as alterações no arquivo
             transformer.transform(source, result);
-            Thread.sleep(2000);
         } catch (TransformerConfigurationException e) {
 
         } catch (TransformerException e) {
-
-        } catch (InterruptedException e) {
 
         }
 

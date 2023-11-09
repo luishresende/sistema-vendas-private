@@ -5,38 +5,40 @@ import codemarket.model.vo.TbUsuario;
 import java.util.List;
 
 public class AuthController {
-    private String username;
-    private String password;
 
-    public AuthController(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    private TbUsuario user;
+    private static AuthController auth;
 
-    private String getUsername() {
-        return username;
-    }
-
-    private void setUsername(String username) {
-        this.username = username;
-    }
-
-    private String getPassword() {
-        return password;
-    }
-
-    private void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public TbUsuario authenticate(){
-        UsuarioRN userRN = new UsuarioRN();
-        //" + getUsername() + "' AND t.usuSenha='" + getPassword() + "'
-        List user = userRN.pesquisar("SELECT t FROM TbUsuario t WHERE t.usuUsuario='" + getUsername() + "' AND t.usuSenha='" + getPassword() + "'");
-        if(user.isEmpty()){
-            return null;
+    // Aplicação do modelo Skeleton, para ser utilizada a mesma instância afim de obter o usuário que logou no sistema
+    public static AuthController getInstance() {
+        if (auth == null) {
+            synchronized (AuthController.class) {
+                if (auth == null) {
+                    AuthController.auth = new AuthController();
+                }
+            }
         }
-        System.out.println("Consulta feita com sucesso! Retornou resultado.");
-        return (TbUsuario) user.get(0);
+        return auth;
     }
+
+    public boolean authenticate(String username, String password) {
+        UsuarioRN userRN = new UsuarioRN();
+        // Verifico se existe um usuário com as credenciais informados, considerando diferença entre letras maiusculas e minusculas
+        List userList = userRN.pesquisar("SELECT t FROM TbUsuario t WHERE FUNCTION('BINARY', t.usuUsuario)='" + username + "' AND FUNCTION('BINARY', t.usuSenha)='" + password + "'");
+        if (userList.isEmpty()) {
+            return false;
+        }
+
+        setUser((TbUsuario) userList.get(0));
+        return true;
+    }
+
+    public TbUsuario getUser() {
+        return user;
+    }
+
+    public void setUser(TbUsuario user) {
+        this.user = user;
+    }
+
 }
