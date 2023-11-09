@@ -142,6 +142,8 @@ public class CadastroEntidadeViewController implements Initializable {
     private TbEndereco endPrincipal;
     private TbEntidadeHasEndereco e[] = new TbEntidadeHasEndereco[10];
     private TbEntidadeHasTelefone t[] = new TbEntidadeHasTelefone[10];
+    private TbCliente CLIENTE;
+    private TbFornecedor FORNECEDOR;
 
     private Stage dialogStage;
 
@@ -347,7 +349,7 @@ public class CadastroEntidadeViewController implements Initializable {
 
         SexoRN sexorn = new SexoRN();
         TbSexo sexo = null;
-        if(tipoSexo.getValue().isEmpty() == false){
+        if (tipoSexo.getValue().isEmpty() == false) {
             sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
         }
 
@@ -401,36 +403,38 @@ public class CadastroEntidadeViewController implements Initializable {
 
         ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
 
-        ClienteRN cli = new ClienteRN();
         if (tipoEntidade1.isSelected()) {
-            TbCliente CLIENTE = new TbCliente(ENTIDADE);
+            CLIENTE = new TbCliente(ENTIDADE);
             ClienteRN cliente = new ClienteRN();
             cliente.salvar(CLIENTE);
-
-            TbCliente clientes = (TbCliente) cli.listaUm("clicpfCnpj", CLIENTE.getClicpfCnpj().getEntcpfCnpj(), TbCliente.class);
-            if (clientes == CLIENTE) {
-                EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
-                for (TbEntidadeHasTelefone tel : t) {
-                    if(tel == null){
-                        break;
-                    }
-                    eht.salvar(tel);
-                }
-                EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
-                for (TbEntidadeHasEndereco end : e) {
-                    if(end == null){
-                        break;
-                    }
-                    ehe.salvar(end);
-                }
-            }
         }
         if (tipoEntidade2.isSelected()) {
-            TbFornecedor FORNECEDOR = new TbFornecedor(ENTIDADE);
+            FORNECEDOR = new TbFornecedor(ENTIDADE);
             FornecedorRN forne = new FornecedorRN();
             forne.salvar(FORNECEDOR);
         }
 
+        ClienteRN cli = new ClienteRN();
+        FornecedorRN fore = new FornecedorRN();
+        TbCliente clientes = (TbCliente) cli.listaUm("clicpfCnpj", CLIENTE.getClicpfCnpj().getEntcpfCnpj(), TbCliente.class);
+        TbFornecedor fornecedores = (TbFornecedor) fore.listaUm("clicpfCnpj", FORNECEDOR.getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class);
+
+        if (clientes == CLIENTE || fornecedores == FORNECEDOR) {
+            EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+            for (TbEntidadeHasTelefone tel : t) {
+                if (tel == null) {
+                    break;
+                }
+                eht.salvar(tel);
+            }
+            EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+            for (TbEntidadeHasEndereco end : e) {
+                if (end == null) {
+                    break;
+                }
+                ehe.salvar(end);
+            }
+        }
     }
 
     @FXML
