@@ -140,6 +140,8 @@ public class CadastroEntidadeViewController implements Initializable {
     private ObservableList<FoneModel> telefones = FXCollections.observableArrayList();
     private ObservableList<EnderecoModel> enderecos = FXCollections.observableArrayList();
     private TbEndereco endPrincipal;
+    private TbEntidadeHasEndereco e[] = new TbEntidadeHasEndereco[10];
+    private TbEntidadeHasTelefone t[] = new TbEntidadeHasTelefone[10];
 
     private Stage dialogStage;
 
@@ -343,73 +345,92 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     void handleFinalizarButton() {
 
+        SexoRN sexorn = new SexoRN();
+        TbSexo sexo = null;
+        if(tipoSexo.getValue().isEmpty() == false){
+            sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+        }
+
+        LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
+        Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        TbEntidade ENTIDADE = new TbEntidade(cpfcnpj.getText(), nome.getText(), nomeFantasia.getText(), rgie.getText(), email.getText(),
+                tipoCliente.getValue(), dateNASC, sexo);
+
+        int i = 0;
         for (FoneModel fones : telefones) {
             TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
-            TbTipoTelefone t = new TbTipoTelefone(fones.getTipoContato());
-            tipoTRN.salvar(t);
+            TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
+            TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo);
 
-            TelefoneRN trn = new TelefoneRN();
-            TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), t);
-            trn.salvar(tell);
+            t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
+            i++;
 
         }
 
+        i = 0;
         for (EnderecoModel endereco : enderecos) {
-            BairroRN bairroRn = new BairroRN();
-            TbBairro b = new TbBairro(endereco.getBairro());
-            bairroRn.salvar(b);
+            TbBairro bairroSalvar = new TbBairro(endereco.getBairro());
 
-            LogradouroRN lourn = new LogradouroRN();
-            TbLogradouro l = new TbLogradouro(endereco.getLogradouro());
-            lourn.salvar(l);
+            TbLogradouro lougradouroSalvar = new TbLogradouro(endereco.getLogradouro());
 
             CidadeRN cid = new CidadeRN();
             String jpql = "SELECT t.tbCidade FROM TbCidEstPai t WHERE "
                     + "t.tbEstado.estSigla = '" + endereco.getEstado() + "' "
                     + "AND t.tbCidade.cidDescricao = '" + endereco.getCidade() + "'";
             TbCidade new_cid = (TbCidade) cid.pesquisar(jpql).get(0);
- 
+
             CidEstPaiRN CEP = new CidEstPaiRN();
             TbCidEstPai ceps = (TbCidEstPai) CEP.pesquisar("SELECT t FROM TbCidEstPai t "
                     + "WHERE t.tbEstado.estSigla = '" + endereco.getEstado() + "' AND t.tbCidade.cidId = '"
                     + new_cid.getCidId() + "'").get(0);
 
-            EndPostalRN postalRN = new EndPostalRN();
-            TbEndPostal postal = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), l, b, ceps);
-            postalRN.salvar(postal);
+            TbEndPostal postal = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), lougradouroSalvar, bairroSalvar, ceps);
 
             TipoEnderecoRN te = new TipoEnderecoRN();
             TbTipoEndereco tende = te.listaUm("teDescricao", endereco.getTipoEndereco(), TbTipoEndereco.class);
 
-            EnderecoRN endRN = new EnderecoRN();
             TbEndereco ende = new TbEndereco(Integer.parseInt(endereco.getNumero()), endereco.getComplemento(), postal, tende);
-            endRN.salvar(ende);
 
+            e[i] = new TbEntidadeHasEndereco(ENTIDADE, ende);
+
+            i++;
             this.endPrincipal = ende;
+
         }
 
-        SexoRN sexorn = new SexoRN();
-        TbSexo sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+        ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
 
-        LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
-        Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-        TbEntidade ENTIDADE = new TbEntidade(cpfcnpj.getText(), nome.getText(), nomeFantasia.getText(), rgie.getText(), email.getText(),
-                tipoCliente.getValue(), dateNASC, sexo, endPrincipal);
-        EntidadeRN ent = new EntidadeRN();
-        ent.salvar(ENTIDADE);
-
+        ClienteRN cli = new ClienteRN();
         if (tipoEntidade1.isSelected()) {
             TbCliente CLIENTE = new TbCliente(ENTIDADE);
             ClienteRN cliente = new ClienteRN();
             cliente.salvar(CLIENTE);
+
+            TbCliente clientes = (TbCliente) cli.listaUm("clicpfCnpj", CLIENTE.getClicpfCnpj().getEntcpfCnpj(), TbCliente.class);
+            if (clientes == CLIENTE) {
+                EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+                for (TbEntidadeHasTelefone tel : t) {
+                    if(tel == null){
+                        break;
+                    }
+                    eht.salvar(tel);
+                }
+                EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                for (TbEntidadeHasEndereco end : e) {
+                    if(end == null){
+                        break;
+                    }
+                    ehe.salvar(end);
+                }
+            }
         }
         if (tipoEntidade2.isSelected()) {
             TbFornecedor FORNECEDOR = new TbFornecedor(ENTIDADE);
             FornecedorRN forne = new FornecedorRN();
             forne.salvar(FORNECEDOR);
         }
-//        dialogStage.close();
+
     }
 
     @FXML

@@ -8,6 +8,7 @@ package codemarket.model.vo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class TbEntidadeHasEndereco implements Serializable {
     @Column(name = "ee_id")
     private Integer eeId;
     @JoinColumn(name = "ee_end_id", referencedColumnName = "end_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEndereco eeEndId;
     @JoinColumn(name = "ee_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
     @ManyToOne(optional = false)
@@ -44,8 +45,9 @@ public class TbEntidadeHasEndereco implements Serializable {
     public TbEntidadeHasEndereco() {
     }
 
-    public TbEntidadeHasEndereco(Integer eeId) {
-        this.eeId = eeId;
+    public TbEntidadeHasEndereco(TbEntidade ent, TbEndereco end) {
+        this.eeentcpfCnpj = ent;
+        this.eeEndId = end;
     }
 
     public Integer getEeId() {

@@ -6,9 +6,11 @@
 package codemarket.model.dao;
 
 import codemarket.model.conexao.HibernateConnection;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -22,10 +24,15 @@ public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
         manager.getTransaction().commit();
     }
     
+    
     @Override
     public void salvar(Tabela objeto) {
         manager.getTransaction().begin();
-        manager.persist(objeto);
+        try {
+            manager.persist(objeto);
+        } catch (RuntimeException e) {
+            manager.getTransaction().rollback();
+        }
         manager.getTransaction().commit();
         System.out.println("Salvo com sucesso!!");
     }

@@ -45,15 +45,15 @@ public class TbEndPostal implements Serializable {
     @Column(name = "end_CEP")
     private String endCEP;
     @JoinColumn(name = "endP_bai_id", referencedColumnName = "bai_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbBairro endPbaiid;
     @JoinColumns({
         @JoinColumn(name = "endP_cep_cid_id", referencedColumnName = "cep_cid_id"),
         @JoinColumn(name = "endP_cep_est_sigla", referencedColumnName = "cep_est_sigla")})
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbCidEstPai tbCidEstPai;
     @JoinColumn(name = "endP_log_id", referencedColumnName = "log_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbLogradouro endPlogid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endendPid")
     private List<TbEndereco> tbEnderecoList;

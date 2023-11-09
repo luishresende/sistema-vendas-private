@@ -191,7 +191,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab style="-fx-font-weight: bold;" text="Usuário">
+                  <Tab style="-fx-font-weight: bold;" text="Usuário e Cargo">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -206,7 +206,7 @@
                                              <graphic>
                                                 <ImageView fx:id="img" fitHeight="116.0" fitWidth="123.0" pickOnBounds="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" styleClass="img">
                                                    <image>
-                                                      <Image url="@../view/user.png" />
+                                                      <Image url="@../images/user.png" />
                                                    </image>
                                                 </ImageView>
                                              </graphic>
@@ -267,11 +267,7 @@
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
                                                             </Label>
-                                                            <PasswordField fx:id="cargo">
-                                                               <font>
-                                                                  <Font size="13.0" />
-                                                               </font>
-                                                            </PasswordField>
+                                                            <ComboBox fx:id="cargo" editable="true" prefHeight="29.0" prefWidth="196.0" promptText="Insira caso não encontre" />
                                                          </children>
                                                          <GridPane.margin>
                                                             <Insets left="10.0" />
@@ -284,11 +280,11 @@
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
                                                             </Label>
-                                                            <PasswordField fx:id="salario" onKeyReleased="#validarSalario">
+                                                            <TextField fx:id="salario" disable="true" editable="false" onKeyReleased="#validarSalario" prefHeight="29.0" prefWidth="227.0" promptText="0,00">
                                                                <font>
                                                                   <Font size="13.0" />
                                                                </font>
-                                                            </PasswordField>
+                                                            </TextField>
                                                          </children>
                                                          <GridPane.margin>
                                                             <Insets left="10.0" />
@@ -305,11 +301,11 @@
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
                                                             </Label>
-                                                            <PasswordField fx:id="usuario">
+                                                            <TextField fx:id="usuario" prefHeight="29.0" prefWidth="227.0" promptText="Usuário">
                                                                <font>
                                                                   <Font size="13.0" />
                                                                </font>
-                                                            </PasswordField>
+                                                            </TextField>
                                                          </children>
                                                          <GridPane.margin>
                                                             <Insets left="10.0" />
@@ -331,7 +327,7 @@
                                                                         <Font name="System Bold" size="15.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <PasswordField fx:id="senha">
+                                                                  <PasswordField fx:id="senha" promptText="Senha">
                                                                      <font>
                                                                         <Font size="13.0" />
                                                                      </font>
@@ -345,11 +341,11 @@
                                                                         <Font name="System Bold" size="15.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField fx:id="confirmaSenha" prefHeight="29.0" prefWidth="227.0">
+                                                                  <PasswordField fx:id="confirmaSenha" promptText="Confirme a Senha">
                                                                      <font>
                                                                         <Font size="13.0" />
                                                                      </font>
-                                                                  </TextField>
+                                                                  </PasswordField>
                                                                </children>
                                                                <GridPane.margin>
                                                                   <Insets left="10.0" />

@@ -9,6 +9,7 @@ package codemarket.model.vo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,9 +38,9 @@ public class TbCliente implements Serializable {
     @Column(name = "cli_id")
     private Integer cliId;
     @JoinColumn(name = "cli_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @OneToOne(optional = false)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     private TbEntidade clicpfCnpj;
-    @OneToMany(mappedBy = "venCliId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "venCliId")
     private List<TbVenda> tbVendaList;
 
     public TbCliente() {

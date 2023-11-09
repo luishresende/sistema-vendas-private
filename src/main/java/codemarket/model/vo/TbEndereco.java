@@ -53,10 +53,10 @@ public class TbEndereco implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entEnderecoPrincipal")
     private List<TbEntidade> tbEntidadeList1;
     @JoinColumn(name = "end_endP_id", referencedColumnName = "endP_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEndPostal endendPid;
     @JoinColumn(name = "end_tipo", referencedColumnName = "te_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbTipoEndereco endTipo;
 
     public TbEndereco() {

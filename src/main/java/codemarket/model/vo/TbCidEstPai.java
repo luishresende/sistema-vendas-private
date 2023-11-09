@@ -33,13 +33,13 @@ public class TbCidEstPai implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbCidEstPai")
     private List<TbEndPostal> tbEndPostalList;
     @JoinColumn(name = "cep_cid_id", referencedColumnName = "cid_id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbCidade tbCidade;
     @JoinColumn(name = "cep_est_sigla", referencedColumnName = "est_sigla", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEstado tbEstado;
     @JoinColumn(name = "cep_pai_sigla", referencedColumnName = "pai_sigla")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL,optional = false)
     private TbPais cepPaiSigla;
 
     public TbCidEstPai() {

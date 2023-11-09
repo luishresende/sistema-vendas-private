@@ -62,7 +62,7 @@ public class TbEntidade implements Serializable {
     @Basic(optional = false)
     @Column(name = "ent_tipo")
     private String entTipo;
-    @ManyToMany(mappedBy = "tbEntidadeList")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tbEntidadeList")
     private List<TbEndereco> tbEnderecoList;
     @JoinTable(name = "tb_entidade_has_telefone", joinColumns = {
         @JoinColumn(name = "eht_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")}, inverseJoinColumns = {
@@ -72,7 +72,7 @@ public class TbEntidade implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "forcpfCnpj")
     private TbFornecedor tbFornecedor;
     @JoinColumn(name = "ent_endereco_principal", referencedColumnName = "end_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEndereco entEnderecoPrincipal;
     @JoinColumn(name = "ent_sexo", referencedColumnName = "sex_id")
     @ManyToOne
@@ -83,6 +83,17 @@ public class TbEntidade implements Serializable {
     private TbCliente tbCliente;
 
     public TbEntidade() {
+    }
+
+    public TbEntidade(String entcpfCnpj, String entNome, String entnomeFantasia, String entrgIe, String entEmail, String entTipo, Date entdtNasc, TbSexo sexo ) {
+        this.entcpfCnpj = entcpfCnpj;
+        this.entNome = entNome;
+        this.entnomeFantasia = entnomeFantasia;
+        this.entrgIe = entrgIe;
+        this.entEmail = entEmail;
+        this.entTipo = entTipo;
+        this.entdtNasc = entdtNasc;
+        this.entSexo = sexo;
     }
 
     public TbEntidade(String entcpfCnpj, String entNome, String entnomeFantasia, String entrgIe, String entEmail, String entTipo, Date entdtNasc, TbSexo sexo, TbEndereco end ) {

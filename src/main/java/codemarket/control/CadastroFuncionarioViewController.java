@@ -39,7 +39,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
-import javax.swing.text.NumberFormatter;
 
 public class CadastroFuncionarioViewController implements Initializable {
 
@@ -94,7 +93,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     private TextField confirmaSenha;
     @FXML
-    private TextField cargo;
+    private ComboBox<String> cargo;
     @FXML
     private RadioButton brasileiro;
     @FXML
@@ -250,17 +249,19 @@ public class CadastroFuncionarioViewController implements Initializable {
         if (!texto.matches("[0-9]*")) {
             salario.setText(texto.replaceAll("[^0-9]", ""));
         }
-        StringConverter<Number> converter = new NumberStringConverter("#,##0.00");
-        TextFormatter<Number> textFormatter = new TextFormatter<>(converter, 0.0, change -> {
-            String newText = change.getControlNewText();
-            ParsePosition parsePosition = new ParsePosition(0);
-            Number number = converter.fromString(newText);
-            if (number != null) {
-                return change;
-            } else {
-                return null;
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            if (change.isContentChange()) {
+                String newText = change.getControlNewText();
+                ParsePosition parsePosition = new ParsePosition(0);
+                Number number = decimalFormat.parse(newText, parsePosition);
+                if (number == null || parsePosition.getIndex() < newText.length()) {
+                    return null;
+                }
             }
-        });
+            return change;
+        };
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
 
         salario.setTextFormatter(textFormatter);
     }
@@ -422,7 +423,8 @@ public class CadastroFuncionarioViewController implements Initializable {
         
         LocalDate dtValidade = validade.getValue();  // Obter a data do DatePicker
         Date dataValidade = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        if(senha.getText() == null ? confirmaSenha.getText() == null : senha.getText().equals(confirmaSenha.getText())) {
+        
+        if(!senha.getText().equals(confirmaSenha.getText())) {
             UsuarioRN usu = new UsuarioRN();
             TbUsuario Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor);
             usu.salvar(Usuario);
@@ -438,7 +440,8 @@ public class CadastroFuncionarioViewController implements Initializable {
         CargoRN carRN = new CargoRN();
         TbCargo car = new TbCargo();
         FuncionarioRN funcRN = new FuncionarioRN();
-//        sTbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, );
+        
+//        TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, );
     }
 
     @FXML
