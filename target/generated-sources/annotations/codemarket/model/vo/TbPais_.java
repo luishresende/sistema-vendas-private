@@ -1,7 +1,7 @@
 package codemarket.model.vo;
 
 import javax.annotation.Generated;
-import javax.persistence.metamodel.CollectionAttribute;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -10,12 +10,12 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class TbPais_ {
 
 	public static volatile SingularAttribute<TbPais, String> paiSigla;
-	public static volatile CollectionAttribute<TbPais, TbCidEstPai> tbCidEstPaiCollection;
 	public static volatile SingularAttribute<TbPais, String> paiDescricao;
+	public static volatile ListAttribute<TbPais, TbCidEstPai> tbCidEstPaiList;
 
 	public static final String PAI_SIGLA = "paiSigla";
-	public static final String TB_CID_EST_PAI_COLLECTION = "tbCidEstPaiCollection";
 	public static final String PAI_DESCRICAO = "paiDescricao";
+	public static final String TB_CID_EST_PAI_LIST = "tbCidEstPaiList";
 
 }
 

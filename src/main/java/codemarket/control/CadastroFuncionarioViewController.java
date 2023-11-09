@@ -350,11 +350,11 @@ public class CadastroFuncionarioViewController implements Initializable {
 
     @FXML
     void handleSalvarEndbutton() {
-        EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(),
-                cidade.getValue(), estado.getValue(),
-                pais.getValue(), logradouro.getText(),
-                bairro.getText(), complemento.getText(), numero.getText());
-        enderecos.add(novoEndereco);
+//        EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(),
+//                cidade.getValue(), estado.getValue(),
+//                pais.getValue(), logradouro.getText(),
+//                bairro.getText(), complemento.getText(), numero.getText());
+//        enderecos.add(novoEndereco);
 
         tipoEndereco.setValue("Selecione...");
         cep.clear();

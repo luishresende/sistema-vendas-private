@@ -41,10 +41,6 @@ public class TbPais implements Serializable {
     public TbPais() {
     }
 
-    public TbPais(String paiSigla) {
-        this.paiSigla = paiSigla;
-    }
-
     public TbPais(String paiSigla, String paiDescricao) {
         this.paiSigla = paiSigla;
         this.paiDescricao = paiDescricao;

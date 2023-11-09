@@ -48,13 +48,9 @@ public class TbTelefone implements Serializable {
     public TbTelefone() {
     }
 
-    public TbTelefone(Integer foneId) {
-        this.foneId = foneId;
-    }
-
-    public TbTelefone(Integer foneId, String foneDescricao) {
-        this.foneId = foneId;
+    public TbTelefone(String foneDescricao, TbTipoTelefone tipo) {
         this.foneDescricao = foneDescricao;
+        this.foneTipo = tipo;
     }
 
     public Integer getFoneId() {

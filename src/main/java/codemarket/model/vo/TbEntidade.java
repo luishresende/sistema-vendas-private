@@ -85,17 +85,16 @@ public class TbEntidade implements Serializable {
     public TbEntidade() {
     }
 
-    public TbEntidade(String entcpfCnpj) {
-        this.entcpfCnpj = entcpfCnpj;
-    }
-
-    public TbEntidade(String entcpfCnpj, String entNome, String entnomeFantasia, String entrgIe, String entEmail, String entTipo) {
+    public TbEntidade(String entcpfCnpj, String entNome, String entnomeFantasia, String entrgIe, String entEmail, String entTipo, Date entdtNasc, TbSexo sexo, TbEndereco end ) {
         this.entcpfCnpj = entcpfCnpj;
         this.entNome = entNome;
         this.entnomeFantasia = entnomeFantasia;
         this.entrgIe = entrgIe;
         this.entEmail = entEmail;
         this.entTipo = entTipo;
+        this.entdtNasc = entdtNasc;
+        this.entSexo = sexo;
+        this.entEnderecoPrincipal = end;
     }
 
     public String getEntNome() {

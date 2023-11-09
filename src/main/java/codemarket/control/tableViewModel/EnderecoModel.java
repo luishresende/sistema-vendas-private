@@ -6,21 +6,31 @@ public class EnderecoModel {
     private String cidade;
     private String pais;
     private String estado;
-    private String logradouro;
+    private String nomerua;
     private String bairro;
     private String complemento;
     private String numero;
+    private String logradouro;
 
-    public EnderecoModel(String tipoEndereco, String cep, String cidade, String estado, String pais, String logradouro, String bairro, String complemento, String numero) {
+    public EnderecoModel(String tipoEndereco, String cep, String cidade, String estado, String pais, String nomerua, String bairro, String complemento, String numero, String logradouro) {
         this.tipoEndereco = tipoEndereco;
         this.cep = cep;
         this.cidade = cidade;
         this.pais = pais;
         this.estado = estado;
-        this.logradouro = logradouro;
+        this.nomerua = nomerua;
         this.bairro = bairro;
         this.complemento = complemento;
         this.numero = numero;
+        this.logradouro = logradouro;
+    }
+
+    public String getNomerua() {
+        return nomerua;
+    }
+
+    public void setNomerua(String nomerua) {
+        this.nomerua = nomerua;
     }
 
     public String getLogradouro() {

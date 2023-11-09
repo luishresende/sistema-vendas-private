@@ -1,7 +1,7 @@
 package codemarket.model.vo;
 
 import javax.annotation.Generated;
-import javax.persistence.metamodel.CollectionAttribute;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -10,11 +10,11 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class TbSexo_ {
 
 	public static volatile SingularAttribute<TbSexo, Integer> sexId;
-	public static volatile CollectionAttribute<TbSexo, TbEntidade> tbEntidadeCollection;
+	public static volatile ListAttribute<TbSexo, TbEntidade> tbEntidadeList;
 	public static volatile SingularAttribute<TbSexo, String> sexDescricao;
 
 	public static final String SEX_ID = "sexId";
-	public static final String TB_ENTIDADE_COLLECTION = "tbEntidadeCollection";
+	public static final String TB_ENTIDADE_LIST = "tbEntidadeList";
 	public static final String SEX_DESCRICAO = "sexDescricao";
 
 }

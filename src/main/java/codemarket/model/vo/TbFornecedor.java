@@ -48,8 +48,8 @@ public class TbFornecedor implements Serializable {
     public TbFornecedor() {
     }
 
-    public TbFornecedor(Integer forId) {
-        this.forId = forId;
+    public TbFornecedor(TbEntidade ent) {
+        this.forcpfCnpj = ent;
     }
 
     public Integer getForId() {

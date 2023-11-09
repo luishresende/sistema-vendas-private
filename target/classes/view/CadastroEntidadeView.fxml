@@ -694,20 +694,6 @@
                                         <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
                                       </rowConstraints>
                                        <children>
-                                          <VBox prefHeight="55.0" prefWidth="816.0" spacing="2.0">
-                                             <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" text="Logradouro">
-                                                   <font>
-                                                      <Font name="System Bold" size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="logradouro" prefHeight="29.0" prefWidth="743.0">
-                                                   <font>
-                                                      <Font size="13.0" />
-                                                   </font>
-                                                </TextField>
-                                             </children>
-                                          </VBox>
                                           <VBox prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                              <children>
                                                 <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" text="Tipo de Endereço">
@@ -798,6 +784,51 @@
                                                             <Font size="13.0" />
                                                          </font>
                                                       </TextField>
+                                                   </children>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </VBox>
+                                             </children>
+                                          </GridPane>
+                                          <GridPane>
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="555.0" minWidth="10.0" prefWidth="551.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="210.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <VBox prefHeight="55.0" prefWidth="816.0" spacing="2.0">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" text="Endereço">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="nomerua" prefHeight="29.0" prefWidth="743.0">
+                                                         <font>
+                                                            <Font size="13.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" text="Logradouro">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <ComboBox fx:id="logradouro" prefHeight="29.0" prefWidth="173.0" promptText="Selecione...">
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </ComboBox>
                                                    </children>
                                                    <GridPane.margin>
                                                       <Insets left="10.0" />
