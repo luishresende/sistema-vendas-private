@@ -8,6 +8,7 @@ package codemarket.model.vo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,16 +36,16 @@ public class TbFuncionario implements Serializable {
     @Column(name = "func_id")
     private Integer funcId;
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbCargo funcCargo;
     @JoinColumn(name = "func_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEntidade funcentcpfCnpj;
     @JoinColumn(name = "func_status", referencedColumnName = "sta_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbStatus funcStatus;
     @JoinColumn(name = "func_usuario", referencedColumnName = "usu_usuario")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private TbUsuario funcUsuario;
 
     public TbFuncionario() {

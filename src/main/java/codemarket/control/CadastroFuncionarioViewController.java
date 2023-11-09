@@ -21,7 +21,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -30,15 +29,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import javafx.util.converter.NumberStringConverter;
 
 public class CadastroFuncionarioViewController implements Initializable {
 
@@ -49,15 +45,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     private Button imgButton;
     @FXML
-    private CheckBox tipoEntidade1;
-    @FXML
-    private CheckBox tipoEntidade2;
-    @FXML
-    private TextField observacao;
-    @FXML
     private ComboBox<String> cidade;
-    @FXML
-    private RadioButton estrangeiro;
     @FXML
     private ComboBox<String> estado;
     @FXML
@@ -83,8 +71,6 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     private TextField email;
     @FXML
-    private TextField codigo;
-    @FXML
     private TextField ddd;
     @FXML
     private TextField usuario;
@@ -93,7 +79,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     private TextField confirmaSenha;
     @FXML
-    private ComboBox<String> cargo;
+    private ComboBox<String> tipoCargo;
     @FXML
     private RadioButton brasileiro;
     @FXML
@@ -116,22 +102,6 @@ public class CadastroFuncionarioViewController implements Initializable {
     private ComboBox<String> logradouro;
     @FXML
     private ComboBox<String> tipoEndereco;
-    @FXML
-    private Button buttonFinalizar;
-    @FXML
-    private Button buttonCancelar;
-    @FXML
-    private Button buttonEndSalvar;
-    @FXML
-    private Button buttonFoneSalvar;
-    @FXML
-    private Button buttonAlterarFone;
-    @FXML
-    private Button buttonAlterarEnd;
-    @FXML
-    private Button buttonCancelarEnd;
-    @FXML
-    private Button buttonCancelarFone;
     @FXML
     private TableView<EnderecoModel> tableEnd;
     @FXML
@@ -156,12 +126,12 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     private TableColumn<FoneModel, String> tbFonenome;
 
-    private ToggleGroup nacionalidade;
-    private ToggleGroup seleEntidade;
-
     private ObservableList<FoneModel> telefones = FXCollections.observableArrayList();
     private ObservableList<EnderecoModel> enderecos = FXCollections.observableArrayList();
     private TbEndereco endPrincipal;
+    private TbEntidadeHasEndereco e[] = new TbEntidadeHasEndereco[10];
+    private TbEntidadeHasTelefone t[] = new TbEntidadeHasTelefone[10];
+    
     private Stage dialogStage;
 
     public Stage getDialogStage() {
@@ -231,7 +201,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             cep.setText(texto.replaceAll("[^0-9]", ""));
         }
         if (texto.length() == 8) {
-            cep.setText(texto.substring(0, 5) + " - " + texto.substring(5, 8));
+            cep.setText(texto.substring(0, 5) + "-" + texto.substring(5, 8));
         }
     }
     
@@ -245,10 +215,10 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     @FXML
     private void validarSalario(KeyEvent event) {
-        String texto = salario.getText();
-        if (!texto.matches("[0-9]*")) {
-            salario.setText(texto.replaceAll("[^0-9]", ""));
-        }
+        CargoRN sal = new CargoRN();
+        TbCargo valor = sal.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
+        System.out.println(valor);
+        salario.setText(new String("" + valor.getCarsalarioBase()));
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         UnaryOperator<TextFormatter.Change> filter = change -> {
             if (change.isContentChange()) {
@@ -358,90 +328,103 @@ public class CadastroFuncionarioViewController implements Initializable {
         ArrayList status = (ArrayList) statusRN.buscarTodos("staDescricao");
         ObservableList<String> sta = FXCollections.observableArrayList(status);
         tipoStatus.setItems(sta);
+        
+        CargoRN carRN = new CargoRN();
+        ArrayList carg = (ArrayList) carRN.buscarTodos("carDescricao");
+        ObservableList<String> caR = FXCollections.observableArrayList(carg);
+        tipoCargo.setItems(caR);
+        
     }    
+    
+    private void displayErrorScreen() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText("Ocorreu um erro");
+        alert.setContentText("As senhas são diferentes!");
+
+        alert.showAndWait();
+    }
     
     @FXML
     void handleFinalizarButton() {
         
-        for (FoneModel fones : telefones) {
-            TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
-            TbTipoTelefone t = new TbTipoTelefone(fones.getTipoContato());
-            tipoTRN.salvar(t);
-
-            TelefoneRN trn = new TelefoneRN();
-            TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), t);
-            trn.salvar(tell);
+        SexoRN sexorn = new SexoRN();
+        TbSexo sexo = null;
+        if (tipoSexo.getValue().isEmpty() == false) {
+            sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
         }
 
-        for (EnderecoModel endereco : enderecos) {
-            BairroRN bairroRn = new BairroRN();
-            TbBairro b = new TbBairro(endereco.getBairro());
-            bairroRn.salvar(b);
+        LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
+        Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-            LogradouroRN lourn = new LogradouroRN();
-            TbLogradouro l = new TbLogradouro(endereco.getLogradouro());
-            lourn.salvar(l);
+        TbEntidade ENTIDADE = new TbEntidade(cpf.getText(), nome.getText(), nomeFantasia.getText(), 
+                                            rg.getText(), email.getText(), "Fisico", dateNASC, sexo);
+
+        int i = 0;
+        for (FoneModel fones : telefones) {
+            TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
+            TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
+            TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo);
+
+            t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
+            i++;
+
+        }
+
+        i = 0;
+        for (EnderecoModel endereco : enderecos) {
+            TbBairro bairroSalvar = new TbBairro(endereco.getBairro());
+
+            TbLogradouro lougradouroSalvar = new TbLogradouro(endereco.getLogradouro());
 
             CidadeRN cid = new CidadeRN();
             String jpql = "SELECT t.tbCidade FROM TbCidEstPai t WHERE "
                     + "t.tbEstado.estSigla = '" + endereco.getEstado() + "' "
                     + "AND t.tbCidade.cidDescricao = '" + endereco.getCidade() + "'";
             TbCidade new_cid = (TbCidade) cid.pesquisar(jpql).get(0);
- 
+
             CidEstPaiRN CEP = new CidEstPaiRN();
             TbCidEstPai ceps = (TbCidEstPai) CEP.pesquisar("SELECT t FROM TbCidEstPai t "
                     + "WHERE t.tbEstado.estSigla = '" + endereco.getEstado() + "' AND t.tbCidade.cidId = '"
                     + new_cid.getCidId() + "'").get(0);
 
-            EndPostalRN postalRN = new EndPostalRN();
-            TbEndPostal postal = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), l, b, ceps);
-            postalRN.salvar(postal);
+            TbEndPostal postal = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), lougradouroSalvar, bairroSalvar, ceps);
 
             TipoEnderecoRN te = new TipoEnderecoRN();
             TbTipoEndereco tende = te.listaUm("teDescricao", endereco.getTipoEndereco(), TbTipoEndereco.class);
 
-            EnderecoRN endRN = new EnderecoRN();
             TbEndereco ende = new TbEndereco(Integer.parseInt(endereco.getNumero()), endereco.getComplemento(), postal, tende);
-            endRN.salvar(ende);
 
+            e[i] = new TbEntidadeHasEndereco(ENTIDADE, ende);
+
+            i++;
             this.endPrincipal = ende;
+
         }
-        
-        SexoRN sexorn = new SexoRN();
-        TbSexo sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
 
-        LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
-        Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-        TbEntidade ENTIDADE = new TbEntidade(cpf.getText(), nome.getText(), nomeFantasia.getText(), rg.getText(), email.getText(),
-                null, dateNASC, sexo, endPrincipal);
-        EntidadeRN ent = new EntidadeRN();
-        ent.salvar(ENTIDADE);
+        ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
         
         StatusRN staRN = new StatusRN();
         TbStatus staValor = staRN.listaUm("staDescricao", tipoStatus.getValue(), TbStatus.class);
         
         LocalDate dtValidade = validade.getValue();  // Obter a data do DatePicker
-        Date dataValidade = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date dataValidade = Date.from(dtValidade.atStartOfDay(ZoneId.systemDefault()).toInstant());
         
-        if(!senha.getText().equals(confirmaSenha.getText())) {
-            UsuarioRN usu = new UsuarioRN();
-            TbUsuario Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor);
-            usu.salvar(Usuario);
+        TbUsuario Usuario = null;
+        if(senha.getText().equals(confirmaSenha.getText())) {
+            Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor);
+            CargoRN carRN = new CargoRN();
+            TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
+            TbCargo valor = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
+                System.out.println(valor);
+                salario.setText(new String("" + valor.getCarsalarioBase()));
+            FuncionarioRN funcRN = new FuncionarioRN();
+            TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
+            funcRN.salvar(funcionario);
+            dialogStage.close();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Ocorreu um erro");
-            alert.setContentText("As senhas são diferentes!");
-
-            alert.showAndWait();
+            displayErrorScreen();
         }
-        
-        CargoRN carRN = new CargoRN();
-        TbCargo car = new TbCargo();
-        FuncionarioRN funcRN = new FuncionarioRN();
-        
-//        TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, );
     }
 
     @FXML
@@ -463,8 +446,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     void handleSalvarEndbutton() {
         EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(),
-                cidade.getValue(), estado.getValue(),
-                pais.getValue(), nomerua.getText(),
+                cidade.getValue(), estado.getValue(), pais.getValue(), nomerua.getText(),
                 bairro.getText(), complemento.getText(), numero.getText(), logradouro.getValue());
         enderecos.add(novoEndereco);
 
@@ -478,7 +460,6 @@ public class CadastroFuncionarioViewController implements Initializable {
         bairro.clear();
         complemento.clear();
         numero.clear();
-
     }
 
     @FXML
