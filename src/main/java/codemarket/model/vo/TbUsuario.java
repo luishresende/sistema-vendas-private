@@ -51,13 +51,11 @@ public class TbUsuario implements Serializable {
     public TbUsuario() {
     }
 
-    public TbUsuario(String usuUsuario) {
-        this.usuUsuario = usuUsuario;
-    }
-
-    public TbUsuario(String usuUsuario, String usuSenha) {
+    public TbUsuario(String usuUsuario, String usuSenha, Date usuValidade, TbStatus usuStatus) {
         this.usuUsuario = usuUsuario;
         this.usuSenha = usuSenha;
+        this.usuValidade = usuValidade;
+        this.usuStatus = usuStatus;
     }
 
     public String getUsuUsuario() {

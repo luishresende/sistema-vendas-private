@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package codemarket.model.vo;
 
@@ -20,10 +15,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author kauan
- */
 @Entity
 @Table(name = "tb_cargo")
 @NamedQueries({
@@ -47,12 +38,7 @@ public class TbCargo implements Serializable {
     public TbCargo() {
     }
 
-    public TbCargo(Integer carId) {
-        this.carId = carId;
-    }
-
-    public TbCargo(Integer carId, String carDescricao, double carsalarioBase) {
-        this.carId = carId;
+    public TbCargo(String carDescricao, double carsalarioBase) {
         this.carDescricao = carDescricao;
         this.carsalarioBase = carsalarioBase;
     }
