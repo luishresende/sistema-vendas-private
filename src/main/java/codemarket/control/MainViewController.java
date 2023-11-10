@@ -7,6 +7,7 @@ package codemarket.control;
 
 import codemarket.model.rn.CargoRN;
 import codemarket.model.rn.EntidadeRN;
+import codemarket.model.utils.ImageManipulation;
 import codemarket.model.vo.TbCargo;
 import codemarket.model.vo.TbEntidade;
 import codemarket.model.vo.TbUsuario;
@@ -20,14 +21,18 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -71,6 +76,10 @@ public class MainViewController implements Initializable {
     private Label labelUserName;
     @FXML
     private Label labelUserRole;
+    @FXML
+    private GridPane gridPaneImage;
+    @FXML
+    private ImageView imageViewUser;
 
     private AnchorPane fornecedoresView;
     private AnchorPane estoqueView;
@@ -78,7 +87,9 @@ public class MainViewController implements Initializable {
     private AnchorPane funcionariosView;
     private AnchorPane PDVLoaderView;
     private TbUsuario user;
-
+    private boolean changingImageSize;
+    private Image userImage;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Carregando as views de cada subTela
@@ -98,9 +109,20 @@ public class MainViewController implements Initializable {
         clientesButton.setOnAction(event -> handleViewsButtons(clientesView));
         funcionariosButton.setOnAction(event -> handleViewsButtons(funcionariosView));
         pdvButton.setOnAction(event -> handleViewsButtons(PDVLoaderView));
+
+        Platform.runLater(() -> {
+            Scene mainScene = mainAnchorPane.getScene();
+            mainScene.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+                if (!changingImageSize) {
+                    resizeUserImage((Double) newHeight);
+                }
+            });
+            updateImageUser();
+        });
+
     }
-    
-    // Função para fechar a side bar
+
+// Função para fechar a side bar
     public void closeSideBar() {
         Timeline timeline = new Timeline(); // Definindo uma timeline (animação)
         sideBarContentGridPane.setEffect(null); // Removendo o efeito de shaddow da side bar
@@ -193,19 +215,46 @@ public class MainViewController implements Initializable {
         // Definindo o conteúdo do AnchorPane existente como o novo conteúdo carregado
         applicationAnchorPane.getChildren().setAll(view);
     }
-    
-    public void updateUserInfo(){
+
+    public void updateUserInfo() {
         // Busco no banco, o nome do usuario e atualizo na tela
         this.user = AuthController.getInstance().getUser();
         EntidadeRN urn = new EntidadeRN();
         List users = urn.pesquisar("SELECT e FROM TbEntidade e INNER JOIN TbFuncionario f ON e.entcpfCnpj = f.funcentcpfCnpj WHERE f.funcUsuario = '" + user.getUsuUsuario() + "'");
         TbEntidade ent = (TbEntidade) users.get(0);
         labelUserName.setText(ent.getEntnomeFantasia());
-        
+
         // Busco no banco, o cargo do usuario e atualizo na tela
         CargoRN crf = new CargoRN();
         List cargos = crf.pesquisar("SELECT c FROM TbFuncionario f INNER JOIN TbCargo c ON f.funcCargo = c.carId WHERE f.funcUsuario = '" + user.getUsuUsuario() + "'");
         TbCargo car = (TbCargo) cargos.get(0);
         labelUserRole.setText(car.getCarDescricao());
+        
+        if(user.getUsuimgPerfil() != null) {
+            ImageManipulation imageManipulation = new ImageManipulation();
+            userImage = imageManipulation.convertToImage(user.getUsuimgPerfil());
+        } else {
+            userImage = new Image("./src/main/resources/images/userAddImage.png");
+        }
     }
+    
+    public void updateImageUser() {
+        imageViewUser.setImage(userImage);
+    }
+
+    private void resizeUserImage(double newValue) {
+        changingImageSize = true; 
+        double newSize = (57.0 / 289 * newValue) - 1; // Redimensionando a imagem com base na relação entre quando x = 1009, y = 198, quando x = 720, 7 = 141
+        System.out.println(newSize);
+        imageViewUser.resize(newSize, newSize); // Redimensionando a imageView
+        imageViewUser.setFitHeight(newSize); // Setando a imagem com a altura completa da imageView
+        imageViewUser.setFitWidth(newSize); // Setando a imagem com a largura comp,eta da imageView
+        changingImageSize = false; 
+    }
+
+    public void setUserImage(Image userImage) {
+        this.userImage = userImage;
+    }
+    
+    
 }

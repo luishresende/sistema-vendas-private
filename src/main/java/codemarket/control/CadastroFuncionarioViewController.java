@@ -3,6 +3,7 @@ package codemarket.control;
 import codemarket.control.tableViewModel.EnderecoModel;
 import codemarket.control.tableViewModel.FoneModel;
 import codemarket.model.rn.*;
+import codemarket.model.utils.ImageManipulation;
 import codemarket.model.vo.*;
 import java.io.File;
 import java.net.URL;
@@ -131,6 +132,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     private TbEndereco endPrincipal;
     private TbEntidadeHasEndereco e[] = new TbEntidadeHasEndereco[10];
     private TbEntidadeHasTelefone t[] = new TbEntidadeHasTelefone[10];
+    private String filePathImageUser;
     
     private Stage dialogStage;
 
@@ -241,7 +243,7 @@ public class CadastroFuncionarioViewController implements Initializable {
         imgButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                new FileChooser.ExtensionFilter("Imagens", "*.png", "*.jpg", "*.jpeg")
             );
             
             // Abrir o diálogo de seleção de arquivo
@@ -249,6 +251,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             
             if (selectedFile != null) {
                 // Carregar a imagem selecionada
+                filePathImageUser = selectedFile.getPath();
                 Image image = new Image(selectedFile.toURI().toString());
                 
                 // Definir a imagem no ImageView
@@ -368,7 +371,6 @@ public class CadastroFuncionarioViewController implements Initializable {
 
             t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
             i++;
-
         }
 
         i = 0;
@@ -412,7 +414,12 @@ public class CadastroFuncionarioViewController implements Initializable {
         
         TbUsuario Usuario = null;
         if(senha.getText().equals(confirmaSenha.getText())) {
-            Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor);
+            ImageManipulation imageMan = new ImageManipulation();
+            byte[] imageByte = null;
+            if(filePathImageUser != null){
+                imageByte = imageMan.convertToBytes(filePathImageUser);
+            }
+            Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor, imageByte);
             CargoRN carRN = new CargoRN();
             TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
             TbCargo valor = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);

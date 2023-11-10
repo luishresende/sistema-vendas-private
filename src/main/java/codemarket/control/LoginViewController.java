@@ -1,6 +1,9 @@
 package codemarket.control;
 
 import codemarket.model.conexao.HibernateConnection;
+import codemarket.model.rn.UsuarioRN;
+import codemarket.model.utils.ImageManipulation;
+import codemarket.model.vo.TbUsuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -137,7 +140,7 @@ public class LoginViewController implements Initializable {
 
     private void setMainView() {
         // Carrego a mainView
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainView.fxml"));
         AnchorPane page = null;
         try {
             page = (AnchorPane) loader.load();

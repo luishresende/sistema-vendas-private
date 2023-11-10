@@ -3,18 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package codemarket.model.vo;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,13 +24,14 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_usuario")
 @NamedQueries({
     @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t")})
 public class TbUsuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -43,20 +43,42 @@ public class TbUsuario implements Serializable {
     @Column(name = "usu_validade")
     @Temporal(TemporalType.DATE)
     private Date usuValidade;
+    @Lob
+    @Column(name = "usu_imgPerfil")
+    private byte[] usuimgPerfil;
     @JoinColumn(name = "usu_status", referencedColumnName = "sta_id")
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     private TbStatus usuStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcUsuario")
+    @OneToMany(mappedBy = "funcUsuario")
     private List<TbFuncionario> tbFuncionarioList;
 
-    public TbUsuario() {
+    public TbUsuario(String usuUsuario, String usuSenha, Date usuValidade, TbStatus usuStatus, byte[] usuimgPerfil) {
+        this.usuUsuario = usuUsuario;
+        this.usuSenha = usuSenha;
+        this.usuValidade = usuValidade;
+        this.usuStatus = usuStatus;
+        this.usuimgPerfil = usuimgPerfil;
     }
-
+    
     public TbUsuario(String usuUsuario, String usuSenha, Date usuValidade, TbStatus usuStatus) {
         this.usuUsuario = usuUsuario;
         this.usuSenha = usuSenha;
         this.usuValidade = usuValidade;
         this.usuStatus = usuStatus;
+    }
+
+    public TbUsuario(String usuUsuario, String usuSenha, TbStatus usuStatus, byte[] usuimgPerfil) {
+        this.usuUsuario = usuUsuario;
+        this.usuSenha = usuSenha;
+        this.usuValidade = usuValidade;
+        this.usuStatus = usuStatus;
+        this.usuimgPerfil = usuimgPerfil;
+    }
+    
+    public TbUsuario(String usuUsuario, String usuSenha, TbStatus status) {
+        this.usuUsuario = usuUsuario;
+        this.usuSenha = usuSenha;
+        this.usuStatus = status;
     }
 
     public String getUsuUsuario() {
@@ -81,6 +103,14 @@ public class TbUsuario implements Serializable {
 
     public void setUsuValidade(Date usuValidade) {
         this.usuValidade = usuValidade;
+    }
+
+    public byte[] getUsuimgPerfil() {
+        return usuimgPerfil;
+    }
+
+    public void setUsuimgPerfil(byte[] usuimgPerfil) {
+        this.usuimgPerfil = usuimgPerfil;
     }
 
     public TbStatus getUsuStatus() {
@@ -121,7 +151,7 @@ public class TbUsuario implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbUsuario[ usuUsuario=" + usuUsuario + " ]";
+        return "pojos.TbUsuario[ usuUsuario=" + usuUsuario + " ]";
     }
-    
+
 }
