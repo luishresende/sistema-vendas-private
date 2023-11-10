@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -9,12 +10,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.CadastroEntidadeViewController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.CadastroEntidadeViewController">
    <children>
-      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Cadastro de Entidades" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="969.0" text="Cadastro de Entidades" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="primaryThemeColor" />
+            <String fx:value="primaryTextColor" />
+         </styleClass>
       </Label>
       <GridPane layoutX="108.0" layoutY="73.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
         <columnConstraints>
@@ -31,7 +36,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <GridPane layoutX="140.0" layoutY="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <GridPane layoutX="140.0" layoutY="14.0" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columnConstraints>
                                   <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="2.5" prefWidth="100.0" />
                                   <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="103.0" minWidth="10.0" prefWidth="103.0" />
@@ -46,12 +51,12 @@
                                  <children>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                        <children>
-                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Código" textFill="#0022ff">
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Código" textFill="#0022ff">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField disable="true" prefHeight="31.0" prefWidth="569.0">
+                                          <TextField editable="false" prefHeight="31.0" prefWidth="569.0">
                                              <font>
                                                 <Font size="13.0" />
                                              </font></TextField>
@@ -62,7 +67,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                        <children>
-                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome" textFill="#0022ff">
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Nome" textFill="#0022ff">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -78,7 +83,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
                                        <children>
-                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Tipo de Entidade" textFill="#0022ff">
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Tipo de Entidade" textFill="#0022ff">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -92,7 +97,7 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <CheckBox fx:id="tipoEntidade1" mnemonicParsing="false" text="Cliente">
+                                                <CheckBox fx:id="tipoEntidade1" mnemonicParsing="false" styleClass="secondTextColor" text="Cliente">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -100,7 +105,7 @@
                                                       <Insets left="5.0" />
                                                    </GridPane.margin>
                                                 </CheckBox>
-                                                <CheckBox fx:id="tipoEntidade2" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" text="Fornecedor" GridPane.columnIndex="1">
+                                                <CheckBox fx:id="tipoEntidade2" layoutX="10.0" layoutY="15.0" mnemonicParsing="false" styleClass="secondTextColor" text="Fornecedor" GridPane.columnIndex="1">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -121,7 +126,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button fx:id="buttonCancelar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleCancelarbutton" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
+                                          <Button fx:id="buttonCancelar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleCancelarbutton" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" text="Cancelar" textAlignment="CENTER" GridPane.columnIndex="1">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -129,14 +134,18 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                              <graphic>
-                                                <FontAwesomeIcon iconName="CLOSE" size="2em" textAlignment="CENTER">
+                                                <FontAwesomeIcon iconName="CLOSE" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </FontAwesomeIcon>
                                              </graphic>
+                                             <styleClass>
+                                                <String fx:value="buttonProduto" />
+                                                <String fx:value="secondTextColor" />
+                                             </styleClass>
                                           </Button>
-                                          <Button fx:id="buttonFinalizar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleFinalizarButton" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Finalizar" textAlignment="CENTER">
+                                          <Button fx:id="buttonFinalizar" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleFinalizarButton" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" text="Finalizar" textAlignment="CENTER">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
@@ -144,12 +153,16 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                              <graphic>
-                                                <FontAwesomeIcon iconName="CHECK" size="2em" textAlignment="CENTER">
+                                                <FontAwesomeIcon iconName="CHECK" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </FontAwesomeIcon>
                                              </graphic>
+                                             <styleClass>
+                                                <String fx:value="buttonProduto" />
+                                                <String fx:value="secondTextColor" />
+                                             </styleClass>
                                           </Button>
                                        </children>
                                     </GridPane>
@@ -165,7 +178,7 @@
               <tabs>
                 <Tab style="-fx-font-weight: bold;" text="Dados Iniciais">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="secondThemeColor">
                            <children>
                               <GridPane layoutX="74.0" layoutY="54.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columnConstraints>
@@ -200,7 +213,7 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Sexo">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Sexo">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -213,7 +226,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Físico / Jurídico">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Físico / Jurídico">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -234,7 +247,7 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="83.0" spacing="2.0">
                                                    <children>
-                                                      <Label fx:id="labelCPFCNPJ" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="CPF / CNPJ">
+                                                      <Label fx:id="labelCPFCNPJ" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="CPF / CNPJ">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -244,7 +257,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="83.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label fx:id="labelRGIE" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="RG / IE">
+                                                      <Label fx:id="labelRGIE" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="RG / IE">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -294,7 +307,7 @@
                                                    <children>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Tipo Contato">
+                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Tipo Contato">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -304,7 +317,7 @@
                                                       </VBox>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome Contato">
+                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Nome Contato">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -334,7 +347,7 @@
                                              <children>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="DDD">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="DDD">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -348,7 +361,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Fone">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Fone">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -380,7 +393,7 @@
                                           </GridPane>
                                           <GridPane GridPane.rowIndex="3">
                                              <children>
-                                                <Button fx:id="buttonSalvarFone" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarFonebutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                <Button fx:id="buttonSalvarFone" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarFonebutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" text="Salvar" textAlignment="CENTER">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -388,14 +401,18 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                    <graphic>
-                                                      <FontAwesomeIcon iconName="SAVE" size="2em" textAlignment="CENTER">
+                                                      <FontAwesomeIcon iconName="SAVE" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                       </FontAwesomeIcon>
                                                    </graphic>
+                                                   <styleClass>
+                                                      <String fx:value="buttonProduto" />
+                                                      <String fx:value="secondTextColor" />
+                                                   </styleClass>
                                                 </Button>
-                                                <Button fx:id="buttonAlterarFone" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerAlterarFoneButton" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="1">
+                                                <Button fx:id="buttonAlterarFone" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerAlterarFoneButton" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="1">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -403,14 +420,18 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                    <graphic>
-                                                      <FontAwesomeIcon iconName="EDIT" size="2em" textAlignment="CENTER">
+                                                      <FontAwesomeIcon iconName="EDIT" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                       </FontAwesomeIcon>
                                                    </graphic>
+                                                   <styleClass>
+                                                      <String fx:value="buttonProduto" />
+                                                      <String fx:value="secondTextColor" />
+                                                   </styleClass>
                                                 </Button>
-                                                <Button fx:id="buttonCancelarFone" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerCancelarFone" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                <Button fx:id="buttonCancelarFone" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerCancelarFone" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="2">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
@@ -418,12 +439,16 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                    <graphic>
-                                                      <FontAwesomeIcon iconName="TRASH" size="2em" textAlignment="CENTER">
+                                                      <FontAwesomeIcon iconName="TRASH" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                       </FontAwesomeIcon>
                                                    </graphic>
+                                                   <styleClass>
+                                                      <String fx:value="buttonProduto" />
+                                                      <String fx:value="secondTextColor" />
+                                                   </styleClass>
                                                 </Button>
                                              </children>
                                              <columnConstraints>
@@ -460,7 +485,7 @@
                                        <children>
                                           <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="544.0" spacing="2.0">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome Fantasia">
+                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Nome Fantasia">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -483,7 +508,7 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="239.0" spacing="3.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Data Nasccimento">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Data Nasccimento">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -493,7 +518,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="306.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Email">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Email">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -523,13 +548,13 @@
                 </Tab>
                 <Tab style="-fx-font-weight: bold;" text="Endereço">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" styleClass="secondThemeColor">
                            <children>
                               <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <VBox prefHeight="385.0" prefWidth="949.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                        <children>
-                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Localidade" textFill="#0022ff">
+                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Localidade" textFill="#0022ff">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -550,7 +575,7 @@
                                                          <children>
                                                             <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" text="País">
+                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" styleClass="secondTextColor" text="País">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -560,7 +585,7 @@
                                                             </VBox>
                                                             <VBox prefHeight="62.0" prefWidth="330.0" spacing="2.0" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" text="Cidade">
+                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" styleClass="secondTextColor" text="Cidade">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -587,7 +612,7 @@
                                                             </VBox>
                                                             <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="98.0" text="Estado">
+                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="98.0" styleClass="secondTextColor" text="Estado">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -604,7 +629,7 @@
                                                 </VBox>
                                                 <GridPane prefHeight="49.0" prefWidth="947.0" GridPane.rowIndex="3">
                                                    <children>
-                                                      <Button fx:id="buttonSalvarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarEndbutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Salvar" textAlignment="CENTER">
+                                                      <Button fx:id="buttonSalvarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" mnemonicParsing="false" onAction="#handleSalvarEndbutton" prefHeight="31.0" prefWidth="101.0" style="-fx-background-color: Transparent;" text="Salvar" textAlignment="CENTER">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -612,14 +637,19 @@
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                          <graphic>
-                                                            <FontAwesomeIcon iconName="SAVE" size="2em" textAlignment="CENTER">
+                                                            <FontAwesomeIcon iconName="SAVE" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                                <font>
                                                                   <Font name="System Bold" size="12.0" />
                                                                </font>
                                                             </FontAwesomeIcon>
                                                          </graphic>
+                                                         <styleClass>
+                                                            <String fx:value="buttonProduto" />
+                                                            <String fx:value="primaryIconColor" />
+                                                            <String fx:value="secondTextColor" />
+                                                         </styleClass>
                                                       </Button>
-                                                      <Button fx:id="buttonAlterarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerAlterarEndButton" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="1">
+                                                      <Button fx:id="buttonAlterarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="224.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerAlterarEndButton" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: Transparent;" text="Alterar" textAlignment="CENTER" GridPane.columnIndex="1">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -627,14 +657,18 @@
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                          <graphic>
-                                                            <FontAwesomeIcon iconName="EDIT" size="2em" textAlignment="CENTER">
+                                                            <FontAwesomeIcon iconName="EDIT" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                                <font>
                                                                   <Font name="System Bold" size="12.0" />
                                                                </font>
                                                             </FontAwesomeIcon>
                                                          </graphic>
+                                                         <styleClass>
+                                                            <String fx:value="buttonProduto" />
+                                                            <String fx:value="secondTextColor" />
+                                                         </styleClass>
                                                       </Button>
-                                                      <Button fx:id="buttonCancelarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerCancelarEnd" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="2">
+                                                      <Button fx:id="buttonCancelarEnd" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="332.0" layoutY="1.0" mnemonicParsing="false" onAction="#handlerCancelarEnd" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: Transparent;" text="Excluir" textAlignment="CENTER" GridPane.columnIndex="2">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -642,12 +676,16 @@
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
                                                          <graphic>
-                                                            <FontAwesomeIcon iconName="TRASH" size="2em" textAlignment="CENTER">
+                                                            <FontAwesomeIcon iconName="TRASH" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
                                                                <font>
                                                                   <Font name="System Bold" size="12.0" />
                                                                </font>
                                                             </FontAwesomeIcon>
                                                          </graphic>
+                                                         <styleClass>
+                                                            <String fx:value="buttonProduto" />
+                                                            <String fx:value="secondTextColor" />
+                                                         </styleClass>
                                                       </Button>
                                                    </children>
                                                    <columnConstraints>
@@ -696,7 +734,7 @@
                                        <children>
                                           <VBox prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" text="Tipo de Endereço">
+                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" styleClass="secondTextColor" text="Tipo de Endereço">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -716,7 +754,7 @@
                                           </VBox>
                                           <VBox prefHeight="46.0" prefWidth="336.0" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Número">
+                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Número">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -743,7 +781,7 @@
                                              <children>
                                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="44.0" text="Bairro">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="44.0" styleClass="secondTextColor" text="Bairro">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -757,7 +795,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" text="Complemento">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" styleClass="secondTextColor" text="Complemento">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -774,7 +812,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" text="CEP">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" styleClass="secondTextColor" text="CEP">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -802,7 +840,7 @@
                                              <children>
                                                 <VBox prefHeight="55.0" prefWidth="816.0" spacing="2.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" text="Endereço">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" styleClass="secondTextColor" text="Endereço">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -816,7 +854,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" text="Logradouro">
+                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" styleClass="secondTextColor" text="Logradouro">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -861,4 +899,8 @@
          </children>
       </GridPane>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+      <URL value="@styleSettings.css" />
+   </stylesheets>
 </AnchorPane>

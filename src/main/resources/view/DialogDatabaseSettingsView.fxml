@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import java.lang.*?>
@@ -8,25 +9,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPaneDBSettings" prefHeight="350.0" prefWidth="400.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.DialogDatabaseSettingsViewController">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneDBSettings" prefHeight="350.0" prefWidth="400.0" styleClass="secondThemeColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.DialogDatabaseSettingsViewController">
    <children>
-      <TextField fx:id="textFieldEnderecoDB" layoutX="86.0" layoutY="120.0" prefHeight="25.0" prefWidth="266.0" promptText="Endereço" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.topAnchor="120.0" />
-      <TextField fx:id="textFieldNomeDB" layoutX="86.0" layoutY="160.0" prefHeight="25.0" prefWidth="266.0" promptText="Base de dados" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.topAnchor="160.0" />
-      <TextField fx:id="textFieldUsuarioDB" layoutX="86.0" layoutY="200.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.topAnchor="200.0" />
-      <PasswordField fx:id="passwordFieldSenhaDB" layoutX="84.0" layoutY="241.0" prefHeight="25.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" />
-      <FontAwesomeIcon fill="#32a0ff" iconName="AT" layoutX="48.0" layoutY="142.0" size="2em" />
-      <FontAwesomeIcon fill="#32a0ff" iconName="DATABASE" layoutX="48.0" layoutY="182.0" size="2em" />
-      <FontAwesomeIcon fill="#32a0ff" iconName="USER" layoutX="48.0" layoutY="222.0" size="2em" />
-      <FontAwesomeIcon fill="#32a0ff" iconName="KEY" layoutX="49.0" layoutY="262.0" size="2em" />
-      <Text fill="#32a0ff" layoutX="50.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONFIGURAÇÃO DE BANCO DE DADOS">
+      <TextField fx:id="textFieldEnderecoDB" layoutX="86.0" layoutY="120.0" prefHeight="25.0" prefWidth="266.0" promptText="Endereço" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" AnchorPane.topAnchor="120.0" />
+      <TextField fx:id="textFieldNomeDB" layoutX="86.0" layoutY="160.0" prefHeight="25.0" prefWidth="266.0" promptText="Base de dados" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" AnchorPane.topAnchor="160.0" />
+      <TextField fx:id="textFieldUsuarioDB" layoutX="86.0" layoutY="200.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" AnchorPane.topAnchor="200.0" />
+      <PasswordField fx:id="passwordFieldSenhaDB" layoutX="84.0" layoutY="241.0" prefHeight="25.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" />
+      <FontAwesomeIcon fill="#32a0ff" iconName="AT" layoutX="48.0" layoutY="142.0" size="2em" styleClass="secondIconColor" />
+      <FontAwesomeIcon fill="#32a0ff" iconName="DATABASE" layoutX="48.0" layoutY="182.0" size="2em" styleClass="secondIconColor" />
+      <FontAwesomeIcon fill="#32a0ff" iconName="USER" layoutX="48.0" layoutY="222.0" size="2em" styleClass="secondIconColor" />
+      <FontAwesomeIcon fill="#32a0ff" iconName="KEY" layoutX="49.0" layoutY="262.0" size="2em" styleClass="secondIconColor" />
+      <Text fill="#32a0ff" layoutX="50.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="thirdTextColor" text="CONFIGURAÇÃO DE BANCO DE DADOS">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <FontAwesomeIcon fill="#32a0ff" iconName="GEAR" layoutX="179.0" layoutY="63.0" size="4em" />
-      <Button fx:id="buttonSalvar" layoutX="158.0" layoutY="288.0" mnemonicParsing="false" onAction="#handlerButtonSalvar" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #32a0ff;" styleClass="buttonProduto" text="SALVAR" textFill="WHITE">
+      <FontAwesomeIcon fill="#32a0ff" iconName="GEAR" layoutX="179.0" layoutY="63.0" size="4em" styleClass="secondIconColor" />
+      <Button fx:id="buttonSalvar" layoutX="158.0" layoutY="288.0" mnemonicParsing="false" onAction="#handlerButtonSalvar" prefHeight="34.0" prefWidth="84.0" text="SALVAR" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <styleClass>
+            <String fx:value="buttonProduto" />
+            <String fx:value="primaryThemeColor" />
+            <String fx:value="primaryTextColor" />
+         </styleClass></Button>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+      <URL value="@styleSettings.css" />
+   </stylesheets>
 </AnchorPane>

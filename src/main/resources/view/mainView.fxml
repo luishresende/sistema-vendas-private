@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
@@ -11,7 +12,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #32a0ff;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.MainViewController">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #32a0ff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.MainViewController">
    <children>
       <GridPane fx:id="mainGridPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -31,7 +32,7 @@
                   <Insets />
                </opaqueInsets>
             </AnchorPane>
-            <GridPane fx:id="sideBarContentGridPane" prefHeight="759.0" prefWidth="320.0" style="-fx-background-color: #32a0ff; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <GridPane fx:id="sideBarContentGridPane" prefHeight="759.0" prefWidth="320.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" styleClass="primaryThemeColor" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
               <columnConstraints>
                 <ColumnConstraints fx:id="sideBarContentColumn" percentWidth="100.0" />
               </columnConstraints>
@@ -45,7 +46,7 @@
                <children>
                   <VBox GridPane.rowIndex="4">
                      <children>
-                        <Button fx:id="fornecedoresButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Fornecedores" textFill="WHITE">
+                        <Button fx:id="fornecedoresButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Fornecedores" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -55,8 +56,12 @@
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="configuraçõesButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Configurações" textFill="WHITE">
+                        <Button fx:id="configuraçõesButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Configurações" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -66,8 +71,12 @@
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="funcionariosButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Funcionarios" textFill="WHITE">
+                        <Button fx:id="funcionariosButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Funcionarios" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -77,8 +86,12 @@
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="clientesButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Clientes" textFill="WHITE">
+                        <Button fx:id="clientesButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Clientes" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -88,8 +101,12 @@
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="pdvButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Ponto de Venda" textFill="WHITE">
+                        <Button fx:id="pdvButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Ponto de Venda" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -99,8 +116,12 @@
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="estoqueButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="itensmenu" text="Estoque" textFill="WHITE">
+                        <Button fx:id="estoqueButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Estoque" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -110,6 +131,10 @@
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
                         </Button>
                      </children>
                      <GridPane.margin>
@@ -125,19 +150,19 @@
                       <RowConstraints percentHeight="50.0" valignment="TOP" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="labelUserName" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="01 - Luis Henrique da Silva Resende" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                        <Label fx:id="labelUserName" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="primaryTextColor" text="01 - Luis Henrique da Silva Resende" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelUserRole" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Desenvolvedor Java" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label fx:id="labelUserRole" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" styleClass="primaryTextColor" text="Desenvolvedor Java" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="menuButton" mnemonicParsing="false" onAction="#closeSideBar" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0); -fx-background-color: Transparent;" styleClass="itensmenu" text="MENU" textFill="WHITE" GridPane.rowIndex="1">
+                  <Button fx:id="menuButton" mnemonicParsing="false" onAction="#closeSideBar" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0); -fx-background-color: Transparent;" text="MENU" textFill="WHITE" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -145,8 +170,12 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIcon fill="WHITE" iconName="BARS" size="1.5em" textAlignment="CENTER" wrappingWidth="27.571428298950195" />
+                        <FontAwesomeIcon fill="WHITE" iconName="BARS" size="1.5em" styleClass="thirdIconColor" textAlignment="CENTER" wrappingWidth="27.571428298950195" />
                      </graphic>
+                     <styleClass>
+                        <String fx:value="itensmenu" />
+                        <String fx:value="primaryTextColor" />
+                     </styleClass>
                   </Button>
                   <GridPane fx:id="gridPaneImage" GridPane.rowIndex="2">
                     <columnConstraints>
@@ -167,7 +196,7 @@
       </GridPane>
       <GridPane fx:id="menuSeparatorGridPane" disable="true" layoutX="10.0" layoutY="10.0" onMouseEntered="#appearMenuSeparator" onMouseExited="#desappearMenuSeparator" prefHeight="720.0" prefWidth="35.0" style="-fx-background-color: Transparent;" translateX="-21.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane style="-fx-background-color: #32a0ff;">
+            <GridPane styleClass="primaryThemeColor">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -200,4 +229,8 @@
          </rowConstraints>
       </GridPane>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+      <URL value="@styleSettings.css" />
+   </stylesheets>
 </AnchorPane>

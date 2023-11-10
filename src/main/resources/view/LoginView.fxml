@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.image.*?>
 <?import de.jensd.fx.glyphs.weathericons.*?>
 <?import javafx.scene.text.*?>
@@ -10,9 +11,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPaneLogin" prefHeight="550.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.LoginViewController">
+<AnchorPane id="AnchorPane" fx:id="anchorPaneLogin" prefHeight="550.0" prefWidth="800.0" styleClass="sublimedTextField" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.LoginViewController">
    <children>
-      <Pane prefHeight="550.0" prefWidth="400.0" style="-fx-background-color: #32a0ff;">
+      <Pane prefHeight="550.0" prefWidth="400.0" styleClass="primaryThemeColor">
          <children>
             <ImageView fitHeight="355.0" fitWidth="343.0" layoutX="29.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,7 +22,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="400.0" prefHeight="550.0" prefWidth="400.0">
+      <Pane layoutX="400.0" prefHeight="550.0" prefWidth="400.0" styleClass="secondThemeColor">
          <children>
             <Button fx:id="buttonDBSettings" layoutX="341.0" mnemonicParsing="false" onAction="#handleButtonDBSettings" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: transparent;" styleClass="buttonConfig">
                <cursor>
@@ -30,15 +31,20 @@
                <graphic>
                   <FontAwesomeIcon iconName="GEAR" size="3em" text="" />
                </graphic></Button>
-            <TextField fx:id="textFieldUsuario" layoutX="88.0" layoutY="258.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="buttonEntrar" disable="true" layoutX="158.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleButtonEntrar" prefHeight="34.0" prefWidth="84.0" style="-fx-background-color: #32a0ff;" styleClass="buttonProduto" text="ENTRAR" textFill="WHITE">
+            <TextField fx:id="textFieldUsuario" layoutX="88.0" layoutY="258.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" />
+            <Button fx:id="buttonEntrar" disable="true" layoutX="158.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleButtonEntrar" prefHeight="34.0" prefWidth="84.0" text="ENTRAR" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <FontAwesomeIcon fill="#32a0ff" iconName="USER" layoutX="50.0" layoutY="281.0" size="2em" />
-            <FontAwesomeIcon fill="#32a0ff" iconName="KEY" layoutX="47.0" layoutY="340.0" size="2em" text="" />
-            <FontAwesomeIcon fill="#32a0ff" iconName="USERS" layoutX="168.0" layoutY="163.0" size="5em" />
-            <Text fill="#32a0ff" layoutX="171.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN">
+               </cursor>
+               <styleClass>
+                  <String fx:value="buttonProduto" />
+                  <String fx:value="primaryThemeColor" />
+                  <String fx:value="primaryTextColor" />
+               </styleClass></Button>
+            <FontAwesomeIcon fill="#32a0ff" iconName="USER" layoutX="50.0" layoutY="281.0" size="2em" strokeWidth="0.0" styleClass="secondIconColor" />
+            <FontAwesomeIcon fill="#32a0ff" iconName="KEY" layoutX="47.0" layoutY="340.0" size="2em" strokeWidth="0.0" styleClass="secondIconColor" text="" />
+            <FontAwesomeIcon fill="#32a0ff" iconName="USERS" layoutX="168.0" layoutY="163.0" size="5em" strokeWidth="0.0" styleClass="secondIconColor" />
+            <Text layoutX="171.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="thirdTextColor" text="LOGIN">
                <font>
                   <Font size="20.0" />
                </font>
@@ -47,8 +53,12 @@
                <font>
                   <Font size="13.0" />
                </font></Text>
-            <PasswordField fx:id="passwordFieldSenha" layoutX="88.0" layoutY="317.0" prefHeight="27.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: Transparent; -fx-border-color: #32a0ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="passwordFieldSenha" layoutX="88.0" layoutY="317.0" prefHeight="27.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" />
          </children>
       </Pane>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+      <URL value="@styleSettings.css" />
+   </stylesheets>
 </AnchorPane>
