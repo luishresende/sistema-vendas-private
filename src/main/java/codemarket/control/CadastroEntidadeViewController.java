@@ -159,107 +159,45 @@ public class CadastroEntidadeViewController implements Initializable {
         this.tituloJanela.setText(titulo);
     }
 
-    // Função para limpara o campo e ativar e desativar campos de pessoa Fisica 
+    EntidadeRN ENT = new EntidadeRN();
+    // Evento que fica verificando o tipo de cliente
     @FXML
-    void onTipoClienteChanged(ActionEvent event) {
-        String tipoSelecionado = tipoCliente.getValue(); // Obtém o tipo selecionado na ComboBox
-        if ("Jurídico".equals(tipoSelecionado)) {
-            // Formatação para CNPJ
-            labelCPFCNPJ.setText("CNPJ");
-            labelRGIE.setText("Inscrição Estadual");
-            tipoSexo.setDisable(true);
-            dataNASC.setDisable(true);
-        } else if ("Físico".equals(tipoSelecionado)) {
-            // Formatação para CPF
-            labelCPFCNPJ.setText("CPF");
-            labelRGIE.setText("RG");
-            tipoSexo.setDisable(false);
-            dataNASC.setDisable(false);
-        } else {
-            labelCPFCNPJ.setText("CPF / CNPJ");
-            labelRGIE.setText("RG / IE");
-            tipoSexo.setDisable(true);
-            dataNASC.setDisable(true);
-        }
-        cpfcnpj.clear();
-        rgie.clear();
-        tipoSexo.setValue("Selecione...");
+    void onTipoClienteChanged(ActionEvent event){
+        ENT.onTipoClienteChanged(event, tipoCliente, cpfcnpj, rgie, labelCPFCNPJ, labelRGIE, tipoSexo, dataNASC);
+    }
+    // Evento que verifica a entrada do teclado para a formatação e aceitação de só numéro para CPF / CNPJ
+    @FXML
+    void validarCPFCNPJ(KeyEvent event){
+        ENT.validarCPFCNPJ(event, cpfcnpj, tipoCliente);
+    }
+    // Evento que verifica a entrada do teclado para o RG, só aceita numero 
+    @FXML
+    void validarRGIE(KeyEvent event) {
+        ENT.validarRGIE(event, rgie);
+    }
+    
+    // Evento para verificar só a entrada de numeros e formata para DDD
+    @FXML
+    void validarDDD(KeyEvent event) {
+        ENT.validarDDD(event, ddd);
     }
 
-    // Só valida a entrada de valores numéricos e formata de acordo o tipo de cliente
+    // Evento para verificar só a entrada de numeros e formata para Telefone
     @FXML
-    void validarCPFCNPJ(KeyEvent event) {
-        String texto = cpfcnpj.getText();
-        if (!texto.matches("[0-9]*")) {
-            // Só aceita valores numéricos
-            cpfcnpj.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        String tipoSelecionado = tipoCliente.getValue(); // Obtém o tipo selecionado na ComboBox 
-        if (texto.length() == 14 && "Jurídico".equals(tipoSelecionado)) {
-            // Formatação para CNPJ "99.999/9999-99"
-            cpfcnpj.setText(texto.substring(0, 2) + "." + texto.substring(2, 5) + "." + texto.substring(5, 8) + "/" + texto.substring(8, 12) + "-" + texto.substring(12));
-        } else if (texto.length() == 11 && "Físico".equals(tipoSelecionado)) {
-            // Formatação para CPF "999.999.999-99"
-            cpfcnpj.setText(texto.substring(0, 3) + "." + texto.substring(3, 6) + "." + texto.substring(6, 9) + "-" + texto.substring(9, 11));
-        }
+    void validarFONE(KeyEvent event) {
+        ENT.validarFONE(event, fone);
     }
 
-    // DDD
+    // Evento para verificar só a entrada de numeros
     @FXML
-    private void validarDDD(KeyEvent event) {
-        String texto = ddd.getText();
-        if (!texto.matches("[0-9]*")) {
-            ddd.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 2) {
-            // Formatação para "(DD)"
-            ddd.setText("(" + texto + ")");
-        }
+    void validarNUM(KeyEvent event) {
+        ENT.validarNUM(event, numero);
     }
 
-    // Telefone
+    // Evento para verificar só a entrada de numeros e formata para CEP
     @FXML
-    private void validarFONE(KeyEvent event) {
-        String texto = fone.getText();
-        if (!texto.matches("[0-9]*")) {
-            fone.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 9) {
-            // Formatação para "(DD)"
-            fone.setText(texto.substring(0, 1) + " " + texto.substring(1, 5) + "-" + texto.substring(5, 9));
-        }
-        if (texto.length() >= 9) {
-            event.consume(); // Impede que mais de 2 caracteres sejam inseridos
-        }
-    }
-
-    // Numero
-    @FXML
-    private void validarNUM(KeyEvent event) {
-        String texto = numero.getText();
-        if (!texto.matches("[0-9]*")) {
-            numero.setText(texto.replaceAll("[^0-9]", ""));
-        }
-    }
-
-    // CEP
-    @FXML
-    private void validarCEP(KeyEvent event) {
-        String texto = cep.getText();
-        if (!texto.matches("[0-9]*")) {
-            cep.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 8) {
-            cep.setText(texto.substring(0, 5) + "-" + texto.substring(5, 8));
-        }
-    }
-
-    @FXML
-    private void validarRGIE(KeyEvent event) {
-        String texto = rgie.getText();
-        if (!texto.matches("[0-9]*")) {
-            rgie.setText(texto.replaceAll("[^0-9]", ""));
-        }
+    void validarCEP(KeyEvent event) {
+        ENT.validarCEP(event, cep);
     }
 
     @Override

@@ -151,72 +151,36 @@ public class CadastroFuncionarioViewController implements Initializable {
     public void setTituloJanela(String titulo) {
         this.tituloJanela.setText(titulo);
     }
-
+    
+    FuncionarioRN FUNC = new FuncionarioRN();
+    EntidadeRN ENT = new EntidadeRN();
     @FXML
-    private void validarCPF(KeyEvent event) {
-        String texto = cpf.getText();
-        if (!texto.matches("[0-9]*")) {
-            // Só aceita valores numéricos
-            cpf.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 11) {
-            // Formatação para CPF "999.999.999-99"
-            cpf.setText(texto.substring(0, 3) + "." + texto.substring(3, 6) + "." + texto.substring(6, 9) + "-" + texto.substring(9, 11));
-        }
-    }
-
-    @FXML
-    private void validarDDD(KeyEvent event) {
-        String texto = ddd.getText();
-        if (!texto.matches("[0-9]*")) {
-            ddd.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 2) {
-            // Formatação para "(DD)"
-            ddd.setText("(" + texto + ")");
-        }
-    }
-
-    @FXML
-    private void validarFONE(KeyEvent event) {
-        String texto = fone.getText();
-        if (!texto.matches("[0-9]*")) {
-            fone.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 9) {
-            // Formatação para "(DD)"
-            fone.setText(texto.substring(0, 1) + " " + texto.substring(1, 5) + "-" + texto.substring(5, 9));
-        }
-        if (texto.length() >= 9) {
-            event.consume(); // Impede que mais de 2 caracteres sejam inseridos
-        }
-    }
-
-    @FXML
-    private void validarNUM(KeyEvent event) {
-        String texto = numero.getText();
-        if (!texto.matches("[0-9]*")) {
-            numero.setText(texto.replaceAll("[^0-9]", ""));
-        }
-    }
-
-    @FXML
-    private void validarCEP(KeyEvent event) {
-        String texto = cep.getText();
-        if (!texto.matches("[0-9]*")) {
-            cep.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 8) {
-            cep.setText(texto.substring(0, 5) + "-" + texto.substring(5, 8));
-        }
+    void validarCPF(KeyEvent event) {
+        FUNC.validarCPF(event, cpf);
     }
     
     @FXML
-    private void validarRG(KeyEvent event) {
-        String texto = rg.getText();
-        if (!texto.matches("[0-9]*")) {
-            rg.setText(texto.replaceAll("[^0-9]", ""));
-        }
+    void validarRG(KeyEvent event) {
+        ENT.validarRGIE(event, rg);
+    }
+    
+    @FXML
+    void validarDDD(KeyEvent event) {
+        ENT.validarDDD(event, ddd);
+    }
+
+    @FXML
+    void validarFONE(KeyEvent event) {
+        ENT.validarFONE(event, fone);
+    }
+
+    @FXML
+    void validarNUM(KeyEvent event) {
+        ENT.validarNUM(event, numero);
+    }
+
+    void validarCEP(KeyEvent event) {
+        ENT.validarCEP(event, cep);
     }
     
     @FXML
@@ -440,9 +404,8 @@ public class CadastroFuncionarioViewController implements Initializable {
             CargoRN carRN = new CargoRN();
             TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
             
-            FuncionarioRN funcRN = new FuncionarioRN();
             TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
-            funcRN.salvar(funcionario);
+            FUNC.salvar(funcionario);
             JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
             dialogStage.close();
         } else {
