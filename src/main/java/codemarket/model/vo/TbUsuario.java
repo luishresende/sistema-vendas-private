@@ -80,6 +80,10 @@ public class TbUsuario implements Serializable {
         this.usuSenha = usuSenha;
         this.usuStatus = status;
     }
+    
+    public TbUsuario() {
+        
+    }
 
     public String getUsuUsuario() {
         return usuUsuario;
