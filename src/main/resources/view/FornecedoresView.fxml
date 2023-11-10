@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
@@ -9,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.FornecedoresViewController">
+<AnchorPane prefHeight="720.0" prefWidth="961.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.FornecedoresViewController">
    <children>
       <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -22,7 +21,7 @@
           <RowConstraints percentHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <GridPane alignment="CENTER" styleClass="secondThemeColor" GridPane.rowIndex="1">
+            <GridPane alignment="CENTER" GridPane.rowIndex="1">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="2.5" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="60.0" />
@@ -35,7 +34,7 @@
                 <RowConstraints percentHeight="100.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <Label contentDisplay="RIGHT" prefHeight="32.0" prefWidth="509.0" styleClass="secondTextColor" text="Pesquisar Fornecedor" GridPane.columnIndex="1">
+                  <Label contentDisplay="RIGHT" prefHeight="32.0" prefWidth="509.0" text="Pesquisar Fornecedor" GridPane.columnIndex="1">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -47,7 +46,7 @@
                         </TextField>
                      </graphic>
                   </Label>
-                  <Button fx:id="buttonCadastrar" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
+                  <Button fx:id="buttonCadastrar" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -55,20 +54,16 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIcon iconName="PLUS_SQUARE_ALT" size="3.5em" styleClass="primaryIconColor" textAlignment="CENTER">
+                        <FontAwesomeIcon iconName="PLUS_SQUARE_ALT" size="3.5em" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </FontAwesomeIcon>
                      </graphic>
-                     <styleClass>
-                        <String fx:value="buttonProduto" />
-                        <String fx:value="secondTextColor" />
-                     </styleClass>
                   </Button>
-                  <Button fx:id="buttonEditar" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Editar" textAlignment="CENTER" GridPane.columnIndex="3">
+                  <Button fx:id="buttonEditar" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonEditar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" textAlignment="CENTER" GridPane.columnIndex="3">
                      <graphic>
-                        <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="3.5em" styleClass="primaryIconColor" textAlignment="CENTER" wrappingWidth="50.0" />
+                        <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="3.5em" textAlignment="CENTER" wrappingWidth="50.0" />
                      </graphic>
                      <opaqueInsets>
                         <Insets />
@@ -79,14 +74,10 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
-                     <styleClass>
-                        <String fx:value="buttonProduto" />
-                        <String fx:value="secondTextColor" />
-                     </styleClass>
                   </Button>
-                  <Button fx:id="buttonRemover" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Deletar" GridPane.columnIndex="4">
+                  <Button fx:id="buttonRemover" alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Deletar" GridPane.columnIndex="4">
                      <graphic>
-                        <FontAwesomeIcon glyphStyleClass="" iconName="TRASH" size="3.5em" styleClass="primaryIconColor" text="" textAlignment="CENTER">
+                        <FontAwesomeIcon glyphStyleClass="" iconName="TRASH" size="3.5em" text="" textAlignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></FontAwesomeIcon>
@@ -94,26 +85,22 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
-                     <styleClass>
-                        <String fx:value="buttonProduto" />
-                        <String fx:value="secondTextColor" />
-                     </styleClass>
                   </Button>
                </children>
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </GridPane>
-            <TableView fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="tableViewFornecedor" fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <columns>
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="226.0" text="Nome Fantasia" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="145.0" text="CNPJ" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="199.0" text="Email" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Telefone" />
+                  <TableColumn fx:id="colunaNome" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
+                  <TableColumn fx:id="colunaNomeF" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="226.0" text="Nome Fantasia" />
+                  <TableColumn fx:id="colunaCNPJ" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="145.0" text="CNPJ" />
+                  <TableColumn fx:id="colunaEmail" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="199.0" text="Email" />
+                  <TableColumn fx:id="colunaFone" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Telefone" />
                </columns>
             </TableView>
-            <GridPane alignment="CENTER" styleClass="secondThemeColor" GridPane.rowIndex="3">
+            <GridPane alignment="CENTER" GridPane.rowIndex="3">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="20.0" />
                   <ColumnConstraints halignment="CENTER" percentWidth="35.0" />
@@ -125,24 +112,24 @@
                 <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <CheckBox mnemonicParsing="false" styleClass="secondTextColor" text="Cores de Controle de Pagamentos de Fornecedores" GridPane.columnIndex="1">
+                  <CheckBox mnemonicParsing="false" text="Cores de Controle de Pagamentos de Fornecedores" GridPane.columnIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </CheckBox>
-                  <Label prefHeight="25.0" prefWidth="69.0" styleClass="secondTextColor" text="Pago" GridPane.columnIndex="2">
+                  <Label prefHeight="25.0" prefWidth="69.0" text="Pago" GridPane.columnIndex="2">
                      <graphic>
                         <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #41E2EF; -fx-border-style: solid;" />
                      </graphic>
                   </Label>
-                  <Label prefHeight="21.0" prefWidth="139.0" styleClass="secondTextColor" text="Boleto Atrasado" GridPane.columnIndex="3">
+                  <Label prefHeight="21.0" prefWidth="139.0" text="Boleto Atrasado" GridPane.columnIndex="3">
                      <graphic>
                         <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #FF7A42; -fx-border-style: solid;" />
                      </graphic>
                   </Label>
                </children>
             </GridPane>
-            <GridPane alignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <GridPane alignment="CENTER" style="-fx-background-color: #32a0ff;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="100.0" />
               </columnConstraints>
@@ -159,16 +146,8 @@
                      </padding>
                   </Label>
                </children>
-               <styleClass>
-                  <String fx:value="primaryThemeColor" />
-                  <String fx:value="primaryTextColor" />
-               </styleClass>
             </GridPane>
          </children>
       </GridPane>
    </children>
-   <stylesheets>
-      <URL value="@style.css" />
-      <URL value="@styleSettings.css" />
-   </stylesheets>
 </AnchorPane>

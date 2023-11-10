@@ -165,13 +165,13 @@
                   <String fx:value="primaryThemeColor" />
                </styleClass>
             </GridPane>
-            <TableView fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="tableViewCliente" fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <columns>
-                  <TableColumn prefWidth="173.0" text="CPF/CNPJ" />
-                  <TableColumn prefWidth="237.0" text="Nome" />
-                  <TableColumn minWidth="0.0" prefWidth="226.0" text="Nome Fantasia" />
-                  <TableColumn prefWidth="199.0" text="Email" />
-                  <TableColumn prefWidth="133.0" text="Telefone" />
+                  <TableColumn fx:id="colunaNome" prefWidth="237.0" text="Nome" />
+                  <TableColumn fx:id="colunaNomeF" minWidth="0.0" prefWidth="226.0" text="Nome Fantasia" />
+                  <TableColumn fx:id="colunaCPFCNPJ" prefWidth="173.0" text="CPF/CNPJ" />
+                  <TableColumn fx:id="colunaEmail" prefWidth="199.0" text="Email" />
+                  <TableColumn fx:id="colunaFone" prefWidth="133.0" text="Telefone" />
                </columns>
             </TableView>
          </children>

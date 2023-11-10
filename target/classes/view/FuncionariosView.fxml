@@ -10,15 +10,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.FuncionariosViewController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.FuncionariosViewController">
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="969.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <GridPane layoutY="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <GridPane alignment="CENTER" GridPane.rowIndex="1">
+                  <GridPane alignment="CENTER" styleClass="secondThemeColor" GridPane.rowIndex="1">
                      <children>
-                        <Label contentDisplay="RIGHT" prefHeight="32.0" prefWidth="524.0" text="Pesquisar Funcionário" GridPane.columnIndex="1">
+                        <Label contentDisplay="RIGHT" prefHeight="32.0" prefWidth="524.0" styleClass="secondTextColor" text="Pesquisar Funcionário" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -30,7 +30,7 @@
                               </TextField>
                            </graphic>
                         </Label>
-                        <Button fx:id="buttonCadastrar" alignment="CENTER" contentDisplay="TOP" ellipsisString="" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="buttonCadastrar" alignment="CENTER" contentDisplay="TOP" ellipsisString="" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonCadastrar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Cadastrar" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -38,14 +38,18 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <graphic>
-                              <FontAwesomeIcon boundsType="LOGICAL_VERTICAL_CENTER" iconName="PLUS_SQUARE_ALT" size="350%" textAlignment="CENTER">
+                              <FontAwesomeIcon boundsType="LOGICAL_VERTICAL_CENTER" iconName="PLUS_SQUARE_ALT" size="350%" styleClass="primaryIconColor" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </FontAwesomeIcon>
                            </graphic>
+                           <styleClass>
+                              <String fx:value="buttonProduto" />
+                              <String fx:value="secondTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="buttonEditar" alignment="CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonEditar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Editar" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="buttonEditar" alignment="CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonEditar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Editar" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -53,18 +57,22 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <graphic>
-                              <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="350%" stroke="#030303" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="42.0" />
+                              <FontAwesomeIcon fontSmoothingType="LCD" glyphStyleClass="" iconName="EDIT" size="350%" stroke="#030303" strokeWidth="0.0" styleClass="primaryIconColor" textAlignment="CENTER" wrappingWidth="42.0" />
                            </graphic>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <styleClass>
+                              <String fx:value="buttonProduto" />
+                              <String fx:value="secondTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="buttonRemover" alignment="CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Deletar" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="buttonRemover" alignment="CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonRemover" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Deletar" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <graphic>
-                              <FontAwesomeIcon glyphStyleClass="" iconName="TRASH" size="350%" text="" textAlignment="CENTER">
+                              <FontAwesomeIcon glyphStyleClass="" iconName="TRASH" size="350%" styleClass="primaryIconColor" text="" textAlignment="CENTER">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -73,8 +81,12 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                           <styleClass>
+                              <String fx:value="buttonProduto" />
+                              <String fx:value="secondTextColor" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="buttonVisualizar" alignment="CENTER" contentDisplay="TOP" ellipsisString="" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonVisualizar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Visualizar" textAlignment="CENTER" GridPane.columnIndex="2">
+                        <Button fx:id="buttonVisualizar" alignment="CENTER" contentDisplay="TOP" ellipsisString="" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleButtonVisualizar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Visualizar" textAlignment="CENTER" GridPane.columnIndex="2">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -82,12 +94,16 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                            <graphic>
-                              <FontAwesomeIcon boundsType="LOGICAL_VERTICAL_CENTER" iconName="STREET_VIEW" size="350%" textAlignment="CENTER">
+                              <FontAwesomeIcon boundsType="LOGICAL_VERTICAL_CENTER" iconName="STREET_VIEW" size="350%" styleClass="primaryIconColor" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </FontAwesomeIcon>
                            </graphic>
+                           <styleClass>
+                              <String fx:value="buttonProduto" />
+                              <String fx:value="secondTextColor" />
+                           </styleClass>
                         </Button>
                      </children>
                      <columnConstraints>
@@ -106,18 +122,18 @@
                         <Insets />
                      </GridPane.margin>
                   </GridPane>
-                  <TableView fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                  <TableView fx:id="tableViewFuncionario" fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="201.0" text="CPF" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="224.0" text="Usuário" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="187.0" text="Telefone" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="119.0" text="Vencimento" />
+                        <TableColumn fx:id="colunaNome" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
+                        <TableColumn fx:id="colunaCPF" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="201.0" text="CPF" />
+                        <TableColumn fx:id="colunaUsuario" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="224.0" text="Usuário" />
+                        <TableColumn fx:id="colunaTelefone" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="187.0" text="Telefone" />
+                        <TableColumn fx:id="colunaVencimento" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="119.0" text="Vencimento" />
                      </columns>
                   </TableView>
-                  <GridPane GridPane.rowIndex="3">
+                  <GridPane styleClass="secondThemeColor" GridPane.rowIndex="3">
                      <children>
-                        <CheckBox ellipsisString="" mnemonicParsing="false" text="Cores de Controle de Vencimento" GridPane.columnIndex="1">
+                        <CheckBox ellipsisString="" mnemonicParsing="false" styleClass="secondTextColor" text="Cores de Controle de Vencimento" GridPane.columnIndex="1">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -125,7 +141,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </CheckBox>
-                        <Label prefHeight="25.0" prefWidth="159.0" text="7 dias para vencer" GridPane.columnIndex="2">
+                        <Label prefHeight="25.0" prefWidth="159.0" styleClass="secondTextColor" text="7 dias para vencer" GridPane.columnIndex="2">
                            <graphic>
                               <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #41E2EF; -fx-border-style: solid;" />
                            </graphic>
@@ -133,7 +149,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="21.0" prefWidth="154.0" text="Usuário Bloqueado" GridPane.columnIndex="3">
+                        <Label prefHeight="21.0" prefWidth="154.0" styleClass="secondTextColor" text="Usuário Bloqueado" GridPane.columnIndex="3">
                            <graphic>
                               <Pane prefHeight="22.0" prefWidth="22.0" style="-fx-background-color: #FF7A42; -fx-border-style: solid;" />
                            </graphic>
@@ -153,9 +169,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane alignment="CENTER" prefHeight="81.0" prefWidth="969.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <GridPane alignment="CENTER" prefHeight="81.0" prefWidth="969.0" styleClass="primaryThemeColor" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Funcionários" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="969.0" styleClass="primaryTextColor" text="Funcionários" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
@@ -185,4 +201,8 @@
          </children>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+      <URL value="@styleSettings.css" />
+   </stylesheets>
 </AnchorPane>

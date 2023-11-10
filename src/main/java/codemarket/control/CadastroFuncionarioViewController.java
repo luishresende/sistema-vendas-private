@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -37,6 +38,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javax.swing.JOptionPane;
 
 public class CadastroFuncionarioViewController implements Initializable {
 
@@ -238,8 +241,24 @@ public class CadastroFuncionarioViewController implements Initializable {
         salario.setTextFormatter(textFormatter);
     }
     
+    private Callback<DatePicker, DateCell> getDayCellFactory() {
+        return datePicker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+
+                // Desativar datas anteriores ao dia atual
+                if (item.isBefore(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: lightgray;"); // Cor de fundo para datas desativadas (opcional)
+                }
+            }
+        };
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        validade.setDayCellFactory(getDayCellFactory());
         imgButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(
@@ -350,7 +369,6 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     @FXML
     void handleFinalizarButton() {
-        
         SexoRN sexorn = new SexoRN();
         TbSexo sexo = null;
         if (tipoSexo.getValue().isEmpty() == false) {
@@ -425,6 +443,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             FuncionarioRN funcRN = new FuncionarioRN();
             TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
             funcRN.salvar(funcionario);
+            JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
             dialogStage.close();
         } else {
             displayErrorScreen();

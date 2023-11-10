@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -36,13 +37,13 @@ public class TbFuncionario implements Serializable {
     @Column(name = "func_id")
     private Integer funcId;
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     private TbCargo funcCargo;
     @JoinColumn(name = "func_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne(cascade = CascadeType.PERSIST, optional = false)
     private TbEntidade funcentcpfCnpj;
     @JoinColumn(name = "func_status", referencedColumnName = "sta_id")
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     private TbStatus funcStatus;
     @JoinColumn(name = "func_usuario", referencedColumnName = "usu_usuario")
     @ManyToOne(cascade = CascadeType.ALL)

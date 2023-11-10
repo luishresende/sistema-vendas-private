@@ -122,13 +122,13 @@
                         <Insets />
                      </GridPane.margin>
                   </GridPane>
-                  <TableView fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                  <TableView fx:id="tableViewFuncionario" fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="201.0" text="CPF" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="224.0" text="Usuário" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="187.0" text="Telefone" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="119.0" text="Vencimento" />
+                        <TableColumn fx:id="colunaNome" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
+                        <TableColumn fx:id="colunaCPF" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="201.0" text="CPF" />
+                        <TableColumn fx:id="colunaUsuario" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="224.0" text="Usuário" />
+                        <TableColumn fx:id="colunaTelefone" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="187.0" text="Telefone" />
+                        <TableColumn fx:id="colunaVencimento" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="119.0" text="Vencimento" />
                      </columns>
                   </TableView>
                   <GridPane styleClass="secondThemeColor" GridPane.rowIndex="3">

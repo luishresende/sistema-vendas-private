@@ -47,8 +47,13 @@ public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
     @Override
     public void excluir(Tabela objeto) {
         manager.getTransaction().begin();
-        manager.remove(objeto);
-        manager.getTransaction().commit();
+        try {
+            manager.remove(objeto);
+            manager.getTransaction().commit();
+            System.out.println("Removido com sucesso!");
+        } catch (HibernateException e){
+            System.out.println("Erro!!!!!");
+        }
     }
 
     @Override

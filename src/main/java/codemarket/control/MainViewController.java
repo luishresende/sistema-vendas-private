@@ -98,7 +98,7 @@ public class MainViewController implements Initializable {
             estoqueView = new FXMLLoader(getClass().getResource("/view/EstoqueView.fxml")).load();
             clientesView = new FXMLLoader(getClass().getResource("/view/ClienteView.fxml")).load();
             funcionariosView = new FXMLLoader(getClass().getResource("/view/FuncionariosView.fxml")).load();
-            PDVLoaderView = new FXMLLoader(getClass().getResource("/view/FuncionariosView.fxml")).load();
+            PDVLoaderView = new FXMLLoader(getClass().getResource("/view/PDVView.fxml")).load();
         } catch (IOException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -234,7 +234,7 @@ public class MainViewController implements Initializable {
             ImageManipulation imageManipulation = new ImageManipulation();
             userImage = imageManipulation.convertToImage(user.getUsuimgPerfil());
         } else {
-            userImage = new Image("./src/main/resources/images/userAddImage.png");
+            userImage = new Image("images/userAddImage.png");
         }
     }
     

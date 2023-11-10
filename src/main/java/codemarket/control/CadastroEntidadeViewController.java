@@ -142,8 +142,8 @@ public class CadastroEntidadeViewController implements Initializable {
     private TbEndereco endPrincipal;
     private TbEntidadeHasEndereco e[] = new TbEntidadeHasEndereco[10];
     private TbEntidadeHasTelefone t[] = new TbEntidadeHasTelefone[10];
-    private TbCliente CLIENTE;
-    private TbFornecedor FORNECEDOR;
+    private TbCliente CLIENTE = null;
+    private TbFornecedor FORNECEDOR = null;
 
     private Stage dialogStage;
 
@@ -348,10 +348,8 @@ public class CadastroEntidadeViewController implements Initializable {
     void handleFinalizarButton() {
 
         SexoRN sexorn = new SexoRN();
-        TbSexo sexo = null;
-        if (tipoSexo.getValue().isEmpty() == false) {
-            sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
-        }
+        TbSexo sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+        
 
         LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
         Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -416,9 +414,17 @@ public class CadastroEntidadeViewController implements Initializable {
 
         ClienteRN cli = new ClienteRN();
         FornecedorRN fore = new FornecedorRN();
-        TbCliente clientes = (TbCliente) cli.listaUm("clicpfCnpj", CLIENTE.getClicpfCnpj().getEntcpfCnpj(), TbCliente.class);
-        TbFornecedor fornecedores = (TbFornecedor) fore.listaUm("clicpfCnpj", FORNECEDOR.getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class);
+        TbCliente clientes = null;
+        TbFornecedor fornecedores = null;
 
+        if (CLIENTE != null) {
+            clientes = (TbCliente) cli.listaUm("clicpfCnpj", CLIENTE.getClicpfCnpj().getEntcpfCnpj(), TbCliente.class);
+        }
+
+        if (FORNECEDOR != null) {
+            fornecedores = (TbFornecedor) fore.listaUm("forcpfCnpj", FORNECEDOR.getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class);
+        }
+        
         if (clientes == CLIENTE || fornecedores == FORNECEDOR) {
             EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
             for (TbEntidadeHasTelefone tel : t) {

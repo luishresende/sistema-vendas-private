@@ -38,11 +38,11 @@ public class TbFornecedor implements Serializable {
     @Column(name = "for_id")
     private Integer forId;
     @JoinColumn(name = "for_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @OneToOne(optional = false)
+    @OneToOne(cascade = CascadeType.PERSIST, optional = false)
     private TbEntidade forcpfCnpj;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entreForId")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "entreForId")
     private List<TbEntradaEstoque> tbEntradaEstoqueList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbFornecedor")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "tbFornecedor")
     private List<TbFornecedorHasProduto> tbFornecedorHasProdutoList;
 
     public TbFornecedor() {

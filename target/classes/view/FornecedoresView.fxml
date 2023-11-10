@@ -91,13 +91,13 @@
                   <Insets />
                </GridPane.margin>
             </GridPane>
-            <TableView fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TableView fx:id="tableViewFornecedor" fixedCellSize="24.0" focusTraversable="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <columns>
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="226.0" text="Nome Fantasia" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="145.0" text="CNPJ" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="199.0" text="Email" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Telefone" />
+                  <TableColumn fx:id="colunaNome" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="237.0" text="Nome" />
+                  <TableColumn fx:id="colunaNomeF" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="226.0" text="Nome Fantasia" />
+                  <TableColumn fx:id="colunaCNPJ" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="145.0" text="CNPJ" />
+                  <TableColumn fx:id="colunaEmail" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="199.0" text="Email" />
+                  <TableColumn fx:id="colunaFone" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="153.0" resizable="false" text="Telefone" />
                </columns>
             </TableView>
             <GridPane alignment="CENTER" GridPane.rowIndex="3">

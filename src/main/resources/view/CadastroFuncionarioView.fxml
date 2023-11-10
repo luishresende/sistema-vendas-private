@@ -120,7 +120,7 @@
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <DatePicker fx:id="dataNASC" prefHeight="31.0" prefWidth="169.0" />
+                                                            <DatePicker fx:id="dataNASC" prefHeight="31.0" prefWidth="169.0" promptText="dd/mm/aaaa" />
                                                          </children>
                                                          <GridPane.margin>
                                                             <Insets left="10.0" right="5.0" />

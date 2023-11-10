@@ -69,7 +69,7 @@ public class TbEntidade implements Serializable {
         @JoinColumn(name = "eht_fone_id", referencedColumnName = "fone_id")})
     @ManyToMany
     private List<TbTelefone> tbTelefoneList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "forcpfCnpj")
+    @OneToOne(mappedBy = "forcpfCnpj")
     private TbFornecedor tbFornecedor;
     @JoinColumn(name = "ent_endereco_principal", referencedColumnName = "end_id")
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
@@ -77,9 +77,9 @@ public class TbEntidade implements Serializable {
     @JoinColumn(name = "ent_sexo", referencedColumnName = "sex_id")
     @ManyToOne
     private TbSexo entSexo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcentcpfCnpj")
-    private List<TbFuncionario> tbFuncionarioList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "clicpfCnpj")
+    @OneToOne(mappedBy = "funcentcpfCnpj")
+    private TbFuncionario tbFuncionario;
+    @OneToOne(mappedBy = "clicpfCnpj")
     private TbCliente tbCliente;
 
     public TbEntidade() {
@@ -204,12 +204,12 @@ public class TbEntidade implements Serializable {
         this.entSexo = entSexo;
     }
 
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public TbFuncionario getTbFuncionarioList() {
+        return tbFuncionario;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setTbFuncionarioList(TbFuncionario tbFuncionario) {
+        this.tbFuncionario = tbFuncionario;
     }
 
     public TbCliente getTbCliente() {

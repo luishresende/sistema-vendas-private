@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="720.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.PDVViewController">
+<AnchorPane prefHeight="720.0" prefWidth="961.0" stylesheets="@styleSettings.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.PDVViewController">
    <children>
       <GridPane layoutX="62.0" layoutY="157.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -16,7 +16,7 @@
           <RowConstraints percentHeight="95.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <GridPane style="-fx-background-color: #32a0ff;">
+            <GridPane styleClass="primaryThemeColor">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -24,14 +24,14 @@
                 <RowConstraints percentHeight="100.0" valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <Label alignment="CENTER" text="Ponto de Venda" textFill="WHITE">
+                  <Label alignment="CENTER" styleClass="primaryTextColor" text="Ponto de Venda" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                </children>
             </GridPane>
-            <GridPane GridPane.rowIndex="1">
+            <GridPane styleClass="secondThemeColor" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="1.0" />
                 <ColumnConstraints hgrow="SOMETIMES" />
@@ -56,7 +56,7 @@
                      <children>
                         <AnchorPane style="-fx-background-color: white; -fx-background-radius: 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                            <children>
-                              <Label alignment="CENTER" text="CAIXA ABERTO" textFill="#14cd00" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Label alignment="CENTER" styleClass="secondThemeColor" text="CAIXA ABERTO" textFill="#14cd00" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
                                  </font>
@@ -94,9 +94,9 @@
                                     <TableColumn editable="false" prefWidth="165.0" resizable="false" text="Grupo / Categoria" />
                                  </columns>
                               </TableView>
-                              <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                              <AnchorPane style="-fx-background-radius: 10px 10px 0 0;" styleClass="primaryThemeColor" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="12.0" text="Lista de Produtos" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="292.0" layoutY="12.0" styleClass="primaryTextColor" text="Lista de Produtos" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>
@@ -126,18 +126,22 @@
                                   <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
                                 </rowConstraints>
                                  <children>
-                                    <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;">
+                                    <AnchorPane style="-fx-background-radius: 10px 10px 0 0;">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="6.0" text="Código de Barras" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="6.0" styleClass="primaryTextColor" text="Código de Barras" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
                                        </children>
+                                       <styleClass>
+                                          <String fx:value="primaryThemeColor" />
+                                          <String fx:value="primaryTextColor" />
+                                       </styleClass>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField alignment="CENTER" layoutX="86.0" layoutY="43.0" promptText="00000000000" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField alignment="CENTER" layoutX="86.0" layoutY="43.0" promptText="00000000000" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="40.0" />
                                              </font>
@@ -157,21 +161,25 @@
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="quantidade" alignment="CENTER" layoutX="86.0" layoutY="43.0" onKeyReleased="#validarQTD" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="quantidade" alignment="CENTER" layoutX="86.0" layoutY="43.0" onKeyReleased="#validarQTD" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="40.0" />
                                              </font>
                                           </TextField>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;">
+                                    <AnchorPane style="-fx-background-radius: 10px 10px 0 0;">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="6.0" text="Quantidade" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="6.0" styleClass="primaryTextColor" text="Quantidade" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
                                        </children>
+                                       <styleClass>
+                                          <String fx:value="primaryThemeColor" />
+                                          <String fx:value="primaryTextColor" />
+                                       </styleClass>
                                     </AnchorPane>
                                  </children>
                               </GridPane>
@@ -184,18 +192,22 @@
                                   <RowConstraints vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;">
+                                    <AnchorPane style="-fx-background-radius: 10px 10px 0 0;">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="6.0" text="Total do Item" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="126.0" layoutY="6.0" styleClass="primaryTextColor" text="Total do Item" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
                                        </children>
+                                       <styleClass>
+                                          <String fx:value="primaryThemeColor" />
+                                          <String fx:value="primaryTextColor" />
+                                       </styleClass>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="totaItem" alignment="CENTER" editable="false" layoutX="86.0" layoutY="43.0" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="totaItem" alignment="CENTER" editable="false" layoutX="86.0" layoutY="43.0" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="40.0" />
                                              </font>
@@ -223,6 +235,10 @@
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
+                           <styleClass>
+                              <String fx:value="secondTextColor" />
+                              <String fx:value="secondThemeColor" />
+                           </styleClass>
                         </TextArea>
                         <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
                           <columnConstraints>
@@ -253,9 +269,9 @@
                                         <RowConstraints percentHeight="75.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;">
+                                          <AnchorPane style="-fx-background-radius: 10px 10px 0 0;" styleClass="primaryThemeColor">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Total Recebido" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="primaryTextColor" text="Total Recebido" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
@@ -264,7 +280,7 @@
                                           </AnchorPane>
                                           <AnchorPane GridPane.rowIndex="1">
                                              <children>
-                                                <TextField fx:id="totalRecebido" alignment="CENTER" onKeyReleased="#intRecebido" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TextField fx:id="totalRecebido" alignment="CENTER" onKeyReleased="#intRecebido" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -282,9 +298,9 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;">
+                                          <AnchorPane style="-fx-background-radius: 10px 10px 0 0;" styleClass="primaryThemeColor">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Troco" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="primaryTextColor" text="Troco" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>
@@ -293,7 +309,7 @@
                                           </AnchorPane>
                                           <AnchorPane GridPane.rowIndex="1">
                                              <children>
-                                                <TextField fx:id="troco" alignment="CENTER" editable="false" onAction="#valorTroco" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TextField fx:id="troco" alignment="CENTER" editable="false" onAction="#valorTroco" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -306,9 +322,9 @@
                               </GridPane>
                               <GridPane style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);">
                                  <children>
-                                    <AnchorPane style="-fx-background-color: #32a0ff; -fx-background-radius: 10px 10px 0 0;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                    <AnchorPane style="-fx-background-radius: 10px 10px 0 0;" styleClass="primaryThemeColor" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                        <children>
-                                          <Label alignment="CENTER" contentDisplay="CENTER" text="Subtotal" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Label alignment="CENTER" contentDisplay="CENTER" styleClass="primaryTextColor" text="Subtotal" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
@@ -317,7 +333,7 @@
                                     </AnchorPane>
                                     <AnchorPane GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="subtotal" alignment="CENTER" editable="false" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="subtotal" alignment="CENTER" editable="false" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>
