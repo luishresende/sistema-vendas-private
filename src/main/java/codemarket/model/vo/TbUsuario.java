@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -47,9 +48,9 @@ public class TbUsuario implements Serializable {
     @Column(name = "usu_imgPerfil")
     private byte[] usuimgPerfil;
     @JoinColumn(name = "usu_status", referencedColumnName = "sta_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbStatus usuStatus;
-    @OneToMany(mappedBy = "funcUsuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcUsuario")
     private List<TbFuncionario> tbFuncionarioList;
 
     public TbUsuario(String usuUsuario, String usuSenha, Date usuValidade, TbStatus usuStatus, byte[] usuimgPerfil) {

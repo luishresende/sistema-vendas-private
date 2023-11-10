@@ -39,7 +39,7 @@ public class TbEntidadeHasEndereco implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEndereco eeEndId;
     @JoinColumn(name = "ee_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEntidade eeentcpfCnpj;
 
     public TbEntidadeHasEndereco() {

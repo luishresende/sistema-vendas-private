@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -216,11 +217,10 @@ public class CadastroFuncionarioViewController implements Initializable {
     }
     
     @FXML
-    private void validarSalario(KeyEvent event) {
+    void onTipoCargoSelecionado(ActionEvent event) {
         CargoRN sal = new CargoRN();
         TbCargo valor = sal.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
-        System.out.println(valor);
-        salario.setText(new String("" + valor.getCarsalarioBase()));
+        salario.setText(("" + valor.getCarsalarioBase()));
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         UnaryOperator<TextFormatter.Change> filter = change -> {
             if (change.isContentChange()) {
@@ -401,7 +401,6 @@ public class CadastroFuncionarioViewController implements Initializable {
 
             i++;
             this.endPrincipal = ende;
-
         }
 
         ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
@@ -422,9 +421,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor, imageByte);
             CargoRN carRN = new CargoRN();
             TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
-            TbCargo valor = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
-                System.out.println(valor);
-                salario.setText(new String("" + valor.getCarsalarioBase()));
+            
             FuncionarioRN funcRN = new FuncionarioRN();
             TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
             funcRN.salvar(funcionario);
