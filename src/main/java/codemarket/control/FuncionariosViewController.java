@@ -83,7 +83,6 @@ public class FuncionariosViewController implements Initializable {
             FuncionarioModel fm = new FuncionarioModel(forne.getFuncentcpfCnpj().getEntNome(), forne.getFuncentcpfCnpj().getEntcpfCnpj(),
                     forne.getFuncUsuario().getUsuUsuario(), fone.getFoneDescricao(), dateFormat.format(forne.getFuncUsuario().getUsuValidade()));
             infoF.add(fm);
-            System.out.println(fone.getFoneDescricao());
         }
         
 

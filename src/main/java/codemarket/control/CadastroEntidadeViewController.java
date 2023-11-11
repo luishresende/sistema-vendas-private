@@ -205,7 +205,7 @@ public class CadastroEntidadeViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        dataNASC.setDayCellFactory(ENT.getDataAnterior());
         tbEndtipo.setCellValueFactory(new PropertyValueFactory<>("tipoEndereco"));
         tbEndcep.setCellValueFactory(new PropertyValueFactory<>("cep"));
         tbEndcidade.setCellValueFactory(new PropertyValueFactory<>("cidade"));

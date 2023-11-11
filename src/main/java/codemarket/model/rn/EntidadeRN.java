@@ -1,12 +1,15 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbEntidade;
+import java.time.LocalDate;
 import java.util.List;import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Callback;
 ;
 
 public class EntidadeRN {
@@ -108,5 +111,20 @@ public class EntidadeRN {
         if (texto.length() == 8) {
             cep.setText(texto.substring(0, 5) + "-" + texto.substring(5, 8));
         }
+    }
+    
+    public Callback<DatePicker, DateCell> getDataAnterior() {
+        return datePicker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+
+                // Desativar datas posteriores ao dia atual
+                if (item.isAfter(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: lightgray;"); // Cor de fundo para datas desativadas (opcional)
+                }
+            }
+        };
     }
 }
