@@ -147,6 +147,8 @@ public class CadastroEntidadeViewController implements Initializable {
     private TbFornecedor FORNECEDOR = null;
 
     private Stage dialogStage;
+    EntidadeRN ENT = new EntidadeRN();
+    TelefoneRN TEL = new TelefoneRN();
 
     public Stage getDialogStage() {
         return dialogStage;
@@ -160,7 +162,7 @@ public class CadastroEntidadeViewController implements Initializable {
         this.tituloJanela.setText(titulo);
     }
 
-    EntidadeRN ENT = new EntidadeRN();
+   
     // Evento que fica verificando o tipo de cliente
     @FXML
     void onTipoClienteChanged(ActionEvent event){
@@ -180,13 +182,13 @@ public class CadastroEntidadeViewController implements Initializable {
     // Evento para verificar só a entrada de numeros e formata para DDD
     @FXML
     void validarDDD(KeyEvent event) {
-        ENT.validarDDD(event, ddd);
+        TEL.validarDDD(event, ddd);
     }
 
     // Evento para verificar só a entrada de numeros e formata para Telefone
     @FXML
     void validarFONE(KeyEvent event) {
-        ENT.validarFONE(event, fone);
+        TEL.validarFONE(event, fone);
     }
 
     // Evento para verificar só a entrada de numeros

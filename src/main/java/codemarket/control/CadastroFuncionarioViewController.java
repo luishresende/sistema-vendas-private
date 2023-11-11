@@ -135,6 +135,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     UsuarioRN USU = new UsuarioRN();
     FuncionarioRN FUNC = new FuncionarioRN();
     EntidadeRN ENT = new EntidadeRN();
+    TelefoneRN TEL = new TelefoneRN();
 
     public Stage getDialogStage() {
         return dialogStage;
@@ -160,12 +161,12 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     @FXML
     void validarDDD(KeyEvent event) {
-        ENT.validarDDD(event, ddd);
+        TEL.validarDDD(event, ddd);
     }
 
     @FXML
     void validarFONE(KeyEvent event) {
-        ENT.validarFONE(event, fone);
+        TEL.validarFONE(event, fone);
     }
 
     @FXML
