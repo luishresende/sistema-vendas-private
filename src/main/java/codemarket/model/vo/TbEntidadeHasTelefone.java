@@ -36,7 +36,7 @@ public class TbEntidadeHasTelefone implements Serializable {
     @Column(name = "eht_id")
     private Integer ehtId;
     @JoinColumn(name = "eht_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbEntidade ehtentcpfCnpj;
     @JoinColumn(name = "eht_fone_id", referencedColumnName = "fone_id")
     @ManyToOne(cascade = CascadeType.ALL, optional = false)

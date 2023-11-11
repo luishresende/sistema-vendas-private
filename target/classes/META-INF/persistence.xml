@@ -46,10 +46,10 @@
     <class>codemarket.model.vo.TbTipoEndereco</class>
     <class>codemarket.model.vo.TbEntidadeHasEndereco</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="4d/y/LOPk7sCKAyddVwswavdwoCjeYXqjxrAmQev46yS/5rrTJvU9P4x46DSpRjv"/>
-      <property name="javax.persistence.jdbc.user" value="CHtYs1NnsEic4tM/NijzAw=="/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/code_market"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="eyEN7MT6eDafS2qTO/VZeA=="/>
+      <property name="javax.persistence.jdbc.password" value="15112020"/>
     </properties>
   </persistence-unit>
 </persistence>

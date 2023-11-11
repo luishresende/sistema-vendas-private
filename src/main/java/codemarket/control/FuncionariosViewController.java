@@ -75,23 +75,24 @@ public class FuncionariosViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        TelefoneRN tel = new TelefoneRN();
-//        for (TbFuncionario forne : funcionarios) {
-//            TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone "
-//                    + "t WHERE t.ehtentcpfCnpj.tbFuncionario.funcentcpfCnpj = '" 
-//                    + forne.getFuncentcpfCnpj().getEntcpfCnpj() + "'").get(0);
-//            FuncionarioModel fm = new FuncionarioModel(forne.getFuncentcpfCnpj().getEntNome(), forne.getFuncentcpfCnpj().getEntcpfCnpj(),
-//                    forne.getFuncUsuario().getUsuUsuario(), fone.getFoneDescricao(), dateFormat.format(forne.getFuncUsuario().getUsuValidade()));
-//            infoF.add(fm);
-//        }
-//        
-//
-//        colunaNome.setCellValueFactory(new PropertyValueFactory<>("Nome"));
-//        colunaCPF.setCellValueFactory(new PropertyValueFactory<>("CPF"));
-//        colunaUsuario.setCellValueFactory(new PropertyValueFactory<>("Usuario"));
-//        colunaTelefone.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
-//        colunaVencimento.setCellValueFactory(new PropertyValueFactory<>("Vencimento"));
-//        tableViewFuncionario.setItems(infoF);
+        TelefoneRN tel = new TelefoneRN();
+        for (TbFuncionario forne : funcionarios) {
+            TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone "
+                    + "t WHERE t.ehtentcpfCnpj.tbFuncionario.funcentcpfCnpj = '" 
+                    + forne.getFuncentcpfCnpj().getEntcpfCnpj() + "'").get(0);
+            FuncionarioModel fm = new FuncionarioModel(forne.getFuncentcpfCnpj().getEntNome(), forne.getFuncentcpfCnpj().getEntcpfCnpj(),
+                    forne.getFuncUsuario().getUsuUsuario(), fone.getFoneDescricao(), dateFormat.format(forne.getFuncUsuario().getUsuValidade()));
+            infoF.add(fm);
+            System.out.println(fone.getFoneDescricao());
+        }
+        
+
+        colunaNome.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+        colunaCPF.setCellValueFactory(new PropertyValueFactory<>("CPF"));
+        colunaUsuario.setCellValueFactory(new PropertyValueFactory<>("Usuario"));
+        colunaTelefone.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
+        colunaVencimento.setCellValueFactory(new PropertyValueFactory<>("Vencimento"));
+        tableViewFuncionario.setItems(infoF);
     }    
 
     @FXML

@@ -37,13 +37,13 @@ public class TbFuncionario implements Serializable {
     @Column(name = "func_id")
     private Integer funcId;
     @JoinColumn(name = "func_cargo", referencedColumnName = "car_id")
-    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
+    @ManyToOne(optional = false)
     private TbCargo funcCargo;
     @JoinColumn(name = "func_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
     @OneToOne(cascade = CascadeType.PERSIST, optional = false)
     private TbEntidade funcentcpfCnpj;
     @JoinColumn(name = "func_status", referencedColumnName = "sta_id")
-    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
+    @ManyToOne(optional = false)
     private TbStatus funcStatus;
     @JoinColumn(name = "func_usuario", referencedColumnName = "usu_usuario")
     @ManyToOne(cascade = CascadeType.ALL)
