@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 public class EntidadeRN {
 
     private GenericDAO<TbEntidade> genericDao;
-
+    
     public EntidadeRN() {
         genericDao = new GenericDAO<>();
     }

@@ -7,38 +7,31 @@ import codemarket.model.utils.ImageManipulation;
 import codemarket.model.vo.*;
 import java.io.File;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.ParsePosition;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.UnaryOperator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javax.swing.JOptionPane;
 
 public class CadastroFuncionarioViewController implements Initializable {
@@ -139,6 +132,9 @@ public class CadastroFuncionarioViewController implements Initializable {
     private String filePathImageUser;
     
     private Stage dialogStage;
+    UsuarioRN USU = new UsuarioRN();
+    FuncionarioRN FUNC = new FuncionarioRN();
+    EntidadeRN ENT = new EntidadeRN();
 
     public Stage getDialogStage() {
         return dialogStage;
@@ -152,8 +148,6 @@ public class CadastroFuncionarioViewController implements Initializable {
         this.tituloJanela.setText(titulo);
     }
     
-    FuncionarioRN FUNC = new FuncionarioRN();
-    EntidadeRN ENT = new EntidadeRN();
     @FXML
     void validarCPF(KeyEvent event) {
         FUNC.validarCPF(event, cpf);
@@ -178,51 +172,21 @@ public class CadastroFuncionarioViewController implements Initializable {
     void validarNUM(KeyEvent event) {
         ENT.validarNUM(event, numero);
     }
-
+    
+    @FXML
     void validarCEP(KeyEvent event) {
         ENT.validarCEP(event, cep);
     }
     
     @FXML
     void onTipoCargoSelecionado(ActionEvent event) {
-        CargoRN sal = new CargoRN();
-        TbCargo valor = sal.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
-        salario.setText(("" + valor.getCarsalarioBase()));
-        DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        UnaryOperator<TextFormatter.Change> filter = change -> {
-            if (change.isContentChange()) {
-                String newText = change.getControlNewText();
-                ParsePosition parsePosition = new ParsePosition(0);
-                Number number = decimalFormat.parse(newText, parsePosition);
-                if (number == null || parsePosition.getIndex() < newText.length()) {
-                    return null;
-                }
-            }
-            return change;
-        };
-        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
-
-        salario.setTextFormatter(textFormatter);
-    }
-    
-    private Callback<DatePicker, DateCell> getDayCellFactory() {
-        return datePicker -> new DateCell() {
-            @Override
-            public void updateItem(LocalDate item, boolean empty) {
-                super.updateItem(item, empty);
-
-                // Desativar datas anteriores ao dia atual
-                if (item.isBefore(LocalDate.now())) {
-                    setDisable(true);
-                    setStyle("-fx-background-color: lightgray;"); // Cor de fundo para datas desativadas (opcional)
-                }
-            }
-        };
+        USU.onTipoCargoSelecionado(event, salario, tipoCargo);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        validade.setDayCellFactory(getDayCellFactory());
+        validade.setDayCellFactory(USU.getDataPosterior());   // Só seleciona datas posteriores ao dia atual
+        dataNASC.setDayCellFactory(USU.getDataAnterior());    // Só seleciona datas anteriores ao dia atual
         imgButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(
@@ -301,7 +265,7 @@ public class CadastroFuncionarioViewController implements Initializable {
         
         brasileiro.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal) {
-                brasileiro.setSelected(true); // Impede que o CheckBox seja desmarcado
+                brasileiro.setSelected(true); // Impede que o RadioButton seja desmarcado
             }
         });
         
@@ -321,15 +285,6 @@ public class CadastroFuncionarioViewController implements Initializable {
         tipoCargo.setItems(caR);
         
     }    
-    
-    private void displayErrorScreen() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Ocorreu um erro");
-        alert.setContentText("As senhas são diferentes!");
-
-        alert.showAndWait();
-    }
     
     @FXML
     void handleFinalizarButton() {
@@ -404,12 +359,27 @@ public class CadastroFuncionarioViewController implements Initializable {
             CargoRN carRN = new CargoRN();
             TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
             
+            EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+            for (TbEntidadeHasTelefone tel : t) {
+                if (tel == null) {
+                    break;
+                }
+                eht.salvar(tel);
+            }
+            EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+            for (TbEntidadeHasEndereco end : e) {
+                if (end == null) {
+                    break;
+                }
+                ehe.salvar(end);
+            }
+            
             TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
             FUNC.salvar(funcionario);
             JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
             dialogStage.close();
         } else {
-            displayErrorScreen();
+            USU.displayErrorScreen();
         }
     }
 

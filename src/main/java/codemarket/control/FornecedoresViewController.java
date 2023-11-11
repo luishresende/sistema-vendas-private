@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,11 +57,12 @@ public class FornecedoresViewController implements Initializable {
 
     private Stage dialogStage;
     private final FXMLLoader loader = new FXMLLoader();
+    
+    FornecedorRN f = new FornecedorRN();
+    List<TbFornecedor> fornecedores = f.pesquisar("SELECT t FROM TbFornecedor t");
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        FornecedorRN f = new FornecedorRN();
-        List<TbFornecedor> fornecedores = f.pesquisar("SELECT t FROM TbFornecedor t");
         TelefoneRN tel = new TelefoneRN();
         for (TbFornecedor forne : fornecedores) {
             TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone t WHERE"
@@ -153,5 +153,31 @@ public class FornecedoresViewController implements Initializable {
             alert.showAndWait();
         }
     }
+    
+    @FXML
+    private void handleButtonAtualizar() {
+        atualizarTabela();
+    }
+    
+    private void atualizarTabela() {
+        // Limpa os dados existentes na tabela
+        infoF.clear();
 
+        // Carrega os dados atualizados
+        TelefoneRN tel = new TelefoneRN();
+        fornecedores = f.pesquisar("SELECT t FROM TbFornecedor t");
+
+        for (TbFornecedor forne : fornecedores) {
+            TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone t WHERE"
+                    + " t.ehtentcpfCnpj.tbFornecedor.forcpfCnpj = '"
+                    + forne.getForcpfCnpj().getEntcpfCnpj() + "'").get(0);
+            FornecedorClienteModel fm = new FornecedorClienteModel(forne.getForcpfCnpj().getEntNome(), forne.getForcpfCnpj().getEntnomeFantasia(),
+                    forne.getForcpfCnpj().getEntcpfCnpj(), forne.getForcpfCnpj().getEntEmail(),
+                    fone.getFoneDescricao());
+            infoF.add(fm);
+        }
+
+        // Atualiza a tabela com os dados carregados
+        tableViewFornecedor.setItems(infoF);
+    }
 }

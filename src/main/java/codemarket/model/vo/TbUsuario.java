@@ -48,9 +48,9 @@ public class TbUsuario implements Serializable {
     @Column(name = "usu_imgPerfil")
     private byte[] usuimgPerfil;
     @JoinColumn(name = "usu_status", referencedColumnName = "sta_id")
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     private TbStatus usuStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcUsuario")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "funcUsuario")
     private List<TbFuncionario> tbFuncionarioList;
 
     public TbUsuario(String usuUsuario, String usuSenha, Date usuValidade, TbStatus usuStatus, byte[] usuimgPerfil) {

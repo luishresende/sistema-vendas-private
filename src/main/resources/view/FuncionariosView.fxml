@@ -23,7 +23,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                            <graphic>
-                              <TextField prefHeight="27.0" prefWidth="385.0">
+                              <TextField prefHeight="27.0" prefWidth="334.0">
                                  <font>
                                     <Font size="12.0" />
                                  </font>
@@ -105,6 +105,21 @@
                               <String fx:value="secondTextColor" />
                            </styleClass>
                         </Button>
+                        <Button alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonAtualizar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Atulizar" textAlignment="CENTER" GridPane.columnIndex="6">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <FontAwesomeIcon iconName="REFRESH" size="3.5em" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </FontAwesomeIcon>
+                           </graphic>
+                        </Button>
                      </children>
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="2.5" />
@@ -113,6 +128,7 @@
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="-Infinity" percentWidth="10.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="-Infinity" percentWidth="10.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="-Infinity" percentWidth="10.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" percentWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="2.5" />
                      </columnConstraints>
                      <rowConstraints>

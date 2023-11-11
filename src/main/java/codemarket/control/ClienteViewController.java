@@ -51,11 +51,11 @@ public class ClienteViewController implements Initializable {
     
     private Stage dialogStage;
     private final FXMLLoader loader = new FXMLLoader();
+    ClienteRN c = new ClienteRN();
+    List<TbCliente> clientes = c.pesquisar("SELECT t FROM TbCliente t");
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ClienteRN c = new ClienteRN();
-        List<TbCliente> clientes = c.pesquisar("SELECT t FROM TbCliente t");
         TelefoneRN tel = new TelefoneRN();
         for (TbCliente cliente : clientes) {
             TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone t WHERE"
@@ -114,5 +114,32 @@ public class ClienteViewController implements Initializable {
         controller.setDialogStage(dialogStage);
     
         dialogStage.showAndWait();
+    }
+    
+    @FXML
+    private void handleButtonAtualizar() {
+        atualizarTabela();
+    }
+    
+    private void atualizarTabela() {
+        // Limpa os dados existentes na tabela
+        infoF.clear();
+
+        // Carrega os dados atualizados
+        TelefoneRN tel = new TelefoneRN();
+        clientes = c.pesquisar("SELECT t FROM TbCliente t");
+        
+        for (TbCliente cliente : clientes) {
+            TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone t WHERE"
+                    + " t.ehtentcpfCnpj.tbCliente.clicpfCnpj = '" 
+                    + cliente.getClicpfCnpj().getEntcpfCnpj() + "'").get(0);
+            FornecedorClienteModel fm = new FornecedorClienteModel(cliente.getClicpfCnpj().getEntNome(), cliente.getClicpfCnpj().getEntnomeFantasia(),
+                    cliente.getClicpfCnpj().getEntcpfCnpj(), cliente.getClicpfCnpj().getEntEmail(),
+                    fone.getFoneDescricao());
+            infoF.add(fm);
+        }
+
+        // Atualiza a tabela com os dados carregados
+        tableViewCliente.setItems(infoF);
     }
 }

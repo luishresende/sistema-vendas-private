@@ -5,37 +5,23 @@
  */
 package codemarket.control;
 
-import codemarket.model.rn.CargoRN;
-import codemarket.model.rn.EntidadeRN;
+import codemarket.model.rn.*;
 import codemarket.model.utils.ImageManipulation;
-import codemarket.model.vo.TbCargo;
-import codemarket.model.vo.TbEntidade;
-import codemarket.model.vo.TbUsuario;
+import codemarket.model.vo.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
+import java.util.logging.*;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 
 public class MainViewController implements Initializable {
@@ -255,6 +241,4 @@ public class MainViewController implements Initializable {
     public void setUserImage(Image userImage) {
         this.userImage = userImage;
     }
-    
-    
 }

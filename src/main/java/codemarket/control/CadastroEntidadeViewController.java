@@ -29,6 +29,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 public class CadastroEntidadeViewController implements Initializable {
 
@@ -286,7 +287,10 @@ public class CadastroEntidadeViewController implements Initializable {
     void handleFinalizarButton() {
 
         SexoRN sexorn = new SexoRN();
-        TbSexo sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+        TbSexo sexo = null;
+        if (tipoSexo.getValue().isEmpty() == false) {
+            sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+        }
         
 
         LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
@@ -379,6 +383,8 @@ public class CadastroEntidadeViewController implements Initializable {
                 ehe.salvar(end);
             }
         }
+        JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+        dialogStage.close();
     }
 
     @FXML

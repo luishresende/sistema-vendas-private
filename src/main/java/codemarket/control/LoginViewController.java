@@ -1,10 +1,6 @@
 package codemarket.control;
 
 import codemarket.model.conexao.HibernateConnection;
-import codemarket.model.rn.UsuarioRN;
-import codemarket.model.utils.ImageManipulation;
-import codemarket.model.utils.SettingsFile;
-import codemarket.model.vo.TbUsuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

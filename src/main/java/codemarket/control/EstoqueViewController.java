@@ -72,4 +72,8 @@ public class EstoqueViewController implements Initializable {
     private void handlebuttonRemover(ActionEvent event) {
     }
     
+    @FXML
+    private void handleButtonAtualizar() {
+
+    }
 }

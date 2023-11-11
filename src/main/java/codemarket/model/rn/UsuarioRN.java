@@ -1,7 +1,19 @@
 package codemarket.model.rn;
+
 import codemarket.model.dao.GenericDAO;
-import codemarket.model.vo.TbUsuario;
-import java.util.List;;
+import codemarket.model.vo.*;
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
+import java.time.LocalDate;
+import java.util.List;import java.util.function.UnaryOperator;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.util.Callback;
 
 public class UsuarioRN {
 
@@ -34,5 +46,72 @@ public class UsuarioRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    
+    public Callback<DatePicker, DateCell> getDataPosterior() {
+        return datePicker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+
+                // Desativar datas anteriores ao dia atual
+                if (item.isBefore(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: lightgray;"); // Cor de fundo para datas desativadas (opcional)
+                }
+            }
+        };
+    }
+    
+    public Callback<DatePicker, DateCell> getDataAnterior() {
+        return datePicker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+
+                // Desativar datas posteriores ao dia atual
+                if (item.isAfter(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: lightgray;"); // Cor de fundo para datas desativadas (opcional)
+                }
+            }
+        };
+    }
+    
+    public void displayErrorScreen() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setHeaderText("Ocorreu um erro");
+        alert.setContentText("As senhas são diferentes!");
+
+        alert.showAndWait();
+    }
+    
+    public void onTipoCargoSelecionado(ActionEvent event, TextField salario, ComboBox<String> tipoCargo) {
+        CargoRN sal = new CargoRN();
+        TbCargo valor = sal.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
+        double salarioBase = valor.getCarsalarioBase();
+
+        // Formata o salário base
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+        String salarioBaseFormatado = decimalFormat.format(salarioBase);
+
+        salario.setText("R$ " + salarioBaseFormatado);
+
+        // Configura a formatação para o TextField
+        UnaryOperator<TextFormatter.Change> filter = change -> {
+            if (change.isContentChange()) {
+                String newText = change.getControlNewText();
+                ParsePosition parsePosition = new ParsePosition(0);
+                Number number = decimalFormat.parse(newText, parsePosition);
+                if (number == null || parsePosition.getIndex() < newText.length()) {
+                    return null;
+                }
+            }
+            return change;
+        };
+        TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+
+        salario.setTextFormatter(textFormatter);
     }
 }
