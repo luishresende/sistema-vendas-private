@@ -8,6 +8,8 @@ package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbTelefone;
 import java.util.List;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -47,5 +49,31 @@ public class TelefoneRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    
+    public void validarDDD(KeyEvent event, TextField ddd) {
+        String texto = ddd.getText();
+        if (!texto.matches("[0-9]*")) {
+            ddd.setText(texto.replaceAll("[^0-9]", ""));
+        }
+        if (texto.length() == 2) {
+            // Formatação para "(DD)"
+            ddd.setText("(" + texto + ")");
+        }
+    }
+
+    // Telefone
+    public void validarFONE(KeyEvent event, TextField fone) {
+        String texto = fone.getText();
+        if (!texto.matches("[0-9]*")) {
+            fone.setText(texto.replaceAll("[^0-9]", ""));
+        }
+        if (texto.length() == 9) {
+            // Formatação para "(DD)"
+            fone.setText(texto.substring(0, 1) + " " + texto.substring(1, 5) + "-" + texto.substring(5, 9));
+        }
+        if (texto.length() >= 9) {
+            event.consume(); // Impede que mais de 2 caracteres sejam inseridos
+        }
     }
 }
