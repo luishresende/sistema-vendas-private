@@ -13,12 +13,12 @@ public abstract class TbEntidade_ {
 	public static volatile SingularAttribute<TbEntidade, TbSexo> entSexo;
 	public static volatile SingularAttribute<TbEntidade, String> entEmail;
 	public static volatile SingularAttribute<TbEntidade, TbEndereco> entEnderecoPrincipal;
+	public static volatile SingularAttribute<TbEntidade, TbFuncionario> tbFuncionario;
 	public static volatile SingularAttribute<TbEntidade, TbFornecedor> tbFornecedor;
 	public static volatile ListAttribute<TbEntidade, TbTelefone> tbTelefoneList;
 	public static volatile SingularAttribute<TbEntidade, String> entTipo;
 	public static volatile ListAttribute<TbEntidade, TbEntidadeHasEndereco> tbEntidadeHasEnderecoList;
 	public static volatile ListAttribute<TbEntidade, TbEntidadeHasTelefone> tbEntidadeHasTelefoneList;
-	public static volatile ListAttribute<TbEntidade, TbFuncionario> tbFuncionarioList;
 	public static volatile SingularAttribute<TbEntidade, TbCliente> tbCliente;
 	public static volatile SingularAttribute<TbEntidade, String> entNome;
 	public static volatile SingularAttribute<TbEntidade, String> entnomeFantasia;
@@ -30,12 +30,12 @@ public abstract class TbEntidade_ {
 	public static final String ENT_SEXO = "entSexo";
 	public static final String ENT_EMAIL = "entEmail";
 	public static final String ENT_ENDERECO_PRINCIPAL = "entEnderecoPrincipal";
+	public static final String TB_FUNCIONARIO = "tbFuncionario";
 	public static final String TB_FORNECEDOR = "tbFornecedor";
 	public static final String TB_TELEFONE_LIST = "tbTelefoneList";
 	public static final String ENT_TIPO = "entTipo";
 	public static final String TB_ENTIDADE_HAS_ENDERECO_LIST = "tbEntidadeHasEnderecoList";
 	public static final String TB_ENTIDADE_HAS_TELEFONE_LIST = "tbEntidadeHasTelefoneList";
-	public static final String TB_FUNCIONARIO_LIST = "tbFuncionarioList";
 	public static final String TB_CLIENTE = "tbCliente";
 	public static final String ENT_NOME = "entNome";
 	public static final String ENTNOME_FANTASIA = "entnomeFantasia";
