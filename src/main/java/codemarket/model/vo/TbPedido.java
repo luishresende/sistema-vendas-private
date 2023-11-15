@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package codemarket.model.vo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -19,7 +15,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_pedido")
@@ -27,8 +23,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "TbPedido.findAll", query = "SELECT t FROM TbPedido t")})
 public class TbPedido implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected TbPedidoPK tbPedidoPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ped_id")
+    private Integer pedId;
     @Basic(optional = false)
     @Column(name = "ped_quantidade")
     private float pedQuantidade;
@@ -38,33 +37,26 @@ public class TbPedido implements Serializable {
     @JoinColumn(name = "ped_esto_produto", referencedColumnName = "esto_produto_codigo")
     @ManyToOne(optional = false)
     private TbEstoque pedEstoProduto;
-    @JoinColumn(name = "ped_id", referencedColumnName = "ven_id", insertable = false, updatable = false)
+    @JoinColumn(name = "ped_venda", referencedColumnName = "ven_id")
     @ManyToOne(optional = false)
-    private TbVenda tbVenda;
+    private TbVenda pedVenda;
 
     public TbPedido() {
     }
 
-    public TbPedido(TbPedidoPK tbPedidoPK) {
-        this.tbPedidoPK = tbPedidoPK;
-    }
-
-    public TbPedido(TbPedidoPK tbPedidoPK, float pedQuantidade, float pedDesconto) {
-        this.tbPedidoPK = tbPedidoPK;
+    public TbPedido(float pedQuantidade, float pedDesconto, TbVenda venda, TbEstoque pedEstoProduto ) {
         this.pedQuantidade = pedQuantidade;
         this.pedDesconto = pedDesconto;
+        this.pedVenda = venda;
+        this.pedEstoProduto = pedEstoProduto;
     }
 
-    public TbPedido(int pedId, String pedVenda) {
-        this.tbPedidoPK = new TbPedidoPK(pedId, pedVenda);
+    public Integer getPedId() {
+        return pedId;
     }
 
-    public TbPedidoPK getTbPedidoPK() {
-        return tbPedidoPK;
-    }
-
-    public void setTbPedidoPK(TbPedidoPK tbPedidoPK) {
-        this.tbPedidoPK = tbPedidoPK;
+    public void setPedId(Integer pedId) {
+        this.pedId = pedId;
     }
 
     public float getPedQuantidade() {
@@ -91,18 +83,18 @@ public class TbPedido implements Serializable {
         this.pedEstoProduto = pedEstoProduto;
     }
 
-    public TbVenda getTbVenda() {
-        return tbVenda;
+    public TbVenda getPedVenda() {
+        return pedVenda;
     }
 
-    public void setTbVenda(TbVenda tbVenda) {
-        this.tbVenda = tbVenda;
+    public void setPedVenda(TbVenda pedVenda) {
+        this.pedVenda = pedVenda;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (tbPedidoPK != null ? tbPedidoPK.hashCode() : 0);
+        hash += (pedId != null ? pedId.hashCode() : 0);
         return hash;
     }
 
@@ -113,7 +105,7 @@ public class TbPedido implements Serializable {
             return false;
         }
         TbPedido other = (TbPedido) object;
-        if ((this.tbPedidoPK == null && other.tbPedidoPK != null) || (this.tbPedidoPK != null && !this.tbPedidoPK.equals(other.tbPedidoPK))) {
+        if ((this.pedId == null && other.pedId != null) || (this.pedId != null && !this.pedId.equals(other.pedId))) {
             return false;
         }
         return true;
@@ -121,7 +113,7 @@ public class TbPedido implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbPedido[ tbPedidoPK=" + tbPedidoPK + " ]";
+        return "pojos.TbPedido[ pedId=" + pedId + " ]";
     }
     
 }

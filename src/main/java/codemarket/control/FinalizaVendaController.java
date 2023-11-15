@@ -15,10 +15,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -49,20 +51,38 @@ public class FinalizaVendaController implements Initializable {
         ArrayList clientes = (ArrayList) clientern.buscarTodos("clicpfCnpj.entNome");
         ObservableList<String> CL = FXCollections.observableArrayList(clientes);
         idCliente.setItems(CL);
-        
+
         TipoPagamentoRN pagamentorn = new TipoPagamentoRN();
         ArrayList pagamentos = (ArrayList) pagamentorn.buscarTodos("tpDescricao");
         ObservableList<String> PG = FXCollections.observableArrayList(pagamentos);
         TipoPagamento.setItems(PG);
 
-    }    
+    }
 
     @FXML
     private void handleFinalizarButton(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
+    }
+
+    public CheckBox getSemCadastro() {
+        return SemCadastro;
+    }
+
+    public ComboBox<String> getIdCliente() {
+        return idCliente;
+    }
+
+    public ComboBox<String> getTipoPagamento() {
+        return TipoPagamento;
     }
 
     @FXML
     private void handleCancelarbutton(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.close();
     }
-    
+
 }

@@ -161,7 +161,7 @@
                                  <children>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="quantidade" alignment="CENTER" layoutX="86.0" layoutY="43.0" onKeyReleased="#validarQTD" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="quantidade" alignment="CENTER" layoutX="86.0" layoutY="43.0" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="40.0" />
                                              </font>

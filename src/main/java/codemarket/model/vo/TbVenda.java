@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package codemarket.model.vo;
 
 import java.io.Serializable;
@@ -27,7 +21,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_venda")
@@ -44,7 +38,7 @@ public class TbVenda implements Serializable {
     @Column(name = "ven_data")
     @Temporal(TemporalType.TIMESTAMP)
     private Date venData;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbVenda")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedVenda")
     private List<TbPedido> tbPedidoList;
     @JoinColumn(name = "ven_cli_id", referencedColumnName = "cli_id")
     @ManyToOne
@@ -52,17 +46,18 @@ public class TbVenda implements Serializable {
     @JoinColumn(name = "ven_tp_id", referencedColumnName = "tp_id")
     @ManyToOne(optional = false)
     private TbTipoPagamento venTpId;
+    @JoinColumn(name = "ven_usuario", referencedColumnName = "usu_usuario")
+    @ManyToOne(optional = false)
+    private TbUsuario venUsuario;
 
     public TbVenda() {
     }
 
-    public TbVenda(Integer venId) {
-        this.venId = venId;
-    }
-
-    public TbVenda(Integer venId, Date venData) {
-        this.venId = venId;
+    public TbVenda(TbTipoPagamento pago, TbCliente cli, Date venData, TbUsuario user ) {
+        this.venUsuario = user;
         this.venData = venData;
+        this.venTpId = pago;
+        this.venCliId = cli;
     }
 
     public Integer getVenId() {
@@ -105,6 +100,14 @@ public class TbVenda implements Serializable {
         this.venTpId = venTpId;
     }
 
+    public TbUsuario getVenUsuario() {
+        return venUsuario;
+    }
+
+    public void setVenUsuario(TbUsuario venUsuario) {
+        this.venUsuario = venUsuario;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -125,9 +128,6 @@ public class TbVenda implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "codemarket.model.vo.TbVenda[ venId=" + venId + " ]";
-    }
-    
 }
+    
+

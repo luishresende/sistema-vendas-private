@@ -1,10 +1,12 @@
 package codemarket.control;
 
 import codemarket.control.tableViewModel.VendaModel;
-import codemarket.model.rn.EstoqueRN;
-import codemarket.model.vo.TbEstoque;
+import codemarket.model.rn.*;
+import codemarket.model.vo.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -28,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PDVViewController implements Initializable {
@@ -87,27 +90,6 @@ public class PDVViewController implements Initializable {
         }
     }
 
-    // Função para formatar milhares com ponto
-    private String formatarMilhar(String texto) {
-        int length = texto.length();
-        if (length >= 4) {
-            int insertIndex = length - 3;
-            texto = texto.substring(0, insertIndex) + "." + texto.substring(insertIndex);
-        }
-        return texto;
-    }
-
-    @FXML
-    private void validarQTD(KeyEvent event) {
-        String texto = quantidade.getText();
-        if (!texto.matches("[0-9]*")) {
-            quantidade.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (event.getCode() == KeyCode.ENTER) {
-            totalRecebido.requestFocus();
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colunaDescricao.setCellValueFactory(new PropertyValueFactory<>("Descricao"));
@@ -155,7 +137,51 @@ public class PDVViewController implements Initializable {
 
     @FXML
     void handleFunctionKeyF1() {
-        
+        try {
+            // Carrega o arquivo FXML da tela FinalizaVenda.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/FinalizaVenda.fxml"));
+            Parent root = loader.load();
+
+            // Cria uma nova janela para a tela FinalizaVenda
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Finalizar Venda");
+            stage.setScene(new Scene(root));
+
+            // Obtém o controlador da tela FinalizaVenda
+            FinalizaVendaController finalizaVendaController = loader.getController();
+
+            // Exibe a janela e aguarda até que ela seja fechada
+            stage.showAndWait();
+
+            // Após o fechamento da janela, obtém os valores selecionados nas ComboBoxes e CheckBox
+            String clienteSelecionado = finalizaVendaController.getIdCliente().getValue();
+            String tipoPagamentoSelecionado = finalizaVendaController.getTipoPagamento().getValue();
+            boolean semCadastroSelecionado = finalizaVendaController.getSemCadastro().isSelected();
+ 
+            TbCliente cliente = null;
+            if(!semCadastroSelecionado){
+                ClienteRN clirn = new ClienteRN();
+                cliente = clirn.listaUm("clicpfCnpj.entNome", clienteSelecionado, TbCliente.class);
+            }
+            
+            Date dataAtual = new Date();
+            Timestamp timestamp = new Timestamp(dataAtual.getTime());
+            
+            TipoPagamentoRN pagamentorn = new TipoPagamentoRN();
+            TbTipoPagamento pagamento = pagamentorn.listaUm("tpDescricao", tipoPagamentoSelecionado, null);
+            
+            VendaRN vendarn = new VendaRN();
+            TbVenda vendaAtual = new TbVenda(pagamento,cliente, timestamp );
+            
+            PedidoRN pedidorn = new PedidoRN();
+            for (VendaModel v : venda){
+                TbPedido pe = new TbPedido(vendaAtual, ,v.getQuantidade(),0.0);
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
