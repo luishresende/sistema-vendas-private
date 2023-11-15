@@ -40,8 +40,6 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     private CheckBox tipoEntidade2;
     @FXML
-    private TextField observacao;
-    @FXML
     private ComboBox<String> cidade;
     @FXML
     private RadioButton estrangeiro;
@@ -149,6 +147,7 @@ public class CadastroEntidadeViewController implements Initializable {
     private Stage dialogStage;
     EntidadeRN ENT = new EntidadeRN();
     TelefoneRN TEL = new TelefoneRN();
+    SexoRN SEX = new SexoRN();
 
     public Stage getDialogStage() {
         return dialogStage;
@@ -161,7 +160,14 @@ public class CadastroEntidadeViewController implements Initializable {
     public void setTituloJanela(String titulo) {
         this.tituloJanela.setText(titulo);
     }
-
+    
+    public void setTipoEntidade1(boolean True) {
+        this.tipoEntidade1.setSelected(True);
+    }
+    
+    public void setTipoEntidade2(boolean True) {
+        this.tipoEntidade2.setSelected(True);
+    }
    
     // Evento que fica verificando o tipo de cliente
     @FXML
@@ -282,21 +288,17 @@ public class CadastroEntidadeViewController implements Initializable {
         ArrayList loges = (ArrayList) logRN.buscarTodos("logDescricao");
         ObservableList<String> looo = FXCollections.observableArrayList(loges);
         logradouro.setItems(looo);
-
+        
+        ENT.verificaCamposText(nome);
+        ENT.verificaCamposText(nomeFantasia);
+        ENT.verificaCamposText(email);
+        ENT.verificaCamposText(cep);
     }
 
     @FXML
     void handleFinalizarButton() {
-
-        SexoRN sexorn = new SexoRN();
-        TbSexo sexo = null;
-        if (tipoSexo.getValue().isEmpty() == false) {
-            sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
-        }
-        
-
-        LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
-        Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        TbSexo sexo = SEX.varificaSexo(tipoSexo, SEX);
+        Date dateNASC = ENT.verificaData(dataNASC);
 
         TbEntidade ENTIDADE = new TbEntidade(cpfcnpj.getText(), nome.getText(), nomeFantasia.getText(), rgie.getText(), email.getText(),
                 tipoCliente.getValue(), dateNASC, sexo);
@@ -309,7 +311,6 @@ public class CadastroEntidadeViewController implements Initializable {
 
             t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
             i++;
-
         }
 
         i = 0;

@@ -77,11 +77,25 @@ public class FuncionariosViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         TelefoneRN tel = new TelefoneRN();
         for (TbFuncionario forne : funcionarios) {
-            TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone "
+            List fone = tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone "
                     + "t WHERE t.ehtentcpfCnpj.tbFuncionario.funcentcpfCnpj = '" 
-                    + forne.getFuncentcpfCnpj().getEntcpfCnpj() + "'").get(0);
+                    + forne.getFuncentcpfCnpj().getEntcpfCnpj() + "'");
+            TbTelefone telefone;
+            String userFone;
+            if(fone.isEmpty())
+                userFone = "";
+            else {
+                telefone = (TbTelefone) fone.get(0);
+                userFone = telefone.getFoneDescricao();
+            }
+            String vencimento;
+            if(dateFormat.format(forne.getFuncUsuario().getUsuValidade()) == null)
+                vencimento = "";
+            else
+                vencimento = dateFormat.format(forne.getFuncUsuario().getUsuValidade());
+                
             FuncionarioModel fm = new FuncionarioModel(forne.getFuncentcpfCnpj().getEntNome(), forne.getFuncentcpfCnpj().getEntcpfCnpj(),
-                    forne.getFuncUsuario().getUsuUsuario(), fone.getFoneDescricao(), dateFormat.format(forne.getFuncUsuario().getUsuValidade()));
+                    forne.getFuncUsuario().getUsuUsuario(), userFone, vencimento);
             infoF.add(fm);
         }
         
@@ -184,11 +198,25 @@ public class FuncionariosViewController implements Initializable {
         funcionarios = f.pesquisar("SELECT t FROM TbFuncionario t");
         
         for (TbFuncionario forne : funcionarios) {
-            TbTelefone fone = (TbTelefone) tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone "
+            List fone = tel.pesquisar("SELECT t.ehtFoneId FROM TbEntidadeHasTelefone "
                     + "t WHERE t.ehtentcpfCnpj.tbFuncionario.funcentcpfCnpj = '" 
-                    + forne.getFuncentcpfCnpj().getEntcpfCnpj() + "'").get(0);
+                    + forne.getFuncentcpfCnpj().getEntcpfCnpj() + "'");
+            TbTelefone telefone;
+            String userFone;
+            if(fone.isEmpty())
+                userFone = "";
+            else {
+                telefone = (TbTelefone) fone.get(0);
+                userFone = telefone.getFoneDescricao();
+            }
+            String vencimento;
+            if(dateFormat.format(forne.getFuncUsuario().getUsuValidade()) == null)
+                vencimento = "";
+            else
+                vencimento = dateFormat.format(forne.getFuncUsuario().getUsuValidade());
+                
             FuncionarioModel fm = new FuncionarioModel(forne.getFuncentcpfCnpj().getEntNome(), forne.getFuncentcpfCnpj().getEntcpfCnpj(),
-                    forne.getFuncUsuario().getUsuUsuario(), fone.getFoneDescricao(), dateFormat.format(forne.getFuncUsuario().getUsuValidade()));
+                    forne.getFuncUsuario().getUsuUsuario(), userFone, vencimento);
             infoF.add(fm);
         }
 

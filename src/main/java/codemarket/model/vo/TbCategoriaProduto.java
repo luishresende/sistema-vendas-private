@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package codemarket.model.vo;
 
 import java.io.Serializable;
@@ -12,6 +6,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_categoria_produto")
@@ -29,6 +25,7 @@ import javax.persistence.Table;
 public class TbCategoriaProduto implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "catp_id")
     private Integer catpId;
@@ -45,8 +42,7 @@ public class TbCategoriaProduto implements Serializable {
         this.catpId = catpId;
     }
 
-    public TbCategoriaProduto(Integer catpId, String catpDescricao) {
-        this.catpId = catpId;
+    public TbCategoriaProduto(String catpDescricao) {
         this.catpDescricao = catpDescricao;
     }
 
@@ -96,7 +92,7 @@ public class TbCategoriaProduto implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbCategoriaProduto[ catpId=" + catpId + " ]";
+        return "pojos.TbCategoriaProduto[ catpId=" + catpId + " ]";
     }
     
 }

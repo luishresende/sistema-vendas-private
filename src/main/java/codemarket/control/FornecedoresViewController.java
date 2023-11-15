@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -93,9 +94,10 @@ public class FornecedoresViewController implements Initializable {
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
         dialogStage.setScene(scene);
-
+        boolean verdadeiro = true;
         codemarket.control.CadastroEntidadeViewController controller = loader.getController();
         controller.setTituloJanela("Cadastrar Fornecedor");
+        controller.setTipoEntidade2(verdadeiro);
         controller.setDialogStage(dialogStage);
 
         dialogStage.showAndWait();

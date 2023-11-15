@@ -1,17 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package codemarket.model.vo;
 
+import codemarket.model.vo.TbEntradaEstoque;
+import codemarket.model.vo.TbPedido;
+import codemarket.model.vo.TbProduto;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -19,10 +19,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_estoque")
@@ -31,9 +33,10 @@ import javax.persistence.Table;
 public class TbEstoque implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "esto_produto_codigo")
-    private String estoProdutoCodigo;
+    @Column(name = "esto_id")
+    private Integer estoId;
     @Basic(optional = false)
     @Column(name = "esto_quantidade")
     private float estoQuantidade;
@@ -52,9 +55,13 @@ public class TbEstoque implements Serializable {
     @Basic(optional = false)
     @Column(name = "esto_atualizar_custo_no_pedido")
     private short estoAtualizarCustoNoPedido;
-    @JoinColumn(name = "esto_produto_codigo", referencedColumnName = "pdt_codigo", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private TbProduto tbProduto;
+    @Basic(optional = false)
+    @Column(name = "esto_data_atualizacao")
+    @Temporal(TemporalType.DATE)
+    private Date estoDataAtualizacao;
+    @JoinColumn(name = "esto_produto_codigo", referencedColumnName = "pdt_codigo")
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    private TbProduto estoProdutoCodigo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrePdtCodigo")
     private List<TbEntradaEstoque> tbEntradaEstoqueList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedEstoProduto")
@@ -63,25 +70,26 @@ public class TbEstoque implements Serializable {
     public TbEstoque() {
     }
 
-    public TbEstoque(String estoProdutoCodigo) {
-        this.estoProdutoCodigo = estoProdutoCodigo;
-    }
-
-    public TbEstoque(String estoProdutoCodigo, float estoQuantidade, float estoValorFinal, float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido) {
-        this.estoProdutoCodigo = estoProdutoCodigo;
+    public TbEstoque(TbProduto produto, float estoQuantidade, float estoValorFinal, float estoValorFinalPrazo, 
+                     float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido, 
+                     Date estoDataAtualizacao) {
+        
+        this.estoProdutoCodigo = produto;
         this.estoQuantidade = estoQuantidade;
         this.estoValorFinal = estoValorFinal;
+        this.estoValorFinalPrazo = estoValorFinalPrazo;
         this.estoLimiteMin = estoLimiteMin;
         this.estoProibirVendaLimMin = estoProibirVendaLimMin;
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
+        this.estoDataAtualizacao = estoDataAtualizacao;
     }
 
-    public String getEstoProdutoCodigo() {
-        return estoProdutoCodigo;
+    public Integer getEstoId() {
+        return estoId;
     }
 
-    public void setEstoProdutoCodigo(String estoProdutoCodigo) {
-        this.estoProdutoCodigo = estoProdutoCodigo;
+    public void setEstoId(Integer estoId) {
+        this.estoId = estoId;
     }
 
     public float getEstoQuantidade() {
@@ -132,12 +140,20 @@ public class TbEstoque implements Serializable {
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
     }
 
-    public TbProduto getTbProduto() {
-        return tbProduto;
+    public Date getEstoDataAtualizacao() {
+        return estoDataAtualizacao;
     }
 
-    public void setTbProduto(TbProduto tbProduto) {
-        this.tbProduto = tbProduto;
+    public void setEstoDataAtualizacao(Date estoDataAtualizacao) {
+        this.estoDataAtualizacao = estoDataAtualizacao;
+    }
+
+    public TbProduto getEstoProdutoCodigo() {
+        return estoProdutoCodigo;
+    }
+
+    public void setEstoProdutoCodigo(TbProduto estoProdutoCodigo) {
+        this.estoProdutoCodigo = estoProdutoCodigo;
     }
 
     public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
@@ -159,7 +175,7 @@ public class TbEstoque implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (estoProdutoCodigo != null ? estoProdutoCodigo.hashCode() : 0);
+        hash += (estoId != null ? estoId.hashCode() : 0);
         return hash;
     }
 
@@ -170,7 +186,7 @@ public class TbEstoque implements Serializable {
             return false;
         }
         TbEstoque other = (TbEstoque) object;
-        if ((this.estoProdutoCodigo == null && other.estoProdutoCodigo != null) || (this.estoProdutoCodigo != null && !this.estoProdutoCodigo.equals(other.estoProdutoCodigo))) {
+        if ((this.estoId == null && other.estoId != null) || (this.estoId != null && !this.estoId.equals(other.estoId))) {
             return false;
         }
         return true;
@@ -178,7 +194,7 @@ public class TbEstoque implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbEstoque[ estoProdutoCodigo=" + estoProdutoCodigo + " ]";
+        return "pojos.TbEstoque[ estoId=" + estoId + " ]";
     }
     
 }

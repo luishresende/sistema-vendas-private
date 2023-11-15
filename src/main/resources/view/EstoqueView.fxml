@@ -161,14 +161,14 @@
                   </Button>
                </children>
             </GridPane>
-            <TableView prefHeight="423.0" prefWidth="969.0" GridPane.rowIndex="3">
+            <TableView fx:id="tableEstoque" prefHeight="423.0" prefWidth="969.0" GridPane.rowIndex="3">
                <columns>
-                  <TableColumn prefWidth="109.0" text="Código" />
-                  <TableColumn prefWidth="438.0" text="Descrição do Produto" />
-                  <TableColumn minWidth="0.0" prefWidth="52.0" text="UNI" />
-                  <TableColumn prefWidth="101.0" text="Valor Avista" />
-                  <TableColumn prefWidth="74.0" text="Est. Atual" />
-                  <TableColumn prefWidth="194.0" text="Grupo / Categoria" />
+                  <TableColumn fx:id="colunaCodigo" prefWidth="109.0" text="Código" />
+                  <TableColumn fx:id="colunaDescricao" prefWidth="438.0" text="Descrição do Produto" />
+                  <TableColumn fx:id="colunaUN" minWidth="0.0" prefWidth="52.0" text="UNI" />
+                  <TableColumn fx:id="colunaAvista" prefWidth="101.0" text="Valor Avista" />
+                  <TableColumn fx:id="counaAtual" prefWidth="74.0" text="Est. Atual" />
+                  <TableColumn fx:id="colunaCategoria" prefWidth="194.0" text="Grupo / Categoria" />
                </columns>
             </TableView>
             <GridPane styleClass="secondThemeColor" GridPane.rowIndex="2">

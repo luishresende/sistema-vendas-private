@@ -102,10 +102,12 @@ public class MainViewController implements Initializable {
                 if (!changingImageSize) {
                     resizeUserImage((Double) newHeight);
                 }
+                
             });
             updateImageUser();
+            handleViewsButtons(PDVLoaderView);
         });
-
+        
     }
 
 // Função para fechar a side bar

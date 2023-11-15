@@ -1,7 +1,8 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbSexo;
-import java.util.List;;
+import java.util.List;import javafx.scene.control.ComboBox;
+;
 
 public class SexoRN {
 
@@ -34,5 +35,14 @@ public class SexoRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public TbSexo varificaSexo(ComboBox<String> tipoSexo, SexoRN sexorn) {
+        //System.out.println(tipoSexo.getValue());
+        TbSexo sexo = null;
+        if (!tipoSexo.isDisable()) {
+            sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+        }
+        //System.out.println(sexo.getSexDescricao());
+        return sexo;
     }
 }

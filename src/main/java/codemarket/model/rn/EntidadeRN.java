@@ -2,6 +2,8 @@ package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbEntidade;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -126,5 +128,33 @@ public class EntidadeRN {
                 }
             }
         };
+    }
+    
+    public Date verificaData(DatePicker dataNASC) {
+        Date dateNASC = null;
+        if(!dataNASC.isDisable()){
+            LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
+            dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        }
+        return dateNASC;
+    }
+    
+    public void verificaCamposText(TextField text) {
+        text.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) { // Quando o foco é perdido
+                validarCampo(text);
+            }
+        });
+    }
+    
+    private void validarCampo(TextField textField) {
+        if (textField.getText().trim().isEmpty()) {
+            // Campo vazio, exibe mensagem de erro
+            textField.setStyle("-fx-background-color: #FF9999;"); // Cor de fundo vermelha
+            textField.setText("Por favor, insira algo.");
+        } else {
+            // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
+            textField.setStyle("");
+        }
     }
 }

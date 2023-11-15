@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -88,9 +89,10 @@ public class ClienteViewController implements Initializable {
         dialogStage.setResizable(false);
 //        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogStage.setScene(scene);
-        
+        boolean verdadeiro = true;
         codemarket.control.CadastroEntidadeViewController controller = loader.getController();
         controller.setTituloJanela("Cadastrar Cliente");
+        controller.setTipoEntidade1(verdadeiro);
         controller.setDialogStage(dialogStage);
         
         dialogStage.showAndWait();

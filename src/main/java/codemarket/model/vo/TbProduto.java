@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package codemarket.model.vo;
 
 import java.io.Serializable;
@@ -23,7 +17,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author kauan
+ * @author Luis Resende
  */
 @Entity
 @Table(name = "tb_produto")
@@ -38,7 +32,7 @@ public class TbProduto implements Serializable {
     @Basic(optional = false)
     @Column(name = "pdt_nome")
     private String pdtNome;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "tbProduto")
+    @OneToOne(mappedBy = "estoProdutoCodigo")
     private TbEstoque tbEstoque;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbProduto")
     private List<TbFornecedorHasProduto> tbFornecedorHasProdutoList;
@@ -56,10 +50,13 @@ public class TbProduto implements Serializable {
         this.pdtCodigo = pdtCodigo;
     }
 
-    public TbProduto(String pdtCodigo, String pdtNome) {
+    public TbProduto(String pdtCodigo, String pdtNome, TbUnidadeMedida unidade, TbCategoriaProduto categoria) {
         this.pdtCodigo = pdtCodigo;
         this.pdtNome = pdtNome;
+        this.pdtUmSigla = unidade;
+        this.pdtCategoria = categoria;
     }
+
 
     public String getPdtCodigo() {
         return pdtCodigo;
@@ -131,7 +128,7 @@ public class TbProduto implements Serializable {
 
     @Override
     public String toString() {
-        return "codemarket.model.vo.TbProduto[ pdtCodigo=" + pdtCodigo + " ]";
+        return "pojos.TbProduto[ pdtCodigo=" + pdtCodigo + " ]";
     }
     
 }
