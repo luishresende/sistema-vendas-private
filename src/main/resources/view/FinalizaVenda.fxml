@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" stylesheets="@styleSettings.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.FinalizaVendaController">
+   <children>
+      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="969.0" text="Cliente e Pagamento" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="primaryThemeColor" />
+            <String fx:value="primaryTextColor" />
+         </styleClass>
+      </Label>
+      <Button fx:id="buttonFinalizar" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="38.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleFinalizarButton" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: Transparent;" text="Finalizar" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon iconName="CHECK" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </FontAwesomeIcon>
+         </graphic>
+         <styleClass>
+            <String fx:value="buttonProduto" />
+            <String fx:value="secondTextColor" />
+         </styleClass>
+      </Button>
+      <Button fx:id="buttonCancelar" alignment="TOP_CENTER" graphicTextGap="7.0" layoutX="164.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleCancelarbutton" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: Transparent;" text="Cancelar" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon iconName="CLOSE" size="2em" styleClass="primaryIconColor" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </FontAwesomeIcon>
+         </graphic>
+         <styleClass>
+            <String fx:value="buttonProduto" />
+            <String fx:value="secondTextColor" />
+         </styleClass>
+      </Button>
+      <CheckBox fx:id="SemCadastro" layoutX="17.0" layoutY="118.0" mnemonicParsing="false" styleClass="secondTextColor" text="Sem Cadastro">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </CheckBox>
+      <VBox alignment="CENTER_LEFT" layoutX="17.0" layoutY="36.0" prefHeight="70.0" prefWidth="116.0" spacing="2.0">
+         <children>
+            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Cliente">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="idCliente" prefHeight="31.0" prefWidth="179.0" promptText="Selecione..." />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER_LEFT" layoutX="150.0" layoutY="36.0" prefHeight="70.0" prefWidth="116.0" spacing="2.0">
+         <children>
+            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" styleClass="secondTextColor" text="Tipo Pagamento">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="TipoPagamento" prefHeight="31.0" prefWidth="179.0" promptText="Selecione..." />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -84,14 +84,14 @@
                             <RowConstraints percentHeight="94.0" valignment="CENTER" vgrow="ALWAYS" />
                           </rowConstraints>
                            <children>
-                              <TableView focusTraversable="false" style="-fx-background-radius: 0px 0px 10 10;" GridPane.rowIndex="1">
+                              <TableView fx:id="tableVenda" focusTraversable="false" style="-fx-background-radius: 0px 0px 10 10;" GridPane.rowIndex="1">
                                  <columns>
-                                    <TableColumn editable="false" prefWidth="84.0" text="Código" />
-                                    <TableColumn editable="false" prefWidth="462.0" text="Descrição do Produto" />
-                                    <TableColumn editable="false" minWidth="0.0" prefWidth="39.0" text="UNI" />
-                                    <TableColumn editable="false" prefWidth="94.0" text="Valor Avista" />
-                                    <TableColumn editable="false" prefWidth="74.0" text="Est. Atual" />
-                                    <TableColumn editable="false" prefWidth="165.0" resizable="false" text="Grupo / Categoria" />
+                                    <TableColumn fx:id="colunaCodigo" editable="false" prefWidth="84.0" text="Código" />
+                                    <TableColumn fx:id="colunaUNI" editable="false" minWidth="0.0" prefWidth="33.0" text="UNI" />
+                                    <TableColumn fx:id="colunaAvista" editable="false" prefWidth="105.0" text="Valor Avista" />
+                                    <TableColumn fx:id="colunaCategoria" editable="false" prefWidth="145.0" resizable="false" text="Grupo / Categoria" />
+                                    <TableColumn fx:id="colunaDescricao" editable="false" prefWidth="145.0" text="Descrição do Produto" />
+                                    <TableColumn fx:id="colunaQuantidade" editable="false" prefWidth="100.0" resizable="false" text="Quantidade" />
                                  </columns>
                               </TableView>
                               <AnchorPane style="-fx-background-radius: 10px 10px 0 0;" styleClass="primaryThemeColor" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -141,7 +141,7 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField alignment="CENTER" layoutX="86.0" layoutY="43.0" promptText="00000000000" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TextField fx:id="idBarras" alignment="CENTER" editable="false" layoutX="86.0" layoutY="43.0" promptText="00000000000" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="40.0" />
                                              </font>
@@ -231,7 +231,7 @@
                         <RowConstraints percentHeight="96.0" valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <TextArea editable="false" focusTraversable="false" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="F1 - Finalizar Venda&#10;F2 - Pesquisar Venda&#10;F3 - Alterar Venda&#10;F4 - Excluir Venda&#10;F5 - Pesquisar Produto&#10;F6 - Inserir Quantidade&#10;F7 - Excluir Porduto&#10;F8 - Finalizar Venda&#10;ESC - Sair" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                        <TextArea editable="false" focusTraversable="false" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="F1 - Finalizar Venda&#10;F2 - Pesquisar Produto&#10;F3 - Inserir Quantidade&#10;F4 - Excluir Produto&#10;F5 - Limpar &#10;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -280,7 +280,7 @@
                                           </AnchorPane>
                                           <AnchorPane GridPane.rowIndex="1">
                                              <children>
-                                                <TextField fx:id="totalRecebido" alignment="CENTER" onKeyReleased="#intRecebido" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <TextField fx:id="totalRecebido" alignment="CENTER" promptText="R$" style="-fx-background-radius: 0px 0px 10 10;" styleClass="secondThemeColor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
                                                       <Font size="30.0" />
                                                    </font>
@@ -351,6 +351,7 @@
                               </GridPane>
                            </children>
                         </GridPane>
+                        <Button fx:id="Button" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

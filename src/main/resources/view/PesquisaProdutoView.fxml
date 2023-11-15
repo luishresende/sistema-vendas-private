@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="662.0" stylesheets="@styleSettings.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.PesquisaProdutoController">
+   <children>
+      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="2.0" prefHeight="25.0" prefWidth="969.0" text="Pesquisar Produto" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="375.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <styleClass>
+            <String fx:value="primaryThemeColor" />
+            <String fx:value="primaryTextColor" />
+         </styleClass>
+      </Label>
+      <TableView fx:id="tableEstoque" layoutX="40.0" layoutY="48.0" prefHeight="423.0" prefWidth="724.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+         <columns>
+            <TableColumn fx:id="colunaCodigo" prefWidth="72.0" text="Código" />
+            <TableColumn fx:id="colunaDescricao" prefWidth="239.0" text="Descrição do Produto" />
+            <TableColumn fx:id="colunaUN" minWidth="0.0" prefWidth="55.0" text="UNI" />
+            <TableColumn fx:id="colunaAvista" prefWidth="89.0" text="Valor Avista" />
+            <TableColumn fx:id="colunaAtual" prefWidth="72.0" text="Est. Atual" />
+            <TableColumn fx:id="colunaCategoria" prefWidth="137.0" text="Grupo / Categoria" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
