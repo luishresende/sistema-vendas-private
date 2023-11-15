@@ -2,6 +2,7 @@ package codemarket.model.vo;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class TbPedido implements Serializable {
     @ManyToOne(optional = false)
     private TbEstoque pedEstoProduto;
     @JoinColumn(name = "ped_venda", referencedColumnName = "ven_id")
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbVenda pedVenda;
 
     public TbPedido() {

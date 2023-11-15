@@ -158,27 +158,29 @@ public class PDVViewController implements Initializable {
             String clienteSelecionado = finalizaVendaController.getIdCliente().getValue();
             String tipoPagamentoSelecionado = finalizaVendaController.getTipoPagamento().getValue();
             boolean semCadastroSelecionado = finalizaVendaController.getSemCadastro().isSelected();
- 
+            
             TbCliente cliente = null;
-            if(!semCadastroSelecionado){
+            if (!semCadastroSelecionado) {
                 ClienteRN clirn = new ClienteRN();
                 cliente = clirn.listaUm("clicpfCnpj.entNome", clienteSelecionado, TbCliente.class);
             }
-            
+
             Date dataAtual = new Date();
             Timestamp timestamp = new Timestamp(dataAtual.getTime());
-            
+
             TipoPagamentoRN pagamentorn = new TipoPagamentoRN();
-            TbTipoPagamento pagamento = pagamentorn.listaUm("tpDescricao", tipoPagamentoSelecionado, null);
-            
-            VendaRN vendarn = new VendaRN();
-            TbVenda vendaAtual = new TbVenda(pagamento,cliente, timestamp );
-            
+            TbTipoPagamento pagamento = pagamentorn.listaUm("tpDescricao", tipoPagamentoSelecionado, TbTipoPagamento.class);
+
+            TbUsuario autg = AuthController.getInstance().getUser();
+            TbVenda vendaAtual = new TbVenda(pagamento, cliente, timestamp, autg);
             PedidoRN pedidorn = new PedidoRN();
-            for (VendaModel v : venda){
-                TbPedido pe = new TbPedido(vendaAtual, ,v.getQuantidade(),0.0);
+            EstoqueRN estoquern = new EstoqueRN();
+            for (VendaModel v : venda) {
+                TbEstoque estoque = estoquern.listaUm("estoProdutoCodigo.pdtCodigo", v.getCodigo(), TbEstoque.class);
+                TbPedido pe = new TbPedido(v.getQuantidade(), 0.0f, vendaAtual, estoque);
+                pedidorn.salvar(pe);
             }
-            
+
         } catch (IOException e) {
             e.printStackTrace();
         }
