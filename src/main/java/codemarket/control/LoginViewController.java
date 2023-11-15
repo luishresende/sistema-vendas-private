@@ -88,10 +88,11 @@ public class LoginViewController implements Initializable {
 
     @FXML
     public void handleButtonEntrar() {
+        buttonEntrar.setDisable(true);
         if (!connectedToTheServer) {
             tryServerConnection(); // Tentando conectar novamente
+            buttonEntrar.setDisable(false);
         } else {
-            buttonEntrar.setDisable(true);
             setStatus("Realizando autenticação...", Color.BLACK);
             Thread thread = new Thread(() -> {
                 AuthController auth = AuthController.getInstance();
@@ -101,6 +102,8 @@ public class LoginViewController implements Initializable {
                         setStatus("Carregando...", Color.GREEN);
                         setMainView();
                     } else {
+                        if(!connectedToTheServer)
+                            buttonEntrar.setDisable(true);
                         setStatus("Credenciais inválidas!", Color.RED);
                         buttonEntrar.setDisable(false);
                     }
@@ -119,18 +122,18 @@ public class LoginViewController implements Initializable {
         // Executo a tentativa de conexão em uma nova thread, para não travar a tela
         Thread thread = new Thread(() -> {
             EntityManager em = HibernateConnection.getInstance(); // Inicializando a conexão do programa
-            if (!em.isOpen()) {
-                setStatus("Falha ao conectar com servidor.", Color.RED);
-                buttonEntrar.setText("CONECTAR");
-                buttonEntrar.setDisable(false);
-            } else {
-                if (!connectedToTheServer) {
+            Platform.runLater(() -> { // Realizando as alterações da GUI dentro da thread principal da interface, garantindo a sua integridade.
+                if (em == null || !em.isOpen()) {
+                    setStatus("Falha ao conectar com servidor.", Color.RED);
+                    buttonEntrar.setText("CONECTAR");
+                    buttonEntrar.setDisable(false);
+                } else {
                     buttonEntrar.setText("ENTRAR");
+                    this.connectedToTheServer = true;
+                    setStatus("Conexão realizada com sucesso!", Color.GREEN);
+                    buttonEntrar.setDisable(false);
                 }
-                this.connectedToTheServer = true;
-                setStatus("Conexão realizada com sucesso!", Color.GREEN);
-                buttonEntrar.setDisable(false);
-            }
+            });
         });
         thread.start();
     }

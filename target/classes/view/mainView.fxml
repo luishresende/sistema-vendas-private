@@ -61,21 +61,6 @@
                               <String fx:value="primaryTextColor" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="configuraçõesButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Configurações" textFill="WHITE">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <ColorAdjust />
-                           </effect>
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="itensmenu" />
-                              <String fx:value="primaryTextColor" />
-                           </styleClass>
-                        </Button>
                         <Button fx:id="funcionariosButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Funcionarios" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -122,6 +107,36 @@
                            </styleClass>
                         </Button>
                         <Button fx:id="estoqueButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Estoque" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="vendasButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Vendas" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="itensmenu" />
+                              <String fx:value="primaryTextColor" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="configuracoesButton" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showSettings" style="-fx-background-color: Transparent; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,1), 10, 0, 0, 0);" text="Configurações" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

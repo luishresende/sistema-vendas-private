@@ -27,10 +27,12 @@ public class AuthController {
         List userList = userRN.pesquisar("SELECT t FROM TbUsuario t WHERE FUNCTION('BINARY', t.usuUsuario)='" + username + "' AND FUNCTION('BINARY', t.usuSenha)='" + password + "'");
         if (userList.isEmpty()) {
             return false;
+        } else {
+            
         }
 
         setUser((TbUsuario) userList.get(0));
-        return true;
+        return user.getUsuStatus().getStaDescricao().equals("Ativo");
     }
 
     public TbUsuario getUser() {

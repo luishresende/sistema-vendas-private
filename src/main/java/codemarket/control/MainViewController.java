@@ -22,6 +22,8 @@ import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainViewController implements Initializable {
@@ -54,6 +56,10 @@ public class MainViewController implements Initializable {
     private Button clientesButton;
     @FXML
     private Button pdvButton;
+    @FXML 
+    private Button configuracoesButton;
+    @FXML
+    private Button vendasButton;
     @FXML
     private AnchorPane mainAnchorPane;
     @FXML
@@ -72,6 +78,9 @@ public class MainViewController implements Initializable {
     private AnchorPane clientesView;
     private AnchorPane funcionariosView;
     private AnchorPane PDVLoaderView;
+    private AnchorPane vendasView;
+    private AnchorPane configuracoesView;
+    
     private TbUsuario user;
     private boolean changingImageSize;
     private Image userImage;
@@ -85,6 +94,8 @@ public class MainViewController implements Initializable {
             clientesView = new FXMLLoader(getClass().getResource("/view/ClienteView.fxml")).load();
             funcionariosView = new FXMLLoader(getClass().getResource("/view/FuncionariosView.fxml")).load();
             PDVLoaderView = new FXMLLoader(getClass().getResource("/view/PDVView.fxml")).load();
+            vendasView = new FXMLLoader(getClass().getResource("/view/SalesView.fxml")).load();
+            configuracoesView = new FXMLLoader(getClass().getResource("/view/SettingsView.fxml")).load();
         } catch (IOException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,6 +106,7 @@ public class MainViewController implements Initializable {
         clientesButton.setOnAction(event -> handleViewsButtons(clientesView));
         funcionariosButton.setOnAction(event -> handleViewsButtons(funcionariosView));
         pdvButton.setOnAction(event -> handleViewsButtons(PDVLoaderView));
+        vendasButton.setOnAction(event -> handleViewsButtons(vendasView));
 
         Platform.runLater(() -> {
             Scene mainScene = mainAnchorPane.getScene();
@@ -102,12 +114,10 @@ public class MainViewController implements Initializable {
                 if (!changingImageSize) {
                     resizeUserImage((Double) newHeight);
                 }
-                
             });
             updateImageUser();
-            handleViewsButtons(PDVLoaderView);
         });
-        
+
     }
 
 // Função para fechar a side bar
@@ -242,5 +252,19 @@ public class MainViewController implements Initializable {
 
     public void setUserImage(Image userImage) {
         this.userImage = userImage;
+    }
+    
+    @FXML
+    public void showSettings() {
+        // Criando um Estágio de Diálogo (Stage Dialog)
+        Scene scene = new Scene(configuracoesView);
+        Stage settings = new Stage();
+        settings.setTitle("Configurações da aplicação");
+        settings.initModality(Modality.APPLICATION_MODAL);
+        settings.setResizable(false);
+        settings.setScene(scene);
+        
+        // Mostra o Dialog e espera até que o usuário o feche
+        settings.showAndWait();
     }
 }
