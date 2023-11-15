@@ -182,6 +182,17 @@ public class EntidadeRN {
 //        }
 //    }
     
+    public boolean validarCampoComboBox(DatePicker data) {
+        if (data.getValue() == null) {
+            data.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            return true;
+        } else {
+            // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
+            data.setStyle("");
+            return false;
+        }
+    }
+    
     public void exibirAlerta(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Validação de Campos");
