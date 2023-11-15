@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -139,22 +140,53 @@ public class EntidadeRN {
         return dateNASC;
     }
     
-    public void verificaCamposText(TextField text) {
-        text.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) { // Quando o foco é perdido
-                validarCampo(text);
-            }
-        });
-    }
-    
-    private void validarCampo(TextField textField) {
-        if (textField.getText().trim().isEmpty()) {
+    public boolean validarCampoText(TextField nome, TextField nomeFantasia, TextField cpfcnpj, TextField rgie, TextField email) {
+        if (nome.getText().trim().isEmpty() || nomeFantasia.getText().trim().isEmpty() || cpfcnpj.getText().trim().isEmpty() || rgie.getText().trim().isEmpty() || email.getText().trim().isEmpty()) {
             // Campo vazio, exibe mensagem de erro
-            textField.setStyle("-fx-background-color: #FF9999;"); // Cor de fundo vermelha
-            textField.setText("Por favor, insira algo.");
+            nome.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            nomeFantasia.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            cpfcnpj.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            rgie.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            email.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            return true;
         } else {
             // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
-            textField.setStyle("");
+            nome.setStyle("");
+            nomeFantasia.setStyle("");
+            cpfcnpj.setStyle("");
+            rgie.setStyle("");
+            email.setStyle("");
+            return false;
         }
+    }
+    
+    public boolean validarCampoData(DatePicker data) {
+        if (data.getValue() == null) {
+            data.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            return true;
+        } else {
+            // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
+            data.setStyle("");
+            return false;
+        }
+    }
+    
+//    public boolean validarCampoData(DatePicker data) {
+//        if (data.getValue() == null) {
+//            data.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+//            return true;
+//        } else {
+//            // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
+//            data.setStyle("");
+//            return false;
+//        }
+//    }
+    
+    public void exibirAlerta(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validação de Campos");
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 }

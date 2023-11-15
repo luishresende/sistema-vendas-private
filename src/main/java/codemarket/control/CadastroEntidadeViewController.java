@@ -160,31 +160,33 @@ public class CadastroEntidadeViewController implements Initializable {
     public void setTituloJanela(String titulo) {
         this.tituloJanela.setText(titulo);
     }
-    
+
     public void setTipoEntidade1(boolean True) {
         this.tipoEntidade1.setSelected(True);
     }
-    
+
     public void setTipoEntidade2(boolean True) {
         this.tipoEntidade2.setSelected(True);
     }
-   
+
     // Evento que fica verificando o tipo de cliente
     @FXML
-    void onTipoClienteChanged(ActionEvent event){
+    void onTipoClienteChanged(ActionEvent event) {
         ENT.onTipoClienteChanged(event, tipoCliente, cpfcnpj, rgie, labelCPFCNPJ, labelRGIE, tipoSexo, dataNASC);
     }
+
     // Evento que verifica a entrada do teclado para a formatação e aceitação de só numéro para CPF / CNPJ
     @FXML
-    void validarCPFCNPJ(KeyEvent event){
+    void validarCPFCNPJ(KeyEvent event) {
         ENT.validarCPFCNPJ(event, cpfcnpj, tipoCliente);
     }
+
     // Evento que verifica a entrada do teclado para o RG, só aceita numero 
     @FXML
     void validarRGIE(KeyEvent event) {
         ENT.validarRGIE(event, rgie);
     }
-    
+
     // Evento para verificar só a entrada de numeros e formata para DDD
     @FXML
     void validarDDD(KeyEvent event) {
@@ -234,7 +236,7 @@ public class CadastroEntidadeViewController implements Initializable {
         tipoCliente.setItems(tipo);
         /* ------------------------------------------------------------------ */
 
-        /* ----------------- Combo Box - Tipo de Sexo ----------------------- */
+ /* ----------------- Combo Box - Tipo de Sexo ----------------------- */
         // Adicionando dados do Tipo de Sexo
         SexoRN sexo = new SexoRN();
         ArrayList tiposSexo = (ArrayList) sexo.buscarTodos("sexDescricao");
@@ -242,7 +244,7 @@ public class CadastroEntidadeViewController implements Initializable {
         tipoSexo.setItems(TS);
 
         /* ------------------------------------------------------------------ */
-        /* ----------------- Combo Box - Tipo de Endereço ------------------- */
+ /* ----------------- Combo Box - Tipo de Endereço ------------------- */
         // Adicionando dados do Tipo de Sexo
         ObservableList<String> der = FXCollections.observableArrayList(
                 "Residencial",
@@ -250,14 +252,14 @@ public class CadastroEntidadeViewController implements Initializable {
         );
         tipoEndereco.setItems(der);
         /* ------------------------------------------------------------------ */
-        /* ----------------- Combo Box - Tipo de Estado ------------------- */
+ /* ----------------- Combo Box - Tipo de Estado ------------------- */
         // Adicionando dados do Tipo de Estado
         EstadoRN es = new EstadoRN();
         ArrayList listEstados = (ArrayList) es.buscarTodos("estSigla");
         ObservableList<String> ET = FXCollections.observableArrayList(listEstados);
         estado.setItems(ET);
         /* ------------------------------------------------------------------ */
-        /* ------------------ Combo Box - Tipo de Cidade -------------------- */
+ /* ------------------ Combo Box - Tipo de Cidade -------------------- */
         // Adicionando dados do Tipo de Cidade
         CidadeRN cd = new CidadeRN();
         estado.setOnAction(event -> {
@@ -288,11 +290,6 @@ public class CadastroEntidadeViewController implements Initializable {
         ArrayList loges = (ArrayList) logRN.buscarTodos("logDescricao");
         ObservableList<String> looo = FXCollections.observableArrayList(loges);
         logradouro.setItems(looo);
-        
-        ENT.verificaCamposText(nome);
-        ENT.verificaCamposText(nomeFantasia);
-        ENT.verificaCamposText(email);
-        ENT.verificaCamposText(cep);
     }
 
     @FXML
@@ -345,49 +342,52 @@ public class CadastroEntidadeViewController implements Initializable {
         }
 
         ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
-
-        if (tipoEntidade1.isSelected()) {
-            CLIENTE = new TbCliente(ENTIDADE);
-            ClienteRN cliente = new ClienteRN();
-            cliente.salvar(CLIENTE);
-        }
-        if (tipoEntidade2.isSelected()) {
-            FORNECEDOR = new TbFornecedor(ENTIDADE);
-            FornecedorRN forne = new FornecedorRN();
-            forne.salvar(FORNECEDOR);
-        }
-
-        ClienteRN cli = new ClienteRN();
-        FornecedorRN fore = new FornecedorRN();
-        TbCliente clientes = null;
-        TbFornecedor fornecedores = null;
-
-        if (CLIENTE != null) {
-            clientes = (TbCliente) cli.listaUm("clicpfCnpj", CLIENTE.getClicpfCnpj().getEntcpfCnpj(), TbCliente.class);
-        }
-
-        if (FORNECEDOR != null) {
-            fornecedores = (TbFornecedor) fore.listaUm("forcpfCnpj", FORNECEDOR.getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class);
-        }
-        
-        if (clientes == CLIENTE || fornecedores == FORNECEDOR) {
-            EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
-            for (TbEntidadeHasTelefone tel : t) {
-                if (tel == null) {
-                    break;
-                }
-                eht.salvar(tel);
+        if (verificaCampos()) {
+            if (tipoEntidade1.isSelected()) {
+                CLIENTE = new TbCliente(ENTIDADE);
+                ClienteRN cliente = new ClienteRN();
+                cliente.salvar(CLIENTE);
             }
-            EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
-            for (TbEntidadeHasEndereco end : e) {
-                if (end == null) {
-                    break;
-                }
-                ehe.salvar(end);
+            if (tipoEntidade2.isSelected()) {
+                FORNECEDOR = new TbFornecedor(ENTIDADE);
+                FornecedorRN forne = new FornecedorRN();
+                forne.salvar(FORNECEDOR);
             }
+
+            ClienteRN cli = new ClienteRN();
+            FornecedorRN fore = new FornecedorRN();
+            TbCliente clientes = null;
+            TbFornecedor fornecedores = null;
+
+            if (CLIENTE != null) {
+                clientes = (TbCliente) cli.listaUm("clicpfCnpj", CLIENTE.getClicpfCnpj().getEntcpfCnpj(), TbCliente.class);
+            }
+
+            if (FORNECEDOR != null) {
+                fornecedores = (TbFornecedor) fore.listaUm("forcpfCnpj", FORNECEDOR.getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class);
+            }
+
+            if (clientes == CLIENTE || fornecedores == FORNECEDOR) {
+                EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+                for (TbEntidadeHasTelefone tel : t) {
+                    if (tel == null) {
+                        break;
+                    }
+                    eht.salvar(tel);
+                }
+                EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                for (TbEntidadeHasEndereco end : e) {
+                    if (end == null) {
+                        break;
+                    }
+                    ehe.salvar(end);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+            dialogStage.close();
+        } else {
+            ENT.exibirAlerta("Preencha todos os campos marcados antes de finalizar.");
         }
-        JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
-        dialogStage.close();
     }
 
     @FXML
@@ -472,5 +472,18 @@ public class CadastroEntidadeViewController implements Initializable {
     void handlerCancelarEnd() {
         EnderecoModel selectedEndereco = tableEnd.getSelectionModel().getSelectedItem();
         enderecos.remove(selectedEndereco);
+    }
+
+    boolean verificaCampos() {
+        if (ENT.validarCampoText(nome, nomeFantasia, cpfcnpj, rgie, email)) {
+            return false;
+        } else {
+            return true;
+        }
+//        if (!dataNASC.isDisable()) {
+//            if (ENT.verificaData(dataNASC)) {
+//
+//            }
+//        }
     }
 }

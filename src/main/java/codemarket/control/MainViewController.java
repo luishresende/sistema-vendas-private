@@ -116,6 +116,7 @@ public class MainViewController implements Initializable {
                 }
             });
             updateImageUser();
+            handleViewsButtons(PDVLoaderView);
         });
 
     }
