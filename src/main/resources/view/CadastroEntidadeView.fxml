@@ -67,7 +67,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                        <children>
-                                          <Label fx:id="labelNome" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="74.0" styleClass="secondTextColor" text="Nome *" textFill="#0022ff">
+                                          <Label fx:id="labelNome" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="74.0" styleClass="secondTextColor" text="Nome *">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
