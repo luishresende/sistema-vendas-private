@@ -257,7 +257,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="83.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label fx:id="labelRGIE" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="101.0" styleClass="secondTextColor" text="RG / IE *">
+                                                      <Label fx:id="labelRGIE" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="138.0" styleClass="secondTextColor" text="RG / IE *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>

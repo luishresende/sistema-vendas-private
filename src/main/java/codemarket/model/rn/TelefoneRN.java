@@ -8,8 +8,10 @@ package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbTelefone;
 import java.util.List;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import static javafx.scene.paint.Color.*;
 
 /**
  *
@@ -74,6 +76,20 @@ public class TelefoneRN {
         }
         if (texto.length() >= 9) {
             event.consume(); // Impede que mais de 2 caracteres sejam inseridos
+        }
+    }
+    public boolean validarCampoDDD(TextField ddd) {
+        if (ddd.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarCampoFone(TextField fone) {
+        if (fone.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

@@ -2,6 +2,10 @@ package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbTipoEndereco;
 import java.util.List;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import static javafx.scene.paint.Color.BLACK;
+import static javafx.scene.paint.Color.RED;
 ;
 
 public class TipoEnderecoRN {
@@ -35,5 +39,12 @@ public class TipoEnderecoRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public boolean validarCampo(ComboBox<String> tipoEND) {
+        if (tipoEND.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

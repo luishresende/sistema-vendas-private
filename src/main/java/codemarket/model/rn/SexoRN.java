@@ -2,7 +2,9 @@ package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbSexo;
 import java.util.List;import javafx.scene.control.ComboBox;
-;
+import javafx.scene.control.Label;
+import static javafx.scene.paint.Color.*;
+
 
 public class SexoRN {
 
@@ -44,5 +46,12 @@ public class SexoRN {
         }
         //System.out.println(sexo.getSexDescricao());
         return sexo;
+    }
+    public boolean validarCampo(ComboBox<String> tipoSexo) {
+        if (tipoSexo.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

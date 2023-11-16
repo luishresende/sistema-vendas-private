@@ -67,6 +67,8 @@ public class PDVViewController implements Initializable {
     private TableColumn<VendaModel, Integer> colunaQuantidade;
 
     private ObservableList<VendaModel> venda = FXCollections.observableArrayList();
+    
+    private boolean isPesquisaProdutoViewOpen = false;
 
     @FXML
     void valorTroco() {
@@ -158,7 +160,7 @@ public class PDVViewController implements Initializable {
             String clienteSelecionado = finalizaVendaController.getIdCliente().getValue();
             String tipoPagamentoSelecionado = finalizaVendaController.getTipoPagamento().getValue();
             boolean semCadastroSelecionado = finalizaVendaController.getSemCadastro().isSelected();
-            
+
             TbCliente cliente = null;
             if (!semCadastroSelecionado) {
                 ClienteRN clirn = new ClienteRN();
@@ -188,30 +190,39 @@ public class PDVViewController implements Initializable {
 
     @FXML
     void handleFunctionKeyF2() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PesquisaProdutoView.fxml"));
-            Parent root = loader.load();
+        // Evite a abertura múltipla da janela
+        if (!isPesquisaProdutoViewOpen) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PesquisaProdutoView.fxml"));
+                Parent root = loader.load();
 
-            // Obtenha o controlador da janela de pesquisa
-            PesquisaProdutoController pesquisaProdutoController = loader.getController();
+                // Obtenha o controlador da janela de pesquisa
+                PesquisaProdutoController pesquisaProdutoController = loader.getController();
 
-            // Exiba a janela de pesquisa
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait(); // Aguarde até que a janela de pesquisa seja fechada
+                // Exiba a janela de pesquisa
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.showAndWait(); // Aguarde até que a janela de pesquisa seja fechada
 
-            // Obtenha o valor retornado da janela de pesquisa
-            String codigoProduto = pesquisaProdutoController.getCodigoProdutoSelecionado();
-            EstoqueRN estoque = new EstoqueRN();
-            TbEstoque est = estoque.listaUm("estoId", codigoProduto, TbEstoque.class);
-            VendaModel v = new VendaModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
-                    est.getEstoValorFinal(),
-                    est.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao(), est.getEstoProdutoCodigo().getPdtNome(), 0);
+                // Defina a flag para indicar que a janela está aberta
+                isPesquisaProdutoViewOpen = true;
 
-            venda.add(v);
-            atualizarSubtotal();
-        } catch (IOException e) {
-            e.printStackTrace();
+                // Obtenha o valor retornado da janela de pesquisa
+                String codigoProduto = pesquisaProdutoController.getCodigoProdutoSelecionado();
+                EstoqueRN estoque = new EstoqueRN();
+                TbEstoque est = estoque.listaUm("estoId", codigoProduto, TbEstoque.class);
+                VendaModel v = new VendaModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
+                        est.getEstoValorFinal(),
+                        est.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao(), est.getEstoProdutoCodigo().getPdtNome(), 0);
+
+                venda.add(v);
+                atualizarSubtotal();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                // Certifique-se de redefinir a flag quando a janela for fechada
+                isPesquisaProdutoViewOpen = false;
+            }
         }
     }
 

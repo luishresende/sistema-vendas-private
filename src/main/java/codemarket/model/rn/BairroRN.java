@@ -1,7 +1,13 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbBairro;
-import java.util.List;;
+import java.util.List;import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import static javafx.scene.paint.Color.BLACK;
+import static javafx.scene.paint.Color.RED;
+;
 
 public class BairroRN {
 
@@ -34,5 +40,12 @@ public class BairroRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public boolean validarCampo(TextField bairro) {
+        if (bairro.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

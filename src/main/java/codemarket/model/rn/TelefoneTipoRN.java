@@ -8,6 +8,10 @@ package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbTipoTelefone;
 import java.util.List;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import static javafx.scene.paint.Color.*;
 
 /**
  *
@@ -47,5 +51,19 @@ public class TelefoneTipoRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public boolean validarCampoTipoContato(ComboBox<String> tipoContato) {
+        if (tipoContato.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarCampoNomeContato(TextField nomeContato) {
+        if (nomeContato.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

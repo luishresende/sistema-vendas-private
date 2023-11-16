@@ -11,11 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -28,8 +30,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.*;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte0.runnable;
 
 public class CadastroEntidadeViewController implements Initializable {
 
@@ -37,7 +42,6 @@ public class CadastroEntidadeViewController implements Initializable {
     private Label labelNome, labelTipoEntidade, labelNomeFantasia, labelSexo, labelTipoCliente, labelDtNasc,
             labelEmail, labelTipoContato, labelNomeContato, labelDDD, labelFone, labelEndereco, labelLogradouro,
             labelTipoEnd, labelBairro, labelCEP, labelPais, labelEstado, labelCidade, labelCPFCNPJ, labelRGIE, tituloJanela;
-
     @FXML
     private CheckBox tipoEntidade1, tipoEntidade2;
     @FXML
@@ -70,8 +74,14 @@ public class CadastroEntidadeViewController implements Initializable {
 
     private Stage dialogStage;
     EntidadeRN ENT = new EntidadeRN();
+    TelefoneTipoRN TTEL = new TelefoneTipoRN();
     TelefoneRN TEL = new TelefoneRN();
     SexoRN SEX = new SexoRN();
+    BairroRN BAI = new BairroRN();
+    CidEstPaiRN CEP = new CidEstPaiRN();
+    LogradouroRN LOG = new LogradouroRN();
+    EndPostalRN END = new EndPostalRN();
+    TipoEnderecoRN TEND = new TipoEnderecoRN();
 
     public Stage getDialogStage() {
         return dialogStage;
@@ -169,12 +179,11 @@ public class CadastroEntidadeViewController implements Initializable {
 
         /* ------------------------------------------------------------------ */
  /* ----------------- Combo Box - Tipo de Endereço ------------------- */
-        // Adicionando dados do Tipo de Sexo
-        ObservableList<String> der = FXCollections.observableArrayList(
-                "Residencial",
-                "Outro"
-        );
-        tipoEndereco.setItems(der);
+        // Adicionando dados do Tipo de Endereço
+        TipoEnderecoRN tendRN = new TipoEnderecoRN();
+        ArrayList ends = (ArrayList) tendRN.buscarTodos("teDescricao");
+        ObservableList<String> ENDS = FXCollections.observableArrayList(ends);
+        tipoEndereco.setItems(ENDS);
         /* ------------------------------------------------------------------ */
  /* ----------------- Combo Box - Tipo de Estado ------------------- */
         // Adicionando dados do Tipo de Estado
@@ -215,15 +224,26 @@ public class CadastroEntidadeViewController implements Initializable {
         ObservableList<String> looo = FXCollections.observableArrayList(loges);
         logradouro.setItems(looo);
         
-        ENT.ficaVerificandoCampos(nome, nomeFantasia, cpfcnpj, rgie, email, nomeContato, 
-                                  ddd, fone, labelNome, labelNomeFantasia, nomerua, bairro, 
-                                  cep, labelCPFCNPJ, labelRGIE, labelEmail, labelNomeContato, 
-                                  labelDDD, labelFone, labelEndereco, labelBairro, labelCEP);
+        ENT.ficaVerificandoCampos(nome, labelNome, nomeFantasia, labelNomeFantasia, cpfcnpj, labelCPFCNPJ, 
+                                  rgie, labelRGIE, email, labelEmail, nomeContato, labelNomeContato, 
+                                  ddd, labelDDD, fone, labelFone, nomerua, labelEndereco, bairro, labelBairro, 
+                                  cep, labelCEP);
+        
+        Platform.runLater(() -> {
+            setLabelColor(labelNome); setLabelColor(labelTipoEntidade); setLabelColor(labelSexo); setLabelColor(labelTipoCliente);
+            setLabelColor(labelDtNasc); setLabelColor(labelEmail); setLabelColor(labelCPFCNPJ); setLabelColor(labelRGIE);
+            setLabelColor(labelTipoContato); setLabelColor(labelNomeContato); setLabelColor(labelDDD); setLabelColor(labelFone);
+            setLabelColor(labelEndereco); setLabelColor(labelLogradouro); setLabelColor(labelTipoEnd); setLabelColor(labelBairro);
+            setLabelColor(labelPais); setLabelColor(labelEstado); setLabelColor(labelCidade); setComboBoxColor(pais); setComboBoxColor(estado);
+            setComboBoxColor(cidade); setComboBoxColor(logradouro); setComboBoxColor(tipoCliente); setComboBoxColor(tipoContato);
+            setComboBoxColor(tipoEndereco); setComboBoxColor(tipoSexo);
+        });
+                
     }
 
     @FXML
     void handleFinalizarButton() {
-        if (verificaCampos()) {
+        if (verificaCampos() && verificaTabela(tableEnd) && verificaTabela(tableFone)) {
             TbSexo sexo = SEX.varificaSexo(tipoSexo, SEX);
             Date dateNASC = ENT.verificaData(dataNASC);
             TbEntidade ENTIDADE = new TbEntidade(cpfcnpj.getText(), nome.getText(), nomeFantasia.getText(), rgie.getText(), email.getText(),
@@ -315,7 +335,7 @@ public class CadastroEntidadeViewController implements Initializable {
             JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
             dialogStage.close();
         } else {
-            ENT.exibirAlerta("Preencha todos os campos marcados antes de finalizar.");
+            exibirAlerta("Preencha todos os campos marcados antes de finalizar.");
         }
     }
 
@@ -335,7 +355,7 @@ public class CadastroEntidadeViewController implements Initializable {
             fone.clear();
             tipoContato.setPromptText("Selecione...");
         } else {
-            ENT.exibirAlerta("Preencha todos os campos para inserir na tabela telefone.");
+            exibirAlerta("Preencha todos os campos para inserir na tabela telefone.");
         }
     }
 
@@ -359,7 +379,7 @@ public class CadastroEntidadeViewController implements Initializable {
             complemento.clear();
             numero.clear();
         } else {
-            ENT.exibirAlerta("Preencha todos os campos para inserir na tabela endereco.");
+            exibirAlerta("Preencha todos os campos para inserir na tabela endereco.");
         }
 
     }
@@ -410,19 +430,80 @@ public class CadastroEntidadeViewController implements Initializable {
         enderecos.remove(selectedEndereco);
     }
 
-    boolean verificaCampos() {        
-        return !ENT.validarCampo(nome, nomeFantasia, cpfcnpj, rgie, email, 
-                labelNome, labelNomeFantasia, labelCPFCNPJ, labelRGIE, labelEmail, tipoSexo,
-                tipoCliente, labelTipoCliente, labelSexo, dataNASC, labelDtNasc);
+    boolean verificaCampos() {
+        boolean camposValidos = true;
+        if (ENT.validarNome(nome)){ labelNome.setTextFill(RED); nome.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarCPFCNPJ(cpfcnpj)) { labelCPFCNPJ.setTextFill(RED); cpfcnpj.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarRGIE(rgie)) { labelRGIE.setTextFill(RED); rgie.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarNomeFantasia(nomeFantasia)) { labelNomeFantasia.setTextFill(RED); nomeFantasia.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarEmail(email)) { labelEmail.setTextFill(RED); email.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarCampoData(dataNASC)) { labelDtNasc.setTextFill(RED); dataNASC.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarCampoCheck(tipoEntidade1, tipoEntidade2)){ labelTipoEntidade.setTextFill(RED); tipoEntidade1.setTextFill(RED); tipoEntidade2.setTextFill(RED); camposValidos = false;}
+        if (ENT.validarCampoTipoCliente(tipoCliente)){ labelTipoCliente.setTextFill(RED); tipoCliente.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (SEX.validarCampo(tipoSexo)) { labelSexo.setTextFill(RED); tipoSexo.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TTEL.validarCampoTipoContato(tipoContato)) { labelTipoContato.setTextFill(RED); tipoContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TTEL.validarCampoNomeContato(nomeContato)) { labelNomeContato.setTextFill(RED); nomeContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TEL.validarCampoDDD(ddd)) { labelDDD.setTextFill(RED); ddd.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TEL.validarCampoFone(fone)) { labelFone.setTextFill(RED); fone.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (BAI.validarCampo(bairro)) { labelBairro.setTextFill(RED); bairro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (LOG.validarCampo(logradouro)) { labelLogradouro.setTextFill(RED); logradouro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TEND.validarCampo(tipoEndereco)) { labelTipoEnd.setTextFill(RED); tipoEndereco.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (END.validarCampoCEP(cep)) { labelCEP.setTextFill(RED); cep.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (END.validarCampoNomeRua(nomerua)) { labelEndereco.setTextFill(RED); nomerua.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (CEP.validarCampoPais(pais)) { labelPais.setTextFill(RED); pais.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (CEP.validarCampoEstado(estado)) { labelEstado.setTextFill(RED); estado.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (CEP.validarCampoCidade(cidade)) { labelCidade.setTextFill(RED); cidade.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        return camposValidos;
     }
-    
+    void setLabelColor(Label label) {
+        label.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                // Focado
+                label.setStyle("-fx-text-fill: black;"); // Altere a cor para vermelho quando focado
+            } 
+        });
+    }
+    void setComboBoxColor(ComboBox<String> box) {
+        box.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                // Focado
+                box.setStyle("-fx-border-color: black;"); // Altere a cor para vermelho quando focado
+            } 
+        });
+    }
     boolean verificaCamposTableFone() {
-        return !ENT.validarCamposTableFone(nomeContato, ddd, fone, labelNomeContato, labelDDD, labelFone, tipoContato, labelTipoContato);
+        boolean camposValidos = true;
+        if (TTEL.validarCampoTipoContato(tipoContato)) { labelTipoContato.setTextFill(RED); tipoContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TTEL.validarCampoNomeContato(nomeContato)) { labelNomeContato.setTextFill(RED); nomeContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TEL.validarCampoDDD(ddd)) { labelDDD.setTextFill(RED); ddd.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TEL.validarCampoFone(fone)) { labelFone.setTextFill(RED); fone.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        return camposValidos;
     }
     
     boolean verificaCamposTableEndereco() {
-        return !ENT.validarCamposTableEndereco(nomerua, bairro, cep, labelEndereco, labelBairro,
-                                               labelCEP, logradouro, tipoEndereco, labelLogradouro, 
-                                               labelTipoEnd);
+        boolean camposValidos = true;
+        if (BAI.validarCampo(bairro)) { labelBairro.setTextFill(RED); bairro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (LOG.validarCampo(logradouro)) { labelLogradouro.setTextFill(RED); logradouro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TEND.validarCampo(tipoEndereco)) { labelTipoEnd.setTextFill(RED); tipoEndereco.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (END.validarCampoCEP(cep)) { labelCEP.setTextFill(RED); cep.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (END.validarCampoNomeRua(nomerua)) { labelEndereco.setTextFill(RED); nomerua.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (CEP.validarCampoPais(pais)) { labelPais.setTextFill(RED); pais.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (CEP.validarCampoEstado(estado)) { labelEstado.setTextFill(RED); estado.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (CEP.validarCampoCidade(cidade)) { labelCidade.setTextFill(RED); cidade.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        return camposValidos;
+    }
+    boolean verificaTabela(TableView tableView) {
+        if (tableView.getItems().isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public void exibirAlerta(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validação de Campos");
+        alert.setHeaderText(null);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 }

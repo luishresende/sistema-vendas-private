@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -61,9 +62,28 @@ public class FinalizaVendaController implements Initializable {
 
     @FXML
     private void handleFinalizarButton(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        stage.close();
+        if (TipoPagamento.getValue() != null) {
+            if ((SemCadastro.isSelected() && idCliente.getValue() == null) || (!SemCadastro.isSelected() && idCliente.getValue() != null)) {
+                Node source = (Node) event.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Erro");
+                alert.setHeaderText(null);
+                alert.setContentText("Por favor, Insira um Cliente ou selecione a CheckBox.");
+
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Erro");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, Insira um Pagamento.");
+
+            alert.showAndWait();
+        }
+
     }
 
     public CheckBox getSemCadastro() {
