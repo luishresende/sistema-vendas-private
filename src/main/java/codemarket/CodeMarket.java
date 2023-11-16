@@ -13,16 +13,10 @@ public class CodeMarket extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        SettingsFile settings = new SettingsFile();
+        SettingsFile settings = SettingsFile.getInstance();
         settings.updateCSSFile();
         Parent root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
         Scene scene = new Scene(root);
-
-        scene.widthProperty().addListener((obervable, oldValue, newValue) -> {
-            double width = newValue.doubleValue();
-            double height = scene.getHeight();
-
-        });
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("CodeMarket");

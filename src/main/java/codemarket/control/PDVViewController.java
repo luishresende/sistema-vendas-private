@@ -68,8 +68,8 @@ public class PDVViewController implements Initializable {
 
     private ObservableList<VendaModel> venda = FXCollections.observableArrayList();
 
-    private boolean isListenerAdded = false;
     private boolean isPesquisaProdutoViewOpen = false;
+    private boolean isListenerAdded = false;
 
     @FXML
     void valorTroco() {
@@ -95,6 +95,7 @@ public class PDVViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         colunaDescricao.setCellValueFactory(new PropertyValueFactory<>("Descricao"));
         colunaUNI.setCellValueFactory(new PropertyValueFactory<>("Uni"));
         colunaAvista.setCellValueFactory(new PropertyValueFactory<>("Valor"));
@@ -103,17 +104,10 @@ public class PDVViewController implements Initializable {
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("Quantidade"));
 
         tableVenda.setItems(venda);
-
-        // Remove o listener antigo, se existir
-        if (isListenerAdded) {
-            Scene oldScene = quantidade.getScene();
-            oldScene.removeEventFilter(KeyEvent.KEY_PRESSED, this::handleFunctionKeys);
-            isListenerAdded = false;
-        }
-
-        // Adiciona o novo listener à nova cena
+        System.out.println("Tela aberta");
+        
         quantidade.sceneProperty().addListener((observable, oldScene, newScene) -> {
-            if (newScene != null) {
+            if (newScene != null && !isListenerAdded) {
                 newScene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleFunctionKeys);
                 isListenerAdded = true;
             }

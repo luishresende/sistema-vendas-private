@@ -13,49 +13,63 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchorPaneLogin" prefHeight="550.0" prefWidth="800.0" styleClass="sublimedTextField" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.LoginViewController">
    <children>
-      <Pane prefHeight="550.0" prefWidth="400.0" styleClass="primaryThemeColor">
+      <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <ImageView fitHeight="355.0" fitWidth="343.0" layoutX="29.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/logo.png" />
-               </image>
-            </ImageView>
+            <Pane prefHeight="550.0" prefWidth="400.0" styleClass="secondThemeColor" GridPane.columnIndex="1">
+               <children>
+                  <Button fx:id="buttonDBSettings" layoutX="341.0" mnemonicParsing="false" onAction="#handleButtonDBSettings" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: transparent;" styleClass="buttonConfig">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontAwesomeIcon iconName="GEAR" size="3em" styleClass="primaryIconColor" text="" />
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="textFieldUsuario" layoutX="88.0" layoutY="258.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" />
+                  <Button fx:id="buttonEntrar" disable="true" layoutX="158.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleButtonEntrar" prefHeight="34.0" prefWidth="84.0" text="ENTRAR" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="buttonProduto" />
+                        <String fx:value="primaryThemeColor" />
+                        <String fx:value="primaryTextColor" />
+                     </styleClass>
+                  </Button>
+                  <FontAwesomeIcon fill="#32a0ff" iconName="USER" layoutX="50.0" layoutY="281.0" size="2em" strokeWidth="0.0" styleClass="secondIconColor" />
+                  <FontAwesomeIcon fill="#32a0ff" iconName="KEY" layoutX="47.0" layoutY="340.0" size="2em" strokeWidth="0.0" styleClass="secondIconColor" text="" />
+                  <FontAwesomeIcon fill="#32a0ff" iconName="USERS" layoutX="168.0" layoutY="163.0" size="5em" strokeWidth="0.0" styleClass="secondIconColor" />
+                  <Text layoutX="171.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="thirdTextColor" text="LOGIN">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="textStatus" layoutX="87.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizando conexão com o servidor..." textAlignment="CENTER" wrappingWidth="226.677734375">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Text>
+                  <PasswordField fx:id="passwordFieldSenha" layoutX="88.0" layoutY="317.0" prefHeight="27.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" />
+               </children>
+            </Pane>
+            <Pane prefHeight="550.0" prefWidth="400.0" styleClass="primaryThemeColor">
+               <children>
+                  <ImageView fitHeight="355.0" fitWidth="343.0" layoutX="29.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
          </children>
-      </Pane>
-      <Pane layoutX="400.0" prefHeight="550.0" prefWidth="400.0" styleClass="secondThemeColor">
-         <children>
-            <Button fx:id="buttonDBSettings" layoutX="341.0" mnemonicParsing="false" onAction="#handleButtonDBSettings" prefHeight="43.0" prefWidth="37.0" style="-fx-background-color: transparent;" styleClass="buttonConfig">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <FontAwesomeIcon iconName="GEAR" size="3em" text="" />
-               </graphic></Button>
-            <TextField fx:id="textFieldUsuario" layoutX="88.0" layoutY="258.0" prefHeight="25.0" prefWidth="266.0" promptText="Usuário" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" />
-            <Button fx:id="buttonEntrar" disable="true" layoutX="158.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleButtonEntrar" prefHeight="34.0" prefWidth="84.0" text="ENTRAR" textFill="WHITE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <styleClass>
-                  <String fx:value="buttonProduto" />
-                  <String fx:value="primaryThemeColor" />
-                  <String fx:value="primaryTextColor" />
-               </styleClass></Button>
-            <FontAwesomeIcon fill="#32a0ff" iconName="USER" layoutX="50.0" layoutY="281.0" size="2em" strokeWidth="0.0" styleClass="secondIconColor" />
-            <FontAwesomeIcon fill="#32a0ff" iconName="KEY" layoutX="47.0" layoutY="340.0" size="2em" strokeWidth="0.0" styleClass="secondIconColor" text="" />
-            <FontAwesomeIcon fill="#32a0ff" iconName="USERS" layoutX="168.0" layoutY="163.0" size="5em" strokeWidth="0.0" styleClass="secondIconColor" />
-            <Text layoutX="171.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="thirdTextColor" text="LOGIN">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-            <Text fx:id="textStatus" layoutX="87.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizando conexão com o servidor..." textAlignment="CENTER" wrappingWidth="226.677734375">
-               <font>
-                  <Font size="13.0" />
-               </font></Text>
-            <PasswordField fx:id="passwordFieldSenha" layoutX="88.0" layoutY="317.0" prefHeight="27.0" prefWidth="266.0" promptText="Senha" style="-fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px;" styleClass="sublimedTextField" />
-         </children>
-      </Pane>
+      </GridPane>
    </children>
    <stylesheets>
       <URL value="@style.css" />

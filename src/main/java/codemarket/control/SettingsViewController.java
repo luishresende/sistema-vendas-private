@@ -1,16 +1,19 @@
 package codemarket.control;
 
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.utils.SettingsFile;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 public class SettingsViewController implements Initializable{
-
+    
     @FXML
     private ColorPicker colorPickerPrimaryTheme;
 
@@ -22,9 +25,6 @@ public class SettingsViewController implements Initializable{
 
     @FXML
     private ColorPicker colorPickerSecondTheme;
-
-    @FXML
-    private ColorPicker colorPickerPrimaryIcon;
 
     @FXML
     private Button buttonCancel;
@@ -41,19 +41,28 @@ public class SettingsViewController implements Initializable{
     @FXML
     private Button buttonAdd;
     
-    private SettingsFile settingsColor;
+    private final SettingsFile settingsColor = SettingsFile.getInstance();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        settingsColor = new SettingsFile();
+        Platform.runLater(() -> {
+            colorPickerPrimaryTheme.setValue(Color.valueOf("#" + settingsColor.getProperties().getProperty("primaryThemeColor")));
+            colorPickerSecondTheme.setValue(Color.valueOf("#" + settingsColor.getProperties().getProperty("secondThemeColor")));
+            colorPickerPrimaryFont.setValue(Color.valueOf("#" + settingsColor.getProperties().getProperty("primaryTextColor")));
+            colorPickerSecondFont.setValue(Color.valueOf("#" + settingsColor.getProperties().getProperty("secondTextColor")));
+        });
     }
     
+    @FXML
     public void handleSaveButton(){
-        System.out.println(colorPickerPrimaryTheme.getValue());
-        System.out.println(colorPickerSecondTheme.getValue());
-        System.out.println(colorPickerPrimaryFont.getValue());
-        System.out.println(colorPickerSecondFont.getValue());
-        //settingsColor.updatePropertiesFile(colorPickerPrimaryTheme.getValue(), null, null, null);
+        try {
+                settingsColor.updatePropertiesFile(colorPickerPrimaryTheme.getValue().toString().substring(2, 8), colorPickerSecondTheme.getValue().toString().substring(2, 8), 
+                                               colorPickerPrimaryFont.getValue().toString().substring(2, 8), colorPickerSecondFont.getValue().toString().substring(2, 8));
+            DisplayDialogScreen.getInstance().displayInfoScreen("Sucesso", "Configurações atualizadas", "Algumas alterações requerem que o sistema seja reiniciado para serem aplicadas.");
+        } catch (Exception e) {
+            DisplayDialogScreen.getInstance().displayErrorScreen("Erro", "Parece que algo deu errado", "Não foi possível salvar as informações");
+        } 
+        
     }
     
 }

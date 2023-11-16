@@ -90,6 +90,7 @@ public class LoginViewController implements Initializable {
     public void handleButtonEntrar() {
         buttonEntrar.setDisable(true);
         if (!connectedToTheServer) {
+            setStatus("Realizando conexão com o servidor...", Color.BLACK);
             tryServerConnection(); // Tentando conectar novamente
             buttonEntrar.setDisable(false);
         } else {

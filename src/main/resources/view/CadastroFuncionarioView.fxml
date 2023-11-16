@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.image.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.geometry.*?>
@@ -10,12 +11,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.CadastroFuncionarioViewController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.CadastroFuncionarioViewController">
    <children>
-      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="969.0" style="-fx-background-color: #32a0ff;" text="Cadastro de Funcionário" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="tituloJanela" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="969.0" text="Cadastro de Funcionário" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
+         <styleClass>
+            <String fx:value="primaryThemeColor" />
+            <String fx:value="primaryTextColor" />
+         </styleClass>
       </Label>
       <GridPane layoutX="108.0" layoutY="73.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
         <columnConstraints>
@@ -1031,4 +1036,8 @@
          </children>
       </GridPane>
    </children>
+   <stylesheets>
+      <URL value="@style.css" />
+      <URL value="@styleSettings.css" />
+   </stylesheets>
 </AnchorPane>

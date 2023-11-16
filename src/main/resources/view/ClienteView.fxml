@@ -110,7 +110,7 @@
                         <String fx:value="secondTextColor" />
                      </styleClass>
                   </Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonAtualizar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" styleClass="buttonProduto" text="Atulizar" textAlignment="CENTER" GridPane.columnIndex="5">
+                  <Button alignment="TOP_CENTER" contentDisplay="TOP" ellipsisString="50" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleButtonAtualizar" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: Transparent;" text="Atulizar" textAlignment="CENTER" GridPane.columnIndex="5">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -118,12 +118,16 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <graphic>
-                        <FontAwesomeIcon iconName="REFRESH" size="3.5em" textAlignment="CENTER">
+                        <FontAwesomeIcon iconName="REFRESH" size="3.5em" styleClass="primaryIconColor" textAlignment="CENTER">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </FontAwesomeIcon>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="buttonProduto" />
+                        <String fx:value="secondTextColor" />
+                     </styleClass>
                   </Button>
                </children>
                <rotationAxis>

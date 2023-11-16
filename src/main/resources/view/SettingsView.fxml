@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="secondThemeColor" stylesheets="@../Documents/GitHub/sistema-vendas/src/main/resources/view/styleSettings.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="secondThemeColor" stylesheets="@styleSettings.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.SettingsViewController">
    <children>
       <GridPane layoutX="63.0" layoutY="48.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -55,9 +55,8 @@
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                        <RowConstraints percentHeight="33.3" vgrow="SOMETIMES" />
-                                          <RowConstraints percentHeight="33.3" vgrow="SOMETIMES" />
-                                          <RowConstraints vgrow="SOMETIMES" />
+                                        <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+                                          <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <GridPane>
@@ -70,7 +69,7 @@
                                               <RowConstraints percentHeight="60.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temas" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondTextColor" text="Temas" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                                    <GridPane.margin>
                                                       <Insets left="20.0" />
                                                    </GridPane.margin>
@@ -78,39 +77,14 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Text>
-                                                <Label contentDisplay="RIGHT" prefHeight="25.0" prefWidth="144.0" text="Primária   " GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="264.0" styleClass="secondTextColor" text="Primária   " textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                    <graphic>
-                                                      <ColorPicker />
+                                                      <ColorPicker fx:id="colorPickerPrimaryTheme" maxWidth="85.0" />
                                                    </graphic>
                                                 </Label>
-                                                <Label contentDisplay="RIGHT" prefHeight="25.0" prefWidth="164.0" text="Secundária   " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="267.0" styleClass="secondTextColor" text="Secundária   " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                    <graphic>
-                                                      <ColorPicker />
-                                                   </graphic>
-                                                </Label>
-                                             </children>
-                                          </GridPane>
-                                          <GridPane GridPane.rowIndex="2">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
-                                                <RowConstraints percentHeight="60.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ícones" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
-                                                   <font>
-                                                      <Font name="System Bold" size="13.0" />
-                                                   </font>
-                                                   <GridPane.margin>
-                                                      <Insets left="20.0" />
-                                                   </GridPane.margin>
-                                                </Text>
-                                                <Label contentDisplay="RIGHT" prefHeight="25.0" prefWidth="144.0" text="Primária   " GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                                                   <graphic>
-                                                      <ColorPicker />
+                                                      <ColorPicker fx:id="colorPickerSecondTheme" maxWidth="85.0" />
                                                    </graphic>
                                                 </Label>
                                              </children>
@@ -125,7 +99,7 @@
                                                 <RowConstraints percentHeight="60.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fontes" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondTextColor" text="Fontes" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                                                    <GridPane.margin>
                                                       <Insets left="20.0" />
                                                    </GridPane.margin>
@@ -133,14 +107,14 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Text>
-                                                <Label contentDisplay="RIGHT" prefHeight="25.0" prefWidth="144.0" text="Primária   " GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="272.0" styleClass="secondTextColor" text="Primária   " GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                    <graphic>
-                                                      <ColorPicker />
+                                                      <ColorPicker fx:id="colorPickerPrimaryFont" maxWidth="85.0" />
                                                    </graphic>
                                                 </Label>
-                                                <Label contentDisplay="RIGHT" prefHeight="25.0" prefWidth="164.0" text="Secundária   " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="263.0" styleClass="secondTextColor" text="Secundária   " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                                                    <graphic>
-                                                      <ColorPicker />
+                                                      <ColorPicker fx:id="colorPickerSecondFont" maxWidth="85.0" />
                                                    </graphic>
                                                 </Label>
                                              </children>
@@ -153,7 +127,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Músicas">
+                <Tab disable="true" text="Em breve">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -198,17 +172,17 @@
                                               <RowConstraints percentHeight="50.0" valignment="TOP" vgrow="ALWAYS" />
                                             </rowConstraints>
                                              <children>
-                                                <Button contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Adicionar">
+                                                <Button fx:id="buttonAdd" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Adicionar">
                                                    <graphic>
-                                                      <FontAwesomeIcon glyphStyleClass="" iconName="PLUS" size="2.5em" />
+                                                      <FontAwesomeIcon glyphStyleClass="" iconName="PLUS" size="2.5em" styleClass="primaryIconColor" />
                                                    </graphic>
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.rowIndex="2">
+                                                <Button fx:id="buttonRemove" contentDisplay="TOP" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.rowIndex="2">
                                                    <graphic>
-                                                      <FontAwesomeIcon iconName="TRASH" size="2.5em" text="" />
+                                                      <FontAwesomeIcon iconName="TRASH" size="2.5em" styleClass="primaryIconColor" text="" />
                                                    </graphic>
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
@@ -255,17 +229,17 @@
                       <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Salvar">
+                        <Button fx:id="buttonSave" mnemonicParsing="false" onAction="#handleSaveButton" style="-fx-background-color: transparent;" text="Salvar">
                            <graphic>
-                              <FontAwesomeIcon iconName="CHECK" size="3em" />
+                              <FontAwesomeIcon iconName="CHECK" size="3em" styleClass="primaryIconColor" />
                            </graphic>
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Cancelar" GridPane.columnIndex="1">
+                        <Button fx:id="buttonCancel" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Cancelar" GridPane.columnIndex="1">
                            <graphic>
-                              <FontAwesomeIcon iconName="CLOSE" size="3EM" />
+                              <FontAwesomeIcon iconName="CLOSE" size="3EM" styleClass="primaryIconColor" />
                            </graphic>
                            <font>
                               <Font name="System Bold" size="14.0" />

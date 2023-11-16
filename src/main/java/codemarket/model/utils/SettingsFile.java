@@ -5,6 +5,7 @@
  */
 package codemarket.model.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,9 +18,22 @@ import java.util.Properties;
 public class SettingsFile {
     private static final Properties properties = new Properties();
     private static final String ARQUIVO_CONFIG = "./src/main/resources/config/config.properties";
+    private static SettingsFile settingsFile;
     
     public SettingsFile(){
         loadSettings();
+    }
+    
+    public static SettingsFile getInstance() {  
+        if (settingsFile == null) {
+            synchronized (SettingsFile.class) {
+                if (settingsFile == null) {
+                        settingsFile = new SettingsFile();                   
+                }
+            }
+        }
+
+        return settingsFile;
     }
     
     public void loadSettings() {
@@ -42,16 +56,29 @@ public class SettingsFile {
         }
     }
     
-    public void updatePropertiesFile(String primaryTextColor, String secondTextColor, String primaryThemeColor, String secondThemeColor) {
+    public void updatePropertiesFile(String primaryThemeColor, String secondThemeColor, String primaryTextColor, String secondTextColor) {
+        primaryTextColor = primaryTextColor.replace("#", "");
+        primaryTextColor = secondTextColor.replace("#", "");
+        primaryTextColor = primaryThemeColor.replace("#", "");
+        primaryTextColor = secondThemeColor.replace("#", "");
         properties.setProperty("primaryThemeColor", primaryThemeColor);
         properties.setProperty("secondThemeColor", secondThemeColor);
         properties.setProperty("primaryTextColor", primaryTextColor);
         properties.setProperty("secondTextColor", secondTextColor);
         properties.setProperty("primaryIconColor", secondTextColor);
+        saveSettings();
+        updateCSSFile();
+        
     }
 
     public void updateCSSFile() {
         CSSFile cssM = new CSSFile();
         boolean sucess = cssM.setSettings(properties.getProperty("primaryTextColor"), properties.getProperty("secondTextColor"), properties.getProperty("primaryThemeColor"), properties.getProperty("secondThemeColor"), properties.getProperty("primaryIconColor"));
+        System.out.println(sucess);
+    }
+    
+
+    public Properties getProperties() {
+        return properties;
     }
 }

@@ -5,6 +5,8 @@
  */
 package codemarket.model.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,24 +19,25 @@ import java.util.regex.Pattern;
  */
 public class CSSFile {
 
+    private final String CSSFilePath = "./src/main/resources/view/styleSettings.css";
     public boolean setSettings(String primaryTextColor, String secondTextColor, String primaryThemeColor, String secondThemeColor, String primaryIconColor) {
-        if(hexaColorValidate(primaryTextColor) || hexaColorValidate(secondTextColor) || hexaColorValidate(primaryThemeColor) || hexaColorValidate(secondThemeColor) || hexaColorValidate(primaryIconColor)){
+        if (hexaColorValidate(primaryTextColor) || hexaColorValidate(secondTextColor) || hexaColorValidate(primaryThemeColor) || hexaColorValidate(secondThemeColor) || hexaColorValidate(primaryIconColor)) {
             return false;
         }
         // Caminho para o arquivo CSS
-        String CSSFilePath = "./src/main/resources/view/styleSettings.css";
         
+
         // Ler conteúdo do arquivo
         try {
             String newCSSContent = new String(
-                      ".primaryTextColor{-fx-text-fill: #" + primaryTextColor + "; -fx-fill: " + primaryTextColor + ";}\n"
-                    + ".secondTextColor{-fx-text-fill: #" + secondTextColor + "; -fx-fill: " + secondTextColor + ";}\n"
-                    + ".thirdTextColor{-fx-text-fill: #" + primaryThemeColor + "; -fx-fill: " + primaryThemeColor + ";}\n"
+                    ".primaryTextColor{-fx-text-fill: #" + primaryTextColor + "; -fx-fill: #" + primaryTextColor + ";}\n"
+                    + ".secondTextColor{-fx-text-fill: #" + secondTextColor + "; -fx-fill: #" + secondTextColor + ";}\n"
+                    + ".thirdTextColor{-fx-text-fill: #" + primaryThemeColor + "; -fx-fill: #" + primaryThemeColor + ";}\n"
                     + ".primaryThemeColor{-fx-background-color: #" + primaryThemeColor + ";}\n"
                     + ".secondThemeColor{-fx-background-color: #" + secondThemeColor + ";}\n"
                     + ".sublimedTextField{-fx-border-color: #" + primaryThemeColor + ";}\n"
-                    + ".primaryIconColor{-fx-border-color: #" + primaryIconColor + ";}\n"
-                    + ".secondIconColor{-fx-border-color: #" + primaryThemeColor + ";}\n");
+                    + ".primaryIconColor{-fx-fill: #" + primaryIconColor + ";}\n"
+                    + ".secondIconColor{-fx-fill: #" + primaryThemeColor + ";}\n");
             System.out.println(newCSSContent);
             // Gravavando o arquivos css com os novos elementos setados
             Files.write(Paths.get(CSSFilePath), newCSSContent.getBytes());
@@ -58,5 +61,6 @@ public class CSSFile {
         // Verificar se há correspondência
         return matcher.matches();
     }
-}
 
+
+}

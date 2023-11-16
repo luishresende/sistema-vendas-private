@@ -80,6 +80,7 @@ public class MainViewController implements Initializable {
     private AnchorPane PDVLoaderView;
     private AnchorPane vendasView;
     private AnchorPane configuracoesView;
+    private Scene configuracoesScene;
     
     private TbUsuario user;
     private boolean changingImageSize;
@@ -96,6 +97,7 @@ public class MainViewController implements Initializable {
             PDVLoaderView = new FXMLLoader(getClass().getResource("/view/PDVView.fxml")).load();
             vendasView = new FXMLLoader(getClass().getResource("/view/SalesView.fxml")).load();
             configuracoesView = new FXMLLoader(getClass().getResource("/view/SettingsView.fxml")).load();
+            configuracoesScene = new Scene(configuracoesView);
         } catch (IOException ex) {
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,7 +118,6 @@ public class MainViewController implements Initializable {
                 }
             });
             updateImageUser();
-            handleViewsButtons(PDVLoaderView);
         });
 
     }
@@ -205,6 +206,7 @@ public class MainViewController implements Initializable {
 
     public void handleViewsButtons(AnchorPane view) {
         applicationAnchorPane.getChildren().clear(); // Limpando o conteudo do AnchorPane pai
+        
         // Definindo as costraints do novo conteudo para ocupar 100% da tela
         AnchorPane.setBottomAnchor(view, 0.0);
         AnchorPane.setTopAnchor(view, 0.0);
@@ -258,12 +260,11 @@ public class MainViewController implements Initializable {
     @FXML
     public void showSettings() {
         // Criando um Estágio de Diálogo (Stage Dialog)
-        Scene scene = new Scene(configuracoesView);
         Stage settings = new Stage();
         settings.setTitle("Configurações da aplicação");
         settings.initModality(Modality.APPLICATION_MODAL);
         settings.setResizable(false);
-        settings.setScene(scene);
+        settings.setScene(configuracoesScene);
         
         // Mostra o Dialog e espera até que o usuário o feche
         settings.showAndWait();

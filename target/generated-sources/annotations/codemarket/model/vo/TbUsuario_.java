@@ -15,6 +15,7 @@ public abstract class TbUsuario_ {
 	public static volatile SingularAttribute<TbUsuario, TbStatus> usuStatus;
 	public static volatile SingularAttribute<TbUsuario, byte[]> usuimgPerfil;
 	public static volatile SingularAttribute<TbUsuario, String> usuUsuario;
+	public static volatile ListAttribute<TbUsuario, TbVenda> tbVendaList;
 	public static volatile ListAttribute<TbUsuario, TbFuncionario> tbFuncionarioList;
 
 	public static final String USU_SENHA = "usuSenha";
@@ -22,6 +23,7 @@ public abstract class TbUsuario_ {
 	public static final String USU_STATUS = "usuStatus";
 	public static final String USUIMG_PERFIL = "usuimgPerfil";
 	public static final String USU_USUARIO = "usuUsuario";
+	public static final String TB_VENDA_LIST = "tbVendaList";
 	public static final String TB_FUNCIONARIO_LIST = "tbFuncionarioList";
 
 }

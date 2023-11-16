@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -231,15 +232,6 @@
                         <RowConstraints percentHeight="96.0" valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <TextArea editable="false" focusTraversable="false" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);" text="F1 - Finalizar Venda&#10;F2 - Pesquisar Produto&#10;F3 - Inserir Quantidade&#10;F4 - Excluir Produto&#10;F5 - Limpar &#10;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="secondTextColor" />
-                              <String fx:value="secondThemeColor" />
-                           </styleClass>
-                        </TextArea>
                         <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" percentWidth="100.0" />
@@ -352,6 +344,50 @@
                            </children>
                         </GridPane>
                         <Button fx:id="Button" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.rowIndex="1" />
+                        <Label GridPane.rowIndex="1" />
+                        <AnchorPane style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 10;" styleClass="secondThemeColor" GridPane.rowIndex="1">
+                           <children>
+                              <GridPane layoutX="73.0" layoutY="66.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondTextColor" text="F1 - Finalizar Venda">
+                                       <GridPane.margin>
+                                          <Insets left="20.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondTextColor" text="F4 - Excluir Produto" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="20.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondTextColor" text="F3 - Inserir Quantidade" GridPane.rowIndex="2">
+                                       <GridPane.margin>
+                                          <Insets left="20.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondTextColor" text="F2 - Pesquisar Produto" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="20.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondTextColor" text="F5 - Limpar " GridPane.rowIndex="4">
+                                       <GridPane.margin>
+                                          <Insets left="20.0" />
+                                       </GridPane.margin>
+                                    </Text>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </GridPane>
                </children>
