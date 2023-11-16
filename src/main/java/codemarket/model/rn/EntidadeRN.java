@@ -11,7 +11,9 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
+import static javafx.scene.paint.Color.*;
 import javafx.util.Callback;
 ;
 
@@ -70,7 +72,7 @@ public class EntidadeRN {
         }
         cpfcnpj.clear();
         rgie.clear();
-        sexo.setValue("Selecione...");
+        sexo.setPromptText("Selecione...");
     }
 
     // Só valida a entrada de valores numéricos e formata de acordo o tipo de cliente
@@ -140,55 +142,149 @@ public class EntidadeRN {
         return dateNASC;
     }
     
-    public boolean validarCampoText(TextField nome, TextField nomeFantasia, TextField cpfcnpj, TextField rgie, TextField email) {
-        if (nome.getText().trim().isEmpty() || nomeFantasia.getText().trim().isEmpty() || cpfcnpj.getText().trim().isEmpty() || rgie.getText().trim().isEmpty() || email.getText().trim().isEmpty()) {
-            // Campo vazio, exibe mensagem de erro
+    public void ficaVerificandoCampos(TextField nome, TextField nomeFantasia, TextField cpfcnpj, TextField rgie, TextField email,
+                                      TextField nomeContato, TextField ddd, TextField fone, Label labelNome, Label labelNomeFantasia,
+                                      TextField nomerua, TextField bairro, TextField cep, Label labelCPFCNPJ, Label labelRGIE, 
+                                      Label labelEmail, Label labelNomeContato, Label labelDDD, Label labelFone, Label labelEndereco,
+                                      Label labelBairro, Label labelCEP) {
+        addFocusListener(nome, labelNome);
+        addFocusListener(nomeFantasia, labelNomeFantasia);
+        addFocusListener(cpfcnpj, labelCPFCNPJ);
+        addFocusListener(rgie, labelRGIE);
+        addFocusListener(email, labelEmail);
+        addFocusListener(nomeContato, labelNomeContato);
+        addFocusListener(ddd, labelDDD);
+        addFocusListener(fone, labelFone);
+        addFocusListener(nomerua, labelEndereco);
+        addFocusListener(bairro, labelBairro);
+        addFocusListener(cep, labelCEP);
+    }
+    
+    public void addFocusListener(TextField textField, Label validationLabel) {
+        textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) { // Quando o foco é perdido
+                validarCampoText(textField, validationLabel);
+            }
+        });
+    }
+    
+    private void validarCampoText(TextField textField, Label validationLabel) {
+        Tooltip tooltip = new Tooltip("Por favor, insira algo.");
+        if (textField.getText().trim().isEmpty()) {
+            textField.setStyle("-fx-border-color: red;");
+            validationLabel.setStyle("-fx-text-fill: red;");
+            Tooltip.install(textField, tooltip);
+        } else {
+            textField.setStyle("");
+            validationLabel.setText("");
+            Tooltip.uninstall(textField, tooltip);
+        }
+    }
+    
+    public boolean validarCampo(TextField nome, TextField nomeFantasia, TextField cpfcnpj, TextField rgie, TextField email,
+                                    Label labelNome, Label labelNomeFantasia, Label labelCPFCNPJ, Label labelRGIE, Label labelEmail, 
+                                    ComboBox<String> tipoSexo, ComboBox<String> tipoCliente, Label labelTipoCliente, Label labelSexo,
+                                    DatePicker data, Label labelDt) {
+        if (nome.getText().trim().isEmpty() || nomeFantasia.getText().trim().isEmpty() || cpfcnpj.getText().trim().isEmpty() || 
+            rgie.getText().trim().isEmpty() || email.getText().trim().isEmpty() || tipoSexo.getValue() == null || tipoCliente.getValue() == null ||
+            data.getValue() == null) {
+
+            labelNome.setTextFill(RED);
             nome.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelNomeFantasia.setTextFill(RED);
             nomeFantasia.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelCPFCNPJ.setTextFill(RED);
             cpfcnpj.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelRGIE.setTextFill(RED);
             rgie.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelEmail.setTextFill(RED);
             email.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelTipoCliente.setTextFill(RED);
+            tipoCliente.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelSexo.setTextFill(RED);
+            tipoSexo.setStyle("-fx-border-color: #FF9999;");
+            labelDt.setTextFill(RED);
+            data.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            
             return true;
         } else {
-            // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
+            labelNome.setTextFill(BLACK);
             nome.setStyle("");
+            labelNomeFantasia.setTextFill(BLACK);
             nomeFantasia.setStyle("");
+            labelCPFCNPJ.setTextFill(BLACK);
             cpfcnpj.setStyle("");
+            labelRGIE.setTextFill(BLACK);
             rgie.setStyle("");
+            labelEmail.setTextFill(BLACK);
             email.setStyle("");
+            labelSexo.setTextFill(BLACK);
+            tipoSexo.setStyle("");
+            labelTipoCliente.setTextFill(BLACK);
+            tipoCliente.setStyle("");
+            labelDt.setTextFill(BLACK);
+            data.setStyle("");
+            
             return false;
         }
     }
     
-    public boolean validarCampoData(DatePicker data) {
-        if (data.getValue() == null) {
-            data.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+    public boolean validarCamposTableFone(TextField nomeContato, TextField ddd, TextField fone, 
+                                             Label labelNomeContato, Label labelDDD, Label labelFone,
+                                             ComboBox<String> tipoContato, Label labelTipoContato) {
+        if (nomeContato.getText().trim().isEmpty() || ddd.getText().trim().isEmpty() || fone.getText().trim().isEmpty() 
+            || tipoContato.getValue() == null) {
+            // Campo vazio, exibe mensagem de erro
+            labelNomeContato.setTextFill(RED);
+            nomeContato.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelDDD.setTextFill(RED);
+            ddd.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelFone.setTextFill(RED);
+            fone.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelTipoContato.setTextFill(RED);
+            tipoContato.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
             return true;
         } else {
             // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
-            data.setStyle("");
+            labelNomeContato.setTextFill(BLACK);
+            nomeContato.setStyle(""); // Cor de fundo vermelha
+            labelDDD.setTextFill(BLACK);
+            ddd.setStyle(""); // Cor de fundo vermelha
+            labelFone.setTextFill(BLACK);
+            fone.setStyle(""); // Cor de fundo vermelha
+            labelTipoContato.setTextFill(BLACK);
+            tipoContato.setStyle(""); // Cor de fundo vermelha
             return false;
         }
     }
     
-//    public boolean validarCampoData(DatePicker data) {
-//        if (data.getValue() == null) {
-//            data.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
-//            return true;
-//        } else {
-//            // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
-//            data.setStyle("");
-//            return false;
-//        }
-//    }
-    
-    public boolean validarCampoComboBox(DatePicker data) {
-        if (data.getValue() == null) {
-            data.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+    public boolean validarCamposTableEndereco(TextField nomerua, TextField bairro, TextField CEP, 
+                                              Label labelEndereco, Label labelBairro, Label labelCEP, 
+                                              ComboBox<String> logradouro, ComboBox<String> tipoEndereco,
+                                              Label labelLogradouro, Label labelTipoEnd) {
+        if (nomerua.getText().trim().isEmpty() || bairro.getText().trim().isEmpty() || CEP.getText().trim().isEmpty()) {
+            // Campo vazio, exibe mensagem de erro
+            labelEndereco.setTextFill(RED);
+            nomerua.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelBairro.setTextFill(RED);
+            bairro.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelCEP.setTextFill(RED);
+            CEP.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelLogradouro.setTextFill(RED);
+            logradouro.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            labelTipoEnd.setTextFill(RED);
+            tipoEndereco.setStyle("-fx-border-color: #FF9999;"); // Cor de fundo vermelha
+            
             return true;
         } else {
             // Campo não vazio, limpa a mensagem de erro e restaura a cor de fundo padrão
-            data.setStyle("");
+            labelEndereco.setTextFill(BLACK);
+            nomerua.setStyle(""); // Cor de fundo vermelha
+            labelBairro.setTextFill(BLACK);
+            bairro.setStyle(""); // Cor de fundo vermelha
+            labelCEP.setTextFill(BLACK);
+            CEP.setStyle(""); // Cor de fundo vermelha
+            
             return false;
         }
     }

@@ -67,7 +67,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                        <children>
-                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="74.0" styleClass="secondTextColor" text="Nome *" textFill="#0022ff">
+                                          <Label fx:id="labelNome" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="74.0" styleClass="secondTextColor" text="Nome *" textFill="#0022ff">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -83,7 +83,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
                                        <children>
-                                          <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="132.0" styleClass="secondTextColor" text="Tipo de Entidade *" textFill="#0022ff">
+                                          <Label fx:id="labelTipoEntidade" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="132.0" styleClass="secondTextColor" text="Tipo de Entidade *" textFill="#0022ff">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
@@ -213,7 +213,7 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="106.0" styleClass="secondTextColor" text="Sexo *">
+                                                      <Label fx:id="labelSexo" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="106.0" styleClass="secondTextColor" text="Sexo *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -226,7 +226,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="137.0" styleClass="secondTextColor" text="Físico / Jurídico *">
+                                                      <Label fx:id="labelTipoCliente" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="137.0" styleClass="secondTextColor" text="Físico / Jurídico *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -307,7 +307,7 @@
                                                    <children>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="121.0" styleClass="secondTextColor" text="Tipo Contato *">
+                                                            <Label fx:id="labelTipoContato" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="121.0" styleClass="secondTextColor" text="Tipo Contato *">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -317,7 +317,7 @@
                                                       </VBox>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="158.0" styleClass="secondTextColor" text="Nome Contato *">
+                                                            <Label fx:id="labelNomeContato" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="158.0" styleClass="secondTextColor" text="Nome Contato *">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -347,7 +347,7 @@
                                              <children>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="58.0" styleClass="secondTextColor" text="DDD *">
+                                                      <Label fx:id="labelDDD" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="58.0" styleClass="secondTextColor" text="DDD *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -361,7 +361,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" styleClass="secondTextColor" text="Fone *">
+                                                      <Label fx:id="labelFone" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" styleClass="secondTextColor" text="Fone *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -485,7 +485,7 @@
                                        <children>
                                           <VBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="544.0" spacing="2.0">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="147.0" styleClass="secondTextColor" text="Nome Fantasia *">
+                                                <Label fx:id="labelNomeFantasia" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="147.0" styleClass="secondTextColor" text="Nome Fantasia *">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -508,7 +508,7 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="239.0" spacing="3.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="151.0" styleClass="secondTextColor" text="Data Nasccimento *">
+                                                      <Label fx:id="labelDtNasc" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="151.0" styleClass="secondTextColor" text="Data Nasccimento *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -518,7 +518,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="306.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" styleClass="secondTextColor" text="Email *">
+                                                      <Label fx:id="labelEmail" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" styleClass="secondTextColor" text="Email *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -575,7 +575,7 @@
                                                          <children>
                                                             <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" styleClass="secondTextColor" text="País *">
+                                                                  <Label fx:id="labelPais" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" styleClass="secondTextColor" text="País *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -585,7 +585,7 @@
                                                             </VBox>
                                                             <VBox prefHeight="62.0" prefWidth="330.0" spacing="2.0" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="83.0" styleClass="secondTextColor" text="Cidade *">
+                                                                  <Label fx:id="labelCidade" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="83.0" styleClass="secondTextColor" text="Cidade *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -612,7 +612,7 @@
                                                             </VBox>
                                                             <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="98.0" styleClass="secondTextColor" text="Estado *">
+                                                                  <Label fx:id="labelEstado" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="98.0" styleClass="secondTextColor" text="Estado *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -733,7 +733,7 @@
                                        <children>
                                           <VBox prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" styleClass="secondTextColor" text="Tipo de Endereço *">
+                                                <Label fx:id="labelTipoEnd" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" styleClass="secondTextColor" text="Tipo de Endereço *">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -780,7 +780,7 @@
                                              <children>
                                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="79.0" styleClass="secondTextColor" text="Bairro *">
+                                                      <Label fx:id="labelBairro" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="79.0" styleClass="secondTextColor" text="Bairro *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -811,7 +811,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" styleClass="secondTextColor" text="CEP *">
+                                                      <Label fx:id="labelCEP" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" styleClass="secondTextColor" text="CEP *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -839,7 +839,7 @@
                                              <children>
                                                 <VBox prefHeight="55.0" prefWidth="816.0" spacing="2.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" styleClass="secondTextColor" text="Endereço *">
+                                                      <Label fx:id="labelEndereco" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" styleClass="secondTextColor" text="Endereço *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -853,7 +853,7 @@
                                                 </VBox>
                                                 <VBox prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" styleClass="secondTextColor" text="Logradouro *">
+                                                      <Label fx:id="labelLogradouro" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" styleClass="secondTextColor" text="Logradouro *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
