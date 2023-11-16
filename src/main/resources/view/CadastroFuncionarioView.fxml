@@ -56,7 +56,7 @@
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome">
+                                                <Label fx:id="labelNome" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome *">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -73,7 +73,7 @@
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="433.0" GridPane.columnIndex="3">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="CPF ">
+                                                <Label fx:id="labelCPF" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="CPF *">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -86,7 +86,7 @@
                                           </VBox>
                                           <VBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="433.0" GridPane.columnIndex="4">
                                              <children>
-                                                <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="RG">
+                                                <Label fx:id="labelRG" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="RG *">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
@@ -115,7 +115,7 @@
                                                    <children>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="239.0">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Data Nascimento">
+                                                            <Label fx:id="labelDtNasc" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="137.0" text="Data Nascimento *">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -128,7 +128,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Sexo">
+                                                            <Label fx:id="labelSexo" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="60.0" text="Sexo *">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -147,7 +147,7 @@
                                                 </GridPane>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome Fantasia">
+                                                      <Label fx:id="labelNomeFantasia" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome Fantasia *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -230,7 +230,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="173.0" spacing="2.0">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="54.0" text="Cargo:">
+                                                            <Label fx:id="labelCargo" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="54.0" text="Cargo:">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -267,7 +267,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="3">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="54.0" text="Status:">
+                                                            <Label fx:id="labelStatus" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="54.0" text="Status:">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -306,7 +306,7 @@
                                                    <children>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="116.0" prefWidth="611.0" spacing="2.0">
                                                          <children>
-                                                            <Label contentDisplay="RIGHT" text="Usuário: ">
+                                                            <Label fx:id="labelUsuario" contentDisplay="RIGHT" text="Usuário: ">
                                                                <font>
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
@@ -323,7 +323,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                          <children>
-                                                            <Label contentDisplay="RIGHT" text="Senha: ">
+                                                            <Label fx:id="labelSenha" contentDisplay="RIGHT" text="Senha: ">
                                                                <font>
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
@@ -340,7 +340,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                                          <children>
-                                                            <Label contentDisplay="RIGHT" prefHeight="21.0" prefWidth="138.0" text=" Confirme a Senha:">
+                                                            <Label fx:id="labelConfirmaSenha" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="138.0" text=" Confirme a Senha:">
                                                                <font>
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
@@ -447,7 +447,7 @@
                                                             </VBox>
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" text="País">
+                                                                  <Label fx:id="labelPais" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" text="País *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -457,7 +457,7 @@
                                                             </VBox>
                                                             <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="330.0" spacing="2.0" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="48.0" text="Cidade">
+                                                                  <Label fx:id="labelCidade" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="89.0" text="Cidade *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -467,7 +467,7 @@
                                                             </VBox>
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="98.0" text="Estado">
+                                                                  <Label fx:id="labelEstado" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="98.0" text="Estado *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -528,7 +528,7 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="44.0" text="Bairro">
+                                                      <Label fx:id="labelBairro" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="84.0" text="Bairro *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -559,7 +559,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" text="CEP">
+                                                      <Label fx:id="labelCEP" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="94.0" text="CEP *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -597,7 +597,7 @@
                                              <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="2">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" text="Tipo de Endereço">
+                                                      <Label fx:id="labelTipoEndereco" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="173.0" text="Tipo de Endereço *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -617,7 +617,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Logradouro">
+                                                      <Label fx:id="labelLogradouro" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="101.0" text="Logradouro *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -630,7 +630,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="816.0" spacing="2.0">
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="87.0" text="Logradouro">
+                                                      <Label fx:id="labelEndereco" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="121.0" text="Endereço *">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -754,7 +754,7 @@
                                                          <children>
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Tipo Contato">
+                                                                  <Label fx:id="labelTipoContato" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="113.0" text="Tipo Contato *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -767,7 +767,7 @@
                                                             </VBox>
                                                             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                                                <children>
-                                                                  <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Nome Contato">
+                                                                  <Label fx:id="labelNomeContato" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="137.0" text="Nome Contato *">
                                                                      <font>
                                                                         <Font name="System Bold" size="14.0" />
                                                                      </font>
@@ -800,7 +800,7 @@
                                                    <children>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.vgrow="ALWAYS">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="DDD">
+                                                            <Label fx:id="labelDDD" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="60.0" text="DDD *">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -814,7 +814,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="2.0" GridPane.columnIndex="1" GridPane.vgrow="ALWAYS">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Fone">
+                                                            <Label fx:id="labelFone" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="71.0" text="Fone *">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -834,7 +834,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="306.0" spacing="2.0" GridPane.columnIndex="2">
                                                          <children>
-                                                            <Label alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" text="Email">
+                                                            <Label fx:id="labelEmail" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="69.0" text="Email *">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>

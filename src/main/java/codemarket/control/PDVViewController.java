@@ -67,7 +67,8 @@ public class PDVViewController implements Initializable {
     private TableColumn<VendaModel, Integer> colunaQuantidade;
 
     private ObservableList<VendaModel> venda = FXCollections.observableArrayList();
-    
+
+    private boolean isListenerAdded = false;
     private boolean isPesquisaProdutoViewOpen = false;
 
     @FXML
@@ -103,9 +104,18 @@ public class PDVViewController implements Initializable {
 
         tableVenda.setItems(venda);
 
+        // Remove o listener antigo, se existir
+        if (isListenerAdded) {
+            Scene oldScene = quantidade.getScene();
+            oldScene.removeEventFilter(KeyEvent.KEY_PRESSED, this::handleFunctionKeys);
+            isListenerAdded = false;
+        }
+
+        // Adiciona o novo listener à nova cena
         quantidade.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null) {
                 newScene.addEventFilter(KeyEvent.KEY_PRESSED, this::handleFunctionKeys);
+                isListenerAdded = true;
             }
         });
 
@@ -149,6 +159,7 @@ public class PDVViewController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Finalizar Venda");
             stage.setScene(new Scene(root));
+            stage.setResizable(false);
 
             // Obtém o controlador da tela FinalizaVenda
             FinalizaVendaController finalizaVendaController = loader.getController();
@@ -202,6 +213,7 @@ public class PDVViewController implements Initializable {
                 // Exiba a janela de pesquisa
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
+                stage.setResizable(false);
                 stage.showAndWait(); // Aguarde até que a janela de pesquisa seja fechada
 
                 // Defina a flag para indicar que a janela está aberta

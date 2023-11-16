@@ -5,8 +5,6 @@ import codemarket.control.tableViewModel.FoneModel;
 import codemarket.model.rn.*;
 import codemarket.model.vo.*;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -30,11 +27,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.*;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte0.runnable;
 
 public class CadastroEntidadeViewController implements Initializable {
 
@@ -441,18 +436,6 @@ public class CadastroEntidadeViewController implements Initializable {
         if (ENT.validarCampoCheck(tipoEntidade1, tipoEntidade2)){ labelTipoEntidade.setTextFill(RED); tipoEntidade1.setTextFill(RED); tipoEntidade2.setTextFill(RED); camposValidos = false;}
         if (ENT.validarCampoTipoCliente(tipoCliente)){ labelTipoCliente.setTextFill(RED); tipoCliente.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
         if (SEX.validarCampo(tipoSexo)) { labelSexo.setTextFill(RED); tipoSexo.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TTEL.validarCampoTipoContato(tipoContato)) { labelTipoContato.setTextFill(RED); tipoContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TTEL.validarCampoNomeContato(nomeContato)) { labelNomeContato.setTextFill(RED); nomeContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEL.validarCampoDDD(ddd)) { labelDDD.setTextFill(RED); ddd.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEL.validarCampoFone(fone)) { labelFone.setTextFill(RED); fone.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (BAI.validarCampo(bairro)) { labelBairro.setTextFill(RED); bairro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (LOG.validarCampo(logradouro)) { labelLogradouro.setTextFill(RED); logradouro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEND.validarCampo(tipoEndereco)) { labelTipoEnd.setTextFill(RED); tipoEndereco.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (END.validarCampoCEP(cep)) { labelCEP.setTextFill(RED); cep.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (END.validarCampoNomeRua(nomerua)) { labelEndereco.setTextFill(RED); nomerua.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoPais(pais)) { labelPais.setTextFill(RED); pais.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoEstado(estado)) { labelEstado.setTextFill(RED); estado.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoCidade(cidade)) { labelCidade.setTextFill(RED); cidade.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
         return camposValidos;
     }
     void setLabelColor(Label label) {
@@ -467,7 +450,7 @@ public class CadastroEntidadeViewController implements Initializable {
         box.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 // Focado
-                box.setStyle("-fx-border-color: black;"); // Altere a cor para vermelho quando focado
+                box.setStyle("-fx-border-color: transparent;"); // Altere a cor para vermelho quando focado
             } 
         });
     }

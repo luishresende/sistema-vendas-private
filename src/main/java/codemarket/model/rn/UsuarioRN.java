@@ -7,12 +7,14 @@ import java.text.ParsePosition;
 import java.time.LocalDate;
 import java.util.List;import java.util.function.UnaryOperator;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Tooltip;
+import static javafx.scene.paint.Color.*;
 import javafx.util.Callback;
 
 public class UsuarioRN {
@@ -77,16 +79,6 @@ public class UsuarioRN {
             }
         };
     }
-    
-    public void displayErrorScreen() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Ocorreu um erro");
-        alert.setContentText("As senhas são diferentes!");
-
-        alert.showAndWait();
-    }
-    
     public void onTipoCargoSelecionado(ActionEvent event, TextField salario, ComboBox<String> tipoCargo) {
         CargoRN sal = new CargoRN();
         TbCargo valor = sal.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
@@ -113,5 +105,67 @@ public class UsuarioRN {
         TextFormatter<String> textFormatter = new TextFormatter<>(filter);
 
         salario.setTextFormatter(textFormatter);
+    }
+    public boolean validarCampoUsuario(TextField usuario) {
+        if (usuario.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarCampoSenha(TextField senha) {
+        if (senha.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarCampoConfirmaSenha(TextField usuario) {
+        if (usuario.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarComboBoxCargo(ComboBox<String> cargo) {
+        if (cargo.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarComboBoxStatus(ComboBox<String> status) {
+        if (status.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void ficaVerificandoCampos(TextField usuario, Label labelUsuario, TextField senha, Label labelSenha, 
+                                      TextField confirmaSenha, Label labelConfirmaSenha) {
+        addFocusListener(usuario, labelUsuario);
+        addFocusListener(senha, labelSenha);
+        addFocusListener(confirmaSenha, labelConfirmaSenha);
+    }
+    
+    public void addFocusListener(TextField textField, Label validationLabel) {
+        textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) { // Quando o foco é perdido
+                validarCampoText(textField, validationLabel);
+            }
+        });
+    }
+    
+    private void validarCampoText(TextField textField, Label validationLabel) {
+        Tooltip tooltip = new Tooltip("Por favor, insira algo.");
+        if (textField.getText().trim().isEmpty()) {
+            textField.setStyle("-fx-border-color: red;");
+            validationLabel.setTextFill(RED);
+            Tooltip.install(textField, tooltip);
+        } else {
+            textField.setStyle("");
+            validationLabel.setTextFill(BLACK);
+            Tooltip.uninstall(textField, tooltip);
+        }
     }
 }
