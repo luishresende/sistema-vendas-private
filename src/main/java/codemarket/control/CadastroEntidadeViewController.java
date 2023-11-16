@@ -363,13 +363,13 @@ public class CadastroEntidadeViewController implements Initializable {
                     bairro.getText(), complemento.getText(), numero.getText(), logradouro.getValue());
             enderecos.add(novoEndereco);
 
-            tipoEndereco.setPromptText("Selecione...");
+            tipoEndereco.setValue("Selecione...");
             cep.clear();
-            cidade.setPromptText("Selecione...");
-            estado.setPromptText("Selecione...");
-            pais.setPromptText("Selecione...");
+            cidade.setValue("Selecione...");
+            estado.setValue("Selecione...");
+            pais.setValue("Selecione...");
             nomerua.clear();
-            logradouro.setPromptText("Selecione...");
+            logradouro.setValue("Selecione...");
             bairro.clear();
             complemento.clear();
             numero.clear();
