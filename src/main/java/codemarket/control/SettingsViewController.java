@@ -45,6 +45,7 @@ public class SettingsViewController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Carrego os colors pickers com base no arquivo de configurações
         Platform.runLater(() -> {
             colorPickerPrimaryTheme.setValue(Color.valueOf("#" + settingsColor.getProperties().getProperty("primaryThemeColor")));
             colorPickerSecondTheme.setValue(Color.valueOf("#" + settingsColor.getProperties().getProperty("secondThemeColor")));
@@ -55,8 +56,9 @@ public class SettingsViewController implements Initializable{
     
     @FXML
     public void handleSaveButton(){
+        // Tento salvar as novas cores no arquivo de configurações
         try {
-                settingsColor.updatePropertiesFile(colorPickerPrimaryTheme.getValue().toString().substring(2, 8), colorPickerSecondTheme.getValue().toString().substring(2, 8), 
+            settingsColor.updatePropertiesFile(colorPickerPrimaryTheme.getValue().toString().substring(2, 8), colorPickerSecondTheme.getValue().toString().substring(2, 8), 
                                                colorPickerPrimaryFont.getValue().toString().substring(2, 8), colorPickerSecondFont.getValue().toString().substring(2, 8));
             DisplayDialogScreen.getInstance().displayInfoScreen("Sucesso", "Configurações atualizadas", "Algumas alterações requerem que o sistema seja reiniciado para serem aplicadas.");
         } catch (Exception e) {

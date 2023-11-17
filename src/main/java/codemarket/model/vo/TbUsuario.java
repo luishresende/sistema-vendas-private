@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -50,8 +51,8 @@ public class TbUsuario implements Serializable {
     @JoinColumn(name = "usu_status", referencedColumnName = "sta_id")
     @ManyToOne(optional = false)
     private TbStatus usuStatus;
-    @OneToMany(mappedBy = "funcUsuario")
-    private List<TbFuncionario> tbFuncionarioList;
+    @OneToOne(mappedBy = "funcUsuario")
+    private TbFuncionario tbFuncionario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "venUsuario")
     private List<TbVenda> tbVendaList;
 
@@ -136,12 +137,12 @@ public class TbUsuario implements Serializable {
         this.usuStatus = usuStatus;
     }
 
-    public List<TbFuncionario> getTbFuncionarioList() {
-        return tbFuncionarioList;
+    public TbFuncionario getTbFuncionario() {
+        return tbFuncionario;
     }
 
-    public void setTbFuncionarioList(List<TbFuncionario> tbFuncionarioList) {
-        this.tbFuncionarioList = tbFuncionarioList;
+    public void setTbFuncionario(TbFuncionario tbFuncionario) {
+        this.tbFuncionario = tbFuncionario;
     }
 
     @Override

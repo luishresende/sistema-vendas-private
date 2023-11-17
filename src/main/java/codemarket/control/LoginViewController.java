@@ -88,21 +88,27 @@ public class LoginViewController implements Initializable {
 
     @FXML
     public void handleButtonEntrar() {
-        buttonEntrar.setDisable(true);
+        buttonEntrar.setDisable(true); // Desabilito o botão para entrar/conectar
         if (!connectedToTheServer) {
+            // Se não estiver conectado, atualizo a label e tento realizar a conexão
             setStatus("Realizando conexão com o servidor...", Color.BLACK);
             tryServerConnection(); // Tentando conectar novamente
             buttonEntrar.setDisable(false);
         } else {
+            // Se estiver conectado. atualizo a label e o programa tenta realizar a autenticação
             setStatus("Realizando autenticação...", Color.BLACK);
+            // Executo em uma nova thread para não travar a tela 
             Thread thread = new Thread(() -> {
                 AuthController auth = AuthController.getInstance();
+                // Obtenho o resultado da autenticação
                 boolean authenticationResult = auth.authenticate(textFieldUsuario.getText(), passwordFieldSenha.getText());
                 Platform.runLater(() -> { // Realizando as alterações da GUI dentro da thread principal da interface, garantindo a sua integridade.
                     if (authenticationResult) {
+                        // Se autenticado. carrego a mainView
                         setStatus("Carregando...", Color.GREEN);
                         setMainView();
                     } else {
+                        // Se não autenticado, neste caso, informo que as credenciais são inválidas
                         if(!connectedToTheServer)
                             buttonEntrar.setDisable(true);
                         setStatus("Credenciais inválidas!", Color.RED);
@@ -153,6 +159,7 @@ public class LoginViewController implements Initializable {
         mainStage.setTitle("Code Market");
         mainStage.setScene(scene);
 
+        // Carrego o controlador e chamo o método que atualiza as informações do usuário na mainView
         MainViewController mainController = loader.getController();
         mainController.updateUserInfo(); // Atualizo as informações do usuário na mainView
 
