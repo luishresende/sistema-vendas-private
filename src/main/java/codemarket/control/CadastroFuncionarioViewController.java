@@ -126,7 +126,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     @FXML
     void validarCEP(KeyEvent event) {
-        ENT.validarCEP(event, cep);
+        END.validarCEP(event, cep);
     }
     
     @FXML
@@ -349,7 +349,7 @@ public class CadastroFuncionarioViewController implements Initializable {
                 displayErrorScreen();
             }
         } else {
-            exibirAlerta("Preencha todos os campos marcados antes de finalizar.");
+            exibirAlerta("Preencha todos os campos marcados antes de finalizar ou preencha as tabelas vazias.");
         }
     }
 
@@ -446,11 +446,11 @@ public class CadastroFuncionarioViewController implements Initializable {
     boolean verificaCampos() {
         boolean camposValidos = true;
         if (ENT.validarNome(nome)){ labelNome.setTextFill(RED); nome.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarCPFCNPJ(cpf)) { labelCPF.setTextFill(RED); cpf.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+//        if (ENT.validarCPFCNPJ(cpf)) { labelCPF.setTextFill(RED); cpf.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;};
         if (ENT.validarRGIE(rg)) { labelRG.setTextFill(RED); rg.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
         if (ENT.validarNomeFantasia(nomeFantasia)) { labelNomeFantasia.setTextFill(RED); nomeFantasia.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarEmail(email)) { labelEmail.setTextFill(RED); email.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
         if (ENT.validarCampoData(dataNASC)) { labelDtNasc.setTextFill(RED); dataNASC.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarEmail(email)){ labelEmail.setTextFill(RED); email.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
         if (SEX.validarCampo(tipoSexo)) { labelSexo.setTextFill(RED); tipoSexo.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
         if (USU.validarCampoUsuario(usuario)) { labelUsuario.setTextFill(RED); usuario.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
         if (USU.validarCampoSenha(senha)) { labelSenha.setTextFill(RED); senha.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
@@ -482,6 +482,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     }
     boolean verificaTabela(TableView tableView) {
         if (tableView.getItems().isEmpty()) {
+            tableView.setStyle("-fx-border-color: #FF9999;");
             return false;
         } else {
             return true;
@@ -490,14 +491,14 @@ public class CadastroFuncionarioViewController implements Initializable {
     void setLabelColor(Label label) {
         label.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                label.setStyle("-fx-text-fill: black;"); // Altere a cor para vermelho quando focado
+                label.setStyle("-fx-text-fill: black;");
             } 
         });
     }
     void setComboBoxColor(ComboBox<String> box) {
         box.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                box.setStyle("-fx-border-color: transparent;"); // Altere a cor para vermelho quando focado
+                box.setStyle("-fx-border-color: transparent;"); 
             } 
         });
     }

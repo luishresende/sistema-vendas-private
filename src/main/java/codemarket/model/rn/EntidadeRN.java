@@ -1,11 +1,12 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.TbEntidade;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -13,6 +14,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import static javafx.scene.paint.Color.*;
 import javafx.util.Callback;
@@ -66,41 +68,64 @@ public class EntidadeRN {
             labelRGIE.setText("RG *");
             sexo.setDisable(false);
             data.setDisable(false);
-        } else {
-            labelCPFCNPJ.setText("CPF / CNPJ *");
-            labelRGIE.setText("RG / IE *");
-            sexo.setDisable(true);
-            data.setDisable(true);
-        }
+        } 
         cpfcnpj.clear();
         rgie.clear();
         sexo.setPromptText("Selecione...");
     }
 
     // Só valida a entrada de valores numéricos e formata de acordo o tipo de cliente
-    public void validarCPFCNPJ(KeyEvent event, TextField cpfcnpj, ComboBox<String> tipo) {
+    public void validaCPFCNPJ(KeyEvent event, TextField cpfcnpj, ComboBox<String> tipo) {
         String texto = cpfcnpj.getText();
+        String tipoSelecionado = tipo.getValue();
         if (!texto.matches("[0-9]*")) {
-            // Só aceita valores numéricos
             cpfcnpj.setText(texto.replaceAll("[^0-9]", ""));
         }
-        String tipoSelecionado = tipo.getValue(); // Obtém o tipo selecionado na ComboBox 
+        // Formatação do CNPJ
         if (texto.length() == 14 && "Jurídico".equals(tipoSelecionado)) {
-            // Formatação para CNPJ "99.999/9999-99"
             cpfcnpj.setText(texto.substring(0, 2) + "." + texto.substring(2, 5) + "." + texto.substring(5, 8) + "/" + texto.substring(8, 12) + "-" + texto.substring(12));
-        } else if (texto.length() == 11 && "Físico".equals(tipoSelecionado)) {
-            // Formatação para CPF "999.999.999-99"
-            cpfcnpj.setText(texto.substring(0, 3) + "." + texto.substring(3, 6) + "." + texto.substring(6, 9) + "-" + texto.substring(9, 11));
+            cpfcnpj.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.length() > 18) {
+                    cpfcnpj.setText(oldValue);
+                }
+            });
         }
-        System.out.println(texto.length() + " " + texto);
-        
+        // Formatação do CPF
+        if (texto.length() == 11 && "Físico".equals(tipoSelecionado)) {
+            cpfcnpj.setText(texto.substring(0, 3) + "." + texto.substring(3, 6) + "." + texto.substring(6, 9) + "-" + texto.substring(9, 11));
+            cpfcnpj.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.length() > 14) {
+                    cpfcnpj.setText(oldValue);
+                }
+            });
+        }
     }
-    
+    public void handleFocusLostCPFCNPJ(InputEvent event, TextField cpfcnpj, ComboBox<String> tipo) {
+        String texto = cpfcnpj.getText();
+        String tipoSelecionado = tipo.getValue();
+        // Verifica se o número de caracteres é o esperado
+        if ("Jurídico".equals(tipoSelecionado) && texto.length() != 18) {
+            DisplayDialogScreen.getInstance().displayErrorScreen("CNPJ", "Verifique os dados inseridos!", "Preencha corretamente o campo CNPJ.");
+        } else if(("Físico".equals(tipoSelecionado) && texto.length() != 14)){
+            DisplayDialogScreen.getInstance().displayErrorScreen("CPF", "Verifique os dados inseridos!", "Preencha corretamente o campo CPF.");
+        }
+    }
+    public void handleFocusLostRGIE(InputEvent event, TextField rgie, ComboBox<String> tipo) {
+        String texto = rgie.getText();
+        if (texto.length() != 14 && "Jurídico".equals(tipo.getValue())) {
+            DisplayDialogScreen.getInstance().displayErrorScreen("Inscrição Estadual", "Verifique os dados inseridos!", "Preencha corretamente o campo Inscrição Estadual.");
+        }
+    }
     public void validarRGIE(KeyEvent event, TextField rgie) {
         String texto = rgie.getText();
         if (!texto.matches("[0-9]*")) {
             rgie.setText(texto.replaceAll("[^0-9]", ""));
         }
+        rgie.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 14) {
+                rgie.setText(oldValue);
+            }
+        });
     }
     
     // Numero
@@ -111,16 +136,7 @@ public class EntidadeRN {
         }
     }
 
-    // Valida CEP
-    public void validarCEP(KeyEvent event, TextField cep) {
-        String texto = cep.getText();
-        if (!texto.matches("[0-9]*")) {
-            cep.setText(texto.replaceAll("[^0-9]", ""));
-        }
-        if (texto.length() == 8) {
-            cep.setText(texto.substring(0, 5) + "-" + texto.substring(5, 8));
-        }
-    }
+    
     
     public Callback<DatePicker, DateCell> getDataAnterior() {
         return datePicker -> new DateCell() {
@@ -187,11 +203,9 @@ public class EntidadeRN {
         }
     }
     
-    public boolean validarCampoCheck(CheckBox cliente, CheckBox fornecedor) {
+    public void validarCampoCheck(CheckBox cliente, CheckBox fornecedor) {
         if (!cliente.isSelected() && !fornecedor.isSelected()) {
-            return true;
-        } else {
-            return false;
+            DisplayDialogScreen.getInstance().displayErrorScreen("Tipo de Entidade", "Falta selecionar!", "Selecione pelo menos um tipo de entidade.");
         }
     }
     
@@ -209,8 +223,9 @@ public class EntidadeRN {
             return false;
         }
     }
-    public boolean validarCPFCNPJ(TextField cpfcnpj) {
-        if (cpfcnpj.getText().trim().isEmpty()) {
+    public boolean validarCPFCNPJ(TextField cpfcnpj, ComboBox<String> tipo) {
+        String texto = cpfcnpj.getText();
+        if (cpfcnpj.getText().trim().isEmpty() && texto.length() < 14 || texto.length() > 18) {
             return true;
         } else {
             return false;
@@ -243,5 +258,54 @@ public class EntidadeRN {
         } else {
             return false;
         }
+    }
+    public ArrayList<String> validarEntidadeJuridico(TbEntidade entidade) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(!entidade.getEntcpfCnpj().isEmpty()){
+            String cnpj = entidade.getEntcpfCnpj();
+            if (cnpj.length() != 18) {
+                errors.add("Campo CNPJ incorreto.");
+            }
+        } else {
+            errors.add("Preeencha o campo CNPJ.");
+        }
+        if(!entidade.getEntrgIe().isEmpty()) {
+            String inscricaoEstadual = entidade.getEntrgIe();
+            if(inscricaoEstadual.length() != 14) {
+                errors.add("Campo Inscrição Estadual incorreto.");
+            }
+        } else {
+            errors.add("Preencha o campo Inscrição Estadual.");
+        }
+        if(entidade.getEntEmail().isEmpty()) {
+            errors.add("Preencha o campo Email.");
+        }
+        return errors;
+    }
+    public ArrayList<String> validarEntidadeFisico(TbEntidade entidade) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(!entidade.getEntcpfCnpj().isEmpty()){
+            String cnpj = entidade.getEntcpfCnpj();
+            if (cnpj.length() != 14) {
+                errors.add("Campo CPF incorreto.");
+            }
+        } else {
+            errors.add("Preeencha o campo CPF.");
+        }
+        if(!entidade.getEntrgIe().isEmpty()) {
+            String inscricaoEstadual = entidade.getEntrgIe();
+            if(inscricaoEstadual.length() != 14) {
+                errors.add("Campo RG incorreto.");
+            }
+        } else {
+            errors.add("Preencha o campo RG.");
+        }
+        if(entidade.getEntEmail().isEmpty()) {
+            errors.add("Preencha o campo Email.");
+        }
+        if(entidade.getEntdtNasc() == null) {
+            errors.add("Insira a data de nascimento.");
+        }
+        return errors;
     }
 }

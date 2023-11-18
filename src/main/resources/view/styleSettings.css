@@ -1,8 +1,8 @@
 .primaryTextColor{-fx-text-fill: #ffffff; -fx-fill: #ffffff;}
 .secondTextColor{-fx-text-fill: #000000; -fx-fill: #000000;}
-.thirdTextColor{-fx-text-fill: #32a0ff; -fx-fill: #32a0ff;}
-.primaryThemeColor{-fx-background-color: #32a0ff;}
+.thirdTextColor{-fx-text-fill: #cc3333; -fx-fill: #cc3333;}
+.primaryThemeColor{-fx-background-color: #cc3333;}
 .secondThemeColor{-fx-background-color: #ffffff;}
-.sublimedTextField{-fx-border-color: #32a0ff;}
+.sublimedTextField{-fx-border-color: #cc3333;}
 .primaryIconColor{-fx-fill: #000000;}
-.secondIconColor{-fx-fill: #32a0ff;}
+.secondIconColor{-fx-fill: #cc3333;}

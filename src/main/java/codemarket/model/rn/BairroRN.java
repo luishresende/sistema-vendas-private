@@ -1,6 +1,8 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbBairro;
+import codemarket.model.vo.TbLogradouro;
+import java.util.ArrayList;
 import java.util.List;import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -40,6 +42,13 @@ public class BairroRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public ArrayList<String> validarBairro(TbBairro bairro) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(bairro.getBaiDescricao().isEmpty()){
+            errors.add("Preencha o campo bairro.");
+        }
+        return errors;
     }
     public boolean validarCampo(TextField bairro) {
         if (bairro.getText().trim().isEmpty()) {

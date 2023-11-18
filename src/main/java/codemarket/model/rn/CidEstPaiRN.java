@@ -1,6 +1,8 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbCidEstPai;
+import codemarket.model.vo.TbEndPostal;
+import java.util.ArrayList;
 import java.util.List;import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import static javafx.scene.paint.Color.BLACK;
@@ -38,6 +40,19 @@ public class CidEstPaiRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public ArrayList<String> validarPaisEstadoCidade(TbCidEstPai cep) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(cep.getCepPaiSigla().getPaiDescricao().isEmpty()){
+            errors.add("Selecione o país.");
+        }
+        if(cep.getTbEstado().getEstDescricao().isEmpty()){
+            errors.add("Selecione o estado.");
+        } 
+        if(cep.getTbCidade().getCidDescricao().isEmpty()){
+            errors.add("Selecione a cidade.");
+        }
+        return errors;
     }
     public boolean validarCampoPais(ComboBox<String> pais) {
         if (pais.getValue() == null) {

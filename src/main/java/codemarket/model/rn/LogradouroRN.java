@@ -1,6 +1,8 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.vo.TbCidEstPai;
 import codemarket.model.vo.TbLogradouro;
+import java.util.ArrayList;
 import java.util.List;import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -39,6 +41,13 @@ public class LogradouroRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public ArrayList<String> validarLogradouro(TbLogradouro logradouro) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(logradouro.getLogDescricao().isEmpty()){
+            errors.add("Selecione o logradouro.");
+        }
+        return errors;
     }
     public boolean validarCampo(ComboBox<String> tipoLOG) {
         if (tipoLOG.getValue() == null) {

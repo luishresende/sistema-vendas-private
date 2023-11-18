@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbTipoEndereco;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -39,6 +40,13 @@ public class TipoEnderecoRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public ArrayList<String> validarTipoEndereco(TbTipoEndereco endereco) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(endereco.getTeDescricao().isEmpty()){
+            errors.add("Selecione o tipo de endereço.");
+        }
+        return errors;
     }
     public boolean validarCampo(ComboBox<String> tipoEND) {
         if (tipoEND.getValue() == null) {

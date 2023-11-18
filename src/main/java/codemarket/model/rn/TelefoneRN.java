@@ -6,12 +6,14 @@
 package codemarket.model.rn;
 
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.utils.DisplayDialogScreen;
+import codemarket.model.vo.TbEntidadeHasTelefone;
 import codemarket.model.vo.TbTelefone;
+import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
-import static javafx.scene.paint.Color.*;
 
 /**
  *
@@ -62,6 +64,17 @@ public class TelefoneRN {
             // Formatação para "(DD)"
             ddd.setText("(" + texto + ")");
         }
+        ddd.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 4) {
+                ddd.setText(oldValue);
+            }
+        });
+    }
+    public void handleFocusLostDDD(InputEvent event, TextField ddd) {
+        String texto = ddd.getText();
+        if (texto.length() != 4) {
+            DisplayDialogScreen.getInstance().displayErrorScreen("Aviso", "Campo DDD", "Preencha corretamente o campo DDD.");
+        }
     }
 
     // Telefone
@@ -73,10 +86,27 @@ public class TelefoneRN {
         if (texto.length() == 9) {
             // Formatação para "(DD)"
             fone.setText(texto.substring(0, 1) + " " + texto.substring(1, 5) + "-" + texto.substring(5, 9));
+            fone.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.length() > 11) {
+                    fone.setText(oldValue);
+                }
+            });
         }
-        if (texto.length() >= 9) {
-            event.consume(); // Impede que mais de 2 caracteres sejam inseridos
+        
+    }
+    public void handleFocusLostFone(InputEvent event, TextField fone) {
+        String texto = fone.getText();
+        if (texto.length() != 11) {
+            DisplayDialogScreen.getInstance().displayErrorScreen("Aviso", "Campo Fone", "Preencha corretamente o campo Fone.");
         }
+    }
+    public ArrayList<String> validarTelefone(TbTelefone fone) {
+        ArrayList<String> errors = new ArrayList<String>();
+        String texto = fone.getFoneDescricao();
+        if((!fone.getFoneDescricao().isEmpty() || !(fone.getFoneDescricao() == null)) && texto.length() != 15){
+            errors.add("Campo fone incorreto.");
+        } 
+        return errors;
     }
     public boolean validarCampoDDD(TextField ddd) {
         if (ddd.getText().trim().isEmpty()) {

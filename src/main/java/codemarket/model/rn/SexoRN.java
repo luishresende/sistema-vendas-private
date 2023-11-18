@@ -1,6 +1,8 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.vo.TbEntidade;
 import codemarket.model.vo.TbSexo;
+import java.util.ArrayList;
 import java.util.List;import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import static javafx.scene.paint.Color.*;
@@ -46,6 +48,13 @@ public class SexoRN {
         }
         //System.out.println(sexo.getSexDescricao());
         return sexo;
+    }
+    public ArrayList<String> validarSexo(TbSexo sexo) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(sexo.getSexDescricao().isEmpty()){
+            errors.add("Selecione um tipo de sexo.");
+        }
+        return errors;
     }
     public boolean validarCampo(ComboBox<String> tipoSexo) {
         if (tipoSexo.getValue() == null) {

@@ -6,7 +6,9 @@
 package codemarket.model.rn;
 
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.TbTipoTelefone;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -51,6 +53,15 @@ public class TelefoneTipoRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    public ArrayList<String> validarTipoTelefone(TbTipoTelefone fone) {
+        ArrayList<String> errors = new ArrayList<String>();
+        if(fone.getTtDescricao().trim().isEmpty()){
+            errors.add("Selecione o tipo de telefone.");
+            DisplayDialogScreen.getInstance().displayErrorScreen("Aviso", "Campo Tipo Telefone", "Selecione um tipo de telefone.");
+        } 
+        return errors;
+        
     }
     public boolean validarCampoTipoContato(ComboBox<String> tipoContato) {
         if (tipoContato.getValue() == null) {
