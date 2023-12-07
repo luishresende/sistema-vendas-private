@@ -43,9 +43,6 @@ public class TbEstoque implements Serializable {
     @Basic(optional = false)
     @Column(name = "esto_valor_final")
     private float estoValorFinal;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "esto_valor_final_prazo")
-    private Float estoValorFinalPrazo;
     @Basic(optional = false)
     @Column(name = "esto_limite_min")
     private float estoLimiteMin;
@@ -70,14 +67,13 @@ public class TbEstoque implements Serializable {
     public TbEstoque() {
     }
 
-    public TbEstoque(TbProduto produto, float estoQuantidade, float estoValorFinal, float estoValorFinalPrazo, 
+    public TbEstoque(TbProduto produto, float estoQuantidade, float estoValorFinal, 
                      float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido, 
                      Date estoDataAtualizacao) {
         
         this.estoProdutoCodigo = produto;
         this.estoQuantidade = estoQuantidade;
         this.estoValorFinal = estoValorFinal;
-        this.estoValorFinalPrazo = estoValorFinalPrazo;
         this.estoLimiteMin = estoLimiteMin;
         this.estoProibirVendaLimMin = estoProibirVendaLimMin;
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
@@ -106,14 +102,6 @@ public class TbEstoque implements Serializable {
 
     public void setEstoValorFinal(float estoValorFinal) {
         this.estoValorFinal = estoValorFinal;
-    }
-
-    public Float getEstoValorFinalPrazo() {
-        return estoValorFinalPrazo;
-    }
-
-    public void setEstoValorFinalPrazo(Float estoValorFinalPrazo) {
-        this.estoValorFinalPrazo = estoValorFinalPrazo;
     }
 
     public float getEstoLimiteMin() {

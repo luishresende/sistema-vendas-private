@@ -107,7 +107,7 @@ public class InserirProdutoController implements Initializable {
 
         EstoqueRN estoquern = new EstoqueRN();
         TbEstoque estoque = new TbEstoque(produto, Float.parseFloat(idQuantidade.getText()), Float.parseFloat(idAvistaValor.getText()),
-                Float.parseFloat(idPrazoValor.getText()), Float.parseFloat(idMinimo.getText()),
+                Float.parseFloat(idMinimo.getText()),
                 (short) (idControle.isSelected() ? 1 : 0), (short) (idProibir.isSelected() ? 1 : 0), timestamp);
 
         estoquern.salvar(estoque);

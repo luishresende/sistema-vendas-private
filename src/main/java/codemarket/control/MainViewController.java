@@ -118,6 +118,12 @@ public class MainViewController implements Initializable {
                 }
             });
             updateImageUser();
+            try {
+                PDVLoaderView = new FXMLLoader(getClass().getResource("/view/PDVView.fxml")).load();
+            } catch (IOException ex) {
+                Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            handleViewsButtons(PDVLoaderView);
         });
 
     }
