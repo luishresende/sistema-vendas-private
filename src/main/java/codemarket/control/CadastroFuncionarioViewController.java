@@ -76,6 +76,8 @@ public class CadastroFuncionarioViewController implements Initializable {
     private TbEntidadeHasEndereco e[] = new TbEntidadeHasEndereco[10];
     private TbEntidadeHasTelefone t[] = new TbEntidadeHasTelefone[10];
     private String filePathImageUser;
+    private boolean editar = false;
+    private TbFuncionario funcionarioEditar;
     
     private Stage dialogStage;
     UsuarioRN USU = new UsuarioRN();
@@ -282,97 +284,110 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     void handleFinalizarButton() {
         if (verificaCampos() && verificaTabela(tableEnd) && verificaTabela(tableFone)) {
-            TbSexo sexo = null;
-            if (tipoSexo.getValue().isEmpty() == false) {
-                sexo = SEX.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
-            }
-
-            LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
-            Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-            TbEntidade ENTIDADE = new TbEntidade(cpf.getText(), nome.getText(), nomeFantasia.getText(), 
-                                                rg.getText(), email.getText(), "Fisico", dateNASC, sexo);
-
-            int i = 0;
-            for (FoneModel fones : telefones) {
-                TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
-                TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
-                TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo, fones.getNomeContato());
-
-                t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
-                i++;
-            }
-
-            i = 0;
-            for (EnderecoModel endereco : enderecos) {
-                TbBairro bairroSalvar = new TbBairro(endereco.getBairro());
-
-                TbLogradouro lougradouroSalvar = new TbLogradouro(endereco.getLogradouro());
-
-                CidadeRN cid = new CidadeRN();
-                String jpql = "SELECT t.tbCidade FROM TbCidEstPai t WHERE "
-                        + "t.tbEstado.estSigla = '" + endereco.getEstado() + "' "
-                        + "AND t.tbCidade.cidDescricao = '" + endereco.getCidade() + "'";
-                TbCidade new_cid = (TbCidade) cid.pesquisar(jpql).get(0);
-
-                CidEstPaiRN CEP = new CidEstPaiRN();
-                TbCidEstPai ceps = (TbCidEstPai) CEP.pesquisar("SELECT t FROM TbCidEstPai t "
-                        + "WHERE t.tbEstado.estSigla = '" + endereco.getEstado() + "' AND t.tbCidade.cidId = '"
-                        + new_cid.getCidId() + "'").get(0);
-
-                TbEndPostal postal = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), lougradouroSalvar, bairroSalvar, ceps);
-
-                TipoEnderecoRN te = new TipoEnderecoRN();
-                TbTipoEndereco tende = te.listaUm("teDescricao", endereco.getTipoEndereco(), TbTipoEndereco.class);
-
-                TbEndereco ende = new TbEndereco(Integer.parseInt(endereco.getNumero()), endereco.getComplemento(), postal, tende);
-
-                e[i] = new TbEntidadeHasEndereco(ENTIDADE, ende);
-
-                i++;
-                this.endPrincipal = ende;
-            }
-
-            ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
-
-            StatusRN staRN = new StatusRN();
-            TbStatus staValor = staRN.listaUm("staDescricao", tipoStatus.getValue(), TbStatus.class);
-
-            LocalDate dtValidade = validade.getValue();  // Obter a data do DatePicker
-            Date dataValidade = Date.from(dtValidade.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
-            TbUsuario Usuario = null;
-            if(USU.validarSenhas(senha, confirmaSenha)) {
-                ImageManipulation imageMan = new ImageManipulation();
-                byte[] imageByte = null;
-                if(filePathImageUser != null){
-                    imageByte = imageMan.convertToBytes(filePathImageUser);
+            if(editar){
+                
+            }else{               
+                TbSexo sexo = null;
+                if (tipoSexo.getValue().isEmpty() == false) {
+                    sexo = SEX.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
                 }
-                Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor, imageByte);
-                CargoRN carRN = new CargoRN();
-                TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
 
-                EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
-                for (TbEntidadeHasTelefone tel : t) {
-                    if (tel == null) {
-                        break;
+                LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
+                Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+                TbEntidade ENTIDADE = new TbEntidade(cpf.getText(), nome.getText(), nomeFantasia.getText(), 
+                                                    rg.getText(), email.getText(), "Fisico", dateNASC, sexo);
+
+                int i = 0;
+                for (FoneModel fones : telefones) {
+                    TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
+                    TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
+                    TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo, fones.getNomeContato());
+
+                    t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
+                    i++;
+                }
+
+                i = 0;
+                for (EnderecoModel endereco : enderecos) {
+                    TbBairro bairroSalvar = new TbBairro(endereco.getBairro());
+
+                    TbLogradouro lougradouroSalvar = new TbLogradouro(endereco.getLogradouro());
+
+                    CidadeRN cid = new CidadeRN();
+                    String jpql = "SELECT t.tbCidade FROM TbCidEstPai t WHERE "
+                            + "t.tbEstado.estSigla = '" + endereco.getEstado() + "' "
+                            + "AND t.tbCidade.cidDescricao = '" + endereco.getCidade() + "'";
+                    TbCidade new_cid = (TbCidade) cid.pesquisar(jpql).get(0);
+
+                    CidEstPaiRN CEP = new CidEstPaiRN();
+                    TbCidEstPai ceps = (TbCidEstPai) CEP.pesquisar("SELECT t FROM TbCidEstPai t "
+                            + "WHERE t.tbEstado.estSigla = '" + endereco.getEstado() + "' AND t.tbCidade.cidId = '"
+                            + new_cid.getCidId() + "'").get(0);
+
+                    TbEndPostal postal = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), lougradouroSalvar, bairroSalvar, ceps);
+
+                    TipoEnderecoRN te = new TipoEnderecoRN();
+                    TbTipoEndereco tende = te.listaUm("teDescricao", endereco.getTipoEndereco(), TbTipoEndereco.class);
+
+                    TbEndereco ende = new TbEndereco(Integer.parseInt(endereco.getNumero()), endereco.getComplemento(), postal, tende);
+
+                    e[i] = new TbEntidadeHasEndereco(ENTIDADE, ende);
+
+                    i++;
+                    this.endPrincipal = ende;
+                }
+
+                ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
+
+                StatusRN staRN = new StatusRN();
+                TbStatus staValor = staRN.listaUm("staDescricao", tipoStatus.getValue(), TbStatus.class);
+
+                LocalDate dtValidade = validade.getValue();  // Obter a data do DatePicker
+                Date dataValidade = Date.from(dtValidade.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+                TbUsuario Usuario = null;
+                if(USU.validarSenhas(senha, confirmaSenha)) {
+                    ImageManipulation imageMan = new ImageManipulation();
+                    byte[] imageByte = null;
+                    if(filePathImageUser != null){
+                        imageByte = imageMan.convertToBytes(filePathImageUser);
                     }
-                    eht.salvar(tel);
-                }
-                EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
-                for (TbEntidadeHasEndereco end : e) {
-                    if (end == null) {
-                        break;
-                    }
-                    ehe.salvar(end);
-                }
+                    Usuario = new TbUsuario(usuario.getText(), senha.getText(), dataValidade, staValor, imageByte);
+                    CargoRN carRN = new CargoRN();
+                    TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
 
-                TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
-                FUNC.salvar(funcionario);
-                JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
-                dialogStage.close();
-            } else {
-                DisplayDialogScreen.getInstance().displayErrorScreen("Senhas", "Verifique a senha!", "As senhas não conferem.");
+                    EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+                    for (TbEntidadeHasTelefone tel : t) {
+                        if (tel == null) {
+                            break;
+                        }
+                        eht.salvar(tel);
+                    }
+                    EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                    for (TbEntidadeHasEndereco end : e) {
+                        if (end == null) {
+                            break;
+                        }
+                
+                        ehe.salvar(end);
+                    }
+
+                    if(editar){
+                        funcionarioEditar.setFuncentcpfCnpj(ENTIDADE);
+                        funcionarioEditar.setFuncUsuario(Usuario);
+                        funcionarioEditar.setFuncCargo(cargo);
+                        funcionarioEditar.setFuncStatus(staValor);
+                        FUNC.atualizar(funcionarioEditar);
+                    }else{
+                        TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
+                        FUNC.salvar(funcionario);
+                    }
+                    JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+                    dialogStage.close();
+                } else {
+                    DisplayDialogScreen.getInstance().displayErrorScreen("Senhas", "Verifique a senha!", "As senhas não conferem.");
+                }
             }
         } else {
             DisplayDialogScreen.getInstance().displayErrorScreen("Finalizar Cadastro", "Campos obrigatórios *", "Preencha todos os "
@@ -516,7 +531,8 @@ public class CadastroFuncionarioViewController implements Initializable {
     }
     
     public void editarFuncionario(TbFuncionario funcionarioParaEditar) {
-        
+        this.funcionarioEditar = funcionarioParaEditar;
+        editar = true;
         TbFuncionario funcionario = funcionarioParaEditar;
         TbEntidade entidade = funcionario.getFuncentcpfCnpj();
         TbUsuario usuarioFunc = funcionario.getFuncUsuario();
@@ -587,7 +603,23 @@ public class CadastroFuncionarioViewController implements Initializable {
            telefones.add(foneModel);
        }       
 
-        
-        
        }
+    public boolean enderecoJaExisteNoBanco(TbEndereco end) {
+        for(TbEndereco endereco : funcionarioEditar.getFuncentcpfCnpj().getTbEnderecoList()){
+            if(end == endereco){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Método para verificar se o telefone já existe no banco
+    public boolean telefoneJaExisteNoBanco(TbTelefone fone) {
+        for(TbTelefone telefone : funcionarioEditar.getFuncentcpfCnpj().getTbTelefoneList()){
+            if(fone == telefone){
+                return false;
+            }
+        }
+        return true;
+    }
 }
