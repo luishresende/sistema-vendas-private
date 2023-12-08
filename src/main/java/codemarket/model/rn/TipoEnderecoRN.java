@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbTipoEndereco;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;

@@ -22,21 +22,21 @@
             <String fx:value="primaryThemeColor" />
          </styleClass>
       </Label>
-      <AnchorPane layoutX="2.0" layoutY="25.0" prefHeight="568.0" prefWidth="522.0" styleClass="secondThemeColor">
+      <AnchorPane layoutX="2.0" layoutY="25.0" prefHeight="532.0" prefWidth="522.0" styleClass="secondThemeColor">
          <children>
-            <Pane layoutX="6.0" layoutY="6.0" prefHeight="244.0" prefWidth="508.0" style="-fx-border-style: dotted; -fx-border-radius: 20;" styleClass="secondThemeColor">
+            <Pane layoutX="6.0" layoutY="6.0" prefHeight="285.0" prefWidth="508.0" style="-fx-border-style: dotted; -fx-border-radius: 20;" styleClass="secondThemeColor">
                <children>
                   <Label contentDisplay="BOTTOM" layoutX="14.0" layoutY="21.0" styleClass="secondTextColor" text="Código">
                      <graphic>
                         <TextField fx:id="idCodigo" editable="false" prefHeight="31.0" prefWidth="67.0" />
                      </graphic>
                   </Label>
-                  <Label contentDisplay="BOTTOM" layoutX="95.0" layoutY="19.0" prefHeight="56.0" prefWidth="322.0" styleClass="secondTextColor" text="Código de Barras">
+                  <Label contentDisplay="BOTTOM" layoutX="95.0" layoutY="19.0" prefHeight="56.0" prefWidth="322.0" styleClass="secondTextColor" text="Código de Barras *">
                      <graphic>
                         <TextField fx:id="idBarras" prefHeight="31.0" prefWidth="322.0" />
                      </graphic>
                   </Label>
-                  <Label contentDisplay="BOTTOM" layoutX="423.0" layoutY="19.0" prefHeight="56.0" prefWidth="67.0" styleClass="secondTextColor" text="Unidade">
+                  <Label contentDisplay="BOTTOM" layoutX="423.0" layoutY="19.0" prefHeight="56.0" prefWidth="67.0" styleClass="secondTextColor" text="Unidade *">
                      <graphic>
                         <ComboBox fx:id="idUnidade" prefHeight="31.0" prefWidth="69.0">
                            <cursor>
@@ -45,9 +45,9 @@
                         </ComboBox>
                      </graphic>
                   </Label>
-                  <Label contentDisplay="BOTTOM" layoutX="249.0" layoutY="158.0" prefHeight="56.0" prefWidth="216.0" styleClass="secondTextColor" text="Grupo / Categoria">
+                  <Label contentDisplay="BOTTOM" layoutX="249.0" layoutY="158.0" prefHeight="56.0" prefWidth="239.0" styleClass="secondTextColor" text="Grupo / Categoria">
                      <graphic>
-                        <TextField fx:id="idGrupo" prefHeight="31.0" prefWidth="218.0" />
+                        <TextField fx:id="idGrupo" prefHeight="31.0" prefWidth="222.0" />
                      </graphic>
                   </Label>
                   <CheckBox fx:id="idControle" layoutX="8.0" layoutY="158.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="303.0" styleClass="secondTextColor" text="Ativar o controle de estoque">
@@ -60,7 +60,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </CheckBox>
-                  <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="5.0" layoutY="94.0" prefHeight="56.0" prefWidth="487.0" styleClass="secondTextColor" text="Descrição do Produto">
+                  <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="5.0" layoutY="94.0" prefHeight="56.0" prefWidth="487.0" styleClass="secondTextColor" text="Descrição do Produto *">
                      <graphic>
                         <TextField fx:id="idDescricao" prefHeight="31.0" prefWidth="474.0" />
                      </graphic>
@@ -77,11 +77,20 @@
                         </FontAwesomeIcon>
                      </graphic>
                   </Button>
+                  <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="80.0" layoutY="219.0" prefHeight="56.0" prefWidth="350.0" styleClass="secondTextColor" text="Fornecedor *" textAlignment="CENTER">
+                     <graphic>
+                        <ComboBox fx:id="idFornecedor" prefHeight="31.0" prefWidth="336.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ComboBox>
+                     </graphic>
+                  </Label>
                </children>
             </Pane>
-            <AnchorPane layoutX="6.0" layoutY="261.0" prefHeight="188.0" prefWidth="508.0" style="-fx-border-style: dotted;" styleClass="secondThemeColor">
+            <AnchorPane layoutX="6.0" layoutY="298.0" prefHeight="155.0" prefWidth="508.0" style="-fx-border-style: dotted;" styleClass="secondThemeColor">
                <children>
-                  <Pane layoutX="5.0" layoutY="8.0" maxHeight="220.0" minHeight="171.0" minWidth="246.0" prefHeight="171.0" prefWidth="246.0" style="-fx-border-style: dotted;">
+                  <Pane layoutX="5.0" layoutY="8.0" maxHeight="220.0" minHeight="141.0" minWidth="246.0" prefHeight="141.0" prefWidth="246.0" style="-fx-border-style: dotted;">
                      <children>
                         <Label contentDisplay="RIGHT" layoutX="26.0" layoutY="52.0" prefHeight="31.0" prefWidth="198.0" styleClass="secondTextColor" text="Qtd. Estoque:">
                            <graphic>
@@ -98,33 +107,23 @@
                               <TextField fx:id="idMinimo" prefHeight="31.0" prefWidth="110.0" />
                            </graphic>
                         </Label>
-                        <Label contentDisplay="RIGHT" layoutX="4.0" layoutY="132.0" prefHeight="31.0" prefWidth="216.0" styleClass="secondTextColor" text="Valor de Compra:">
-                           <graphic>
-                              <TextField fx:id="idCompra" prefHeight="31.0" prefWidth="113.0" />
-                           </graphic>
-                        </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="255.0" layoutY="8.0" maxHeight="222.0" minHeight="171.0" minWidth="246.0" prefHeight="171.0" prefWidth="246.0" style="-fx-border-style: dotted;">
+                  <Pane layoutX="255.0" layoutY="8.0" maxHeight="222.0" minHeight="141.0" minWidth="246.0" prefHeight="141.0" prefWidth="246.0" style="-fx-border-style: dotted;">
                      <children>
-                        <Label contentDisplay="RIGHT" layoutX="35.0" layoutY="49.0" prefHeight="31.0" prefWidth="198.0" styleClass="secondTextColor" text="Valor Avista(R$):">
+                        <Label contentDisplay="RIGHT" layoutX="28.0" layoutY="100.0" prefHeight="31.0" prefWidth="198.0" styleClass="secondTextColor" text="Valor Avista(R$):">
                            <graphic>
-                              <TextField fx:id="idAvistaValor" prefHeight="31.0" prefWidth="105.0" />
+                              <TextField fx:id="idAvistaValor" onKeyReleased="#validaValorAvista" prefHeight="31.0" prefWidth="105.0" />
                            </graphic>
                         </Label>
-                        <Label contentDisplay="RIGHT" layoutX="15.0" layoutY="90.0" prefHeight="31.0" prefWidth="216.0" styleClass="secondTextColor" text="Margem a prazo(%):">
+                        <Label contentDisplay="RIGHT" layoutX="15.0" layoutY="64.0" prefHeight="31.0" prefWidth="216.0" styleClass="secondTextColor" text="Margem Avista(%):">
                            <graphic>
-                              <TextField fx:id="idPrazoMargem" prefHeight="31.0" prefWidth="105.0" />
+                              <TextField fx:id="idAvistaMargem" onKeyReleased="#validaMargem" prefHeight="31.0" prefWidth="105.0" />
                            </graphic>
                         </Label>
-                        <Label contentDisplay="RIGHT" layoutX="29.0" layoutY="127.0" prefHeight="31.0" prefWidth="204.0" styleClass="secondTextColor" text="Valor a prazo(R$):">
+                        <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="17.0" prefHeight="31.0" prefWidth="204.0" styleClass="secondTextColor" text="Valor de Compra:">
                            <graphic>
-                              <TextField fx:id="idPrazoValor" prefHeight="31.0" prefWidth="105.0" />
-                           </graphic>
-                        </Label>
-                        <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="13.0" prefHeight="31.0" prefWidth="216.0" styleClass="secondTextColor" text="Margem Avista(%):">
-                           <graphic>
-                              <TextField fx:id="idAvistaMargem" prefHeight="31.0" prefWidth="105.0" />
+                              <TextField fx:id="idCompra" onKeyReleased="#validaValorCompra" prefHeight="31.0" prefWidth="105.0" />
                            </graphic>
                         </Label>
                      </children>

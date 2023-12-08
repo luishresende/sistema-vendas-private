@@ -3,6 +3,7 @@ package codemarket.control;
 import codemarket.control.tableViewModel.EnderecoModel;
 import codemarket.control.tableViewModel.FoneModel;
 import codemarket.model.rn.*;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.utils.ImageManipulation;
 import codemarket.model.vo.*;
 import java.io.File;
@@ -14,6 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -126,7 +129,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     @FXML
     void validarCEP(KeyEvent event) {
-        ENT.validarCEP(event, cep);
+        END.validarCEP(event, cep);
     }
     
     @FXML
@@ -234,31 +237,54 @@ public class CadastroFuncionarioViewController implements Initializable {
         ObservableList<String> caR = FXCollections.observableArrayList(carg);
         tipoCargo.setItems(caR);
         
-        ENT.ficaVerificandoCampos(nome, labelNome, nomeFantasia, labelNomeFantasia, cpf, labelCPF, 
-                                  rg, labelRG, email, labelEmail, nomeContato, labelNomeContato, 
-                                  ddd, labelDDD, fone, labelFone, nomerua, labelEndereco, bairro, labelBairro, 
-                                  cep, labelCEP);
-        USU.ficaVerificandoCampos(usuario, labelUsuario, senha, labelSenha, confirmaSenha, labelConfirmaSenha);
-        
-        Platform.runLater(() -> {
-            setLabelColor(labelNome); setLabelColor(labelUsuario); setLabelColor(labelSexo); setLabelColor(labelSenha);
-            setLabelColor(labelDtNasc); setLabelColor(labelEmail); setLabelColor(labelCPF); setLabelColor(labelRG);
-            setLabelColor(labelTipoContato); setLabelColor(labelNomeContato); setLabelColor(labelDDD); setLabelColor(labelFone);
-            setLabelColor(labelEndereco); setLabelColor(labelLogradouro); setLabelColor(labelTipoEndereco); setLabelColor(labelBairro); setLabelColor(labelCEP);
-            setLabelColor(labelPais); setLabelColor(labelEstado); setLabelColor(labelCidade); setLabelColor(labelCargo);
-            setLabelColor(labelStatus); setComboBoxColor(pais); setComboBoxColor(estado);
-            setComboBoxColor(cidade); setComboBoxColor(logradouro); setComboBoxColor(tipoStatus); setComboBoxColor(tipoContato);
-            setComboBoxColor(tipoEndereco); setComboBoxColor(tipoSexo); setComboBoxColor(tipoCargo);
+        cpf.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    FUNC.handleFocusLostCPFCNPJ(null, cpf);
+                }
+            }
+        });
+        rg.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    FUNC.handleFocusLostRG(null, rg);
+                }
+            }
+        });
+        ddd.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    TEL.handleFocusLostDDD(null, ddd);
+                }
+            }
+        });
+        fone.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    TEL.handleFocusLostFone(null, fone);
+                }
+            }
+        });
+        cep.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    END.handleFocusLostCEP(null, cep);
+                }
+            }
         });
     }    
     
     @FXML
     void handleFinalizarButton() {
         if (verificaCampos() && verificaTabela(tableEnd) && verificaTabela(tableFone)) {
-            SexoRN sexorn = new SexoRN();
             TbSexo sexo = null;
             if (tipoSexo.getValue().isEmpty() == false) {
-                sexo = sexorn.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+                sexo = SEX.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
             }
 
             LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
@@ -316,7 +342,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             Date dataValidade = Date.from(dtValidade.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
             TbUsuario Usuario = null;
-            if(senha.getText().equals(confirmaSenha.getText())) {
+            if(USU.validarSenhas(senha, confirmaSenha)) {
                 ImageManipulation imageMan = new ImageManipulation();
                 byte[] imageByte = null;
                 if(filePathImageUser != null){
@@ -346,10 +372,11 @@ public class CadastroFuncionarioViewController implements Initializable {
                 JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
                 dialogStage.close();
             } else {
-                displayErrorScreen();
+                DisplayDialogScreen.getInstance().displayErrorScreen("Senhas", "Verifique a senha!", "As senhas não conferem.");
             }
         } else {
-            exibirAlerta("Preencha todos os campos marcados antes de finalizar.");
+            DisplayDialogScreen.getInstance().displayErrorScreen("Finalizar Cadastro", "Campos obrigatórios *", "Preencha todos os "
+                        + "campos! \nAs tabelas de endereço e telefone tem que conter pelo menos uma informação.");
         }
     }
 
@@ -369,7 +396,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             fone.clear();
             tipoContato.setPromptText("Selecione...");
         } else {
-            exibirAlerta("Preencha todos os campos para inserir na tabela telefone.");
+            DisplayDialogScreen.getInstance().displayErrorScreen("Tabela de Telefone", "Alguns campos vazios!", "Preencha os campos para inserir na tabela antes de salvar.");
         }
     }
 
@@ -393,7 +420,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             complemento.clear();
             numero.clear();
         } else {
-            exibirAlerta("Preencha todos os campos para inserir na tabela endereco.");
+            DisplayDialogScreen.getInstance().displayErrorScreen("Tabela de Endereco", "Alguns campos vazios!", "Preencha os campos para inserir na tabela antes de salvar.");
         }
     }
 
@@ -445,39 +472,39 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     boolean verificaCampos() {
         boolean camposValidos = true;
-        if (ENT.validarNome(nome)){ labelNome.setTextFill(RED); nome.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarCPFCNPJ(cpf)) { labelCPF.setTextFill(RED); cpf.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarRGIE(rg)) { labelRG.setTextFill(RED); rg.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarNomeFantasia(nomeFantasia)) { labelNomeFantasia.setTextFill(RED); nomeFantasia.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarEmail(email)) { labelEmail.setTextFill(RED); email.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarCampoData(dataNASC)) { labelDtNasc.setTextFill(RED); dataNASC.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (SEX.validarCampo(tipoSexo)) { labelSexo.setTextFill(RED); tipoSexo.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (USU.validarCampoUsuario(usuario)) { labelUsuario.setTextFill(RED); usuario.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (USU.validarCampoSenha(senha)) { labelSenha.setTextFill(RED); senha.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (USU.validarCampoConfirmaSenha(confirmaSenha)) { labelConfirmaSenha.setTextFill(RED); confirmaSenha.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (USU.validarComboBoxCargo(tipoCargo)) { labelCargo.setTextFill(RED); tipoCargo.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (USU.validarComboBoxStatus(tipoStatus)) { labelStatus.setTextFill(RED); tipoStatus.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarNome(nome)){ camposValidos = false;}
+        if (FUNC.validarCPF(cpf)) { camposValidos = false;};
+        if (ENT.validarRGIE(rg)) { camposValidos = false;}
+        if (ENT.validarNomeFantasia(nomeFantasia)) { camposValidos = false;}
+        if (ENT.validarCampoData(dataNASC)) { camposValidos = false;}
+        if (ENT.validarEmail(email)){ camposValidos = false;}
+        if (SEX.validarCampo(tipoSexo)) { camposValidos = false;}
+        if (USU.validarCampoUsuario(usuario)) { camposValidos = false;}
+        if (USU.validarCampoSenha(senha)) { camposValidos = false;}
+        if (USU.validarCampoConfirmaSenha(confirmaSenha)) { camposValidos = false;}
+        if (USU.validarComboBoxCargo(tipoCargo)) { camposValidos = false;}
+        if (USU.validarComboBoxStatus(tipoStatus)) { camposValidos = false;}
         return camposValidos;
     }
     boolean verificaCamposTableFone() {
         boolean camposValidos = true;
-        if (TTEL.validarCampoTipoContato(tipoContato)) { labelTipoContato.setTextFill(RED); tipoContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TTEL.validarCampoNomeContato(nomeContato)) { labelNomeContato.setTextFill(RED); nomeContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEL.validarCampoDDD(ddd)) { labelDDD.setTextFill(RED); ddd.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEL.validarCampoFone(fone)) { labelFone.setTextFill(RED); fone.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TTEL.validarCampoTipoContato(tipoContato)) { camposValidos = false;}
+        if (TTEL.validarCampoNomeContato(nomeContato)) { camposValidos = false;}
+        if (TEL.validarCampoDDD(ddd)) { camposValidos = false;}
+        if (TEL.validarCampoFone(fone)) { camposValidos = false;}
         return camposValidos;
     }
     
     boolean verificaCamposTableEndereco() {
         boolean camposValidos = true;
-        if (BAI.validarCampo(bairro)) { labelBairro.setTextFill(RED); bairro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (LOG.validarCampo(logradouro)) { labelLogradouro.setTextFill(RED); logradouro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEND.validarCampo(tipoEndereco)) { labelTipoEndereco.setTextFill(RED); tipoEndereco.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (END.validarCampoCEP(cep)) { labelCEP.setTextFill(RED); cep.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (END.validarCampoNomeRua(nomerua)) { labelEndereco.setTextFill(RED); nomerua.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoPais(pais)) { labelPais.setTextFill(RED); pais.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoEstado(estado)) { labelEstado.setTextFill(RED); estado.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoCidade(cidade)) { labelCidade.setTextFill(RED); cidade.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (BAI.validarCampo(bairro)) { camposValidos = false;}
+        if (LOG.validarCampo(logradouro)) { camposValidos = false;}
+        if (TEND.validarCampo(tipoEndereco)) { camposValidos = false;}
+        if (END.validarCampoCEP(cep)) { camposValidos = false;}
+        if (END.validarCampoNomeRua(nomerua)) { camposValidos = false;}
+        if (CEP.validarCampoPais(pais)) { camposValidos = false;}
+        if (CEP.validarCampoEstado(estado)) { camposValidos = false;}
+        if (CEP.validarCampoCidade(cidade)) { camposValidos = false;}
         return camposValidos;
     }
     boolean verificaTabela(TableView tableView) {
@@ -486,33 +513,5 @@ public class CadastroFuncionarioViewController implements Initializable {
         } else {
             return true;
         }
-    }
-    void setLabelColor(Label label) {
-        label.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                label.setStyle("-fx-text-fill: black;"); // Altere a cor para vermelho quando focado
-            } 
-        });
-    }
-    void setComboBoxColor(ComboBox<String> box) {
-        box.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                box.setStyle("-fx-border-color: transparent;"); // Altere a cor para vermelho quando focado
-            } 
-        });
-    }
-    public void exibirAlerta(String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Validação de Campos");
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
-    public void displayErrorScreen() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Ocorreu um erro");
-        alert.setContentText("As senhas são diferentes!");
-        alert.showAndWait();
     }
 }

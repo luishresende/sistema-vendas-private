@@ -6,7 +6,9 @@
 package codemarket.model.rn;
 
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.TbTipoTelefone;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;

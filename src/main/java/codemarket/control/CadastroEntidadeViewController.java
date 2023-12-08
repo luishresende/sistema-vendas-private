@@ -3,19 +3,20 @@ package codemarket.control;
 import codemarket.control.tableViewModel.EnderecoModel;
 import codemarket.control.tableViewModel.FoneModel;
 import codemarket.model.rn.*;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -27,7 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import static javafx.scene.paint.Color.*;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 
@@ -38,9 +38,9 @@ public class CadastroEntidadeViewController implements Initializable {
             labelEmail, labelTipoContato, labelNomeContato, labelDDD, labelFone, labelEndereco, labelLogradouro,
             labelTipoEnd, labelBairro, labelCEP, labelPais, labelEstado, labelCidade, labelCPFCNPJ, labelRGIE, tituloJanela;
     @FXML
-    private CheckBox tipoEntidade1, tipoEntidade2;
+    private CheckBox tipoCliente, tipoFornecedor;
     @FXML
-    private ComboBox<String> cidade, tipoContato, tipoCliente, tipoEndereco, logradouro, estado, tipoSexo, pais;
+    private ComboBox<String> cidade, tipoContato, tipoPessoa, tipoEndereco, logradouro, estado, tipoSexo, pais;
     @FXML
     private RadioButton estrangeiro, brasileiro;
     @FXML
@@ -66,6 +66,16 @@ public class CadastroEntidadeViewController implements Initializable {
     private TbEntidadeHasTelefone t[] = new TbEntidadeHasTelefone[10];
     private TbCliente CLIENTE = null;
     private TbFornecedor FORNECEDOR = null;
+    private TbSexo SEXO = new TbSexo();
+    private TbEntidade ENTIDADE = new TbEntidade();
+    private TbTipoTelefone TIPOTELEFONE = new TbTipoTelefone();
+    private TbTelefone TELEFONE = new TbTelefone();
+    private TbEndPostal ENDPOSTAL = new TbEndPostal();
+    private TbCidEstPai CEPS = new TbCidEstPai();
+    private TbLogradouro LOGRADOURO = new TbLogradouro();
+    private TbTipoEndereco TIPOENDERECO = new TbTipoEndereco();
+    private TbBairro BAIRRO = new TbBairro();
+    private EntidadeHasTelefoneRN EHT = new EntidadeHasTelefoneRN();
 
     private Stage dialogStage;
     EntidadeRN ENT = new EntidadeRN();
@@ -91,23 +101,23 @@ public class CadastroEntidadeViewController implements Initializable {
     }
 
     public void setTipoEntidade1(boolean True) {
-        this.tipoEntidade1.setSelected(True);
+        this.tipoCliente.setSelected(True);
     }
 
     public void setTipoEntidade2(boolean True) {
-        this.tipoEntidade2.setSelected(True);
+        this.tipoFornecedor.setSelected(True);
     }
 
     // Evento que fica verificando o tipo de cliente
     @FXML
     void onTipoClienteChanged(ActionEvent event) {
-        ENT.onTipoClienteChanged(event, tipoCliente, cpfcnpj, rgie, labelCPFCNPJ, labelRGIE, tipoSexo, dataNASC);
+        ENT.onTipoClienteChanged(event, tipoPessoa, cpfcnpj, rgie, labelCPFCNPJ, labelRGIE, tipoSexo, dataNASC);
     }
 
     // Evento que verifica a entrada do teclado para a formatação e aceitação de só numéro para CPF / CNPJ
     @FXML
     void validarCPFCNPJ(KeyEvent event) {
-        ENT.validarCPFCNPJ(event, cpfcnpj, tipoCliente);
+        ENT.validaCPFCNPJ(event, cpfcnpj, tipoPessoa);
     }
 
     // Evento que verifica a entrada do teclado para o RG, só aceita numero 
@@ -137,9 +147,9 @@ public class CadastroEntidadeViewController implements Initializable {
     // Evento para verificar só a entrada de numeros e formata para CEP
     @FXML
     void validarCEP(KeyEvent event) {
-        ENT.validarCEP(event, cep);
+        END.validarCEP(event, cep);
     }
-
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         dataNASC.setDayCellFactory(ENT.getDataAnterior());
@@ -162,13 +172,14 @@ public class CadastroEntidadeViewController implements Initializable {
                 "Físico",
                 "Jurídico"
         );
-        tipoCliente.setItems(tipo);
+        tipoPessoa.setItems(tipo);
+        tipoPessoa.setValue("Físico");
         /* ------------------------------------------------------------------ */
 
  /* ----------------- Combo Box - Tipo de Sexo ----------------------- */
         // Adicionando dados do Tipo de Sexo
-        SexoRN sexo = new SexoRN();
-        ArrayList tiposSexo = (ArrayList) sexo.buscarTodos("sexDescricao");
+        SexoRN SEXO = new SexoRN();
+        ArrayList tiposSexo = (ArrayList) SEXO.buscarTodos("sexDescricao");
         ObservableList<String> TS = FXCollections.observableArrayList(tiposSexo);
         tipoSexo.setItems(TS);
 
@@ -219,46 +230,71 @@ public class CadastroEntidadeViewController implements Initializable {
         ObservableList<String> looo = FXCollections.observableArrayList(loges);
         logradouro.setItems(looo);
         
-        ENT.ficaVerificandoCampos(nome, labelNome, nomeFantasia, labelNomeFantasia, cpfcnpj, labelCPFCNPJ, 
-                                  rgie, labelRGIE, email, labelEmail, nomeContato, labelNomeContato, 
-                                  ddd, labelDDD, fone, labelFone, nomerua, labelEndereco, bairro, labelBairro, 
-                                  cep, labelCEP);
-        
-        Platform.runLater(() -> {
-            setLabelColor(labelNome); setLabelColor(labelTipoEntidade); setLabelColor(labelSexo); setLabelColor(labelTipoCliente);
-            setLabelColor(labelDtNasc); setLabelColor(labelEmail); setLabelColor(labelCPFCNPJ); setLabelColor(labelRGIE);
-            setLabelColor(labelTipoContato); setLabelColor(labelNomeContato); setLabelColor(labelDDD); setLabelColor(labelFone);
-            setLabelColor(labelEndereco); setLabelColor(labelLogradouro); setLabelColor(labelTipoEnd); setLabelColor(labelBairro);
-            setLabelColor(labelPais); setLabelColor(labelEstado); setLabelColor(labelCidade); setComboBoxColor(pais); setComboBoxColor(estado);
-            setComboBoxColor(cidade); setComboBoxColor(logradouro); setComboBoxColor(tipoCliente); setComboBoxColor(tipoContato);
-            setComboBoxColor(tipoEndereco); setComboBoxColor(tipoSexo);
+        cpfcnpj.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    ENT.handleFocusLostCPFCNPJ(null, cpfcnpj, tipoPessoa);
+                }
+            }
         });
-                
+        rgie.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    ENT.handleFocusLostRGIE(null, rgie, tipoPessoa);
+                }
+            }
+        });
+        ddd.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    TEL.handleFocusLostDDD(null, ddd);
+                }
+            }
+        });
+        fone.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    TEL.handleFocusLostFone(null, fone);
+                }
+            }
+        });
+        cep.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (!newValue) { // Se o foco foi perdido
+                    END.handleFocusLostCEP(null, cep);
+                }
+            }
+        });
     }
-
+    
     @FXML
     void handleFinalizarButton() {
-        if (verificaCampos() && verificaTabela(tableEnd) && verificaTabela(tableFone)) {
-            TbSexo sexo = SEX.varificaSexo(tipoSexo, SEX);
+        if(verificaCampos() && verificaTabela(tableEnd) && verificaTabela(tableFone)){
+            SEXO = SEX.varificaSexo(tipoSexo, SEX);
             Date dateNASC = ENT.verificaData(dataNASC);
-            TbEntidade ENTIDADE = new TbEntidade(cpfcnpj.getText(), nome.getText(), nomeFantasia.getText(), rgie.getText(), email.getText(),
-                    tipoCliente.getValue(), dateNASC, sexo);
+            ENTIDADE = new TbEntidade(cpfcnpj.getText(), nome.getText(), nomeFantasia.getText(), rgie.getText(), email.getText(),
+                    tipoPessoa.getValue(), dateNASC, SEXO);
 
             int i = 0;
             for (FoneModel fones : telefones) {
-                TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
-                TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
-                TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo);
+                TIPOTELEFONE = TTEL.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
+                TELEFONE = new TbTelefone(fones.getDdd() + fones.getFone(), TIPOTELEFONE);
 
-                t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
+                t[i] = new TbEntidadeHasTelefone(TELEFONE, ENTIDADE);
                 i++;
             }
 
+
             i = 0;
             for (EnderecoModel endereco : enderecos) {
-                TbBairro bairroSalvar = new TbBairro(endereco.getBairro());
+                BAIRRO = new TbBairro(endereco.getBairro());
 
-                TbLogradouro lougradouroSalvar = new TbLogradouro(endereco.getLogradouro());
+                LOGRADOURO = new TbLogradouro(endereco.getLogradouro());
 
                 CidadeRN cid = new CidadeRN();
                 String jpql = "SELECT t.tbCidade FROM TbCidEstPai t WHERE "
@@ -266,17 +302,16 @@ public class CadastroEntidadeViewController implements Initializable {
                         + "AND t.tbCidade.cidDescricao = '" + endereco.getCidade() + "'";
                 TbCidade new_cid = (TbCidade) cid.pesquisar(jpql).get(0);
 
-                CidEstPaiRN CEP = new CidEstPaiRN();
-                TbCidEstPai ceps = (TbCidEstPai) CEP.pesquisar("SELECT t FROM TbCidEstPai t "
+                CEPS = (TbCidEstPai) CEP.pesquisar("SELECT t FROM TbCidEstPai t "
                         + "WHERE t.tbEstado.estSigla = '" + endereco.getEstado() + "' AND t.tbCidade.cidId = '"
                         + new_cid.getCidId() + "'").get(0);
 
-                TbEndPostal postal = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), lougradouroSalvar, bairroSalvar, ceps);
+                ENDPOSTAL = new TbEndPostal(endereco.getNomerua(), endereco.getCep(), LOGRADOURO, BAIRRO, CEPS);
 
-                TipoEnderecoRN te = new TipoEnderecoRN();
-                TbTipoEndereco tende = te.listaUm("teDescricao", endereco.getTipoEndereco(), TbTipoEndereco.class);
 
-                TbEndereco ende = new TbEndereco(Integer.parseInt(endereco.getNumero()), endereco.getComplemento(), postal, tende);
+                TIPOENDERECO = TEND.listaUm("teDescricao", endereco.getTipoEndereco(), TbTipoEndereco.class);
+
+                TbEndereco ende = new TbEndereco(Integer.parseInt(endereco.getNumero()), endereco.getComplemento(), ENDPOSTAL, TIPOENDERECO);
 
                 e[i] = new TbEntidadeHasEndereco(ENTIDADE, ende);
 
@@ -287,15 +322,39 @@ public class CadastroEntidadeViewController implements Initializable {
 
             ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
 
-            if (tipoEntidade1.isSelected()) {
-                CLIENTE = new TbCliente(ENTIDADE);
-                ClienteRN cliente = new ClienteRN();
-                cliente.salvar(CLIENTE);
+            if (tipoCliente.isSelected()) {
+                if("Juridico".equals(tipoPessoa.getValue())){
+                    CLIENTE = new TbCliente(ENTIDADE);
+                    ClienteRN cliente = new ClienteRN();
+                    cliente.salvar(CLIENTE);
+                    JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+                    dialogStage.close();
+                } else if("Físico".equals(tipoPessoa.getValue())) {
+                    CLIENTE = new TbCliente(ENTIDADE);
+                    ClienteRN cliente = new ClienteRN();
+                    cliente.salvar(CLIENTE);
+                    JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+                    dialogStage.close();
+                } else {
+                    DisplayDialogScreen.getInstance().displayErrorScreen("Tipo Cliente", "Físico / Jurídico *", "Selecione uma opção de cliente.");
+                }
             }
-            if (tipoEntidade2.isSelected()) {
-                FORNECEDOR = new TbFornecedor(ENTIDADE);
-                FornecedorRN forne = new FornecedorRN();
-                forne.salvar(FORNECEDOR);
+            if (tipoFornecedor.isSelected()) {
+                if("Jurídico".equals(tipoPessoa.getValue())){
+                    FORNECEDOR = new TbFornecedor(ENTIDADE);
+                    FornecedorRN forne = new FornecedorRN();
+                    forne.salvar(FORNECEDOR);
+                    JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+                    dialogStage.close();
+                } else if("Físico".equals(tipoPessoa.getValue())) {
+                    FORNECEDOR = new TbFornecedor(ENTIDADE);
+                    FornecedorRN forne = new FornecedorRN();
+                    forne.salvar(FORNECEDOR);
+                    JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+                    dialogStage.close();
+                } else {
+                    DisplayDialogScreen.getInstance().displayErrorScreen("Tipo Fornecedor", "Físico / Jurídico *", "Selecione uma opção de cliente.");
+                }
             }
 
             ClienteRN cli = new ClienteRN();
@@ -327,10 +386,10 @@ public class CadastroEntidadeViewController implements Initializable {
                     ehe.salvar(end);
                 }
             }
-            JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
-            dialogStage.close();
+        
         } else {
-            exibirAlerta("Preencha todos os campos marcados antes de finalizar.");
+            DisplayDialogScreen.getInstance().displayErrorScreen("Finalizar Cadastro", "Campos obrigatórios *", "Preencha todos os "
+                        + "campos! \nAs tabelas de endereço e telefone tem que conter pelo menos uma informação.");
         }
     }
 
@@ -350,12 +409,14 @@ public class CadastroEntidadeViewController implements Initializable {
             fone.clear();
             tipoContato.setPromptText("Selecione...");
         } else {
-            exibirAlerta("Preencha todos os campos para inserir na tabela telefone.");
+            DisplayDialogScreen.getInstance().displayErrorScreen("Tabela de Telefone", "Alguns campos vazios!", "Preencha os campos para inserir na tabela antes de salvar.");
         }
     }
 
     @FXML
     void handleSalvarEndbutton() {
+        TIPOTELEFONE = new TbTipoTelefone(tipoContato.getValue());
+        TELEFONE = new TbTelefone(ddd.getText() + fone.getText(), TIPOTELEFONE);
         if(verificaCamposTableEndereco()){
             EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(),
                     cidade.getValue(), estado.getValue(),
@@ -374,7 +435,7 @@ public class CadastroEntidadeViewController implements Initializable {
             complemento.clear();
             numero.clear();
         } else {
-            exibirAlerta("Preencha todos os campos para inserir na tabela endereco.");
+            DisplayDialogScreen.getInstance().displayErrorScreen("Tabela de Endereco", "Alguns campos vazios!", "Preencha os campos para inserir na tabela antes de salvar.");
         }
 
     }
@@ -424,55 +485,39 @@ public class CadastroEntidadeViewController implements Initializable {
         EnderecoModel selectedEndereco = tableEnd.getSelectionModel().getSelectedItem();
         enderecos.remove(selectedEndereco);
     }
-
+    
     boolean verificaCampos() {
         boolean camposValidos = true;
-        if (ENT.validarNome(nome)){ labelNome.setTextFill(RED); nome.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarCPFCNPJ(cpfcnpj)) { labelCPFCNPJ.setTextFill(RED); cpfcnpj.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarRGIE(rgie)) { labelRGIE.setTextFill(RED); rgie.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarNomeFantasia(nomeFantasia)) { labelNomeFantasia.setTextFill(RED); nomeFantasia.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarEmail(email)) { labelEmail.setTextFill(RED); email.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarCampoData(dataNASC)) { labelDtNasc.setTextFill(RED); dataNASC.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (ENT.validarCampoCheck(tipoEntidade1, tipoEntidade2)){ labelTipoEntidade.setTextFill(RED); tipoEntidade1.setTextFill(RED); tipoEntidade2.setTextFill(RED); camposValidos = false;}
-        if (ENT.validarCampoTipoCliente(tipoCliente)){ labelTipoCliente.setTextFill(RED); tipoCliente.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (SEX.validarCampo(tipoSexo)) { labelSexo.setTextFill(RED); tipoSexo.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (ENT.validarNome(nome)){ camposValidos = false;}
+        if (ENT.campoCPFCNPJ(cpfcnpj)) { camposValidos = false;}
+        if (ENT.validarRGIE(rgie)) { camposValidos = false;}
+        if (ENT.validarNomeFantasia(nomeFantasia)) { camposValidos = false;}
+        if (ENT.validarCampoData(dataNASC)) { camposValidos = false;}
+        if (ENT.validarCampoCheck(tipoCliente, tipoFornecedor)){ camposValidos = false;}
+        if (ENT.validarCampoTipoCliente(tipoPessoa)){ camposValidos = false;}
+        if (ENT.validarEmail(email)){ camposValidos = false;}
+        if (SEX.validarCampo(tipoSexo)) { camposValidos = false;}
         return camposValidos;
-    }
-    void setLabelColor(Label label) {
-        label.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                // Focado
-                label.setStyle("-fx-text-fill: black;"); // Altere a cor para vermelho quando focado
-            } 
-        });
-    }
-    void setComboBoxColor(ComboBox<String> box) {
-        box.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                // Focado
-                box.setStyle("-fx-border-color: transparent;"); // Altere a cor para vermelho quando focado
-            } 
-        });
     }
     boolean verificaCamposTableFone() {
         boolean camposValidos = true;
-        if (TTEL.validarCampoTipoContato(tipoContato)) { labelTipoContato.setTextFill(RED); tipoContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TTEL.validarCampoNomeContato(nomeContato)) { labelNomeContato.setTextFill(RED); nomeContato.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEL.validarCampoDDD(ddd)) { labelDDD.setTextFill(RED); ddd.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEL.validarCampoFone(fone)) { labelFone.setTextFill(RED); fone.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (TTEL.validarCampoTipoContato(tipoContato)) { camposValidos = false;}
+        if (TTEL.validarCampoNomeContato(nomeContato)) { camposValidos = false;}
+        if (TEL.validarCampoDDD(ddd)) { camposValidos = false;}
+        if (TEL.validarCampoFone(fone)) { camposValidos = false;}
         return camposValidos;
     }
     
     boolean verificaCamposTableEndereco() {
         boolean camposValidos = true;
-        if (BAI.validarCampo(bairro)) { labelBairro.setTextFill(RED); bairro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (LOG.validarCampo(logradouro)) { labelLogradouro.setTextFill(RED); logradouro.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (TEND.validarCampo(tipoEndereco)) { labelTipoEnd.setTextFill(RED); tipoEndereco.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (END.validarCampoCEP(cep)) { labelCEP.setTextFill(RED); cep.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (END.validarCampoNomeRua(nomerua)) { labelEndereco.setTextFill(RED); nomerua.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoPais(pais)) { labelPais.setTextFill(RED); pais.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoEstado(estado)) { labelEstado.setTextFill(RED); estado.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
-        if (CEP.validarCampoCidade(cidade)) { labelCidade.setTextFill(RED); cidade.setStyle("-fx-border-color: #FF9999;"); camposValidos = false;}
+        if (BAI.validarCampo(bairro)) { camposValidos = false;}
+        if (LOG.validarCampo(logradouro)) { camposValidos = false;}
+        if (TEND.validarCampo(tipoEndereco)) { camposValidos = false;}
+        if (END.validarCampoCEP(cep)) { camposValidos = false;}
+        if (END.validarCampoNomeRua(nomerua)) { camposValidos = false;}
+        if (CEP.validarCampoPais(pais)) { camposValidos = false;}
+        if (CEP.validarCampoEstado(estado)) { camposValidos = false;}
+        if (CEP.validarCampoCidade(cidade)) { camposValidos = false;}
         return camposValidos;
     }
     boolean verificaTabela(TableView tableView) {
@@ -481,12 +526,5 @@ public class CadastroEntidadeViewController implements Initializable {
         } else {
             return true;
         }
-    }
-    public void exibirAlerta(String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Validação de Campos");
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
     }
 }

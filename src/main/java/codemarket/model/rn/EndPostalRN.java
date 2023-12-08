@@ -1,10 +1,11 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.TbEndPostal;
-import java.util.List;import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.RED;
+import java.util.ArrayList;
+import java.util.List;import javafx.scene.control.TextField;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyEvent;
 ;
 
 public class EndPostalRN {
@@ -38,6 +39,28 @@ public class EndPostalRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    // Valida CEP
+    public void validarCEP(KeyEvent event, TextField cep) {
+        String texto = cep.getText();
+        if (!texto.matches("[0-9]*")) {
+            cep.setText(texto.replaceAll("[^0-9]", ""));
+        }
+        if (texto.length() == 8) {
+            cep.setText(texto.substring(0, 5) + "-" + texto.substring(5, 8));
+        }
+        cep.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 9) {
+                cep.setText(oldValue);
+            }
+        });
+    }
+    public void handleFocusLostCEP(InputEvent event, TextField cep) {
+        // Chama o método existente para validar e formatar
+        String texto = cep.getText();
+        if (texto.length() != 9) {
+            DisplayDialogScreen.getInstance().displayErrorScreen("Aviso", "Campo CEP", "Preencha corretamente o campo CEP.");
+        }
     }
     public boolean validarCampoNomeRua(TextField nomerua) {
         if (nomerua.getText().trim().isEmpty()) {

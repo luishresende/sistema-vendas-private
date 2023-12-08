@@ -4,7 +4,6 @@ import codemarket.model.rn.*;
 import codemarket.model.vo.*;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -21,56 +20,31 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.sql.Timestamp;
+import java.util.Locale;
+import javafx.scene.input.KeyEvent;
 
 public class InserirProdutoController implements Initializable {
 
     @FXML
     private Label tituloJanela;
     @FXML
-    private TextField idQuantidade;
+    private TextField idQuantidade, idAvistaMargem, idAvistaValor, idPrazoValor, idCompra, idBarras,
+            idDescricao, idPrazoMargem, idCodigo, idMinimo, idGrupo;
     @FXML
-    private TextField idAvistaMargem;
+    private CheckBox idControle, idProibir;
     @FXML
-    private CheckBox idControle;
-    @FXML
-    private Button idAdicionarGrupo;
-    @FXML
-    private TextField idAvistaValor;
+    private Button idAdicionarGrupo, buttonCadastrar, buttonCancelar;
     @FXML
     private DatePicker idAtualizacao;
     @FXML
-    private TextField idPrazoValor;
-    @FXML
-    private Button buttonCancelar;
-    @FXML
     private ComboBox<String> idUnidade;
-    @FXML
-    private TextField idCompra;
-    @FXML
-    private Button buttonCadastrar;
-    @FXML
-    private TextField idBarras;
-    @FXML
-    private CheckBox idProibir;
-    @FXML
-    private TextField idDescricao;
-    @FXML
-    private TextField idPrazoMargem;
-    @FXML
-    private CheckBox idAtualizar;
-    @FXML
-    private TextField idCodigo;
-    @FXML
-    private TextField idMinimo;
-    @FXML
-    private TextField idGrupo;
-    @FXML
-    private DatePicker idValidade;
 
     private Stage dialogStage;
     Date dataAtual = new Date();
     Timestamp timestamp = new Timestamp(dataAtual.getTime());
-
+    UnidadeMedidaRN UN = new UnidadeMedidaRN();
+    EstoqueRN EST = new EstoqueRN();
+    
     public Stage getDialogStage() {
         return dialogStage;
     }
@@ -82,9 +56,25 @@ public class InserirProdutoController implements Initializable {
     public void setTituloJanela(String titulo) {
         this.tituloJanela.setText(titulo);
     }
+    
+    @FXML
+    void validaValorCompra(KeyEvent event) {
+        EST.aceitaNumero(event, idCompra);
+    }
+    @FXML
+    void validaValorAvista(KeyEvent event) {
+        EST.aceitaNumero(event, idAvistaValor);
+    }
+    @FXML
+    void validaMargem(KeyEvent event) {
+        EST.aceitaNumero(event, idAvistaMargem);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        EST.initializeCurrencyField(idCompra, Locale.getDefault(), 0.0);
+        EST.initializeCurrencyField(idAvistaValor, Locale.getDefault(), 0.0);
+        EST.initializeCurrencyField(idAvistaMargem, Locale.getDefault(), 0.0);
         UnidadeMedidaRN medidarn = new UnidadeMedidaRN();
         ArrayList medidas = (ArrayList) medidarn.buscarTodos("umSigla");
         ObservableList<String> UN = FXCollections.observableArrayList(medidas);
@@ -123,5 +113,11 @@ public class InserirProdutoController implements Initializable {
         CategoriaProdutoRN categoriarn = new CategoriaProdutoRN();
         TbCategoriaProduto categoria = new TbCategoriaProduto(idGrupo.getText());
         categoriarn.salvar(categoria);
+    }
+    
+    boolean verificaCampos() {
+        boolean camposValidos = true;
+        if (UN.validarCampoTipoCliente(idUnidade)){ camposValidos = false;}
+        return camposValidos;
     }
 }

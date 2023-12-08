@@ -1,6 +1,7 @@
 package codemarket.model.rn;
 
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.*;
 import java.text.DecimalFormat;
 import java.text.ParsePosition;
@@ -141,31 +142,11 @@ public class UsuarioRN {
             return false;
         }
     }
-    public void ficaVerificandoCampos(TextField usuario, Label labelUsuario, TextField senha, Label labelSenha, 
-                                      TextField confirmaSenha, Label labelConfirmaSenha) {
-        addFocusListener(usuario, labelUsuario);
-        addFocusListener(senha, labelSenha);
-        addFocusListener(confirmaSenha, labelConfirmaSenha);
-    }
-    
-    public void addFocusListener(TextField textField, Label validationLabel) {
-        textField.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) { // Quando o foco é perdido
-                validarCampoText(textField, validationLabel);
-            }
-        });
-    }
-    
-    private void validarCampoText(TextField textField, Label validationLabel) {
-        Tooltip tooltip = new Tooltip("Por favor, insira algo.");
-        if (textField.getText().trim().isEmpty()) {
-            textField.setStyle("-fx-border-color: red;");
-            validationLabel.setTextFill(RED);
-            Tooltip.install(textField, tooltip);
+    public boolean validarSenhas(TextField senha, TextField confirmaSenha) {
+        if (!senha.getText().equals(confirmaSenha.getText())) {
+            return true;
         } else {
-            textField.setStyle("");
-            validationLabel.setTextFill(BLACK);
-            Tooltip.uninstall(textField, tooltip);
+            return false;
         }
     }
 }

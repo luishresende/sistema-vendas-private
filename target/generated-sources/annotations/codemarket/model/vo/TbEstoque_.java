@@ -11,7 +11,6 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class TbEstoque_ {
 
 	public static volatile SingularAttribute<TbEstoque, Integer> estoId;
-	public static volatile SingularAttribute<TbEstoque, Float> estoValorFinalPrazo;
 	public static volatile SingularAttribute<TbEstoque, Short> estoProibirVendaLimMin;
 	public static volatile SingularAttribute<TbEstoque, Short> estoAtualizarCustoNoPedido;
 	public static volatile SingularAttribute<TbEstoque, TbProduto> estoProdutoCodigo;
@@ -23,7 +22,6 @@ public abstract class TbEstoque_ {
 	public static volatile SingularAttribute<TbEstoque, Float> estoValorFinal;
 
 	public static final String ESTO_ID = "estoId";
-	public static final String ESTO_VALOR_FINAL_PRAZO = "estoValorFinalPrazo";
 	public static final String ESTO_PROIBIR_VENDA_LIM_MIN = "estoProibirVendaLimMin";
 	public static final String ESTO_ATUALIZAR_CUSTO_NO_PEDIDO = "estoAtualizarCustoNoPedido";
 	public static final String ESTO_PRODUTO_CODIGO = "estoProdutoCodigo";

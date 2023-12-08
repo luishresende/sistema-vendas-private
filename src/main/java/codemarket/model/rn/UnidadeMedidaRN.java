@@ -1,7 +1,8 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbUnidadeMedida;
-import java.util.List;;
+import java.util.List;import javafx.scene.control.ComboBox;
+;
 
 public class UnidadeMedidaRN {
 
@@ -34,5 +35,13 @@ public class UnidadeMedidaRN {
     public List pesquisar(String jpql) {
         List obj = genericDao.pesquisar(jpql);
         return obj;
+    }
+    
+    public boolean validarCampoTipoCliente(ComboBox<String> unidadeMedida) {
+        if (unidadeMedida.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

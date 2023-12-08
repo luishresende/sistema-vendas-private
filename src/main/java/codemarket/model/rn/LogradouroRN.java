@@ -1,11 +1,8 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbLogradouro;
+import java.util.ArrayList;
 import java.util.List;import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.RED;
 ;
 
 public class LogradouroRN {

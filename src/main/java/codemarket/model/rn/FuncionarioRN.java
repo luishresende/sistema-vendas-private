@@ -1,7 +1,10 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.TbFuncionario;
-import java.util.List;import javafx.scene.control.TextField;
+import java.util.List;import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 ;
 
@@ -47,6 +50,27 @@ public class FuncionarioRN {
         if (texto.length() == 11) {
             // Formatação para CPF "999.999.999-99"
             cpf.setText(texto.substring(0, 3) + "." + texto.substring(3, 6) + "." + texto.substring(6, 9) + "-" + texto.substring(9, 11));
+        }
+    }
+    public boolean validarCPF(TextField cpf) {
+        String texto = cpf.getText();
+        if (cpf.getText().trim().isEmpty() && texto.length() != 14) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void handleFocusLostCPFCNPJ(InputEvent event, TextField cpf) {
+        String texto = cpf.getText();
+        if(texto.length() != 14){
+            DisplayDialogScreen.getInstance().displayErrorScreen("CPF", "Verifique os dados inseridos!", "Preencha corretamente o campo CPF.");
+        }
+    }
+    
+    public void handleFocusLostRG(InputEvent event, TextField rg) {
+        String texto = rg.getText();
+        if (texto.length() != 14) {
+            DisplayDialogScreen.getInstance().displayErrorScreen("Inscrição Estadual", "Verifique os dados inseridos!", "Preencha corretamente o campo Inscrição Estadual.");
         }
     }
 }

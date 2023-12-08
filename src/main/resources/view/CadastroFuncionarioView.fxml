@@ -235,7 +235,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="173.0" spacing="2.0">
                                                          <children>
-                                                            <Label fx:id="labelCargo" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="54.0" text="Cargo:">
+                                                            <Label fx:id="labelCargo" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="73.0" text="Cargo *:">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -272,7 +272,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="173.0" spacing="2.0" GridPane.columnIndex="3">
                                                          <children>
-                                                            <Label fx:id="labelStatus" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="54.0" text="Status:">
+                                                            <Label fx:id="labelStatus" alignment="TOP_LEFT" contentDisplay="BOTTOM" focusTraversable="false" prefHeight="20.0" prefWidth="85.0" text="Status *:">
                                                                <font>
                                                                   <Font name="System Bold" size="14.0" />
                                                                </font>
@@ -311,7 +311,7 @@
                                                    <children>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="116.0" prefWidth="611.0" spacing="2.0">
                                                          <children>
-                                                            <Label fx:id="labelUsuario" contentDisplay="RIGHT" text="Usuário: ">
+                                                            <Label fx:id="labelUsuario" contentDisplay="RIGHT" text="Usuário *: ">
                                                                <font>
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
@@ -328,7 +328,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                                          <children>
-                                                            <Label fx:id="labelSenha" contentDisplay="RIGHT" text="Senha: ">
+                                                            <Label fx:id="labelSenha" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="67.0" text="Senha *: ">
                                                                <font>
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
@@ -345,7 +345,7 @@
                                                       </VBox>
                                                       <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                                                          <children>
-                                                            <Label fx:id="labelConfirmaSenha" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="138.0" text=" Confirme a Senha:">
+                                                            <Label fx:id="labelConfirmaSenha" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="154.0" text=" Confirme a Senha *:">
                                                                <font>
                                                                   <Font name="System Bold" size="15.0" />
                                                                </font>
