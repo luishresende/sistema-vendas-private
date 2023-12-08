@@ -68,6 +68,8 @@ public class FuncionariosViewController implements Initializable {
 
     private Stage dialogStage;
     private final FXMLLoader loader = new FXMLLoader();
+    private static CadastroFuncionarioViewController cadastroController = new CadastroFuncionarioViewController();
+
     
     FuncionarioRN f = new FuncionarioRN();
     List<TbFuncionario> funcionarios = f.pesquisar("SELECT t FROM TbFuncionario t");
@@ -127,24 +129,39 @@ public class FuncionariosViewController implements Initializable {
         dialogStage.showAndWait();
     }
 
-    @FXML
-    private void handleButtonEditar() throws IOException {
+@FXML
+private void handleButtonEditar() throws IOException {
+    FuncionarioModel selectedFunc = tableViewFuncionario.getSelectionModel().getSelectedItem();
+    if (selectedFunc != null) {
+        FuncionarioRN funcionariorn = new FuncionarioRN();
+        TbFuncionario funcionarioParaEditar = funcionariorn.listaUm("funcentcpfCnpj.entcpfCnpj", selectedFunc.getCPF(), TbFuncionario.class);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroFuncionarioView.fxml"));
+        
         AnchorPane page = (AnchorPane) loader.load();
 
         Scene scene = new Scene(page);
         dialogStage = new Stage();
-        dialogStage.setTitle("Editar Funcionário");
+        dialogStage.setTitle("Cadastrar Funcionário");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
         dialogStage.setScene(scene);
-        
         codemarket.control.CadastroFuncionarioViewController controller = loader.getController();
-        controller.setTituloJanela("Editar Cadastro do Funcionário");
+        controller.setTituloJanela("Cadastrar Funcionário");
+        controller.editarFuncionario(funcionarioParaEditar);
         controller.setDialogStage(dialogStage);
-    
+        
+        
         dialogStage.showAndWait();
+    } else {
+        // Exiba uma mensagem de aviso caso nenhum funcionário seja selecionado
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Aviso");
+        alert.setHeaderText(null);
+        alert.setContentText("Por favor, selecione um funcionário para editar.");
+        alert.showAndWait();
     }
+}
 
     @FXML
     private void handleButtonRemover(ActionEvent event) {

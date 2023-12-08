@@ -514,4 +514,47 @@ public class CadastroFuncionarioViewController implements Initializable {
             return true;
         }
     }
+    
+    public void editarFuncionario(TbFuncionario funcionarioParaEditar) {
+        System.out.println("aa");
+        TbFuncionario funcionario = funcionarioParaEditar;
+        TbEntidade entidade = funcionario.getFuncentcpfCnpj();
+        TbUsuario usuarioFunc = funcionario.getFuncUsuario();
+
+        nome.setText(entidade.getEntNome());
+        nomeFantasia.setText(entidade.getEntnomeFantasia());
+        cpf.setText(entidade.getEntcpfCnpj());
+        rg.setText(entidade.getEntrgIe());
+        email.setText(entidade.getEntEmail());
+        
+        java.sql.Date date = new java.sql.Date(entidade.getEntdtNasc().getTime());
+        LocalDate aniv = date.toLocalDate();
+        dataNASC.setValue(aniv);
+        
+        usuario.setText(usuarioFunc.getUsuUsuario());
+        senha.setText(usuarioFunc.getUsuSenha());
+        confirmaSenha.setText(usuarioFunc.getUsuSenha());
+        
+        java.sql.Date datef = new java.sql.Date(usuarioFunc.getUsuValidade().getTime());
+        LocalDate valid = datef.toLocalDate();
+
+        validade.setValue(valid);
+        
+        if (entidade.getEntSexo() != null) {
+            tipoSexo.setValue(entidade.getEntSexo().getSexDescricao());
+        }
+        
+        if(usuarioFunc.getUsuimgPerfil() != null) {
+            ImageManipulation imageManipulation = new ImageManipulation();
+            img.setImage(imageManipulation.convertToImage(usuarioFunc.getUsuimgPerfil()));
+        }
+        
+        tipoCargo.setValue(funcionario.getFuncCargo().getCarDescricao());
+        tipoStatus.setValue(funcionario.getFuncStatus().getStaDescricao());
+        
+        
+        
+        
+        
+       }
 }
