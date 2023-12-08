@@ -297,7 +297,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             for (FoneModel fones : telefones) {
                 TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
                 TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
-                TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo);
+                TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo, fones.getNomeContato());
 
                 t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
                 i++;
@@ -516,7 +516,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     }
     
     public void editarFuncionario(TbFuncionario funcionarioParaEditar) {
-        System.out.println("aa");
+        
         TbFuncionario funcionario = funcionarioParaEditar;
         TbEntidade entidade = funcionario.getFuncentcpfCnpj();
         TbUsuario usuarioFunc = funcionario.getFuncUsuario();
@@ -552,8 +552,41 @@ public class CadastroFuncionarioViewController implements Initializable {
         tipoCargo.setValue(funcionario.getFuncCargo().getCarDescricao());
         tipoStatus.setValue(funcionario.getFuncStatus().getStaDescricao());
         
-        
-        
+       
+       List<TbEndereco> enderecosList = entidade.getTbEnderecoList();
+       for (TbEndereco endereco : enderecosList) {
+           EnderecoModel enderecoModel = new EnderecoModel(
+               endereco.getEndTipo().getTeDescricao(),
+               endereco.getEndendPid().getEndCEP(),
+               endereco.getEndendPid().getTbCidEstPai().getTbCidade().getCidDescricao(),
+               endereco.getEndendPid().getTbCidEstPai().getTbEstado().getEstSigla(),
+               endereco.getEndendPid().getTbCidEstPai().getCepPaiSigla().getPaiDescricao(),
+               endereco.getEndendPid().getEndPnomerua(),
+               endereco.getEndendPid().getEndPbaiid().getBaiDescricao(),
+               endereco.getEndComplemento(),
+               String.valueOf(endereco.getEndNumero()),
+               endereco.getEndendPid().getEndPlogid().getLogDescricao()
+           );
+           enderecos.add(enderecoModel);
+       }
+
+       // Fetch and populate phone data
+       List<TbEntidadeHasTelefone> telefonesList = entidade.getTbEntidadeHasTelefoneList();
+       for (TbEntidadeHasTelefone entidadeHasTelefone : telefonesList) {
+           TbTelefone telefone = entidadeHasTelefone.getEhtFoneId();
+           String contado = telefone.getFoneDescricao();
+           String dd = contado.substring(0, Math.min(contado.length(), 4));
+           String resto = contado.substring(Math.min(contado.length(), 4));
+
+           FoneModel foneModel = new FoneModel(
+               telefone.getFonenomeContato(),
+               dd,
+               resto,
+               telefone.getFoneTipo().getTtDescricao()
+           );
+           telefones.add(foneModel);
+       }       
+
         
         
        }

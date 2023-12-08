@@ -44,13 +44,25 @@ public class TbTelefone implements Serializable {
     @JoinColumn(name = "fone_tipo", referencedColumnName = "tt_id")
     @ManyToOne(optional = false)
     private TbTipoTelefone foneTipo;
+    @Basic(optional = false)
+    @Column(name = "fone_nomeContato")
+    private String fonenomeContato;
 
-    public TbTelefone() {
+    public String getFonenomeContato() {
+        return fonenomeContato;
     }
 
-    public TbTelefone(String foneDescricao, TbTipoTelefone tipo) {
+    public void setFonenomeContato(String fonenomeContato) {
+        this.fonenomeContato = fonenomeContato;
+    }
+    
+    public TbTelefone() {
+    }
+ 
+    public TbTelefone(String foneDescricao, TbTipoTelefone tipo, String fonenomeContato) {
         this.foneDescricao = foneDescricao;
         this.foneTipo = tipo;
+        this.fonenomeContato = fonenomeContato;
     }
 
     public Integer getFoneId() {
