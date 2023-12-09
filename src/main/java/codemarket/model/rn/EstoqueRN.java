@@ -2,6 +2,7 @@ package codemarket.model.rn;
 
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbEstoque;
+import codemarket.model.vo.TbFornecedor;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -167,6 +168,13 @@ public class EstoqueRN {
     
     public boolean validarComboBox(ComboBox<String> combo) {
         if (combo.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean validarComboFornecedor(ComboBox<TbFornecedor> combo) {
+        if (combo.getValue() == null){
             return true;
         } else {
             return false;

@@ -24,8 +24,9 @@ import java.sql.Timestamp;
 import java.util.Locale;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
+import javafx.util.StringConverter;
+import javax.swing.JOptionPane;
 
 public class InserirProdutoController implements Initializable {
 
@@ -33,7 +34,7 @@ public class InserirProdutoController implements Initializable {
     private Label tituloJanela;
     @FXML
     private TextField idQuantidade, idAvistaMargem, idAvistaValor, idPrazoValor, idCompra, idBarras,
-            idDescricao, idPrazoMargem, idCodigo, idMinimo, idGrupo;
+            idDescricao, idPrazoMargem, idMinimo, idGrupo;
     @FXML
     private CheckBox idControle, idProibir;
     @FXML
@@ -41,18 +42,20 @@ public class InserirProdutoController implements Initializable {
     @FXML
     private DatePicker idAtualizacao;
     @FXML
-    private ComboBox<String> idUnidade, idFornecedor;
+    private ComboBox<String> idUnidade;
+    @FXML
+    private ComboBox<TbFornecedor> idFornecedor;
 
     private Stage dialogStage;
-    
+
     TbFornecedor FORNECEDOR = null;
-            
+
     Date dataAtual = new Date();
     Timestamp timestamp = new Timestamp(dataAtual.getTime());
     UnidadeMedidaRN UN = new UnidadeMedidaRN();
     EstoqueRN EST = new EstoqueRN();
     FornecedorRN FOR = new FornecedorRN();
-    
+
     public Stage getDialogStage() {
         return dialogStage;
     }
@@ -64,19 +67,12 @@ public class InserirProdutoController implements Initializable {
     public void setTituloJanela(String titulo) {
         this.tituloJanela.setText(titulo);
     }
-    
+
     @FXML
-    void validaValorCompra(KeyEvent event) {
-        EST.aceitaNumero(event, idCompra);
+    void validaCodigoBarras(KeyEvent event) {
+        EST.aceitaNumero(event, idBarras);
     }
-    @FXML
-    void validaValorAvista(KeyEvent event) {
-        EST.aceitaNumero(event, idAvistaValor);
-    }
-    @FXML
-    void validaMargem(KeyEvent event) {
-        EST.aceitaNumero(event, idAvistaMargem);
-    }
+
     @FXML
     void valorAvista() {
         try {
@@ -93,14 +89,15 @@ public class InserirProdutoController implements Initializable {
             double compra = Double.parseDouble(valorNumCompra);
             double lucro = Double.parseDouble(valorNumMargem);
             // Calcula o valor que vai ser avista
-            double valorAvista = (compra + (compra * (lucro/100)));
+            double valorAvista = (compra + (compra * (lucro / 100)));
 
             // Exibe o troco no TextField troco
             idAvistaValor.setText(String.valueOf(valorAvista + "0"));
         } catch (NumberFormatException e) {
-            
+
         }
     }
+
     @FXML
     void margemAvista() {
         try {
@@ -113,7 +110,7 @@ public class InserirProdutoController implements Initializable {
             valorNumCompra = valorNumCompra.replace(',', '.');
             valAvista = valAvista.replace(',', '.');
             // Converte as strings para números
-            double compra = Double.parseDouble(valorNumCompra); 
+            double compra = Double.parseDouble(valorNumCompra);
             double valorAvista = Double.parseDouble(valorNumAvista);
             // Calcula o valor que vai ser avista
             double valorP = compra - valorAvista;
@@ -121,9 +118,12 @@ public class InserirProdutoController implements Initializable {
             // Exibe o troco no TextField troco
             idAvistaMargem.setText(String.valueOf(porcentagem));
         } catch (NumberFormatException e) {
-            
+
         }
     }
+
+    ArrayList<TbFornecedor> fornecedores = null;
+    ObservableList<TbFornecedor> listaFornecedores = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -132,63 +132,82 @@ public class InserirProdutoController implements Initializable {
         EST.initializeCurrencyField(idAvistaMargem, Locale.getDefault(), 0.0);
         EST.initializeCurrencyField(idMinimo, Locale.getDefault(), 0.0);
         EST.initializeCurrencyField(idQuantidade, Locale.getDefault(), 0.0);
-        
+
         ArrayList medidas = (ArrayList) UN.buscarTodos("umSigla");
         ObservableList<String> UNI = FXCollections.observableArrayList(medidas);
         idUnidade.setItems(UNI);
-        
-        ArrayList fornecedores = (ArrayList) FOR.pesquisar("SELECT f.entNome FROM codemarket.model.vo.TbEntidade f JOIN f.tbFornecedor on ent_cpfCnpj = for_cpfCnpj");
-        ObservableList<String> FORNE = FXCollections.observableArrayList(fornecedores);
-        idFornecedor.setItems(FORNE);
-        
-        if(!idAvistaValor.getText().isEmpty()) {
+
+        fornecedores = (ArrayList<TbFornecedor>) FOR.pesquisar("SELECT f.tbFornecedor FROM codemarket.model.vo.TbEntidade f JOIN f.tbFornecedor on ent_cpfCnpj = for_cpfCnpj");
+        listaFornecedores = FXCollections.observableArrayList(fornecedores);
+
+        // Configurar um StringConverter para exibir o nome do fornecedor na ComboBox
+        idFornecedor.setConverter(new StringConverter<TbFornecedor>() {
+            @Override
+            public String toString(TbFornecedor fornecedor) {
+                return (fornecedor != null) ? fornecedor.getForcpfCnpj().getEntNome() : "";
+            }
+
+            @Override
+            public TbFornecedor fromString(String string) {
+                // Método necessário para conversões bidirecionais
+                // Se necessário, você pode implementar esta parte para converter de volta de uma string para um objeto TbFornecedor
+                return null;
+            }
+        });
+
+        idFornecedor.setItems(listaFornecedores);
+
+        if (!idAvistaValor.getText().isEmpty()) {
             idAvistaMargem.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     valorAvista(); // Chama o método valorTroco() sempre que o texto em totalRecebido é alterado
                 }
             });
-        } else if(!idAvistaMargem.getText().isEmpty()) {
+        } else if (!idAvistaMargem.getText().isEmpty()) {
             idAvistaValor.textProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     margemAvista(); // Chama o método valorTroco() sempre que o texto em totalRecebido é alterado
                 }
             });
-        } 
-        
+        }
+
         idAtualizacao.setValue(LocalDate.now());
         idAtualizacao.setDisable(true);
     }
 
     @FXML
     void handlerCadastrar(ActionEvent event) {
-        if(verificaCampos()){
-            String valorAvista = idAvistaValor.getText().replaceAll("[^\\d,]+", "");
-            valorAvista = valorAvista.replace(',', '.');
-            String valorCompra = idCompra.getText().replaceAll("[^\\d,]+", "");
-            valorCompra = valorCompra.replace(',', '.');
-            FORNECEDOR = (TbFornecedor) FOR.pesquisar("SELECT f FROM codemarket.model.vo.TbEntidade f "
-                    + "JOIN f.tbFornecedor tf WHERE f.entNome = '" + idFornecedor.getValue() + "'");
-            System.out.println(FORNECEDOR.getForcpfCnpj().getEntNome());
-
-
-            
+        if (verificaCampos()) {
+            TbFornecedor fornecedorSelecionado = idFornecedor.getSelectionModel().getSelectedItem();
+            if (fornecedorSelecionado != null) {
+                FORNECEDOR = (TbFornecedor) FOR.listaUm("forcpfCnpj", idFornecedor.getValue().getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class);
+            }
             UnidadeMedidaRN unidadern = new UnidadeMedidaRN();
             TbUnidadeMedida unidade = unidadern.listaUm("umSigla", idUnidade.getValue(), TbUnidadeMedida.class);
 
             CategoriaProdutoRN categoriarn = new CategoriaProdutoRN();
             TbCategoriaProduto categoria = categoriarn.listaUm("catpDescricao", idGrupo.getText(), TbCategoriaProduto.class);
-            
-            TbProduto produto = new TbProduto(idBarras.getText(), idDescricao.getText(), unidade, categoria, FORNECEDOR);
 
+            TbProduto produto = new TbProduto(idBarras.getText(), idDescricao.getText(), unidade, categoria, FORNECEDOR);
+            String valorAvista = idAvistaValor.getText();
+            String valorCompra = idCompra.getText();
+            
+            String valorNumAvista = valorAvista.replaceAll("[^\\d,]+", "");
+            String valorNumCompra = valorCompra.replaceAll("[^\\d,]+", "");
+            
+            float avista = Float.parseFloat(valorNumAvista.replace(',', '.'));
+            float compra = Float.parseFloat(valorNumCompra.replace(',', '.'));
+            System.out.println(compra + "\n" + avista);
             EstoqueRN estoquern = new EstoqueRN();
-            TbEstoque estoque = new TbEstoque(produto, Float.parseFloat(idQuantidade.getText()), Float.parseFloat(valorAvista),
-                    Float.parseFloat(idMinimo.getText()),
-                    (short) (idControle.isSelected() ? 1 : 0), (short) (idProibir.isSelected() ? 1 : 0), timestamp, Float.parseFloat(valorCompra));
+            TbEstoque estoque = new TbEstoque(produto, Float.parseFloat(idQuantidade.getText().replace(',', '.')), avista,
+                    Float.parseFloat(idMinimo.getText().replace(',', '.')),
+                    (short) (idControle.isSelected() ? 1 : 0), (short) (idProibir.isSelected() ? 1 : 0), timestamp, compra);
 
             estoquern.salvar(estoque);
-            
+            JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+            dialogStage.close();
         } else {
             DisplayDialogScreen.getInstance().displayErrorScreen("Finalizar Cadastro", "Campos obrigatórios *", "Preencha todos os campos!");
         }
@@ -205,18 +224,36 @@ public class InserirProdutoController implements Initializable {
         TbCategoriaProduto categoria = new TbCategoriaProduto(idGrupo.getText());
         categoriarn.salvar(categoria);
     }
-    
+
     boolean verificaCampos() {
         boolean camposValidos = true;
-        if (UN.validarCampoTipoCliente(idUnidade)){ camposValidos = false;}
-        if (EST.validarTextField(idBarras)) { camposValidos = false;}
-        if (EST.validarTextField(idDescricao)) { camposValidos = false;}
-        if (EST.validarTextField(idMinimo)) { camposValidos = false;}
-        if (EST.validarTextField(idQuantidade)) { camposValidos = false;}
-        if (EST.validarTextField(idCompra)) { camposValidos = false;}
-        if (EST.validarTextField(idAvistaValor)) { camposValidos = false;}
-        if (EST.validarComboBox(idUnidade)) { camposValidos = false;}
-        if (EST.validarComboBox(idFornecedor)) { camposValidos = false;}
+        if (UN.validarCampoTipoCliente(idUnidade)) {
+            camposValidos = false;
+        }
+        if (EST.validarTextField(idBarras)) {
+            camposValidos = false;
+        }
+        if (EST.validarTextField(idDescricao)) {
+            camposValidos = false;
+        }
+        if (EST.validarTextField(idMinimo)) {
+            camposValidos = false;
+        }
+        if (EST.validarTextField(idQuantidade)) {
+            camposValidos = false;
+        }
+        if (EST.validarTextField(idCompra)) {
+            camposValidos = false;
+        }
+        if (EST.validarTextField(idAvistaValor)) {
+            camposValidos = false;
+        }
+        if (EST.validarComboBox(idUnidade)) {
+            camposValidos = false;
+        }
+        if (EST.validarComboFornecedor(idFornecedor)) {
+            camposValidos = false;
+        }
         return camposValidos;
     }
 }

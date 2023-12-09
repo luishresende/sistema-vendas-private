@@ -1,8 +1,5 @@
 package codemarket.model.vo;
 
-import codemarket.model.vo.TbEntradaEstoque;
-import codemarket.model.vo.TbPedido;
-import codemarket.model.vo.TbProduto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
