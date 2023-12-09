@@ -347,7 +347,7 @@ public class CadastroFuncionarioViewController implements Initializable {
                 Date dataValidade = Date.from(dtValidade.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
                 TbUsuario Usuario = null;
-                if(USU.validarSenhas(senha, confirmaSenha)) {
+                if(USU.verificaSenhas(senha, confirmaSenha)) {
                     ImageManipulation imageMan = new ImageManipulation();
                     byte[] imageByte = null;
                     if(filePathImageUser != null){

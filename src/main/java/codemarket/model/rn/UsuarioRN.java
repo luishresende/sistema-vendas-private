@@ -142,11 +142,11 @@ public class UsuarioRN {
             return false;
         }
     }
-    public boolean validarSenhas(TextField senha, TextField confirmaSenha) {
+    public boolean verificaSenhas(TextField senha, TextField confirmaSenha) {
         if (!senha.getText().equals(confirmaSenha.getText())) {
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
 }

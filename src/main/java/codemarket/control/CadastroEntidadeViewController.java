@@ -283,7 +283,7 @@ public class CadastroEntidadeViewController implements Initializable {
             int i = 0;
             for (FoneModel fones : telefones) {
                 TIPOTELEFONE = TTEL.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
-                TELEFONE = new TbTelefone(fones.getDdd() + fones.getFone(), TIPOTELEFONE);
+                TELEFONE = new TbTelefone(fones.getDdd() + fones.getFone(), TIPOTELEFONE, fones.getNomeContato());
 
                 t[i] = new TbEntidadeHasTelefone(TELEFONE, ENTIDADE);
                 i++;
@@ -416,7 +416,7 @@ public class CadastroEntidadeViewController implements Initializable {
     @FXML
     void handleSalvarEndbutton() {
         TIPOTELEFONE = new TbTipoTelefone(tipoContato.getValue());
-        TELEFONE = new TbTelefone(ddd.getText() + fone.getText(), TIPOTELEFONE);
+        TELEFONE = new TbTelefone(ddd.getText() + fone.getText(), TIPOTELEFONE, nomeContato.getText());
         if(verificaCamposTableEndereco()){
             EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(),
                     cidade.getValue(), estado.getValue(),

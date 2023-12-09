@@ -31,6 +31,10 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t")})
 public class TbEstoque implements Serializable {
+
+    @Basic(optional = false)
+    @Column(name = "esto_valor_base")
+    private float estoValorBase;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,7 +73,7 @@ public class TbEstoque implements Serializable {
 
     public TbEstoque(TbProduto produto, float estoQuantidade, float estoValorFinal, 
                      float estoLimiteMin, short estoProibirVendaLimMin, short estoAtualizarCustoNoPedido, 
-                     Date estoDataAtualizacao) {
+                     Date estoDataAtualizacao, float estoValorBase) {
         
         this.estoProdutoCodigo = produto;
         this.estoQuantidade = estoQuantidade;
@@ -78,6 +82,7 @@ public class TbEstoque implements Serializable {
         this.estoProibirVendaLimMin = estoProibirVendaLimMin;
         this.estoAtualizarCustoNoPedido = estoAtualizarCustoNoPedido;
         this.estoDataAtualizacao = estoDataAtualizacao;
+        this.estoValorBase = estoValorBase;
     }
 
     public Integer getEstoId() {
@@ -183,6 +188,14 @@ public class TbEstoque implements Serializable {
     @Override
     public String toString() {
         return "pojos.TbEstoque[ estoId=" + estoId + " ]";
+    }
+
+    public float getEstoValorBase() {
+        return estoValorBase;
+    }
+
+    public void setEstoValorBase(float estoValorBase) {
+        this.estoValorBase = estoValorBase;
     }
     
 }

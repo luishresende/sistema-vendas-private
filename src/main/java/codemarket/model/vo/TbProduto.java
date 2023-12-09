@@ -34,8 +34,9 @@ public class TbProduto implements Serializable {
     private String pdtNome;
     @OneToOne(mappedBy = "estoProdutoCodigo")
     private TbEstoque tbEstoque;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tbProduto")
-    private List<TbFornecedorHasProduto> tbFornecedorHasProdutoList;
+    @JoinColumn(name = "pdt_for_if", referencedColumnName = "for_id")
+    @ManyToOne(optional = false)
+    private TbFornecedor forId;
     @JoinColumn(name = "pdt_categoria", referencedColumnName = "catp_id")
     @ManyToOne(optional = false)
     private TbCategoriaProduto pdtCategoria;
@@ -50,11 +51,12 @@ public class TbProduto implements Serializable {
         this.pdtCodigo = pdtCodigo;
     }
 
-    public TbProduto(String pdtCodigo, String pdtNome, TbUnidadeMedida unidade, TbCategoriaProduto categoria) {
+    public TbProduto(String pdtCodigo, String pdtNome, TbUnidadeMedida unidade, TbCategoriaProduto categoria, TbFornecedor fornecedor) {
         this.pdtCodigo = pdtCodigo;
         this.pdtNome = pdtNome;
         this.pdtUmSigla = unidade;
         this.pdtCategoria = categoria;
+        this.forId = fornecedor;
     }
 
 
@@ -82,12 +84,12 @@ public class TbProduto implements Serializable {
         this.tbEstoque = tbEstoque;
     }
 
-    public List<TbFornecedorHasProduto> getTbFornecedorHasProdutoList() {
-        return tbFornecedorHasProdutoList;
+    public TbFornecedor getForId() {
+        return forId;
     }
 
-    public void setTbFornecedorHasProdutoList(List<TbFornecedorHasProduto> tbFornecedorHasProdutoList) {
-        this.tbFornecedorHasProdutoList = tbFornecedorHasProdutoList;
+    public void setForId(TbFornecedor forId) {
+        this.forId = forId;
     }
 
     public TbCategoriaProduto getPdtCategoria() {
