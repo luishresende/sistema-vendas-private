@@ -6,8 +6,10 @@
 package codemarket.control;
 
 import codemarket.control.tableViewModel.FornecedorClienteModel;
+import codemarket.model.rn.ClienteRN;
 import codemarket.model.rn.FornecedorRN;
 import codemarket.model.rn.TelefoneRN;
+import codemarket.model.vo.TbCliente;
 import codemarket.model.vo.TbFornecedor;
 import codemarket.model.vo.TbTelefone;
 import java.io.IOException;
@@ -105,21 +107,35 @@ public class FornecedoresViewController implements Initializable {
 
     @FXML
     private void handleButtonEditar() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroEntidadeView.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
+        FornecedorClienteModel selectedFunc = tableViewFornecedor.getSelectionModel().getSelectedItem();
+        if (selectedFunc != null) {
+            FornecedorRN forrn = new FornecedorRN();
+            TbFornecedor fornecedorParaEditar = forrn.listaUm("forcpfCnpj.entcpfCnpj", selectedFunc.getCNPJ(), TbFornecedor.class);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroEntidadeView.fxml"));
 
-        Scene scene = new Scene(page);
-        dialogStage = new Stage();
-        dialogStage.setTitle("Editar Fornecedor");
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.setResizable(false);
-        dialogStage.setScene(scene);
+            AnchorPane page = (AnchorPane) loader.load();
+            
 
-        codemarket.control.CadastroEntidadeViewController controller = loader.getController();
-        controller.setTituloJanela("Editar Cadastro do Fornecedor");
-        controller.setDialogStage(dialogStage);
+            Scene scene = new Scene(page);
+            dialogStage = new Stage();
+            dialogStage.setTitle("Editar Cliente");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setResizable(false);
+            dialogStage.setScene(scene);
+            codemarket.control.CadastroEntidadeViewController controller = loader.getController();
+            controller.setTituloJanela("Editar Cadastro do Fornecedor");
+            controller.editarClienteFornecedor(null, fornecedorParaEditar);
+            controller.setDialogStage(dialogStage);
 
-        dialogStage.showAndWait();
+            dialogStage.showAndWait();
+        } else {
+            // Exiba uma mensagem de aviso caso nenhum funcionário seja selecionado
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecione um Fornecedor para editar.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

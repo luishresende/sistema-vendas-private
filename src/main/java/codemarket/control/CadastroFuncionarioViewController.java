@@ -78,6 +78,8 @@ public class CadastroFuncionarioViewController implements Initializable {
     private String filePathImageUser;
     private boolean editar = false;
     private TbFuncionario funcionarioEditar;
+    private TbEntidade enti;
+
     
     private Stage dialogStage;
     UsuarioRN USU = new UsuarioRN();
@@ -283,33 +285,52 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     @FXML
     void handleFinalizarButton() {
-        if (verificaCampos() && verificaTabela(tableEnd) && verificaTabela(tableFone)) {
-            if(editar){
-                
-            }else{               
-                TbSexo sexo = null;
-                if (tipoSexo.getValue().isEmpty() == false) {
-                    sexo = SEX.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
-                }
+        if (verificaCampos() && verificaTabela(tableEnd) && verificaTabela(tableFone)) {             
+            TbSexo sexo = null;
+            if (tipoSexo.getValue().isEmpty() == false) {
+                sexo = SEX.listaUm("sexDescricao", tipoSexo.getValue(), TbSexo.class);
+            }
 
-                LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
-                Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            LocalDate dtNASC = dataNASC.getValue();  // Obter a data do DatePicker
+            Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-                TbEntidade ENTIDADE = new TbEntidade(cpf.getText(), nome.getText(), nomeFantasia.getText(), 
-                                                    rg.getText(), email.getText(), "Fisico", dateNASC, sexo);
+            TbEntidade ENTIDADE = new TbEntidade(cpf.getText(), nome.getText(), nomeFantasia.getText(), 
+                                                rg.getText(), email.getText(), "Fisico", dateNASC, sexo);
+            
+            StatusRN staRN = new StatusRN();
+            TbStatus staValor = staRN.listaUm("staDescricao", tipoStatus.getValue(), TbStatus.class);
 
-                int i = 0;
-                for (FoneModel fones : telefones) {
-                    TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
-                    TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
+            int i = 0;
+            for (FoneModel fones : telefones) {
+                TelefoneTipoRN tipoTRN = new TelefoneTipoRN();
+                TbTipoTelefone tipo = tipoTRN.listaUm("ttDescricao", fones.getTipoContato(), TbTipoTelefone.class);
+
+                if(fones.getHas() == null){
                     TbTelefone tell = new TbTelefone(fones.getDdd() + fones.getFone(), tipo, fones.getNomeContato());
+                    
+                    TbEntidadeHasTelefone tel = null;
+                    if(editar){
+                        tel = new TbEntidadeHasTelefone(tell, enti);
+                    }else{
+                        tel = new TbEntidadeHasTelefone(tell, ENTIDADE);
+                    }
+                    EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+                    eht.salvar(tel);               
+                }else{
+                   TbTelefone f = fones.getHas();
+                   f.setFoneDescricao(fones.getDdd() + fones.getFone());
+                   f.setFonenomeContato(fones.getNomeContato());
+                   f.setFoneTipo(tipo);
 
-                    t[i] = new TbEntidadeHasTelefone(tell, ENTIDADE);
-                    i++;
+                   TelefoneRN trn = new TelefoneRN();
+                   trn.atualizar(f);                   
                 }
 
-                i = 0;
-                for (EnderecoModel endereco : enderecos) {
+            }
+            
+            for (EnderecoModel endereco : enderecos){
+                if(endereco.getHas() == null){
+                    i = 0;
                     TbBairro bairroSalvar = new TbBairro(endereco.getBairro());
 
                     TbLogradouro lougradouroSalvar = new TbLogradouro(endereco.getLogradouro());
@@ -332,22 +353,92 @@ public class CadastroFuncionarioViewController implements Initializable {
 
                     TbEndereco ende = new TbEndereco(Integer.parseInt(endereco.getNumero()), endereco.getComplemento(), postal, tende);
 
-                    e[i] = new TbEntidadeHasEndereco(ENTIDADE, ende);
-
+                    TbEntidadeHasEndereco new_endereco = null;
+                    if(editar){
+                        new_endereco = new TbEntidadeHasEndereco(enti, ende);
+                    }else{
+                        new_endereco = new TbEntidadeHasEndereco(ENTIDADE, ende);
+                    }
+                    EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                    ehe.salvar(new_endereco);    
                     i++;
-                    this.endPrincipal = ende;
+                    this.endPrincipal = ende;   
+                }else{
+                        
+                    TbEndereco end = endereco.getHas();
+                    end.setEndComplemento(endereco.getComplemento());
+                    end.setEndNumero(Integer.parseInt(endereco.getNumero()));
+
+                    TipoEnderecoRN trn = new TipoEnderecoRN();
+                    TbTipoEndereco tip = trn.listaUm("teDescricao", endereco.getTipoEndereco(), TbTipoEndereco.class);
+                    end.setEndTipo(tip);
+
+                    TbEndPostal endP = end.getEndendPid();
+                    endP.setEndPnomerua(endereco.getNomerua());
+                    endP.setEndCEP(endereco.getCep());
+
+                    CidadeRN cid = new CidadeRN();
+                    String jpql = "SELECT t.tbCidade FROM TbCidEstPai t WHERE "
+                            + "t.tbEstado.estSigla = '" + endereco.getEstado() + "' "
+                            + "AND t.tbCidade.cidDescricao = '" + endereco.getCidade() + "'";
+                    TbCidade new_cid = (TbCidade) cid.pesquisar(jpql).get(0);
+
+                    CidEstPaiRN cep = new CidEstPaiRN();
+                    TbCidEstPai ceps = (TbCidEstPai) cep.pesquisar("SELECT t FROM TbCidEstPai t "
+                            + "WHERE t.tbEstado.estSigla = '" + endereco.getEstado() + "' AND t.tbCidade.cidId = '"
+                            + new_cid.getCidId() + "'").get(0);
+
+                    endP.setTbCidEstPai(ceps);
+
+                    TbLogradouro lou = endP.getEndPlogid();
+                    lou.setLogDescricao(endereco.getLogradouro());
+
+                    TbBairro bai = endP.getEndPbaiid();
+                    bai.setBaiDescricao(endereco.getBairro());
+
+                    EnderecoRN endrn = new EnderecoRN();
+                    endrn.atualizar(end);
                 }
-
+            }
+            if(editar){
+                
+                enti.setEntEmail(email.getText());
+                enti.setEntNome(nome.getText());
+                enti.setEntnomeFantasia(nomeFantasia.getText());
+                enti.setEntSexo(sexo);
+                enti.setEntdtNasc(dateNASC);
+                enti.setEntcpfCnpj(cpf.getText());
+                enti.setEntrgIe(rg.getText());
+                
+                funcionarioEditar.setFuncStatus(staValor);
+                TbUsuario usu = funcionarioEditar.getFuncUsuario();
+                
+                usu.setUsuSenha(senha.getText());
+                usu.setUsuUsuario(usuario.getText());
+                LocalDate dtValidade = validade.getValue();  // Obter a data do DatePicker
+                Date dataValidade = Date.from(dtValidade.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                usu.setUsuValidade(dataValidade);
+                
+                ImageManipulation imageMan = new ImageManipulation();
+                    byte[] imageByte = null;
+                    if(filePathImageUser != null){
+                        imageByte = imageMan.convertToBytes(filePathImageUser);
+                }                  
+                usu.setUsuimgPerfil(imageByte);
+                
+                funcionarioEditar.setFuncUsuario(usu);
+                enti.setTbFuncionarioList(funcionarioEditar);
+                JOptionPane.showMessageDialog(null, "Edição concluido com sucesso!");
+                dialogStage.close();
+             
+            }else{
                 ENTIDADE.setEntEnderecoPrincipal(endPrincipal);
-
-                StatusRN staRN = new StatusRN();
-                TbStatus staValor = staRN.listaUm("staDescricao", tipoStatus.getValue(), TbStatus.class);
 
                 LocalDate dtValidade = validade.getValue();  // Obter a data do DatePicker
                 Date dataValidade = Date.from(dtValidade.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
                 TbUsuario Usuario = null;
-                if(USU.verificaSenhas(senha, confirmaSenha)) {
+                if(USU.validarSenhas(senha, confirmaSenha)) {
                     ImageManipulation imageMan = new ImageManipulation();
                     byte[] imageByte = null;
                     if(filePathImageUser != null){
@@ -357,38 +448,16 @@ public class CadastroFuncionarioViewController implements Initializable {
                     CargoRN carRN = new CargoRN();
                     TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
 
-                    EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
-                    for (TbEntidadeHasTelefone tel : t) {
-                        if (tel == null) {
-                            break;
-                        }
-                        eht.salvar(tel);
-                    }
-                    EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
-                    for (TbEntidadeHasEndereco end : e) {
-                        if (end == null) {
-                            break;
-                        }
-                
-                        ehe.salvar(end);
-                    }
+                    
 
-                    if(editar){
-                        funcionarioEditar.setFuncentcpfCnpj(ENTIDADE);
-                        funcionarioEditar.setFuncUsuario(Usuario);
-                        funcionarioEditar.setFuncCargo(cargo);
-                        funcionarioEditar.setFuncStatus(staValor);
-                        FUNC.atualizar(funcionarioEditar);
-                    }else{
-                        TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
-                        FUNC.salvar(funcionario);
-                    }
+                    TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
+                    FUNC.salvar(funcionario);
                     JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
                     dialogStage.close();
-                } else {
+                }else {
                     DisplayDialogScreen.getInstance().displayErrorScreen("Senhas", "Verifique a senha!", "As senhas não conferem.");
-                }
-            }
+                }   
+            }   
         } else {
             DisplayDialogScreen.getInstance().displayErrorScreen("Finalizar Cadastro", "Campos obrigatórios *", "Preencha todos os "
                         + "campos! \nAs tabelas de endereço e telefone tem que conter pelo menos uma informação.");
@@ -403,7 +472,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     @FXML
     void handleSalvarFonebutton() {
         if (verificaCamposTableFone()) {
-            FoneModel novoFone = new FoneModel(nomeContato.getText(), ddd.getText(), fone.getText(), tipoContato.getValue());
+            FoneModel novoFone = new FoneModel(nomeContato.getText(), ddd.getText(), fone.getText(), tipoContato.getValue(), null);
             telefones.add(novoFone);
 
             nomeContato.clear();
@@ -421,7 +490,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             EnderecoModel novoEndereco = new EnderecoModel(tipoEndereco.getValue(), cep.getText(),
                     cidade.getValue(), estado.getValue(),
                     pais.getValue(), nomerua.getText(),
-                    bairro.getText(), complemento.getText(), numero.getText(), logradouro.getValue());
+                    bairro.getText(), complemento.getText(), numero.getText(), logradouro.getValue(), null);
             enderecos.add(novoEndereco);
 
             tipoEndereco.setValue("Selecione...");
@@ -456,6 +525,14 @@ public class CadastroFuncionarioViewController implements Initializable {
 
             // Remova o item da lista de endereços
             enderecos.remove(selectedEndereco);
+            
+            if(selectedEndereco.getHas() != null){
+                EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                TbEntidadeHasEndereco remove_end = (TbEntidadeHasEndereco) ehe.pesquisar("SELECT t FROM TbEntidadeHasEndereco"
+                                                                                          + " t where t.eeentcpfCnpj = '" + enti.getEntcpfCnpj() + 
+                                                                                          "' and t.eeEndId = '" + selectedEndereco.getHas().getEndId() + "'").get(0);
+                ehe.excluir(remove_end);   
+            }
         }
     }
 
@@ -470,6 +547,17 @@ public class CadastroFuncionarioViewController implements Initializable {
 
             // Remova o item da lista de telefones
             telefones.remove(selectedFone);
+            
+            if(selectedFone.getHas() != null){
+                EntidadeHasTelefoneRN ehe = new EntidadeHasTelefoneRN();
+                TbEntidadeHasTelefone remove_tel = (TbEntidadeHasTelefone) ehe.pesquisar("SELECT t FROM TbEntidadeHasTelefone"
+                                                                                          + " t where t.ehtentcpfCnpj = '" + enti.getEntcpfCnpj() + 
+                                                                                          "' and t.ehtFoneId = '" + selectedFone.getHas().getFoneId()+ "'").get(0);
+                EntidadeRN adminrn = new EntidadeRN();
+                TbEntidade admin = adminrn.listaUm("entcpfCnpj", "000.000.000-00", TbEntidade.class);
+                remove_tel.setEhtentcpfCnpj(admin);
+                ehe.atualizar(remove_tel);  
+            }
         }
     }
     
@@ -477,12 +565,30 @@ public class CadastroFuncionarioViewController implements Initializable {
     void handlerCancelarFone() {
         FoneModel selectedFone = tableFone.getSelectionModel().getSelectedItem();
         telefones.remove(selectedFone);
+        
+        if(selectedFone.getHas() != null){
+                EntidadeHasTelefoneRN ehe = new EntidadeHasTelefoneRN();
+                TbEntidadeHasTelefone remove_tel = (TbEntidadeHasTelefone) ehe.pesquisar("SELECT t FROM TbEntidadeHasTelefone"
+                                                                                          + " t where t.ehtentcpfCnpj = '" + enti.getEntcpfCnpj() + 
+                                                                                          "' and t.ehtFoneId = '" + selectedFone.getHas().getFoneId()+ "'").get(0);
+                EntidadeRN adminrn = new EntidadeRN();
+                TbEntidade admin = adminrn.listaUm("entcpfCnpj", "000.000.000-00", TbEntidade.class);
+                remove_tel.setEhtentcpfCnpj(admin);
+                ehe.atualizar(remove_tel);  
+            }
     }
     
     @FXML
     void handlerCancelarEnd() {
-        EnderecoModel selectedEndereco = tableEnd.getSelectionModel().getSelectedItem();
+        EnderecoModel selectedEndereco = tableEnd.getSelectionModel().getSelectedItem();      
         enderecos.remove(selectedEndereco);
+            if(selectedEndereco.getHas() != null){
+                EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                TbEntidadeHasEndereco remove_end = (TbEntidadeHasEndereco) ehe.pesquisar("SELECT t FROM TbEntidadeHasEndereco"
+                                                                                          + " t where t.eeentcpfCnpj = '" + enti.getEntcpfCnpj() + 
+                                                                                          "' and t.eeEndId = '" + selectedEndereco.getHas().getEndId() + "'").get(0);
+                ehe.excluir(remove_end);   
+            }
     }
     
     boolean verificaCampos() {
@@ -532,6 +638,7 @@ public class CadastroFuncionarioViewController implements Initializable {
     
     public void editarFuncionario(TbFuncionario funcionarioParaEditar) {
         this.funcionarioEditar = funcionarioParaEditar;
+        this.enti = funcionarioEditar.getFuncentcpfCnpj();
         editar = true;
         TbFuncionario funcionario = funcionarioParaEditar;
         TbEntidade entidade = funcionario.getFuncentcpfCnpj();
@@ -581,12 +688,12 @@ public class CadastroFuncionarioViewController implements Initializable {
                endereco.getEndendPid().getEndPbaiid().getBaiDescricao(),
                endereco.getEndComplemento(),
                String.valueOf(endereco.getEndNumero()),
-               endereco.getEndendPid().getEndPlogid().getLogDescricao()
+               endereco.getEndendPid().getEndPlogid().getLogDescricao(),
+               endereco
            );
            enderecos.add(enderecoModel);
        }
 
-       // Fetch and populate phone data
        List<TbEntidadeHasTelefone> telefonesList = entidade.getTbEntidadeHasTelefoneList();
        for (TbEntidadeHasTelefone entidadeHasTelefone : telefonesList) {
            TbTelefone telefone = entidadeHasTelefone.getEhtFoneId();
@@ -598,28 +705,11 @@ public class CadastroFuncionarioViewController implements Initializable {
                telefone.getFonenomeContato(),
                dd,
                resto,
-               telefone.getFoneTipo().getTtDescricao()
+               telefone.getFoneTipo().getTtDescricao(),
+               telefone
            );
            telefones.add(foneModel);
        }       
 
        }
-    public boolean enderecoJaExisteNoBanco(TbEndereco end) {
-        for(TbEndereco endereco : funcionarioEditar.getFuncentcpfCnpj().getTbEnderecoList()){
-            if(end == endereco){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    // Método para verificar se o telefone já existe no banco
-    public boolean telefoneJaExisteNoBanco(TbTelefone fone) {
-        for(TbTelefone telefone : funcionarioEditar.getFuncentcpfCnpj().getTbTelefoneList()){
-            if(fone == telefone){
-                return false;
-            }
-        }
-        return true;
-    }
 }

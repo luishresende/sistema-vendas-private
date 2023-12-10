@@ -2,19 +2,23 @@ package codemarket.model.rn;
 
 import codemarket.model.dao.GenericDAO;
 import codemarket.model.vo.TbEstoque;
-import codemarket.model.vo.TbFornecedor;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.UnaryOperator;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.NodeOrientation;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
+import javafx.util.converter.PercentageStringConverter;
+
+;
 
 public class EstoqueRN {
 
@@ -60,57 +64,39 @@ public class EstoqueRN {
     }
 
     // Formatação monetária ---------------------------------------------------------------------
-    private NumberFormat format, percentageFormat, numeroFormat;
+    private NumberFormat format, percentageFormat;
     private SimpleDoubleProperty amount;
 
     public void initializeCurrencyField(TextField textField, Locale locale, Double initialAmount) {
         textField.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         amount = new SimpleDoubleProperty(this, "amount", initialAmount);
         String textFieldId = textField.getId();
-        if ("idCompra".equals(textFieldId) || "idAvistaValor".equals(textFieldId)) {
+        // Erro aqui ------------------------------------------
+        if ("idCompra".equals(textFieldId) || "idAvistaCompra".equals(textFieldId)) {
             format = NumberFormat.getCurrencyInstance(locale);
-            textField.setText(format.format(initialAmount));
-            // Remove selection when textfield gets focus
-            textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-                Platform.runLater(() -> {
-                    int length = textField.getText().length();
-                    textField.selectRange(length, length);
-                    textField.positionCaret(length);
-                });
-            });
+        } else if ("idAvistaMargem".equals(textFieldId)) {
+            format = NumberFormat.getNumberInstance(locale);
+        }
+        // ---------------------------------------------------
+        textField.setText(format.format(initialAmount));
 
-            // Listen the text's changes
-            textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-                formatText(textField, newValue, format);
-                Platform.runLater(() -> {
-                    int length = textField.getText().length();
-                    textField.positionCaret(length);
-                });
+        // Remove selection when textfield gets focus
+        textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            Platform.runLater(() -> {
+                int length = textField.getText().length();
+                textField.selectRange(length, length);
+                textField.positionCaret(length);
             });
-        }
-        if ("idAvistaMargem".equals(textFieldId)) {
-            percentageFormat = NumberFormat.getPercentInstance(locale);
-            textField.setText(percentageFormat.format(initialAmount));
-            textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-                formatText(textField, newValue, percentageFormat);
-                Platform.runLater(() -> {
-                    int length = textField.getText().length();
-                    textField.positionCaret(length);
-                });
+        });
+
+        // Listen the text's changes
+        textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            formatText(textField, newValue);
+            Platform.runLater(() -> {
+                int length = textField.getText().length();
+                textField.positionCaret(length);
             });
-        }
-        if ("idMinimo".equals(textFieldId) || "idQuantidade".equals(textFieldId)) {
-            numeroFormat = NumberFormat.getNumberInstance(locale);
-            numeroFormat.setMinimumFractionDigits(2);
-            textField.setText(numeroFormat.format(initialAmount));
-            textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-                formatText(textField, newValue, numeroFormat);
-                Platform.runLater(() -> {
-                    int length = textField.getText().length();
-                    textField.positionCaret(length);
-                });
-            });
-        }
+        });
     }
 
     public Double getAmount() {
@@ -121,19 +107,19 @@ public class EstoqueRN {
         return this.amount;
     }
 
-    public void setAmount(TextField textField, Double newAmount, NumberFormat formato) {
+    public void setAmount(TextField textField, Double newAmount) {
         if (newAmount >= 0.0) {
             amount.set(newAmount);
-            formatText(textField, formato.format(newAmount), formato);
+            formatText(textField, format.format(newAmount));
         }
     }
 
-    public void setCurrencyFormat(TextField textField, Locale locale, NumberFormat formato) {
-        formato = NumberFormat.getCurrencyInstance(locale);
-        formatText(textField, formato.format(getAmount()), formato);
+    public void setCurrencyFormat(TextField textField, Locale locale) {
+        format = NumberFormat.getCurrencyInstance(locale);
+        formatText(textField, format.format(getAmount()));
     }
 
-    private void formatText(TextField textField, String text, NumberFormat formato) {
+    private void formatText(TextField textField, String text) {
         if (text != null && !text.isEmpty()) {
             String plainText = text.replaceAll("[^0-9]", "");
 
@@ -146,38 +132,15 @@ public class EstoqueRN {
 
             Double newValue = Double.parseDouble(builder.toString());
             amount.set(newValue);
-            textField.setText(formato.format(newValue));
+            textField.setText(format.format(newValue));
         }
     }
 
-    public void deleteText(TextField textField, int start, int end, NumberFormat formato) {
+    public void deleteText(TextField textField, int start, int end) {
         StringBuilder builder = new StringBuilder(textField.getText());
         builder.delete(start, end);
-        formatText(textField, builder.toString(), formato);
+        formatText(textField, builder.toString());
         textField.selectRange(start, start);
     }
     // ------------------------------------------------------------------------------------
-    
-    public boolean validarTextField(TextField textField) {
-        if (textField.getText().trim().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    public boolean validarComboBox(ComboBox<String> combo) {
-        if (combo.getValue() == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public boolean validarComboFornecedor(ComboBox<TbFornecedor> combo) {
-        if (combo.getValue() == null){
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

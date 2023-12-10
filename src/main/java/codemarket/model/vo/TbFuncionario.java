@@ -40,7 +40,7 @@ public class TbFuncionario implements Serializable {
     @ManyToOne(optional = false)
     private TbCargo funcCargo;
     @JoinColumn(name = "func_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @OneToOne(cascade = CascadeType.PERSIST, optional = false)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
     private TbEntidade funcentcpfCnpj;
     @JoinColumn(name = "func_status", referencedColumnName = "sta_id")
     @ManyToOne(optional = false)

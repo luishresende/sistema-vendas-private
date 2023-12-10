@@ -6,6 +6,8 @@
 
 package codemarket.control.tableViewModel;
 
+import codemarket.model.vo.TbTelefone;
+
 /**
  *
  * @author kauan
@@ -13,14 +15,24 @@ package codemarket.control.tableViewModel;
 public class FoneModel {
     private String tipoContato;
     private String nomeContato;
+
+    public TbTelefone getHas() {
+        return has;
+    }
+
+    public void setHas(TbTelefone has) {
+        this.has = has;
+    }
     private String ddd;
     private String Fone;
+    private TbTelefone has;
 
-    public FoneModel(String nomeContato, String ddd, String Fone, String tipoContato) {
+    public FoneModel(String nomeContato, String ddd, String Fone, String tipoContato, TbTelefone has) {
         this.tipoContato = tipoContato;
         this.nomeContato = nomeContato;
         this.ddd = ddd;
         this.Fone = Fone;
+        this.has = has;
     }
 
     public String getTipoContato() {

@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,8 +30,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_fornecedor")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TbFornecedor.findAll", query = "SELECT t FROM TbFornecedor t")})
+    @NamedQuery(name = "TbFornecedor.findAll", query = "SELECT t FROM TbFornecedor t"),
+    @NamedQuery(name = "TbFornecedor.findByForId", query = "SELECT t FROM TbFornecedor t WHERE t.forId = :forId")})
 public class TbFornecedor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,12 +42,11 @@ public class TbFornecedor implements Serializable {
     @Column(name = "for_id")
     private Integer forId;
     @JoinColumn(name = "for_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @OneToOne(cascade = CascadeType.PERSIST, optional = false)
+    @OneToOne(optional = false)
     private TbEntidade forcpfCnpj;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "entreForId")
-    private List<TbEntradaEstoque> tbEntradaEstoqueList;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "tbFornecedor")
-    private List<TbFornecedorHasProduto> tbFornecedorHasProdutoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pdtForIf")
+    private List<TbProduto> tbProdutoList;
+
 
     public TbFornecedor() {
     }
@@ -68,20 +71,13 @@ public class TbFornecedor implements Serializable {
         this.forcpfCnpj = forcpfCnpj;
     }
 
-    public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
-        return tbEntradaEstoqueList;
+    @XmlTransient
+    public List<TbProduto> getTbProdutoList() {
+        return tbProdutoList;
     }
 
-    public void setTbEntradaEstoqueList(List<TbEntradaEstoque> tbEntradaEstoqueList) {
-        this.tbEntradaEstoqueList = tbEntradaEstoqueList;
-    }
-
-    public List<TbFornecedorHasProduto> getTbFornecedorHasProdutoList() {
-        return tbFornecedorHasProdutoList;
-    }
-
-    public void setTbFornecedorHasProdutoList(List<TbFornecedorHasProduto> tbFornecedorHasProdutoList) {
-        this.tbFornecedorHasProdutoList = tbFornecedorHasProdutoList;
+    public void setTbProdutoList(List<TbProduto> tbProdutoList) {
+        this.tbProdutoList = tbProdutoList;
     }
 
     @Override
@@ -92,21 +88,8 @@ public class TbFornecedor implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TbFornecedor)) {
-            return false;
-        }
-        TbFornecedor other = (TbFornecedor) object;
-        if ((this.forId == null && other.forId != null) || (this.forId != null && !this.forId.equals(other.forId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "codemarket.model.vo.TbFornecedor[ forId=" + forId + " ]";
+        return "teste.TbFornecedor[ forId=" + forId + " ]";
     }
     
 }

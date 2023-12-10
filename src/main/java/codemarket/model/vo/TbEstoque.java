@@ -1,5 +1,8 @@
 package codemarket.model.vo;
 
+import codemarket.model.vo.TbEntradaEstoque;
+import codemarket.model.vo.TbPedido;
+import codemarket.model.vo.TbProduto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,16 +31,15 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "TbEstoque.findAll", query = "SELECT t FROM TbEstoque t")})
 public class TbEstoque implements Serializable {
-
-    @Basic(optional = false)
-    @Column(name = "esto_valor_base")
-    private float estoValorBase;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "esto_id")
     private Integer estoId;
+    @Basic(optional = false)
+    @Column(name = "esto_valor_base")
+    private float estoValorBase;
     @Basic(optional = false)
     @Column(name = "esto_quantidade")
     private float estoQuantidade;
@@ -182,17 +184,17 @@ public class TbEstoque implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "pojos.TbEstoque[ estoId=" + estoId + " ]";
-    }
-
     public float getEstoValorBase() {
         return estoValorBase;
     }
 
     public void setEstoValorBase(float estoValorBase) {
         this.estoValorBase = estoValorBase;
+    }
+
+    @Override
+    public String toString() {
+        return "pojos.TbEstoque[ estoId=" + estoId + " ]";
     }
     
 }

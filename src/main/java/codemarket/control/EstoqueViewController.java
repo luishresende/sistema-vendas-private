@@ -60,9 +60,9 @@ public class EstoqueViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         List<TbEstoque> estoques = e.pesquisar("SELECT t FROM TbEstoque t");
         for (TbEstoque est : estoques) {
-            EstoqueModel esto = new EstoqueModel(est.getEstoId(), est.getEstoProdutoCodigo().getPdtNome(),
+            EstoqueModel esto = new EstoqueModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtNome(),
                     est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
-                    est.getEstoValorFinal(), est.getEstoQuantidade(),
+                    est.getEstoValorFinal(),
                     est.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao());
 
             estoque.add(esto);
@@ -98,22 +98,36 @@ public class EstoqueViewController implements Initializable {
     }
 
     @FXML
-    private void handleButtonEditar() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/InserirProdutoView.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
+    private void handleButtonEditar() throws IOException {        
+        EstoqueModel selectedFunc = tableEstoque.getSelectionModel().getSelectedItem();
+        if (selectedFunc != null) {
+            EstoqueRN estorn = new EstoqueRN();
+            TbEstoque etoqueParaEditar = estorn.listaUm("estoProdutoCodigo.pdtCodigo", selectedFunc.getCodigo(), TbEstoque.class);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/InserirProdutoView.fxml"));
 
-        Scene scene = new Scene(page);
-        dialogStage = new Stage();
-        dialogStage.setTitle("Editar Produto");
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.setResizable(false);
-        dialogStage.setScene(scene);
+            AnchorPane page = (AnchorPane) loader.load();
+            
 
-        codemarket.control.InserirProdutoController controller = loader.getController();
-        controller.setTituloJanela("Editar Produto");
-        controller.setDialogStage(dialogStage);
+            Scene scene = new Scene(page);
+            dialogStage = new Stage();
+            dialogStage.setTitle("Editar Estoque");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setResizable(false);
+            dialogStage.setScene(scene);
+            codemarket.control.InserirProdutoController controller = loader.getController();
+            controller.setTituloJanela("Editar Cadastro do Estoque");
+            controller.editarEstoque(etoqueParaEditar);
+            controller.setDialogStage(dialogStage);
 
-        dialogStage.showAndWait();
+            dialogStage.showAndWait();
+        } else {
+            // Exiba uma mensagem de aviso caso nenhum funcionário seja selecionado
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Aviso");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, selecione um Fornecedor para editar.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -154,9 +168,9 @@ public class EstoqueViewController implements Initializable {
         estoque.clear();
         List<TbEstoque> estoques = e.pesquisar("SELECT t FROM TbEstoque t");
         for (TbEstoque est : estoques) {
-            EstoqueModel esto = new EstoqueModel(est.getEstoId(), est.getEstoProdutoCodigo().getPdtNome(),
+            EstoqueModel esto = new EstoqueModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtNome(),
                     est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
-                    est.getEstoValorFinal(), est.getEstoQuantidade(),
+                    est.getEstoValorFinal(),
                     est.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao());
 
             estoque.add(esto);

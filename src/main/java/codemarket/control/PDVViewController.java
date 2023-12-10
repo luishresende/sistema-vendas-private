@@ -217,7 +217,8 @@ public class PDVViewController implements Initializable {
                 String codigoProduto = pesquisaProdutoController.getCodigoProdutoSelecionado();
                 EstoqueRN estoque = new EstoqueRN();
                 TbEstoque est = estoque.listaUm("estoId", codigoProduto, TbEstoque.class);
-                VendaModel v = new VendaModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(), (float) est.getEstoValorFinal(),
+                VendaModel v = new VendaModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
+                        est.getEstoValorFinal(),
                         est.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao(), est.getEstoProdutoCodigo().getPdtNome(), 0);
 
                 venda.add(v);

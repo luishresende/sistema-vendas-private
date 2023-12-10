@@ -1,5 +1,9 @@
 
 package codemarket.control.tableViewModel;
+
+import codemarket.model.vo.TbEndereco;
+import codemarket.model.vo.TbEntidadeHasEndereco;
+
 public class EnderecoModel {
     private String tipoEndereco;
     private String cep;
@@ -11,8 +15,9 @@ public class EnderecoModel {
     private String complemento;
     private String numero;
     private String logradouro;
+    private TbEndereco has;
 
-    public EnderecoModel(String tipoEndereco, String cep, String cidade, String estado, String pais, String nomerua, String bairro, String complemento, String numero, String logradouro) {
+    public EnderecoModel(String tipoEndereco, String cep, String cidade, String estado, String pais, String nomerua, String bairro, String complemento, String numero, String logradouro, TbEndereco has) {
         this.tipoEndereco = tipoEndereco;
         this.cep = cep;
         this.cidade = cidade;
@@ -23,6 +28,15 @@ public class EnderecoModel {
         this.complemento = complemento;
         this.numero = numero;
         this.logradouro = logradouro;
+        this.has = has;
+    }
+
+    public TbEndereco getHas() {
+        return has;
+    }
+
+    public void setHas(TbEndereco has) {
+        this.has = has;
     }
 
     public String getNomerua() {

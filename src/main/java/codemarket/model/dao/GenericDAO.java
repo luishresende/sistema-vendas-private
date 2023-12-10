@@ -42,6 +42,7 @@ public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
         manager.getTransaction().begin();
         manager.merge(objeto);
         manager.getTransaction().commit();
+
     }
 
     @Override

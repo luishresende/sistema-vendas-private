@@ -62,7 +62,7 @@ public class TbEntidade implements Serializable {
     @Basic(optional = false)
     @Column(name = "ent_tipo")
     private String entTipo;
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tbEntidadeList")
+    @ManyToMany(mappedBy = "tbEntidadeList")
     private List<TbEndereco> tbEnderecoList;
     @JoinTable(name = "tb_entidade_has_telefone", joinColumns = {
         @JoinColumn(name = "eht_ent_cpfCnpj", referencedColumnName = "ent_cpfCnpj")}, inverseJoinColumns = {

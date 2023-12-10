@@ -26,9 +26,14 @@
          <children>
             <Pane layoutX="6.0" layoutY="6.0" prefHeight="285.0" prefWidth="508.0" style="-fx-border-style: dotted; -fx-border-radius: 20;" styleClass="secondThemeColor">
                <children>
-                  <Label contentDisplay="BOTTOM" layoutX="12.0" layoutY="19.0" prefHeight="56.0" prefWidth="405.0" styleClass="secondTextColor" text="Código de Barras *">
+                  <Label contentDisplay="BOTTOM" layoutX="14.0" layoutY="21.0" styleClass="secondTextColor" text="Código">
                      <graphic>
-                        <TextField fx:id="idBarras" onKeyReleased="#validaCodigoBarras" prefHeight="31.0" prefWidth="400.0" />
+                        <TextField fx:id="idCodigo" editable="false" prefHeight="31.0" prefWidth="67.0" />
+                     </graphic>
+                  </Label>
+                  <Label contentDisplay="BOTTOM" layoutX="95.0" layoutY="19.0" prefHeight="56.0" prefWidth="322.0" styleClass="secondTextColor" text="Código de Barras *">
+                     <graphic>
+                        <TextField fx:id="idBarras" prefHeight="31.0" prefWidth="322.0" />
                      </graphic>
                   </Label>
                   <Label contentDisplay="BOTTOM" layoutX="423.0" layoutY="19.0" prefHeight="56.0" prefWidth="67.0" styleClass="secondTextColor" text="Unidade *">
@@ -50,7 +55,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </CheckBox>
-                  <CheckBox fx:id="idProibir" layoutX="8.0" layoutY="186.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="239.0" styleClass="secondTextColor" text="Proibir venda ao atingir o limite minímo">
+                  <CheckBox fx:id="idProibir" layoutX="8.0" layoutY="186.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="303.0" styleClass="secondTextColor" text="Proibir venda ao atingir o limite minímo">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -108,17 +113,17 @@
                      <children>
                         <Label contentDisplay="RIGHT" layoutX="28.0" layoutY="100.0" prefHeight="31.0" prefWidth="198.0" styleClass="secondTextColor" text="Valor Avista(R$):">
                            <graphic>
-                              <TextField fx:id="idAvistaValor" onAction="#valorAvista" prefHeight="31.0" prefWidth="105.0" />
+                              <TextField fx:id="idAvistaValor" onKeyReleased="#validaValorAvista" prefHeight="31.0" prefWidth="105.0" />
                            </graphic>
                         </Label>
                         <Label contentDisplay="RIGHT" layoutX="15.0" layoutY="64.0" prefHeight="31.0" prefWidth="216.0" styleClass="secondTextColor" text="Margem Avista(%):">
                            <graphic>
-                              <TextField fx:id="idAvistaMargem" onAction="#margemAvista" prefHeight="31.0" prefWidth="105.0" />
+                              <TextField fx:id="idAvistaMargem" onKeyReleased="#validaMargem" prefHeight="31.0" prefWidth="105.0" />
                            </graphic>
                         </Label>
                         <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="17.0" prefHeight="31.0" prefWidth="204.0" styleClass="secondTextColor" text="Valor de Compra:">
                            <graphic>
-                              <TextField fx:id="idCompra" prefHeight="31.0" prefWidth="105.0" />
+                              <TextField fx:id="idCompra" onKeyReleased="#validaValorCompra" prefHeight="31.0" prefWidth="105.0" />
                            </graphic>
                         </Label>
                      </children>

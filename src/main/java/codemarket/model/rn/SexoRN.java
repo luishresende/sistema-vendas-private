@@ -1,7 +1,11 @@
 package codemarket.model.rn;
 import codemarket.model.dao.GenericDAO;
+import codemarket.model.vo.TbEntidade;
 import codemarket.model.vo.TbSexo;
+import java.util.ArrayList;
 import java.util.List;import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import static javafx.scene.paint.Color.*;
 
 
 public class SexoRN {
