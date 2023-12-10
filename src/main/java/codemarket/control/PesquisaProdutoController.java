@@ -59,7 +59,7 @@ public class PesquisaProdutoController implements Initializable {
         for (TbEstoque pro : produtos) {
             EstoqueModel pros = new EstoqueModel(String.valueOf(pro.getEstoId()), pro.getEstoProdutoCodigo().getPdtNome(),
                     pro.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
-                    pro.getEstoValorFinal(),
+                    pro.getEstoValorFinal(), pro.getEstoQuantidade(),
                     pro.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao());
 
             produto.add(pros);

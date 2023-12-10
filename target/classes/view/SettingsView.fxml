@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
@@ -8,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="secondThemeColor" stylesheets="@styleSettings.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.SettingsViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="secondThemeColor" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codemarket.control.SettingsViewController">
    <children>
       <GridPane layoutX="63.0" layoutY="48.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -236,14 +237,28 @@
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="secondTextColor" />
+                              <String fx:value="buttonProduto" />
+                           </styleClass>
                         </Button>
-                        <Button fx:id="buttonCancel" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Cancelar" GridPane.columnIndex="1">
+                        <Button fx:id="buttonCancel" mnemonicParsing="false" onAction="#handleCancelButton" style="-fx-background-color: transparent;" text="Cancelar" GridPane.columnIndex="1">
                            <graphic>
                               <FontAwesomeIcon iconName="CLOSE" size="3EM" styleClass="primaryIconColor" />
                            </graphic>
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <styleClass>
+                              <String fx:value="buttonProduto" />
+                              <String fx:value="secondTextColor" />
+                           </styleClass>
                         </Button>
                      </children>
                   </GridPane>
@@ -252,4 +267,8 @@
          </children>
       </GridPane>
    </children>
+   <stylesheets>
+      <URL value="@styleSettings.css" />
+      <URL value="@style.css" />
+   </stylesheets>
 </AnchorPane>

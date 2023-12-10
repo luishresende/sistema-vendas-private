@@ -62,7 +62,7 @@ public class EstoqueViewController implements Initializable {
         for (TbEstoque est : estoques) {
             EstoqueModel esto = new EstoqueModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtNome(),
                     est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
-                    est.getEstoValorFinal(),
+                    est.getEstoValorFinal(), est.getEstoQuantidade(),
                     est.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao());
 
             estoque.add(esto);
@@ -170,7 +170,7 @@ public class EstoqueViewController implements Initializable {
         for (TbEstoque est : estoques) {
             EstoqueModel esto = new EstoqueModel(est.getEstoProdutoCodigo().getPdtCodigo(), est.getEstoProdutoCodigo().getPdtNome(),
                     est.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla(),
-                    est.getEstoValorFinal(),
+                    est.getEstoValorFinal(), est.getEstoQuantidade(),
                     est.getEstoProdutoCodigo().getPdtCategoria().getCatpDescricao());
 
             estoque.add(esto);

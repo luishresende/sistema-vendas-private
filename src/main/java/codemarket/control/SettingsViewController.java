@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 public class SettingsViewController implements Initializable{
     
@@ -43,6 +44,15 @@ public class SettingsViewController implements Initializable{
     
     private final SettingsFile settingsColor = SettingsFile.getInstance();
     
+    private Stage dialogStage;
+    public Stage getDialogStage() {
+        return dialogStage;
+    }
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Carrego os colors pickers com base no arquivo de configurações
@@ -65,6 +75,10 @@ public class SettingsViewController implements Initializable{
             DisplayDialogScreen.getInstance().displayErrorScreen("Erro", "Parece que algo deu errado", "Não foi possível salvar as informações");
         } 
         
+    }
+    @FXML
+    public void handleCancelButton(){
+//        dialogStage.close();
     }
     
 }

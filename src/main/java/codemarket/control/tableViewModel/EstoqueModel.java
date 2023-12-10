@@ -4,13 +4,15 @@ public class EstoqueModel {
     private String Codigo;
     private String DescProduto;
     private String UN;
+    private String Avista;
     private String Atual;  
     private String Categoria;  
 
-    public EstoqueModel(String Codigo, String DescProduto, String UN, float Atual, String Categoria) {
+    public EstoqueModel(String Codigo, String DescProduto, String UN, float Avista, float Atual, String Categoria) {
         this.Codigo = Codigo;
         this.DescProduto = DescProduto;
         this.UN = UN;
+        this.Avista = String.valueOf(Avista);
         this.Atual = String.valueOf(Atual);
         this.Categoria = Categoria;
     }
@@ -39,6 +41,13 @@ public class EstoqueModel {
         this.UN = UN;
     }
 
+    public String getAvista() {
+        return Avista;
+    }
+
+    public void setAvista(String Avista) {
+        this.Avista = Avista;
+    }
 
     public String getAtual() {
         return Atual;
@@ -55,6 +64,4 @@ public class EstoqueModel {
     public void setCategoria(String Categoria) {
         this.Categoria = Categoria;
     }
-
-
 }
