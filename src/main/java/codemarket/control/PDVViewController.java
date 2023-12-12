@@ -184,7 +184,7 @@ public class PDVViewController implements Initializable {
             EstoqueRN estoquern = new EstoqueRN();
             for (VendaModel v : venda) {
                 TbEstoque estoque = estoquern.listaUm("estoProdutoCodigo.pdtCodigo", v.getCodigo(), TbEstoque.class);
-                TbPedido pe = new TbPedido(v.getQuantidade(), 0.0f, vendaAtual, estoque);
+                TbPedido pe = new TbPedido(v.getQuantidade(), 0.0f, vendaAtual, estoque, subtotal.getText());
                 pedidorn.salvar(pe);
             }
 

@@ -112,7 +112,7 @@ public class FornecedoresViewController implements Initializable {
             FornecedorRN forrn = new FornecedorRN();
             TbFornecedor fornecedorParaEditar = forrn.listaUm("forcpfCnpj.entcpfCnpj", selectedFunc.getCNPJ(), TbFornecedor.class);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroEntidadeView.fxml"));
-
+            
             AnchorPane page = (AnchorPane) loader.load();
             
 

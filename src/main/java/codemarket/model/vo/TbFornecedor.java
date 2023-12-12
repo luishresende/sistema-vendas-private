@@ -42,7 +42,7 @@ public class TbFornecedor implements Serializable {
     @Column(name = "for_id")
     private Integer forId;
     @JoinColumn(name = "for_cpfCnpj", referencedColumnName = "ent_cpfCnpj")
-    @OneToOne(optional = false)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
     private TbEntidade forcpfCnpj;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pdtForIf")
     private List<TbProduto> tbProdutoList;

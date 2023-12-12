@@ -41,15 +41,19 @@ public class TbPedido implements Serializable {
     @JoinColumn(name = "ped_venda", referencedColumnName = "ven_id")
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private TbVenda pedVenda;
+    @Basic(optional = false)
+    @Column(name = "ped_valor_total")
+    private float pedValorTotal;
 
     public TbPedido() {
     }
 
-    public TbPedido(float pedQuantidade, float pedDesconto, TbVenda venda, TbEstoque pedEstoProduto ) {
+    public TbPedido(float pedQuantidade, float pedDesconto, TbVenda venda, TbEstoque pedEstoProduto, String pedValorTotal ) {
         this.pedQuantidade = pedQuantidade;
         this.pedDesconto = pedDesconto;
         this.pedVenda = venda;
         this.pedEstoProduto = pedEstoProduto;
+        this.pedValorTotal = Float.parseFloat(pedValorTotal);
     }
 
     public Integer getPedId() {
@@ -58,6 +62,14 @@ public class TbPedido implements Serializable {
 
     public void setPedId(Integer pedId) {
         this.pedId = pedId;
+    }
+
+    public float getPedValorTotal() {
+        return pedValorTotal;
+    }
+
+    public void setPedValorTotal(float pedValorTotal) {
+        this.pedValorTotal = pedValorTotal;
     }
 
     public float getPedQuantidade() {

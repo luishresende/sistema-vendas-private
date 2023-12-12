@@ -295,8 +295,7 @@ public class CadastroFuncionarioViewController implements Initializable {
             Date dateNASC = Date.from(dtNASC.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
             TbEntidade ENTIDADE = new TbEntidade(cpf.getText(), nome.getText(), nomeFantasia.getText(), 
-                                                rg.getText(), email.getText(), "Fisico", dateNASC, sexo);
-            
+                                                rg.getText(), email.getText(), "Físico", dateNASC, sexo);
             StatusRN staRN = new StatusRN();
             TbStatus staValor = staRN.listaUm("staDescricao", tipoStatus.getValue(), TbStatus.class);
 
@@ -314,8 +313,8 @@ public class CadastroFuncionarioViewController implements Initializable {
                     }else{
                         tel = new TbEntidadeHasTelefone(tell, ENTIDADE);
                     }
-                    EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
-                    eht.salvar(tel);               
+                    t[i] = tel;
+                    i++;
                 }else{
                    TbTelefone f = fones.getHas();
                    f.setFoneDescricao(fones.getDdd() + fones.getFone());
@@ -359,8 +358,7 @@ public class CadastroFuncionarioViewController implements Initializable {
                     }else{
                         new_endereco = new TbEntidadeHasEndereco(ENTIDADE, ende);
                     }
-                    EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
-                    ehe.salvar(new_endereco);    
+                    e[i] = new_endereco;  
                     i++;
                     this.endPrincipal = ende;   
                 }else{
@@ -427,6 +425,22 @@ public class CadastroFuncionarioViewController implements Initializable {
                 usu.setUsuimgPerfil(imageByte);
                 
                 funcionarioEditar.setFuncUsuario(usu);
+                
+                EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+                    for(TbEntidadeHasTelefone tel : t){
+                        if(tel == null){
+                            break;
+                        }
+                        eht.salvar(tel);
+                    }
+                    EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                    for(TbEntidadeHasEndereco end : e){
+                        if(end == null){
+                            break;
+                        }
+                        ehe.salvar(end);
+                    }
+                    
                 enti.setTbFuncionarioList(funcionarioEditar);
                 JOptionPane.showMessageDialog(null, "Edição concluido com sucesso!");
                 dialogStage.close();
@@ -449,9 +463,24 @@ public class CadastroFuncionarioViewController implements Initializable {
                     TbCargo cargo = carRN.listaUm("carDescricao", tipoCargo.getValue(), TbCargo.class);
 
                     
-
                     TbFuncionario funcionario = new TbFuncionario(ENTIDADE, Usuario, cargo, staValor);
                     FUNC.salvar(funcionario);
+                    
+                    EntidadeHasTelefoneRN eht = new EntidadeHasTelefoneRN();
+                    for(TbEntidadeHasTelefone tel : t){
+                        if(tel == null){
+                            break;
+                        }
+                        eht.salvar(tel);
+                    }
+                    EntidadeHasEnderecoRN ehe = new EntidadeHasEnderecoRN();
+                    for(TbEntidadeHasEndereco end : e){
+                        if(end == null){
+                            break;
+                        }
+                        ehe.salvar(end);
+                    }
+                    
                     JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
                     dialogStage.close();
                 }else {
@@ -676,40 +705,49 @@ public class CadastroFuncionarioViewController implements Initializable {
         tipoStatus.setValue(funcionario.getFuncStatus().getStaDescricao());
         
        
-       List<TbEndereco> enderecosList = entidade.getTbEnderecoList();
-       for (TbEndereco endereco : enderecosList) {
-           EnderecoModel enderecoModel = new EnderecoModel(
-               endereco.getEndTipo().getTeDescricao(),
-               endereco.getEndendPid().getEndCEP(),
-               endereco.getEndendPid().getTbCidEstPai().getTbCidade().getCidDescricao(),
-               endereco.getEndendPid().getTbCidEstPai().getTbEstado().getEstSigla(),
-               endereco.getEndendPid().getTbCidEstPai().getCepPaiSigla().getPaiDescricao(),
-               endereco.getEndendPid().getEndPnomerua(),
-               endereco.getEndendPid().getEndPbaiid().getBaiDescricao(),
-               endereco.getEndComplemento(),
-               String.valueOf(endereco.getEndNumero()),
-               endereco.getEndendPid().getEndPlogid().getLogDescricao(),
-               endereco
-           );
-           enderecos.add(enderecoModel);
-       }
+        List<EnderecoModel> enderecos = new ArrayList<>();
+        List<FoneModel> telefones = new ArrayList<>();
 
-       List<TbEntidadeHasTelefone> telefonesList = entidade.getTbEntidadeHasTelefoneList();
-       for (TbEntidadeHasTelefone entidadeHasTelefone : telefonesList) {
-           TbTelefone telefone = entidadeHasTelefone.getEhtFoneId();
-           String contado = telefone.getFoneDescricao();
-           String dd = contado.substring(0, Math.min(contado.length(), 4));
-           String resto = contado.substring(Math.min(contado.length(), 4));
+        try {
+            List<TbEndereco> enderecosList = enti.getTbEnderecoList();
+            for (TbEndereco endereco : enderecosList) {
+                try {
+                    EnderecoModel enderecoModel = new EnderecoModel(
+                        endereco.getEndTipo().getTeDescricao(),
+                        endereco.getEndendPid().getEndCEP(),
+                        endereco.getEndendPid().getTbCidEstPai().getTbCidade().getCidDescricao(),
+                        endereco.getEndendPid().getTbCidEstPai().getTbEstado().getEstSigla(),
+                        endereco.getEndendPid().getTbCidEstPai().getCepPaiSigla().getPaiDescricao(),
+                        endereco.getEndendPid().getEndPnomerua(),
+                        endereco.getEndendPid().getEndPbaiid().getBaiDescricao(),
+                        endereco.getEndComplemento(),
+                        String.valueOf(endereco.getEndNumero()),
+                        endereco.getEndendPid().getEndPlogid().getLogDescricao(),
+                        endereco
+                    );
+                    enderecos.add(enderecoModel);
+                } catch (Exception e) {}
+            }
 
-           FoneModel foneModel = new FoneModel(
-               telefone.getFonenomeContato(),
-               dd,
-               resto,
-               telefone.getFoneTipo().getTtDescricao(),
-               telefone
-           );
-           telefones.add(foneModel);
-       }       
+            List<TbTelefone> telefonesList = enti.getTbTelefoneList();
+            for (TbTelefone entidadeHasTelefone : telefonesList) {
+                try {
+                    TbTelefone telefone = entidadeHasTelefone;
+                    String contado = telefone.getFoneDescricao();
+                    String dd = contado.substring(0, Math.min(contado.length(), 4));
+                    String resto = contado.substring(Math.min(contado.length(), 4));
+
+                    FoneModel foneModel = new FoneModel(
+                        telefone.getFonenomeContato(),
+                    dd,
+                    resto,
+                    telefone.getFoneTipo().getTtDescricao(),
+                    telefone
+                );
+                telefones.add(foneModel);
+            } catch (Exception e) {}
+        }
+    } catch (Exception e) {}       
 
        }
 }
