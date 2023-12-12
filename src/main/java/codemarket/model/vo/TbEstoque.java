@@ -62,8 +62,6 @@ public class TbEstoque implements Serializable {
     @JoinColumn(name = "esto_produto_codigo", referencedColumnName = "pdt_codigo")
     @OneToOne(cascade = CascadeType.ALL, optional = false)
     private TbProduto estoProdutoCodigo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "entrePdtCodigo")
-    private List<TbEntradaEstoque> tbEntradaEstoqueList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedEstoProduto")
     private List<TbPedido> tbPedidoList;
 
@@ -146,14 +144,6 @@ public class TbEstoque implements Serializable {
 
     public void setEstoProdutoCodigo(TbProduto estoProdutoCodigo) {
         this.estoProdutoCodigo = estoProdutoCodigo;
-    }
-
-    public List<TbEntradaEstoque> getTbEntradaEstoqueList() {
-        return tbEntradaEstoqueList;
-    }
-
-    public void setTbEntradaEstoqueList(List<TbEntradaEstoque> tbEntradaEstoqueList) {
-        this.tbEntradaEstoqueList = tbEntradaEstoqueList;
     }
 
     public List<TbPedido> getTbPedidoList() {

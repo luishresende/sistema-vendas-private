@@ -170,10 +170,10 @@ public class InserirProdutoController implements Initializable {
 
                 estoque.setEstoProdutoCodigo(produto);
                 estoque.setEstoDataAtualizacao(dataAtual);
-                estoque.setEstoValorBase(Float.parseFloat(idCompra.getText().replace(",", ".")));
-                estoque.setEstoValorFinal(Float.parseFloat(idAvistaValor.getText().replace(",", ".")));
-                estoque.setEstoLimiteMin(Float.parseFloat(idMinimo.getText().replace(",", ".")));
-                estoque.setEstoQuantidade(Float.parseFloat(idQuantidade.getText().replace(",", ".")));
+                estoque.setEstoValorBase(Float.parseFloat(idCompra.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
+                estoque.setEstoValorFinal(Float.parseFloat(idAvistaValor.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
+                estoque.setEstoLimiteMin(Float.parseFloat(idMinimo.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
+                estoque.setEstoQuantidade(Float.parseFloat(idQuantidade.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
                 estoque.setEstoLimiteMin((short) (idControle.isSelected() ? 1 : 0));
                 estoque.setEstoProibirVendaLimMin((short) (idProibir.isSelected() ? 1 : 0));
 
