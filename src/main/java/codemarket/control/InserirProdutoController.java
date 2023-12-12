@@ -126,8 +126,6 @@ public class InserirProdutoController implements Initializable {
 
             @Override
             public TbFornecedor fromString(String string) {
-                // Método necessário para conversões bidirecionais
-                // Se necessário, você pode implementar esta parte para converter de volta de uma string para um objeto TbFornecedor
                 return null;
             }
         });
@@ -227,7 +225,6 @@ public class InserirProdutoController implements Initializable {
         this.estoque = estoque;
         editar = true;
 
-        idCodigo.setText(String.valueOf(estoque.getEstoId()));
         idBarras.setText(estoque.getEstoProdutoCodigo().getPdtCodigo());
         idUnidade.setValue(estoque.getEstoProdutoCodigo().getPdtUmSigla().getUmSigla());
         idDescricao.setText(estoque.getEstoProdutoCodigo().getPdtNome());

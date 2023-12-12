@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package codemarket.model.dao;
 
 import codemarket.model.conexao.HibernateConnection;
@@ -13,10 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import org.hibernate.HibernateException;
 
-/**
- *
- * @author Iuri Pereira
- */
 public class GenericDAO<Tabela> implements iGenericDAO<Tabela> {
 
     EntityManager manager = HibernateConnection.getInstance();

@@ -705,49 +705,40 @@ public class CadastroFuncionarioViewController implements Initializable {
         tipoStatus.setValue(funcionario.getFuncStatus().getStaDescricao());
         
        
-        List<EnderecoModel> enderecos = new ArrayList<>();
-        List<FoneModel> telefones = new ArrayList<>();
-
-        try {
-            List<TbEndereco> enderecosList = enti.getTbEnderecoList();
-            for (TbEndereco endereco : enderecosList) {
-                try {
-                    EnderecoModel enderecoModel = new EnderecoModel(
-                        endereco.getEndTipo().getTeDescricao(),
-                        endereco.getEndendPid().getEndCEP(),
-                        endereco.getEndendPid().getTbCidEstPai().getTbCidade().getCidDescricao(),
-                        endereco.getEndendPid().getTbCidEstPai().getTbEstado().getEstSigla(),
-                        endereco.getEndendPid().getTbCidEstPai().getCepPaiSigla().getPaiDescricao(),
-                        endereco.getEndendPid().getEndPnomerua(),
-                        endereco.getEndendPid().getEndPbaiid().getBaiDescricao(),
-                        endereco.getEndComplemento(),
-                        String.valueOf(endereco.getEndNumero()),
-                        endereco.getEndendPid().getEndPlogid().getLogDescricao(),
-                        endereco
-                    );
-                    enderecos.add(enderecoModel);
-                } catch (Exception e) {}
-            }
-
-            List<TbTelefone> telefonesList = enti.getTbTelefoneList();
-            for (TbTelefone entidadeHasTelefone : telefonesList) {
-                try {
-                    TbTelefone telefone = entidadeHasTelefone;
-                    String contado = telefone.getFoneDescricao();
-                    String dd = contado.substring(0, Math.min(contado.length(), 4));
-                    String resto = contado.substring(Math.min(contado.length(), 4));
-
-                    FoneModel foneModel = new FoneModel(
-                        telefone.getFonenomeContato(),
-                    dd,
-                    resto,
-                    telefone.getFoneTipo().getTtDescricao(),
-                    telefone
+        List<TbEndereco> enderecosList = enti.getTbEnderecoList();
+        for (TbEndereco endereco : enderecosList) {
+                EnderecoModel enderecoModel = new EnderecoModel(
+                    endereco.getEndTipo().getTeDescricao(),
+                    endereco.getEndendPid().getEndCEP(),
+                    endereco.getEndendPid().getTbCidEstPai().getTbCidade().getCidDescricao(),
+                    endereco.getEndendPid().getTbCidEstPai().getTbEstado().getEstSigla(),
+                    endereco.getEndendPid().getTbCidEstPai().getCepPaiSigla().getPaiDescricao(),
+                    endereco.getEndendPid().getEndPnomerua(),
+                    endereco.getEndendPid().getEndPbaiid().getBaiDescricao(),
+                    endereco.getEndComplemento(),
+                    String.valueOf(endereco.getEndNumero()),
+                    endereco.getEndendPid().getEndPlogid().getLogDescricao(),
+                    endereco
                 );
-                telefones.add(foneModel);
-            } catch (Exception e) {}
+                enderecos.add(enderecoModel);
         }
-    } catch (Exception e) {}       
+
+        List<TbTelefone> telefonesList = enti.getTbTelefoneList();
+        for (TbTelefone entidadeHasTelefone : telefonesList) {
+                TbTelefone telefone = entidadeHasTelefone;
+                String contado = telefone.getFoneDescricao();
+                String dd = contado.substring(0, Math.min(contado.length(), 4));
+                String resto = contado.substring(Math.min(contado.length(), 4));
+
+                FoneModel foneModel = new FoneModel(
+                    telefone.getFonenomeContato(),
+                dd,
+                resto,
+                telefone.getFoneTipo().getTtDescricao(),
+                telefone
+            );
+            telefones.add(foneModel);
+    }     
 
        }
 }
