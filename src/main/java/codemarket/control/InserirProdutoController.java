@@ -70,6 +70,7 @@ public class InserirProdutoController implements Initializable {
     public void setTituloJanela(String titulo) {
         this.tituloJanela.setText(titulo);
     }
+
     @FXML
     void validaCodigoBarras(KeyEvent event) {
         EST.aceitaNumero(event, idBarras);
@@ -78,24 +79,15 @@ public class InserirProdutoController implements Initializable {
     @FXML
     void valorAvista() {
         try {
-            // Obter o texto do campo formatado como porcentagem
-            String valorCompra = idCompra.getText();
-            String valorMargem = idAvistaMargem.getText();
-            // Remover caracteres não numéricos (deixar apenas dígitos e ponto)
-            String valorNumCompra = valorCompra.replaceAll("[^\\d,]+", "");
-            String valorNumMargem = valorMargem.replaceAll("[^\\d,]+", "");
-            valorNumCompra = valorNumCompra.replace(',', '.');
-            valorNumMargem = valorNumMargem.replace(',', '.');
-            // Converte as strings para números
-            double compra = Double.parseDouble(valorNumCompra);
-            double lucro = Double.parseDouble(valorNumMargem);
-            // Calcula o valor que vai ser avista
-            double valorAvista = Math.round((compra + (compra * (lucro / 100))) * 100.0) / 100.0;
-            // Exibe o troco no TextField troco
-            idAvistaValor.setText(String.valueOf(valorAvista * 10));
-        } catch (NumberFormatException e) {
+            String valorCompra = idCompra.getText().replaceAll("[^\\d,]+", "").replace(',', '.');
+            String valorMargem = idAvistaMargem.getText().replaceAll("[^\\d,]+", "").replace(',', '.');
 
-        }
+            double compra = Double.parseDouble(valorCompra);
+            double lucro = Double.parseDouble(valorMargem);
+            double valorAvista = Math.round((compra + (compra * (lucro / 100))) * 100.0) / 100.0;
+
+            idAvistaValor.setText(String.valueOf(valorAvista * 10));
+        } catch (NumberFormatException e) {}
     }
 
     ArrayList<TbFornecedor> fornecedores = null;
@@ -150,9 +142,8 @@ public class InserirProdutoController implements Initializable {
     void handlerCadastrar(ActionEvent event) {
         if (verificaCampos()) {
             TbFornecedor fornecedorSelecionado = idFornecedor.getSelectionModel().getSelectedItem();
-            if (fornecedorSelecionado != null) {
-                FORNECEDOR = (TbFornecedor) FOR.listaUm("forcpfCnpj", idFornecedor.getValue().getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class);
-            }
+            FORNECEDOR = (fornecedorSelecionado != null) ? (TbFornecedor) FOR.listaUm("forcpfCnpj", idFornecedor.getValue().getForcpfCnpj().getEntcpfCnpj(), TbFornecedor.class) : null;
+
             UnidadeMedidaRN unidadern = new UnidadeMedidaRN();
             TbUnidadeMedida unidade = unidadern.listaUm("umSigla", idUnidade.getValue(), TbUnidadeMedida.class);
 
@@ -170,43 +161,41 @@ public class InserirProdutoController implements Initializable {
 
                 estoque.setEstoProdutoCodigo(produto);
                 estoque.setEstoDataAtualizacao(dataAtual);
-                estoque.setEstoValorBase(Float.parseFloat(idCompra.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
-                estoque.setEstoValorFinal(Float.parseFloat(idAvistaValor.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
-                estoque.setEstoLimiteMin(Float.parseFloat(idMinimo.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
-                estoque.setEstoQuantidade(Float.parseFloat(idQuantidade.getText().replaceAll("[^\\d,]+", "").replace(",", ".")));
+                estoque.setEstoValorBase(parseCurrency(idCompra.getText()));
+                estoque.setEstoValorFinal(parseCurrency(idAvistaValor.getText()));
+                estoque.setEstoLimiteMin(parseCurrency(idMinimo.getText()));
+                estoque.setEstoQuantidade(parseCurrency(idQuantidade.getText()));
                 estoque.setEstoLimiteMin((short) (idControle.isSelected() ? 1 : 0));
                 estoque.setEstoProibirVendaLimMin((short) (idProibir.isSelected() ? 1 : 0));
 
                 EstoqueRN estorn = new EstoqueRN();
                 estorn.atualizar(estoque);
-                JOptionPane.showMessageDialog(null, "Edição concluido com sucesso!");
+                JOptionPane.showMessageDialog(null, "Edição concluída com sucesso!");
                 dialogStage.close();
 
             } else {
                 TbProduto produto = new TbProduto(idBarras.getText(), idDescricao.getText(), unidade, categoria, FORNECEDOR);
-                String valorAvista = idAvistaValor.getText();
-                String valorCompra = idCompra.getText();
-
-                String valorNumAvista = valorAvista.replaceAll("[^\\d,]+", "");
-                String valorNumCompra = valorCompra.replaceAll("[^\\d,]+", "");
-
-                float avista = Float.parseFloat(valorNumAvista.replace(',', '.'));
-                float compra = Float.parseFloat(valorNumCompra.replace(',', '.'));
                 EstoqueRN estoquern = new EstoqueRN();
-                TbEstoque estoque = new TbEstoque(produto, 
-                        Float.parseFloat(idQuantidade.getText().replace(',', '.')), avista,
-                        Float.parseFloat(idMinimo.getText().replace(',', '.')),
-                        (short) (idControle.isSelected() ? 1 : 0), 
-                        (short) (idProibir.isSelected() ? 1 : 0), timestamp, 
-                        compra);
+                TbEstoque estoque = new TbEstoque(produto,
+                        parseCurrency(idQuantidade.getText()), parseCurrency(idAvistaValor.getText()),
+                        parseCurrency(idMinimo.getText()),
+                        (short) (idControle.isSelected() ? 1 : 0),
+                        (short) (idProibir.isSelected() ? 1 : 0), timestamp,
+                        parseCurrency(idCompra.getText()));
 
                 estoquern.salvar(estoque);
-                JOptionPane.showMessageDialog(null, "Cadastro concluido com sucesso!");
+                JOptionPane.showMessageDialog(null, "Cadastro concluído com sucesso!");
                 dialogStage.close();
             }
         } else {
             DisplayDialogScreen.getInstance().displayErrorScreen("Finalizar Cadastro", "Campos obrigatórios *", "Preencha todos os campos!");
         }
+    }
+
+// Função para tratar pontos decimais e converter para float
+    private float parseCurrency(String value) {
+        String cleanedValue = value.replaceAll("[^\\d,]+", "").replace(',', '.');
+        return Float.parseFloat(cleanedValue);
     }
 
     @FXML

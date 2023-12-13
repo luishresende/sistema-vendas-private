@@ -18,7 +18,6 @@ public abstract class TbEstoque_ {
 	public static volatile SingularAttribute<TbEstoque, Float> estoLimiteMin;
 	public static volatile SingularAttribute<TbEstoque, Date> estoDataAtualizacao;
 	public static volatile ListAttribute<TbEstoque, TbPedido> tbPedidoList;
-	public static volatile ListAttribute<TbEstoque, TbEntradaEstoque> tbEntradaEstoqueList;
 	public static volatile SingularAttribute<TbEstoque, Float> estoQuantidade;
 	public static volatile SingularAttribute<TbEstoque, Float> estoValorFinal;
 
@@ -30,7 +29,6 @@ public abstract class TbEstoque_ {
 	public static final String ESTO_LIMITE_MIN = "estoLimiteMin";
 	public static final String ESTO_DATA_ATUALIZACAO = "estoDataAtualizacao";
 	public static final String TB_PEDIDO_LIST = "tbPedidoList";
-	public static final String TB_ENTRADA_ESTOQUE_LIST = "tbEntradaEstoqueList";
 	public static final String ESTO_QUANTIDADE = "estoQuantidade";
 	public static final String ESTO_VALOR_FINAL = "estoValorFinal";
 

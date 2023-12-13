@@ -5,7 +5,6 @@ import codemarket.model.utils.DisplayDialogScreen;
 import codemarket.model.vo.TbEntidade;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.event.ActionEvent;
