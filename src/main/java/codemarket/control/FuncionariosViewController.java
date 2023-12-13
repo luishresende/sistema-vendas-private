@@ -182,9 +182,6 @@ private void handleButtonEditar() throws IOException {
                     TbFuncionario funcExcluir = funcionario.listaUm("funcentcpfCnpj.entcpfCnpj", selectedFunc.getCPF(), TbFuncionario.class);                        
                     funcionario.excluir(funcExcluir);
                     infoF.remove(selectedFunc);
-                } else {
-                    // O usuário clicou em Cancelar ou fechou o alerta
-                    System.out.println("Operação de remoção cancelada.");
                 }
             });
         } else {

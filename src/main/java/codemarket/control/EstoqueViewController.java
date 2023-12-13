@@ -150,8 +150,6 @@ public class EstoqueViewController implements Initializable {
                     estoquern.excluir(estoqueExcluir);
                     estoque.remove(selectedEstoque);
                 } else {
-                    // O usuário clicou em Cancelar ou fechou o alerta
-                    System.out.println("Operação de remoção cancelada.");
                 }
             });
         } else {

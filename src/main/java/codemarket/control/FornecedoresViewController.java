@@ -157,9 +157,6 @@ public class FornecedoresViewController implements Initializable {
                     TbFornecedor fornecedorExcluir = fornecedor.listaUm("forcpfCnpj.entcpfCnpj", selectedFornecedor.getCNPJ(), TbFornecedor.class);                        
                     fornecedor.excluir(fornecedorExcluir);
                     infoF.remove(selectedFornecedor);
-                } else {
-                    // O usuário clicou em Cancelar ou fechou o alerta
-                    System.out.println("Operação de remoção cancelada.");
                 }
             });
         } else {

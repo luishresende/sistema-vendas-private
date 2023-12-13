@@ -104,7 +104,6 @@ public class PDVViewController implements Initializable {
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<>("Quantidade"));
 
         tableVenda.setItems(venda);
-        System.out.println("Tela aberta");
         
         quantidade.sceneProperty().addListener((observable, oldScene, newScene) -> {
             if (newScene != null && !isListenerAdded) {

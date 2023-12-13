@@ -38,7 +38,6 @@ public class CSSFile {
                     + ".sublimedTextField{-fx-border-color: #" + primaryThemeColor + ";}\n"
                     + ".primaryIconColor{-fx-fill: #" + primaryIconColor + ";}\n"
                     + ".secondIconColor{-fx-fill: #" + primaryThemeColor + ";}\n");
-            System.out.println(newCSSContent);
             // Gravavando o arquivos css com os novos elementos setados
             Files.write(Paths.get(CSSFilePath), newCSSContent.getBytes());
         } catch (IOException e) {

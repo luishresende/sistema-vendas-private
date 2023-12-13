@@ -71,7 +71,6 @@ public class DialogDatabaseSettingsViewController implements Initializable {
         try {
             this.persistenceManipulation = new PersistenceManipulation();
         } catch (Exception ex) {
-            System.out.println("nao funfou");
         }
     }
 }
